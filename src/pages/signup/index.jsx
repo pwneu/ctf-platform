@@ -2,7 +2,7 @@
 import Preloader from "@/components/common/Preloader"; 
 import HeaderAuth from "@/components/layout/headers/HeaderAuth"; 
 import AuthImageMove from "@/components/others/AuthImageMove"; 
-import SignUpForm from "@/components/others/SignUpForm";
+import SignUpForm from "@/pages/signup/SignUpForm";
 import React from "react";
 import MetaComponent from "@/components/common/MetaComponent"; 
 
