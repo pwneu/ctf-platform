@@ -7,8 +7,8 @@ import "aos/dist/aos.css";
 import { useEffect } from "react";
 import IndexWeb from "./pages/home/indexweb";
 
-import LoginPage from "./pages/others/login";
-import SignupPage from "./pages/others/signup";
+import LoginPage from "./pages/login";
+import SignupPage from "./pages/signup";
 import ContactPage from "./pages/contacts/contact";
 import HelpCenterPage from "./pages/others/help-center";
 import ListofChallenges from "./pages/challengesList/list-of-challenges";
