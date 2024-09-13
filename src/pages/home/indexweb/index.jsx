@@ -3,7 +3,6 @@ import Footer from "@/components/layout/footers/Footer";
 import Preloader from "@/components/common/Preloader";
 import MetaComponent from "@/components/common/MetaComponent";
 
-
 import HomeHero from "@/components/homes/heros/HomeHero"; 
 import Organization from "@/components/common/Organization"; 
 import LearningFeatures from "../../../components/homes/LearningFeatures/LearningFeatures";
@@ -12,7 +11,6 @@ import FeaturesBenefits from "@/components/homes/features/Features";
 import TopCategories from "@/components/homes/categories/TopCategories";
 import WhyPWNEU from "@/components/homes/WhyPWNEU"; 
 
-import Mentors from "@/components/homes/mentors/Mentorship"; 
 import Campuses from "@/components/homes/campuses/CampusesTag"; 
 import Testimonials from "@/components/homes/testimonials/Testimonials";
 import Achievement from "@/components/homes/achievements/Achievements"; 
@@ -35,15 +33,13 @@ export default function PublicWeb() {
           <HomeHero />
           <Organization />
           <LearningFeatures />
-           <FindLearningPath />
+          <FindLearningPath />
+          <Campuses />
+          <WhyPWNEU />
           <FeaturesBenefits />
           <TopCategories />
-          <WhyPWNEU />
-           <Mentors />
-          <Campuses />
           <Testimonials />
           <Achievement /> 
-
         <Footer />
       </div>
     </>
