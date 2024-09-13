@@ -32,7 +32,7 @@ export const menuList = [
       { href: "/discussion-forum", label: "Discussion Forums" },
       { href: "/learning-paths", label: "Learning Paths" },
       { href: "/resource-libraries", label: "Resource Libraries" },
-      { href: "/career-development", label: "Career Development" },
+      { href: "https://pauljerimy.com/security-certification-roadmap/", label: "Career Development" },
      
     ],
   },
