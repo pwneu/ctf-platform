@@ -6,27 +6,27 @@ import React, { useEffect } from "react";
 const masthead_info = [
   {
     id: 1,
-    icon: "/assets/img/homehero/icons/1.svg",
+    icon: "/assets/img/homehero/icons/Innovators_icon.svg",
     text: "A Community of Innovators",
   },
   {
     id: 2,
-    icon: "/assets/img/homehero/icons/2.svg",
+    icon: "/assets/img/homehero/icons/EdgeTraining_icon.svg",
     text: "Cutting-Edge Training",
   },
   {
     id: 3,
-    icon: "/assets/img/homehero/icons/3.svg",
+    icon: "/assets/img/homehero/icons/RealWorld _icon.svg",
     text: "Real-World Challenges",
   },
   {
     id: 4,
-    icon: "/assets/img/homehero/icons/3.svg",
+    icon: "/assets/img/homehero/icons/Certifications_icon.svg",
     text: "Certifications & Recognition",
   },
   {
     id: 5,
-    icon: "/assets/img/homehero/icons/3.svg",
+    icon: "/assets/img/homehero/icons/Career_icon.svg",
     text: "Career Development Resources",
   },
   
