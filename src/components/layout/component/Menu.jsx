@@ -51,7 +51,7 @@ export default function Menu({ allClasses, headerPosition }) {
             <li className="menu-item-has-children">
               <Link
                 data-barba
-                to="#"
+                to="https://pwneu.github.io/learn/docs/introduction"
                 className={menuItem == "Learn" ? "activeMenu" : ""}
               >
                 
