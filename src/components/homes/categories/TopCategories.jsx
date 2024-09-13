@@ -11,7 +11,7 @@ export default function TopCategories() {
               <h2 className="sectionTitle__title ">Top Categories</h2>
 
               <p className="sectionTitle__text ">
-                Lorem ipsum dolor sit amet, consectetur.
+                Discover a range of cybersecurity courses covering the most crucial areas. Whether you’re interested in ethical hacking or other essential topics, find the right category to elevate your skills and knowledge.
               </p>
             </div>
           </div>
@@ -64,9 +64,6 @@ export default function TopCategories() {
                     <h4 className="categoryCard__title text-17 lh-15 fw-500 text-white">
                       {topCatagoriesThree[4].title}
                     </h4>
-                    <div className="categoryCard__subtitle text-13 text-white lh-1 mt-5">
-                      {topCatagoriesThree[4].courses}
-                    </div>
                   </div>
                 </Link>
               </div>
@@ -92,9 +89,6 @@ export default function TopCategories() {
                       <h4 className="categoryCard__title text-17 lh-15 fw-500 text-white">
                         {elm.title}
                       </h4>
-                      <div className="categoryCard__subtitle text-13 text-white lh-1 mt-5">
-                        {elm.courses}
-                      </div>
                     </div>
                   </div>
                 </Link>
