@@ -10,7 +10,7 @@ export default function CampusesTag() {
     setShowSlider(true);
   }, []);
   return (
-    <section className="layout-pt-lg layout-pb-lg bg-light-3">
+    <section className="layout-pt-lg layout-pb-lg bg-white-3">
       <div className="container">
         <div className="row y-gap-15 justify-between items-end">
           <div className="col-lg-6">
