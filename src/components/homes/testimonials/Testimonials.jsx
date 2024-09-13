@@ -49,7 +49,7 @@ export default function Testimonials() {
                     slidesPerView={1}
                     className="overflow-visible"
                   >
-                    {testimonials.slice(0, 3).map((elm, i) => (
+                    {testimonials.slice(0, 8).map((elm, i) => (
                       <SwiperSlide key={i}>
                         <div className="swiper-slide">
                           <div className="pt-40 pb-30 px-40 border-light rounded-8">
@@ -106,7 +106,7 @@ export default function Testimonials() {
                 <div className="-el-1">
                   <img
                     className="w-1/1"
-                    src="/assets/img/testimonials/662x730.png"
+                    src="/assets/img/testimonials/testimonialCard.png"
                     alt="image"
                   />
                 </div>
