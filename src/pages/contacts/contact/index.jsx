@@ -12,9 +12,10 @@ const metadata = {
   description: "Get in touch with us for any questions, support, or feedback. We're here to help!",
 };
 
-export default function ContactPage1() {
+export default function ContactPage() {
   return (
     <div className="main-content  ">
+      <section class="breadcrumbs  "></section>
       <MetaComponent meta={metadata} />
       <Preloader />
       <Header />
