@@ -13,7 +13,7 @@ import WhyPWNEU from "@/components/homes/WhyPWNEU";
 
 import Campuses from "@/components/homes/campuses/CampusesTag"; 
 import Testimonials from "@/components/homes/testimonials/Testimonials";
-import Achievement from "@/components/homes/achievements/Achievements"; 
+// import Achievement from "@/components/homes/achievements/Achievements"; 
 
 
 const metadata = {
@@ -39,7 +39,7 @@ export default function PublicWeb() {
           <FeaturesBenefits />
           <TopCategories />
           <Testimonials />
-          <Achievement /> 
+          {/* <Achievement />  */}
         <Footer />
       </div>
     </>
