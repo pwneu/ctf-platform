@@ -153,6 +153,7 @@
   --color-error-2: #AB3331;
   --color-success-1: #DEF2D7;
   --color-success-2: #5B7052;
+  --color-breadcrums-1:#5fff1a;
   --white:#fff
   -
 }
@@ -7230,10 +7231,10 @@ h1, h2, h3, h4, h5, h6 {
 
 .breadcrumbs {
   margin-top: 90px;
-  padding: 16px 0;
+  padding: 5px 0;
   display: flex;
   align-items: center;
-  background-color: var(--color-light-6);
+  background-color: var( --color-breadcrums-1);
 }
 
 .breadcrumbs__content {
@@ -15676,3 +15677,44 @@ table.table td {
   background: white;
 }
 
+.fade-in-right {
+  opacity: 0;
+  transform: translateX(100%);
+  animation: fadeInRight 2s forwards;
+}
+
+@keyframes fadeInRight {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.slide-in {
+  opacity: 0;
+  transform: translateX(-100%);
+  animation: slideIn 2s forwards;
+  
+}
+
+.slide-in-left {
+  opacity: 0;
+  transform: translateX(-100%);
+  animation: slideInLeft 2s forwards;
+}
+
+@keyframes slideInLeft {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+    animation: fadeInRight 2s forwards;
+  }
+}
+
+@keyframes slideIn {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+    animation: fadeInRight 2s forwards;
+  }
+}
