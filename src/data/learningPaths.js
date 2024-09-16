@@ -50,4 +50,29 @@ export const learningPath = [
   },
 ];
 
-
+export const ourapproach = [
+  {
+    id: 1,
+    title: "Learn with Experts",
+    image: "/assets/img/about/ourstory/ourapproach/2.svg",
+    description: "Grursus mal suada faci lisis that ipsum ameti consecte.",
+  },
+  {
+    id: 2,
+    title: "Learn Anything",
+    image: "/assets/img/about/ourstory/ourapproach/2.svg",
+    description: "Grursus mal suada faci lisis that ipsum ameti consecte.",
+  },
+  {
+    id: 3,
+    title: "Flexible Learning",
+    image: "/assets/img/about/ourstory/ourapproach/3.svg",
+    description: "Grursus mal suada faci lisis that ipsum ameti consecte.",
+  },
+  {
+    id: 4,
+    title: "Industrial Standard",
+    image: "/assets/img/about/ourstory/ourapproach/4.svg",
+    description: "Grursus mal suada faci lisis that ipsum ameti consecte.",
+  },
+];
