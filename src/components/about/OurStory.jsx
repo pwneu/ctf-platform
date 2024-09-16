@@ -1,4 +1,4 @@
-import React from "react"; 
+import React from "react";
 
 import { Link } from "react-router-dom";
 export default function OurStory() {
@@ -10,13 +10,24 @@ export default function OurStory() {
             <div className="row justify-center text-center">
               <div className="col-auto">
                 <div>
-                  <h1 className="page-header__title">Our Story</h1>
+                  <h3 className="page-header__title">Our Story</h3>
                 </div>
-
                 <div>
-                  <p className="page-header__text">
-                  Neque convallis a cras semper auctor. Libero id faucibus nisl
-                  tincidunt egetnvallis a cras se
+                  <h3 className="page-header__text">
+                    Welcome to PWNEU Cybersecurity Education!
+                  </h3>
+                  <p className="text-dark-1 mt-20">
+                    Our journey began with a shared passion for cybersecurity
+                    and a desire to empower students at New Era University. We
+                    recognized the growing need for skilled cybersecurity
+                    professionals and understood that hands-on experience was
+                    key to mastering the complexities of this field. That's why
+                    we founded PWNEU—to create a platform where students can
+                    learn, grow, and challenge themselves through Capture The
+                    Flag (CTF) competitions and other interactive learning
+                    experiences. Our story is one of innovation, community, and
+                    a commitment to nurturing the next generation of
+                    cybersecurity experts.
                   </p>
                 </div>
               </div>
@@ -30,41 +41,32 @@ export default function OurStory() {
             <div className="col-lg-6 pr-50 sm:pr-15">
               <div className="composition -type-8">
                 <div className="-el-1">
-                  <img src="/assets/img/ourstory/1.png" alt="image" />
+                  <img src="/assets/img/about/ourstory/1.png" alt="image" />
                 </div>
                 <div className="-el-2">
-                  <img src="/assets/img/ourstory/2.png" alt="image" />
+                  <img src="/assets/img/about/ourstory/2.png" alt="image" />
                 </div>
                 <div className="-el-3">
-                  <img src="/assets/img/ourstory/3.png" alt="image" />
+                  <img src="/assets/img/about/ourstory/3.png" alt="image" />
                 </div>
               </div>
             </div>
 
             <div className="col-lg-5">
-              <h2 className="text-30 lh-16">
-                PWNEU OurStory
-              </h2>
-              <p className="text-dark-1 mt-30">
-                Yeou cnvallis a cras Neque convallis a cras semper auctor. Libero id faucibus nisl
-                tincidunt egetnvallis a cras sesemper auctor. Libero id faucibus nisl
-                tincidunt egetnvallis a cras se
+              <h2 className="text-25 lh-16 text-center">Our Expertise</h2>
+              <p className="text-dark-1 mt-20 text-center">
+                Our team consists of seasoned cybersecurity professionals,
+                educators, and enthusiasts who bring a wealth of knowledge and
+                experience to the table. We specialize in creating challenging
+                and relevant CTF scenarios that simulate real-world security
+                threats. Our expertise extends beyond just technical skills; we
+                focus on fostering critical thinking, problem-solving, and
+                teamwork, which are essential attributes for any cybersecurity
+                professional. With our guidance, students can expect to gain a
+                deep understanding of cybersecurity principles and practices,
+                preparing them for successful careers in this ever-evolving
+                field.
               </p>
-              <p className="pr-50 lg:pr-0 mt-25">
-                Neque convallis a cras semper auctor. Libero id faucibus nisl
-                tincidunt egetnvallis a cras semper auctonvallis a cras semper
-                aucto. Neque convallis a cras semper auctor. Liberoe convallis a
-                cras semper atincidunt egetnval
-              </p>
-              <div className="d-inline-block">
-                <Link
-                  to="/signup"
-                  className="button -md -purple-1 text-white mt-30"
-                >
-                  Neque convallis a cras semper auctor. Libero id faucibus nisl
-                  tincidunt egetnvallis a cras se
-                </Link>
-              </div>
             </div>
           </div>
         </div>
