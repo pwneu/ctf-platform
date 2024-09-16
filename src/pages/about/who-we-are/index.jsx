@@ -6,6 +6,9 @@ import Header from "@/components/layout/headers/Header";
 import React from "react"; 
 
 import MetaComponent from "@/components/common/MetaComponent"; 
+import Founder from "@/components/homes/founder/DevFounder";
+
+import OurPreview from "@/components/about/OurPreview";
 
 const metadata = {
   title:
@@ -21,7 +24,9 @@ export default function WhoWeAres() {
       <Header />
       <div className="content-wrapper js-content-wrapper overflow-hidden">
         <PageLinks />
+        <OurPreview />
         <WhoWeAre />
+        <Founder />
         <Footer />
       </div>
     </div>
