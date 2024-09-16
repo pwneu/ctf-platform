@@ -5,26 +5,24 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import { useEffect } from "react";
-import IndexWeb from "./pages/home/indexweb";
 
+import IndexWeb from "./pages/home/indexweb";
 import LoginPage from "./pages/login";
 import SignupPage from "./pages/signup";
 import ContactPage from "./pages/contacts/contact";
+import PrivacyPolicyPage from "./pages/ownership/privacy-policy";
+import TermsandConditionsPage from "./pages/ownership/terms-and-conditions";
+import UniversityPage from "./pages/campuses/campuses";
 import HelpCenterPage from "./pages/others/help-center";
 import ListofChallenges from "./pages/challengesList/list-of-challenges";
-
 import OurStoryPage from "./pages/about/our-story";
 import WhoWeArePage from "./pages/about/who-we-are";
 import MissionVisionPage from "./pages/about/mission-vision";
 
 
 import DiscussionPage from "./pages/community/discussion-forum";
-import LearningPathPage from "./pages/community/learning-paths";
-import ResourcesLibrariesPage from "./pages/community/resource-libraries";
-import CareerDevelopment from "./pages/community/career-development";
-
-import AchievementsdetailsPage from "./pages/achivements/achievements";
-import AchievementsListPage from "./pages/achivements/achievements-list";  
+// import AchievementsdetailsPage from "./pages/achivements/achievements";
+// import AchievementsListPage from "./pages/achivements/achievements-list";  
 
 
 function App() {
@@ -49,6 +47,8 @@ function App() {
             <Route path="login" element={<LoginPage />} />
             <Route path="signup" element={<SignupPage />} />
 
+            <Route path="campuses" element={<UniversityPage />} />
+
             {/* About Us*/}
             <Route path="our-story" element={<OurStoryPage />} />
             <Route path="who-we-are" element={<WhoWeArePage />} />
@@ -57,19 +57,19 @@ function App() {
             {/* Contact */}
             <Route path="contact" element={<ContactPage />} />
             <Route path="help-center" element={<HelpCenterPage />} />
+            <Route path="privacy-policy" element={<PrivacyPolicyPage />} />
+            <Route path="terms-and-conditions" element={<TermsandConditionsPage />} />
+
 
             {/* Compete */}
             <Route path="list-of-challenges" element={<ListofChallenges />} />
 
             {/* Community */}
             <Route path="discussion-forum" element={<DiscussionPage />} />
-            <Route path="learning-paths" element={<LearningPathPage />} />
-            <Route path="resource-libraries" element={<ResourcesLibrariesPage />} />
-            <Route path="career-development" element={<CareerDevelopment />} />
-
+           
             {/* Achievements */}
-            <Route path="achievements/:id" element={<AchievementsdetailsPage />} />
-            <Route path="achievements-list" element={<AchievementsListPage />} /> 
+            {/* <Route path="achievements/:id" element={<AchievementsdetailsPage />} /> */}
+            {/* <Route path="achievements-list" element={<AchievementsListPage />} />  */}
 
           </Route>
         </Routes>
