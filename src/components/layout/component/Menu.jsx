@@ -53,8 +53,7 @@ export default function Menu({ allClasses, headerPosition }) {
                 data-barba
                 to="https://pwneu.github.io/learn/docs/introduction"
                 className={menuItem == "Learn" ? "activeMenu" : ""}
-              >
-                
+              >                
                 Learn
               </Link>
 
@@ -62,10 +61,10 @@ export default function Menu({ allClasses, headerPosition }) {
             <li className="menu-item-has-children">
               <Link
                 data-barba
-                to="#"
+                to="/campuses"
                 className={menuItem == "Campuses" ? "activeMenu" : ""}
               >
-                Campuses
+                University
               </Link>
              
             </li>
@@ -81,75 +80,24 @@ export default function Menu({ allClasses, headerPosition }) {
 
             </li>
 
-            <li className="menu-item-has-children">
+            <li className="menu-item-has-children -has-mega-menu">
               <Link
                 data-barba
                 to="/discussion-forum"
-                className={menuItem == "achievements" ? "activeMenu" : ""}
+                className={menuItem == "Courses" ? "activeMenu" : ""}
               >
-                Community <i className="icon-chevron-right text-13 ml-10"></i>
+                Community
               </Link>
-              <ul className="subnav">
-                <li className="menu__backButton js-nav-list-back">
-                  <Link to="#">
-                    <i className="icon-chevron-left text-13 mr-10"></i>
-                  </Link>
-                </li>
-
-                {menuList[3].links.map((elm, i) => (
-                  <li
-                    key={i}
-                    className={
-                      pathname.split("/")[1] == elm.href.split("/")[1]
-                        ? "activeMenu"
-                        : "inActiveMenu"
-                    }
-                  >
-                    <Link data-barba to={elm.href}>
-                      {elm.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
             </li>
 
-            <li className="menu-item-has-children">
+            <li className="menu-item-has-children -has-mega-menu">
               <Link
                 data-barba
                 to="/our-story"
-                className={menuItem == "Pages" ? "activeMenu" : ""}
+                className={menuItem == "Courses" ? "activeMenu" : ""}
               >
-                About Us <i className="icon-chevron-right text-13 ml-10"></i>
+                About Us
               </Link>
-
-              <ul className="subnav">
-                <li className="menu__backButton js-nav-list-back">
-                  
-                </li>
-                <li className="menu-item-has-children">
-                  
-
-                  
-                </li>
-
-                
-                {menuList[4].links
-                  .filter((el) => el.href)
-                  .map((elm, i) => (
-                    <li
-                      key={i}
-                      className={
-                        pathname.split("/")[1] == elm.href.split("/")[1]
-                          ? "activeMenu"
-                          : "inActiveMenu"
-                      }
-                    >
-                      <Link key={i} data-barba to={elm.href}>
-                        {elm.label}
-                      </Link>
-                    </li>
-                  ))}
-              </ul>
             </li>
 
             <li>
