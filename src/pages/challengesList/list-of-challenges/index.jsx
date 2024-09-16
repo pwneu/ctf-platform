@@ -12,7 +12,7 @@ const metadata = {
   description: "Join the competition, test your skills, and climb the leaderboard in exciting challenges.",
 };
 
-export default function CourseListPage1() {
+export default function ChallengeList() {
   return (
     <div className="main-content  ">
       <MetaComponent meta={metadata} />
