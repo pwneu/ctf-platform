@@ -118,7 +118,7 @@ export default function CampusesTag() {
         <div className="row pt-60 lg:pt-40">
           <div className="col-auto">
             <Link
-              to="#"
+              to="/campuses"
               className="button -icon -outline-purple-1 text-purple-1 fw-500"
             >
                 Discover More
