@@ -18,22 +18,19 @@ export const menuList = [
      ],
   },
   {
-    title: "Campuses",
+    title: "University",
     links: [
       {
-        href: "#" 
+        href: "/campuses" 
       }
     ],
   },
   {
     title: "Community",
     links: [
-      { href: "/achievements-list", label: "Achievement Highlights" },
-      { href: "/discussion-forum", label: "Discussion Forums" },
-      { href: "/learning-paths", label: "Learning Paths" },
-      { href: "/resource-libraries", label: "Resource Libraries" },
-      { href: "https://pauljerimy.com/security-certification-roadmap/", label: "Career Development" },
-     
+      {
+        href: "/discussion-forum" 
+      }
     ],
   },
   {
