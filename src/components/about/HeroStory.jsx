@@ -66,26 +66,24 @@ export default function HeroStory() {
 
       <div className="container">
         <div className="row justify-center text-center">
-          <div className="col-xl-6 col-lg-8">
+          <div className="col-xl-9 col-lg-8">
             <div
               className="mainSlider__content"
               data-aos="fade-up"
               data-aos-delay="500"
             >
               <h1 className="mainSlider__title text-white">
-                Lorem{" "}
-                <span className="text-green-1 underline">
-                  New Era University
-                </span>
+                Step into Cybersecurity Mastery with{" "}
+                <span className="text-green-1">New Era University</span>
               </h1>
 
               <p className="mainSlider__text text-white">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus
-                lacinia odio vitae vestibulum. Integer nec odio. Praesent
-                libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem
-                at nibh elementum imperdiet. Duis sagittis ipsum. Praesent
-                mauris. Fusce nec tellus sed augue semper eleifend. Phasellus id
-                blandit dui, in fringilla dolor.
+                Elevate your cybersecurity expertise with New Era University’s
+                cutting-edge programs. Our immersive learning experiences,
+                crafted by industry-leading experts and dedicated teams, are
+                designed to equip you with the skills needed to excel in a
+                rapidly evolving field. Join us and collaborate with our teams
+                to turn your passion for cybersecurity into mastery.
               </p>
             </div>
           </div>
