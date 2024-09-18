@@ -9426,6 +9426,19 @@ h1, h2, h3, h4, h5, h6 {
   color: var(--color-purple-1) !important;
 }
 
+.text-custom-color {
+  color: #FF8682 !important;
+}
+
+.error-text {
+  color: red;
+  font-size: 12px;
+}
+
+.text-bold {
+  font-weight: bold;
+}
+
 .text-purple-2 {
   color: var(--color-purple-2) !important;
 }
@@ -15732,4 +15745,15 @@ table.table td {
 
 .up-text {
   animation: upText 0.8s ease-out forwards;
+}
+
+.button {
+  background-color: #45f045; 
+  color: #ffffff; 
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.button:hover {
+  background-color: #fcfcfc;
+  color: #ffffff;
 }
