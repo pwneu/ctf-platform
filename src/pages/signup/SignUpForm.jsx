@@ -1,8 +1,8 @@
-import { Link, useNavigate } from "react-router-dom"; // Import useNavigate
+import { Link, useNavigate } from "react-router-dom";
 import React, { useState } from "react";
 
 export default function SignUpForm() {
-  const navigate = useNavigate(); // Create navigate instance
+  const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
     firstName: "",
@@ -17,11 +17,22 @@ export default function SignUpForm() {
 
   const [errors, setErrors] = useState({
     password: "",
-    confirmPassword: ""
+    confirmPassword: "",
   });
 
+  const [showPassword, setShowPassword] = useState({
+    password: false,
+    confirmPassword: false,
+  });
+
+  const togglePasswordVisibility = (field) => {
+    setShowPassword((prev) => ({
+      ...prev,
+      [field]: !prev[field],
+    }));
+  };
+
   const validatePassword = (password) => {
-    // Regular expressions for validation
     const lengthRegex = /^.{8,12}$/;
     const uppercaseRegex = /[A-Z]/;
     const lowercaseRegex = /[a-z]/;
@@ -48,11 +59,11 @@ export default function SignUpForm() {
   const handleInputChange = (e) => {
     const { name, value, type, checked } = e.target;
 
-    if (name === 'password' || name === 'confirmPassword') {
+    if (name === "password" || name === "confirmPassword") {
       const error = validatePassword(value);
       setErrors((prevErrors) => ({
         ...prevErrors,
-        [name]: error
+        [name]: error,
       }));
     }
 
@@ -64,30 +75,28 @@ export default function SignUpForm() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    
+
     if (!formData.termsAgreed) {
       alert("You must agree to the Terms and Privacy Policies.");
       return;
     }
 
-    // Validate passwords
     const passwordError = validatePassword(formData.password);
-    const confirmPasswordError = formData.password !== formData.confirmPassword
-      ? "Passwords do not match."
-      : "";
+    const confirmPasswordError =
+      formData.password !== formData.confirmPassword
+        ? "Passwords do not match."
+        : "";
 
     if (passwordError || confirmPasswordError) {
       setErrors({
         password: passwordError,
-        confirmPassword: confirmPasswordError
+        confirmPassword: confirmPasswordError,
       });
       return;
     }
 
-    // Assuming form validation passes and account is successfully created:
     console.log("Form Data Submitted: ", formData);
 
-    // Redirect to "/user-account-created" after successful form submission
     navigate("/user-account-created");
   };
 
@@ -97,7 +106,7 @@ export default function SignUpForm() {
         <div className="row justify-center items-center mt-8">
           <div className="col-xl-10 col-lg-9 mt-8">
             <div className="mt-5 px-1 py-0 md:px-35 md:py-25 bg-white rounded-16">
-              <h3 className="text-1 lh-2 mt-2 ">Join Us!</h3>
+              <h3 className="text-1 lh-2 mt-2">Join Us!</h3>
               <p className="text-1 mt-10">
                 Sign up with your university's institutional account to get started!
               </p>
@@ -163,44 +172,85 @@ export default function SignUpForm() {
                     autoComplete="username"
                   />
                 </div>
+
                 <div className="col-lg-6">
                   <label className="text-13 lh-1 fw-500 text-dark-1 mb-10">
                     Password *
                   </label>
-                  <input
-                    required
-                    type="password"
-                    name="password"
-                    placeholder="Password"
-                    value={formData.password}
-                    onChange={handleInputChange}
-                    autoComplete="new-password"
-                    minLength="8"
-                    maxLength="12"
-                  />
-                  {errors.password && <p className="error-text">{errors.password}</p>}
+                  <div className="position-relative">
+                    <input
+                      required
+                      type={showPassword.password ? "text" : "password"}
+                      name="password"
+                      placeholder="Password"
+                      value={formData.password}
+                      onChange={handleInputChange}
+                      autoComplete="new-password"
+                      minLength="8"
+                      maxLength="12"
+                      className="form-control pe-5"
+                    />
+                    <i
+                      className={`fas ${
+                        showPassword.password ? "fa-eye" : "fa-eye-slash"
+                      } position-absolute`}
+                      style={{
+                        cursor: "pointer",
+                        right: "10px",
+                        top: "50%",
+                        transform: "translateY(-50%)",
+                        zIndex: 1,
+                        color: "#000",
+                      }}
+                      onClick={() => togglePasswordVisibility("password")}
+                    ></i>
+                  </div>
+                  {errors.password && (
+                    <p className="error-text">{errors.password}</p>
+                  )}
                 </div>
                 <div className="col-lg-6">
                   <label className="text-13 lh-1 fw-500 text-dark-1 mb-10">
                     Confirm Password *
                   </label>
-                  <input
-                    required
-                    type="password"
-                    name="confirmPassword"
-                    placeholder="Confirm Password"
-                    value={formData.confirmPassword}
-                    onChange={handleInputChange}
-                    autoComplete="confirm-password"
-                    minLength="8"
-                    maxLength="12"
-                  />
-                  {errors.confirmPassword && <p className="error-text">{errors.confirmPassword}</p>}
+                  <div className="position-relative">
+                    <input
+                      required
+                      type={showPassword.confirmPassword ? "text" : "password"}
+                      name="confirmPassword"
+                      placeholder="Confirm Password"
+                      value={formData.confirmPassword}
+                      onChange={handleInputChange}
+                      autoComplete="confirm-password"
+                      minLength="8"
+                      maxLength="12"
+                      className="form-control pe-5"
+                    />
+                    <i
+                      className={`fas ${
+                        showPassword.confirmPassword ? "fa-eye" : "fa-eye-slash"
+                      } position-absolute`}
+                      style={{
+                        cursor: "pointer",
+                        right: "10px",
+                        top: "50%",
+                        transform: "translateY(-50%)",
+                        zIndex: 1,
+                        color: "#000",
+                      }}
+                      onClick={() =>
+                        togglePasswordVisibility("confirmPassword")
+                      }
+                    ></i>
+                  </div>
+                  {errors.confirmPassword && (
+                    <p className="error-text">{errors.confirmPassword}</p>
+                  )}
                 </div>
 
                 <div className="col-lg-12">
                   <label className="text-13 lh-1 fw-500 text-dark-1 mb-10">
-                    AccessKey *
+                    Access Key *
                   </label>
                   <input
                     required
@@ -213,7 +263,6 @@ export default function SignUpForm() {
                   />
                 </div>
 
-                {/* Terms and Conditions Checkbox */}
                 <div className="col-lg-12">
                   <label className="text-13 lh-1 fw-500 text-dark-1 mb-10">
                     <input
@@ -237,9 +286,8 @@ export default function SignUpForm() {
                   </label>
                 </div>
 
-                {/* Submit Button */}
                 <div className="col-12">
-                 <button
+                  <button
                     type="submit"
                     name="submit"
                     id="submit"

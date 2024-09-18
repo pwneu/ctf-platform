@@ -15757,3 +15757,28 @@ table.table td {
   background-color: #000000;
   color: #ffffff;
 }
+
+.position-relative {
+  position: relative;
+}
+
+.form-control {
+  width: 100%;
+  padding-right: 40px;
+  box-sizing: border-box; 
+}
+
+.position-absolute {
+  position: absolute;
+  right: 10px; 
+  top: 50%; 
+  transform: translateY(-50%); 
+  cursor: pointer; 
+  z-index: 1; 
+}
+
+.error-text {
+  color: #ff0c04; 
+  font-size: 12px; 
+  margin-top: 5px; 
+}
