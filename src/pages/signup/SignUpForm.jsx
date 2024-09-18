@@ -243,7 +243,7 @@ export default function SignUpForm() {
                     type="submit"
                     name="submit"
                     id="submit"
-                    className="button -md text-dark-1 fw-500 w-1/1"
+                    className="button -md fw-500 w-1/1"
                   >
                     Create Account
                   </button>
