@@ -15748,12 +15748,12 @@ table.table td {
 }
 
 .button {
-  background-color: #45f045; 
-  color: #ffffff; 
+  background-color: #5fff1a; 
+  color: #030202; 
   transition: background-color 0.3s, color 0.3s;
 }
 
 .button:hover {
-  background-color: #fcfcfc;
+  background-color: #000000;
   color: #ffffff;
 }
