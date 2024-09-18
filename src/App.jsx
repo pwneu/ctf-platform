@@ -1,5 +1,6 @@
 import "./styles/index.scss";
 import "@fortawesome/fontawesome-svg-core/styles.css";
+import "@fortawesome/fontawesome-free/css/all.min.css";
 import "react-calendar/dist/Calendar.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import AOS from "aos";
