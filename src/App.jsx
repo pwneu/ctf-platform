@@ -8,7 +8,10 @@ import { useEffect } from "react";
 
 import IndexWeb from "./pages/home/indexweb";
 import LoginPage from "./pages/login";
-import SignupPage from "./pages/signup";
+import SignupPage from "./pages/signup/Index";
+import AccountCreatedPage from "./pages/signup/UserAccountCreated";
+import AccountHasVerified from "@/pages/signup/UserGetStarted";
+
 import ContactPage from "./pages/contacts/contact";
 import PrivacyPolicyPage from "./pages/ownership/privacy-policy";
 import TermsandConditionsPage from "./pages/ownership/terms-and-conditions";
@@ -46,7 +49,9 @@ function App() {
             {/* Users */}
             <Route path="login" element={<LoginPage />} />
             <Route path="signup" element={<SignupPage />} />
-
+            <Route path="user-account-created" element={<AccountCreatedPage />} />
+            <Route path="account-verified" element={<AccountHasVerified  />} />
+        
             <Route path="campuses" element={<UniversityPage />} />
 
             {/* About Us*/}
