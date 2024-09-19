@@ -33,7 +33,7 @@ export default function FindLearningPath() {
           <div className="col-auto">
             <Link
               to="/learning-paths"
-              className="button -md -outline-white text-white mt-45 md:mt-20"
+              className="button -md -white text-black  mt-45 md:mt-0"
             >
               Get Started on Your Cybersecurity Journey Today
             </Link>

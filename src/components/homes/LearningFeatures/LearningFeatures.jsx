@@ -38,29 +38,30 @@ export default function LearningFeatures() {
     <section className="layout-pt-lg layout-pb-lg js-mouse-move-container">
       <div className="container">
         <div className="row y-gap-30 items-center">
-          <div className="col-lg-6 order-2 order-lg-1">
-            <h2 className="text-45 lg:text-40 md:text-30 text-dark-1">
-              Unlock Your Cybersecurity
-              <br className="xl:d-none" /> Potential with PWNEU CyberEduc
-            </h2>
-            <p className="text-dark-1 mt-20">
-              Explore the key features of our upskilling
-              <br className="lg:d-none" /> platform.
-            </p>
+          <h2 className="text-10 text-center lg:text-40 md:text-30 text-dark-1">
+            Unlock Your Cybersecurity
+            <br className="xl:d-none" /> Potential with{" "}
+            <span style={{ color: "#AB3331" }}>PWNEU Cyber-Education</span>{" "}
+          </h2>
+          <p className="text-dark-1 text-center mt-0">
+            Explore the key features of our upskilling platform:
+          </p>
 
-            <div className="row y-gap-30 pt-60 lg:pt-40">
+          <div className="col-lg-6 order-2 order-lg-1">
+            <div className="row y-gap-60 pt-60 lg:pt-40">
               {learningPath.map((elm, i) => (
-                <div key={i} className="col-12">
+                <div key={i} className="col-">
                   <div className="featureIcon -type-1">
                     <div
-                      className={`featureIcon__icon ${elm.iconBg && elm.iconBg
-                        }`}
+                      className={`featureIcon__icon ${
+                        elm.iconBg && elm.iconBg
+                      }`}
                     >
                       <img src={elm.iconSrc && elm.iconSrc} alt="icon" />
                     </div>
 
                     <div className="featureIcon__content ml-30 md:ml-20">
-                      <h4 className="text-10 fw-560">{elm.title}</h4>
+                      <h4 className="text-7 fw-560 mt-2 ">{elm.title}</h4>
                       <p className="mt-5">
                         {elm.description.split(" ").length > 5 ? (
                           <>
@@ -89,7 +90,6 @@ export default function LearningFeatures() {
                   alt="image"
                 />
               </div>
-            
             </div>
           </div>
         </div>

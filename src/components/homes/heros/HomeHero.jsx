@@ -29,7 +29,6 @@ const masthead_info = [
     icon: "/assets/img/homehero/icons/Career_icon.svg",
     text: "Career Development Resources",
   },
-  
 ];
 
 const hero_content = {
@@ -44,8 +43,9 @@ const hero_content = {
   ),
   info_hero: (
     <>
-     Join the PWNEU community to master the art of ethical hacking, 
-      <br /> enhance your cybersecurity skills, and lead the digital defense of tomorrow.
+      Join the PWNEU community to master the art of ethical hacking,
+      <br /> enhance your cybersecurity skills, and lead the digital defense of
+      tomorrow.
     </>
   ),
   starts: [
@@ -94,7 +94,10 @@ const HomeHero = () => {
     <>
       <section className="masthead -type-1 js-mouse-move-container">
         <div className="masthead__bg">
-          <img src={"/assets/img/learningPaths/learning/herobg1.gif"} alt="image" />
+          <img
+            src={"/assets/img/learningPaths/learning/herobg1.gif"}
+            alt="image"
+          />
         </div>
 
         <div className="container">
@@ -127,18 +130,18 @@ const HomeHero = () => {
                     <Link
                       data-barba
                       to="/signup"
-                      className="button -md -purple-1 text-white"
+                      className="buttonhero button-get-started -md  text-white"
                     >
-                     Get Started Today
+                      Get Started Today
                     </Link>
                   </div>
                   <div className="col-12 col-sm-auto">
                     <Link
                       data-barba
                       to="/mission-vision"
-                      className="button -md -outline-green-1 text-green-1"
+                      className="buttonhero button-learn-more text-white"
                     >
-                     Learn More About Our Mission
+                      Learn More About Our Mission
                     </Link>
                   </div>
                 </div>
@@ -164,8 +167,7 @@ const HomeHero = () => {
               </div>
             </div>
           </div>
-        </div> 
-        
+        </div>
 
         {/* animated shape start */}
         <ShapeRendering />

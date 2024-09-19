@@ -16,7 +16,7 @@ export default function WhyPWNEU() {
               </h2>
 
               <p
-                className="sectionTitle__text text-white"
+                className="sectionTitle__text text-white "
                 data-aos="fade-up"
                 data-aos-duration={800}
               >
