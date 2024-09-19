@@ -1,7 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-
 export default function AccountHasVerified() {
   return (
   
@@ -20,7 +19,7 @@ export default function AccountHasVerified() {
 
              <p className="mt-15 text-34 text-center">
                 To get started, go to{" "}
-                <Link to="/pneu-competition" className="text-custom-color text-bold">
+                <Link to="/list-of-challenges" className="text-custom-color text-bold">
                   PNEU Competition
                 </Link>{" "}
                 and begin your journey!
