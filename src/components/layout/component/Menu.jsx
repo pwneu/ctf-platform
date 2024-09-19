@@ -49,13 +49,14 @@ export default function Menu({ allClasses, headerPosition }) {
         <div className="menu js-navList">
           <ul className={`${allClasses ? allClasses : ""}`}>
             <li className="menu-item-has-children">
-              <Link
-                data-barba
-                to="https://pwneu.github.io/learn/docs/introduction"
+              <a
+                href="https://pwneu.github.io/learn/docs/introduction"
                 className={menuItem == "Learn" ? "activeMenu" : ""}
+                target="_blank"
+                rel="noopener noreferrer"
               >                
                 Learn
-              </Link>
+              </a>
 
             </li>
             <li className="menu-item-has-children">
