@@ -119,7 +119,7 @@ export default function CampusesTag() {
           <div className="col-auto">
             <Link
               to="/campuses"
-              className="button -icon -outline-purple-1 text-purple-1 fw-500"
+              className="button -icon button -md -purple-1 text-white mt-50"
             >
                 Discover More
               <span className="icon-arrow-top-right text-14 ml-10"></span>
