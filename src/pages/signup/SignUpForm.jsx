@@ -52,7 +52,6 @@ export default function SignUpForm() {
     } else if (!specialCharRegex.test(password)) {
       error = "Password must include at least one special character.";
     }
-
     return error;
   };
 
@@ -96,7 +95,6 @@ export default function SignUpForm() {
     }
 
     console.log("Form Data Submitted: ", formData);
-
     navigate("/user-account-created");
   };
 
@@ -105,17 +103,17 @@ export default function SignUpForm() {
       <div className="container mt-10">
         <div className="row justify-center items-center mt-8">
           <div className="col-xl-10 col-lg-9 mt-8">
-            <div className="mt-5 px-1 py-0 md:px-35 md:py-25 bg-white rounded-16">
-              <h3 className="text-1 lh-2 mt-2">Join Us!</h3>
-              <p className="text-1 mt-10">
-                Sign up with your university's institutional account to get started!
+            <div className="mt-5 px-1 py-0 md:px-35 md:py-25 bg-white  rounded-16">
+              <h3 className="text-40 lh-2 mt-2 text-center">Join Us!</h3>
+              <p className="text-15 mt-13 text-center">
+                Sign up with your university's institutional account to get
+                started!
               </p>
 
               <form
                 className="contact-form respondForm__form row y-gap-20 pt-30"
                 onSubmit={handleSubmit}
               >
-                {/* Input fields */}
                 <div className="col-lg-6">
                   <label className="text-13 lh-1 fw-500 text-dark-1 mb-10">
                     First Name *
@@ -272,14 +270,14 @@ export default function SignUpForm() {
                       onChange={handleInputChange}
                     />{" "}
                     I agree to all the{" "}
-                    <Link to="/terms" className="text-custom-color text-bold">
+                    <Link
+                      to="/terms-and-conditions"
+                      className="text-custom-color"
+                    >
                       Terms
                     </Link>{" "}
                     and{" "}
-                    <Link
-                      to="/privacy-policy"
-                      className="text-custom-color text-bold"
-                    >
+                    <Link to="/privacy-policy" className="text-custom-color">
                       Privacy Policies
                     </Link>
                     .
@@ -297,7 +295,7 @@ export default function SignUpForm() {
                   </button>
                   <p className="mt-10 text-center">
                     Already have an account?{" "}
-                    <Link to="/login" className="text-custom-color text-bold">
+                    <Link to="/login" className="text-custom-color">
                       Log in
                     </Link>
                   </p>
