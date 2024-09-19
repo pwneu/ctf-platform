@@ -9,7 +9,7 @@ import { useEffect } from "react";
 
 import IndexWeb from "./pages/home/indexweb";
 import LoginPage from "./pages/login";
-import SignupPage from "./pages/signup/Index";
+import SignupPage from "./pages/signup/index";
 import AccountCreatedPage from "./pages/signup/UserAccountCreated";
 import AccountHasVerified from "@/pages/signup/UserGetStarted";
 
