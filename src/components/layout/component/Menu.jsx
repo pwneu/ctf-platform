@@ -40,7 +40,7 @@ export default function Menu({ allClasses, headerPosition }) {
             Log in
           </Link>
           <Link to="/signup" className="text-dark-1 ml-30">
-            Sign Up
+            Register
           </Link>
         </div>
 
