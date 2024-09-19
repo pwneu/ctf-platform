@@ -1,4 +1,5 @@
 import React from "react";
+
 export default function AccountHasbeenCreated() {
   return (
     <div className="form-page__content lg:py-50">
