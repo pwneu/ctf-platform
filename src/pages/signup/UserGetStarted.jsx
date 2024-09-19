@@ -7,9 +7,10 @@ import MetaComponent from "@/components/common/MetaComponent";
 
 const metadata = {
   title: "Account Created || PWNEU",
-  description: "Create your account to join our community and start participating in exciting challenges.",
+  description: "Your account has been successfully created! Start exploring our platform and participating in exciting challenges.",
 };
-export default function UserGetStarted() {
+
+export default function UserGetStartedPage() {
   return (
     <div className="main-content  ">
       <MetaComponent meta={metadata} />
