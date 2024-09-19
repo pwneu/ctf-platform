@@ -58,7 +58,7 @@ export default function Header() {
                 </div>
 
                 <div className="header-right__buttons d-flex items-center ml-30 md:d-none">
-                  <Link to="/login" className="button -underline text-white">
+                  <Link to="/login" className="-sm -white text-white-1  ">
                     Log in
                   </Link>
                   <Link
