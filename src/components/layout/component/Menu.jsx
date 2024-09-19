@@ -28,9 +28,8 @@ export default function Menu({ allClasses, headerPosition }) {
 
   return (
     <div
-      className={`header-menu js-mobile-menu-toggle ${
-        headerPosition ? headerPosition : ""
-      }`}
+      className={`header-menu js-mobile-menu-toggle ${headerPosition ? headerPosition : ""
+        }`}
     >
       <div className="header-menu__content">
         <div className="mobile-bg js-mobile-bg"></div>
@@ -44,16 +43,17 @@ export default function Menu({ allClasses, headerPosition }) {
           </Link>
         </div>
 
-        
-
         <div className="menu js-navList">
           <ul className={`${allClasses ? allClasses : ""}`}>
             <li className="menu-item-has-children">
               <Link
-                data-barba
                 to="https://pwneu.github.io/learn/docs/introduction"
-                className={menuItem == "Learn" ? "activeMenu" : ""}
-              >                
+                className={menuItem === "Learn" ? "activeMenu" : ""}
+                onClick={(e) => {
+                  e.preventDefault(); 
+                  window.open(e.currentTarget.href, '_blank', 'noopener noreferrer'); 
+                }}
+              >
                 Learn
               </Link>
 
@@ -66,7 +66,7 @@ export default function Menu({ allClasses, headerPosition }) {
               >
                 University
               </Link>
-             
+
             </li>
 
             <li className="menu-item-has-children -has-mega-menu">
@@ -75,7 +75,7 @@ export default function Menu({ allClasses, headerPosition }) {
                 to="/list-of-challenges"
                 className={menuItem == "Courses" ? "activeMenu" : ""}
               >
-                Compete 
+                Compete
               </Link>
 
             </li>
