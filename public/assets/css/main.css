@@ -9430,6 +9430,11 @@ h1, h2, h3, h4, h5, h6 {
   color: #FF8682 !important;
 }
 
+.text-custom-green {
+  color: #5fff1a !important;
+}
+
+
 .error-text {
   color: red;
   font-size: 12px;
@@ -10045,7 +10050,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .shadow-1 {
-  box-shadow: 0px 20px 30px rgba(25, 25, 46, 0.04);
+  box-shadow: 0px 25px 70px 0px rgba(42, 6, 109, 0.541);
 }
 
 .shadow-2 {
@@ -15747,8 +15752,9 @@ table.table td {
   animation: upText 0.8s ease-out forwards;
 }
 
+
 .button {
-  background-color: #5fff1a; 
+  background-color: #cff721; 
   color: #030202; 
   transition: background-color 0.3s, color 0.3s;
 }
@@ -15782,3 +15788,38 @@ table.table td {
   font-size: 12px; 
   margin-top: 5px; 
 }
+
+.buttonhero {
+  display: inline-block;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  border-radius: 5px;
+  transition: all 0.3s ease;
+}
+
+.button-get-started {
+  background-color: #3a045e;
+  color: white;
+  border: 3px solid transparent; 
+}
+
+.button-get-started:hover {
+  background-color: #0000006b;
+  color: white;
+  border: 3px solid transparent; 
+}
+
+.button-learn-more {
+  background-color: #526403;
+  color: rgb(0, 0, 0);
+  border: 3px solid transparent; 
+}
+
+.button-learn-more:hover {
+  background-color: #0000006b;
+  border: 3px solid transparent; 
+}
+
+
