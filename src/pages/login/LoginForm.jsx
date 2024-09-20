@@ -110,7 +110,7 @@ export default function LoginForm() {
         // console.log(response.data);
 
         setAuth(response.data);
-        toast.success(`Logged in with user id: ${response.data.id}`);
+        // toast.success(`Logged in with user id: ${response.data.id}`);
         navigate(fromLocation, { replace: true });
       } catch (error) {
         toast.error(`Error loggin in: ${error.response.data.message}`);
