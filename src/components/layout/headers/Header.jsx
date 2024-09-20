@@ -1,14 +1,31 @@
-import React from "react";
-import { HeaderExplore } from "../component/header-explore";  // Okay
+import { HeaderExplore } from "../component/header-explore";
+import Menu from "../component/Menu";
+import { Link } from "react-router-dom";
+import { useState } from "react";
+import MobileMenu from "../component/MobileMenu";
+import useAuth from "@/hooks/useAuth";
+import { useNavigate } from "react-router-dom";
+import { api } from "@/api";
+import { toast } from "react-toastify";
 
-import Menu from "../component/Menu";  
-import { Link } from "react-router-dom"; 
+// TODO -- Fix mobile view, remove the "login" and "signup" button, fix dropdown
 
-import { useState } from "react";  
-import MobileMenu from "../component/MobileMenu";  
+const LOGOUT_API = "/identity/logout";
 
 export default function Header() {
   const [activeMobileMenu, setActiveMobileMenu] = useState(false);
+  const { auth, setAuth } = useAuth();
+  const navigate = useNavigate();
+
+  const handleLogout = async () => {
+    try {
+      await api.post(LOGOUT_API);
+      setAuth(null);
+      navigate("/login");
+    } catch (error) {
+      toast.error("Unable to log out");
+    }
+  };
 
   return (
     <>
@@ -20,17 +37,14 @@ export default function Header() {
                 <div className="header__logo ">
                   <Link to="/">
                     <img src="/assets/img/general/PWNEU_Logo.svg" alt="logo" />
-                  
                   </Link>
                 </div>
 
-                {/* header explore start */}
                 <HeaderExplore
                   allClasses={
                     "header__explore text-green-1 ml-60 xl:ml-30 xl:d-none"
                   }
                 />
-                {/* header explore end */}
               </div>
             </div>
 
@@ -43,9 +57,6 @@ export default function Header() {
             <div className="col-auto">
               <div className="header-right d-flex items-center">
                 <div className="header-right__icons text-white d-flex items-center">
-                
-                
-
                   <div className="d-none xl:d-block ml-20">
                     <button
                       onClick={() => setActiveMobileMenu(true)}
@@ -58,15 +69,29 @@ export default function Header() {
                 </div>
 
                 <div className="header-right__buttons d-flex items-center ml-30 md:d-none">
-                  <Link to="/login" className="-sm -white text-white-1  ">
-                    Log in
-                  </Link>
-                  <Link
-                    to="/signup"
-                    className="button -sm -white text-dark-1 ml-30"
-                  >
-                    Sign up
-                  </Link>
+                  {auth?.userName ? (
+                    <>
+                      <span className="text-white-1">{auth.userName}</span>
+                      <button
+                        onClick={handleLogout}
+                        className="button -sm -white text-dark-1 ml-30"
+                      >
+                        Log out
+                      </button>
+                    </>
+                  ) : (
+                    <>
+                      <Link to="/login" className="-sm -white text-white-1">
+                        Log in
+                      </Link>
+                      <Link
+                        to="/signup"
+                        className="button -sm -white text-dark-1 ml-30"
+                      >
+                        Sign up
+                      </Link>
+                    </>
+                  )}
                 </div>
               </div>
             </div>
