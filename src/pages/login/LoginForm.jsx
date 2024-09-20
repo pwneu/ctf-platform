@@ -1,5 +1,12 @@
-import { Link } from "react-router-dom";
-import React, { useState } from "react";
+/* eslint-disable no-useless-escape */
+/* eslint-disable react/no-unescaped-entities */
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { api } from "@/api";
+import { toast } from "react-toastify";
+import useAuth from "@/hooks/useAuth";
+
+const LOGIN_API = "/identity/login";
 
 export default function LoginForm() {
   const [formData, setFormData] = useState({
@@ -7,6 +14,7 @@ export default function LoginForm() {
     password: "",
     rememberMe: false,
   });
+  // TODO -- Remove "remember me" form data. The website will always remember the user.
 
   const [errors, setErrors] = useState({
     username: "",
@@ -17,6 +25,14 @@ export default function LoginForm() {
     password: false,
   });
 
+  const [isButtonDisabled, setIsButtonDisabled] = useState(false);
+
+  const { setAuth } = useAuth();
+
+  const navigate = useNavigate();
+  const location = useLocation();
+  const fromLocation = location.state?.from?.pathname || "/";
+
   const togglePasswordVisibility = (field) => {
     setShowPassword((prev) => ({
       ...prev,
@@ -25,7 +41,8 @@ export default function LoginForm() {
   };
 
   const validatePassword = (password) => {
-    const lengthRegex = /^.{8,12}$/;
+    const minLengthRegex = /^.{12,}$/; // At least 12 characters
+    const maxLengthRegex = /^.{1,128}$/; // Maximum 128 characters
     const uppercaseRegex = /[A-Z]/;
     const lowercaseRegex = /[a-z]/;
     const digitRegex = /\d/;
@@ -33,8 +50,10 @@ export default function LoginForm() {
 
     let error = "";
 
-    if (!lengthRegex.test(password)) {
-      error = "Password must be between 8 and 12 characters.";
+    if (!minLengthRegex.test(password)) {
+      error = "Password must be at least 12 characters.";
+    } else if (!maxLengthRegex.test(password)) {
+      error = "Password must not exceed 128 characters.";
     } else if (!uppercaseRegex.test(password)) {
       error = "Password must include at least one uppercase letter.";
     } else if (!lowercaseRegex.test(password)) {
@@ -56,7 +75,7 @@ export default function LoginForm() {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     let hasErrors = false;
@@ -78,7 +97,27 @@ export default function LoginForm() {
     }
 
     if (!hasErrors) {
-      console.log("Form Data Submitted: ", formData);
+      // console.log("Form Data Submitted: ", formData);
+
+      setIsButtonDisabled(true);
+
+      try {
+        const response = await api.post(LOGIN_API, {
+          userName: formData.username,
+          password: formData.password,
+        });
+
+        // console.log(response.data);
+
+        setAuth(response.data);
+        toast.success(`Logged in with user id: ${response.data.id}`);
+        navigate(fromLocation, { replace: true });
+      } catch (error) {
+        toast.error(`Error loggin in: ${error.response.data.message}`);
+        console.error(`Error loggin in: ${error.response.data.message}`);
+      } finally {
+        setIsButtonDisabled(false);
+      }
     }
   };
 
@@ -92,8 +131,9 @@ export default function LoginForm() {
                 Welcome Back Eranians!
               </h3>
               <p className="mt-10">
-                Log in with your university's institutional account. Don’t have
-                an account yet? Register through your school.
+                {/* Log in with your university's institutional account. Don’t have
+                an account yet? Register through your school. */}
+                Log in with your username and your password.
               </p>
 
               <form
@@ -130,8 +170,8 @@ export default function LoginForm() {
                       value={formData.password}
                       onChange={handleInputChange}
                       autoComplete="new-password"
-                      minLength="8"
-                      maxLength="12"
+                      minLength="12"
+                      maxLength="128"
                       className="form-control pe-5"
                     />
                     <i
@@ -154,7 +194,7 @@ export default function LoginForm() {
                   )}
                 </div>
                 <div className="col-12 d-flex justify-content-between align-items-center mt-4">
-                  <div className="form-check">
+                  {/* <div className="form-check">
                     <input
                       type="checkbox"
                       name="rememberMe"
@@ -169,7 +209,7 @@ export default function LoginForm() {
                     >
                       Remember Me
                     </label>
-                  </div>
+                  </div> */}
                   <Link
                     to="/forgot-password"
                     className="text-custom-color text-14"
@@ -177,14 +217,15 @@ export default function LoginForm() {
                     Forgot Password?
                   </Link>
                 </div>
-                <div className="col-12 ">
+                <div className="col-12">
                   <button
                     type="submit"
                     name="submit"
                     id="submit"
                     className="button -md fw-500 w-1/1"
+                    disabled={isButtonDisabled}
                   >
-                    Log In
+                    {isButtonDisabled ? "Processing..." : "Log In"}
                   </button>
                 </div>
                 <div className="col-12 text-center">

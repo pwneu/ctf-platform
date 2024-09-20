@@ -36,6 +36,8 @@ import { ToastContainer } from "react-toastify";
 // import AchievementsdetailsPage from "./pages/achivements/achievements";
 // import AchievementsListPage from "./pages/achivements/achievements-list";
 
+import "react-toastify/dist/ReactToastify.css"; // Make sure to import CSS
+
 function App() {
   useEffect(() => {
     AOS.init({
