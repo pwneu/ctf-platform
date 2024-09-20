@@ -2,7 +2,7 @@ import "./styles/index.scss";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "react-calendar/dist/Calendar.css";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import { useEffect } from "react";
@@ -32,6 +32,7 @@ import MissionVisionPage from "./pages/about/mission-vision";
 import HelpCenterPage from "./pages/others/help-center";
 
 import DiscussionPage from "./pages/community/discussion-forum";
+import { ToastContainer } from "react-toastify";
 // import AchievementsdetailsPage from "./pages/achivements/achievements";
 // import AchievementsListPage from "./pages/achivements/achievements-list";
 
@@ -93,6 +94,7 @@ function App() {
           {/* <Route path="achievements-list" element={<AchievementsListPage />} />  */}
         </Route>
       </Routes>
+      <ToastContainer />
     </>
   );
 }
