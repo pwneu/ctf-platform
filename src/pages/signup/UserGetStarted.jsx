@@ -2,7 +2,6 @@ import Preloader from "@/components/common/Preloader";
 import HeaderAuth from "@/components/layout/headers/HeaderAuth"; 
 import AuthImageMove from "@/components/others/AuthImageMove"; 
 import AccountHasVerified from "@/pages/signup/AccountHasVerified";
-import React from "react";
 import MetaComponent from "@/components/common/MetaComponent"; 
 
 const metadata = {

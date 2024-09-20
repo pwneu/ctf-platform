@@ -37,6 +37,7 @@ import { ToastContainer } from "react-toastify";
 // import AchievementsListPage from "./pages/achivements/achievements-list";
 
 import "react-toastify/dist/ReactToastify.css"; // Make sure to import CSS
+import VerifyEmailPage from "./pages/signup/VerifyEmail";
 
 function App() {
   useEffect(() => {
@@ -64,6 +65,7 @@ function App() {
             path="password-completed"
             element={<PasswordCompletedPage />}
           />
+          <Route path="verify-email" element={<VerifyEmailPage />} />
 
           {/* User Registration */}
           <Route path="signup" element={<SignupPage />} />
