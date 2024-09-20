@@ -9,13 +9,13 @@ import { useEffect } from "react";
 
 import IndexWeb from "./pages/home/indexweb";
 
-import LoginPage from "./pages/login/Index";
+import LoginPage from "./pages/login";
 import ForgotPasswordPage from "./pages/login/UserForgotPassword";
 import VerifyCodePage from "./pages/login/UserVerifyCode";
 import SetPasswordPage from "./pages/login/UserSetPassword";
 import PasswordCompletedPage from "./pages/login/UserPasswordCompleted";
 
-import SignupPage from "./pages/signup/Index";
+import SignupPage from "./pages/signup";
 import AccountCreatedPage from "./pages/signup/UserAccountCreated";
 import AccountHasVerifiedPage from "@/pages/signup/UserGetStarted";
 
@@ -33,8 +33,7 @@ import HelpCenterPage from "./pages/others/help-center";
 
 import DiscussionPage from "./pages/community/discussion-forum";
 // import AchievementsdetailsPage from "./pages/achivements/achievements";
-// import AchievementsListPage from "./pages/achivements/achievements-list";  
-
+// import AchievementsListPage from "./pages/achivements/achievements-list";
 
 function App() {
   useEffect(() => {
@@ -48,49 +47,52 @@ function App() {
 
   return (
     <>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/">
-            {/* Homepage */}
-            <Route index element={<IndexWeb />} />
+      <Routes>
+        <Route path="/">
+          {/* Homepage */}
+          <Route index element={<IndexWeb />} />
 
-            {/* User Login */}
-            <Route path="login" element={<LoginPage />} />
-            <Route path="forgot-password" element={<ForgotPasswordPage />} />
-            <Route path="verify-code" element={<VerifyCodePage />} />
-            <Route path="set-new-password" element={<SetPasswordPage />} />
-            <Route path="password-completed" element={<PasswordCompletedPage />} />
-          
-            {/* User Registration */}
-            <Route path="signup" element={<SignupPage />} />
-            <Route path="user-account-created" element={<AccountCreatedPage />} />
-            <Route path="account-verified" element={<AccountHasVerifiedPage  />} />
-            <Route path="campuses" element={<UniversityPage />} />
+          {/* User Login */}
+          <Route path="login" element={<LoginPage />} />
+          <Route path="forgot-password" element={<ForgotPasswordPage />} />
+          <Route path="verify-code" element={<VerifyCodePage />} />
+          <Route path="set-new-password" element={<SetPasswordPage />} />
+          <Route
+            path="password-completed"
+            element={<PasswordCompletedPage />}
+          />
 
-            {/* About Us*/}
-            <Route path="our-story" element={<OurStoryPage />} />
-            <Route path="who-we-are" element={<WhoWeArePage />} />
-            <Route path="mission-vision" element={<MissionVisionPage />} />
+          {/* User Registration */}
+          <Route path="signup" element={<SignupPage />} />
+          <Route path="user-account-created" element={<AccountCreatedPage />} />
+          <Route path="account-verified" element={<AccountHasVerifiedPage />} />
+          <Route path="campuses" element={<UniversityPage />} />
 
-            {/* Contact */}
-            <Route path="contact" element={<ContactPage />} />
-            <Route path="help-center" element={<HelpCenterPage />} />
-            <Route path="privacy-policy" element={<PrivacyPolicyPage />} />
-            <Route path="terms-and-conditions" element={<TermsandConditionsPage />} />
+          {/* About Us*/}
+          <Route path="our-story" element={<OurStoryPage />} />
+          <Route path="who-we-are" element={<WhoWeArePage />} />
+          <Route path="mission-vision" element={<MissionVisionPage />} />
 
-            {/* Compete */}
-            <Route path="list-of-challenges" element={<ListofChallenges />} />
+          {/* Contact */}
+          <Route path="contact" element={<ContactPage />} />
+          <Route path="help-center" element={<HelpCenterPage />} />
+          <Route path="privacy-policy" element={<PrivacyPolicyPage />} />
+          <Route
+            path="terms-and-conditions"
+            element={<TermsandConditionsPage />}
+          />
 
-            {/* Community */}
-            <Route path="discussion-forum" element={<DiscussionPage />} />
-           
-            {/* Achievements */}
-            {/* <Route path="achievements/:id" element={<AchievementsdetailsPage />} /> */}
-            {/* <Route path="achievements-list" element={<AchievementsListPage />} />  */}
+          {/* Compete */}
+          <Route path="list-of-challenges" element={<ListofChallenges />} />
 
-          </Route>
-        </Routes>
-      </BrowserRouter>
+          {/* Community */}
+          <Route path="discussion-forum" element={<DiscussionPage />} />
+
+          {/* Achievements */}
+          {/* <Route path="achievements/:id" element={<AchievementsdetailsPage />} /> */}
+          {/* <Route path="achievements-list" element={<AchievementsListPage />} />  */}
+        </Route>
+      </Routes>
     </>
   );
 }
