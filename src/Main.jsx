@@ -4,6 +4,12 @@ import App from "./App.jsx";
 import { BrowserRouter } from "react-router-dom";
 import { AuthProvider } from "./context/AuthProvider.jsx";
 
+/* 
+Disable Strict Mode On:
+
+1. Testing email verification
+*/
+
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <BrowserRouter>

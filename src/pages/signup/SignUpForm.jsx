@@ -1,5 +1,11 @@
+/* eslint-disable react/no-unescaped-entities */
+/* eslint-disable no-useless-escape */
 import { Link, useNavigate } from "react-router-dom";
-import React, { useState } from "react";
+import { useState } from "react";
+import { toast } from "react-toastify";
+import { api } from "@/api";
+
+const REGISTER_API = "/identity/register";
 
 export default function SignUpForm() {
   const navigate = useNavigate();
@@ -25,6 +31,8 @@ export default function SignUpForm() {
     confirmPassword: false,
   });
 
+  const [isButtonDisabled, setIsButtonDisabled] = useState(false);
+
   const togglePasswordVisibility = (field) => {
     setShowPassword((prev) => ({
       ...prev,
@@ -33,7 +41,8 @@ export default function SignUpForm() {
   };
 
   const validatePassword = (password) => {
-    const lengthRegex = /^.{8,12}$/;
+    const minLengthRegex = /^.{12,}$/; // At least 12 characters
+    const maxLengthRegex = /^.{1,128}$/; // Maximum 128 characters
     const uppercaseRegex = /[A-Z]/;
     const lowercaseRegex = /[a-z]/;
     const digitRegex = /\d/;
@@ -41,8 +50,10 @@ export default function SignUpForm() {
 
     let error = "";
 
-    if (!lengthRegex.test(password)) {
-      error = "Password must be between 8 and 12 characters.";
+    if (!minLengthRegex.test(password)) {
+      error = "Password must be at least 12 characters.";
+    } else if (!maxLengthRegex.test(password)) {
+      error = "Password must not exceed 128 characters.";
     } else if (!uppercaseRegex.test(password)) {
       error = "Password must include at least one uppercase letter.";
     } else if (!lowercaseRegex.test(password)) {
@@ -52,6 +63,7 @@ export default function SignUpForm() {
     } else if (!specialCharRegex.test(password)) {
       error = "Password must include at least one special character.";
     }
+
     return error;
   };
 
@@ -72,11 +84,11 @@ export default function SignUpForm() {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (!formData.termsAgreed) {
-      alert("You must agree to the Terms and Privacy Policies.");
+      toast.error("You must agree to the Terms and Privacy Policies.");
       return;
     }
 
@@ -94,8 +106,26 @@ export default function SignUpForm() {
       return;
     }
 
-    console.log("Form Data Submitted: ", formData);
-    navigate("/user-account-created");
+    setIsButtonDisabled(true);
+
+    try {
+      await api.post(REGISTER_API, {
+        userName: formData.username,
+        email: formData.email,
+        password: formData.password,
+        fullName: formData.firstName + " " + formData.lastName,
+        accessKey: formData.accessKey,
+      });
+
+      toast.success(`The verification link has been sent to ${formData.email}. Please check to activate your account.`)
+
+      // navigate("/user-account-created");
+      navigate("/login");
+    } catch (error) {
+      toast.error(`Unable to register: ${error.response.data.message}`);
+    } finally {
+      setIsButtonDisabled(false);
+    }
   };
 
   return (
@@ -184,8 +214,8 @@ export default function SignUpForm() {
                       value={formData.password}
                       onChange={handleInputChange}
                       autoComplete="new-password"
-                      minLength="8"
-                      maxLength="12"
+                      minLength="12"
+                      maxLength="128"
                       className="form-control pe-5"
                     />
                     <i
@@ -220,8 +250,8 @@ export default function SignUpForm() {
                       value={formData.confirmPassword}
                       onChange={handleInputChange}
                       autoComplete="confirm-password"
-                      minLength="8"
-                      maxLength="12"
+                      minLength="12"
+                      maxLength="128"
                       className="form-control pe-5"
                     />
                     <i
@@ -252,7 +282,7 @@ export default function SignUpForm() {
                   </label>
                   <input
                     required
-                    type="password"
+                    type="text"
                     name="accessKey"
                     placeholder="Access Key"
                     value={formData.accessKey}
@@ -290,8 +320,9 @@ export default function SignUpForm() {
                     name="submit"
                     id="submit"
                     className="button -md fw-500 w-1/1"
+                    disabled={isButtonDisabled}
                   >
-                    Create Account
+                    {isButtonDisabled ? "Processing..." : "Create Account"}
                   </button>
                   <p className="mt-10 text-center">
                     Already have an account?{" "}
