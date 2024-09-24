@@ -1,133 +1,345 @@
 export const challengesData = [
   {
-    "id": "05d3656e-1c63-4508-a6b4-923ddd28c590", // from original `id`
-    "categoryId": "1", // Placeholder as no original mapping for categoryId
-    "categoryName": "Cryptography", 
-    "name": "Verify",
-    "description": "Introductory course on web hosting, domain registration, and how you can easily publish and edit your website online.", // from original `desc`
-    "points": 100, 
-    "deadlineEnabled": false, // Placeholder as there was no `deadlineEnabled`
-    "deadline": "", // Placeholder since no deadline was provided
-    "maxAttempts": 0, 
-    "solveCount": 280, // Placeholder, no solve count data was available
+    "id": "1",
+    "categoryId": "1",
+    "categoryName": "Cryptography",
+    "name": "Flag Test 1",
+    "description": "Solve cryptographic puzzles to reveal hidden flags.",
+    "points": 100,
+    "deadlineEnabled": false,
+    "maxAttempts": 0,
+    "solveCount": 280,
     "tags": [
       "Beginner",
       "PWNEU 2024"
     ],
     "artifacts": [
       {
-        "id": "1", 
-        "fileName": "" 
-      },
-      {
-        "id": "2", 
-        "fileName": ""
+        "id": "1",
+        "fileName": "https://i.pinimg.com/474x/e4/ed/cd/e4edcd205807e450ed26e2427d9df580.jpg"
       }
     ],
     "hints": [
       {
-        "id": "1", 
-        "deduction": 0 
+        "id": "1",
+        "deduction": 0
       },
       {
-        "id": "2", 
-        "deduction": 0 
+        "id": "2",
+        "deduction": 0
       }
     ]
-
   },
   {
-    "id": "2", 
-    "categoryId": "1", 
-    "categoryName": "Cryptography", 
+    "id": "2",
+    "categoryId": "1",
+    "categoryName": "Cryptography",
     "name": "Scan Surprise",
-    "description": "Introductory course on web hosting, domain registration, and how you can easily publish and edit your website online.", // from original `desc`
-    "points": 50, 
-    "deadlineEnabled": false, 
-    "deadline": "", 
-    "maxAttempts": 0, 
-    "solveCount": 0, 
+    "description": "Analyze encrypted messages to uncover the secrets they hold.",
+    "points": 350,
+    "deadlineEnabled": false,
+    "maxAttempts": 0,
+    "solveCount": 2013,
     "tags": [
       "Intermediate",
-      "PWNEU 2024",
+      "PWNEU 2024"
     ],
     "artifacts": [
       {
-        "id": "1", 
-        "fileName": "" 
+        "id": "1",
+        "fileName": "dabid.jpg"
       },
       {
-        "id": "2", 
-        "fileName": ""
+        "id": "2",
+        "fileName": "dabid.jpg"
       }
     ],
     "hints": [
       {
-        "id": "1", 
-        "deduction": 0 
+        "id": "1",
+        "deduction": 0
       },
       {
-        "id": "2", 
-        "deduction": 0 
+        "id": "2",
+        "deduction": 0
       }
     ]
-
   },
   {
-    "id": "3", 
-    "categoryId": "1", 
-    "categoryName": "Cryptography", 
-    "name": "Secret of the Polyglot ",
-    "description": "Introductory course on web hosting, domain registration, and how you can easily publish and edit your website online.", // from original `desc`
-    "points": 150, 
-    "deadlineEnabled": false, 
-    "deadline": "", 
-    "maxAttempts": 0, 
-    "solveCount": 0, 
+    "id": "3",
+    "categoryId": "1",
+    "categoryName": "Cryptography",
+    "name": "Secret of the Polyglot",
+    "description": "Decrypt a polyglot file that contains hidden information in multiple formats.",
+    "points": 150,
+    "deadlineEnabled": false,
+    "maxAttempts": 0,
+    "solveCount": 0,
     "tags": [
       "Expert",
-      "PWNEU 2024",
+      "PWNEU 2024"
     ],
     "artifacts": [
       {
-        "id": "1", 
-        "fileName": "" 
+        "id": "1",
+        "fileName": ""
       },
       {
-        "id": "2", 
+        "id": "2",
         "fileName": ""
       }
     ],
     "hints": [
       {
-        "id": "1", 
-        "deduction": 0 
+        "id": "1",
+        "deduction": 0
       },
       {
-        "id": "2", 
-        "deduction": 0 
+        "id": "2",
+        "deduction": 0
       }
     ]
-
   },
-];
+  {
+    "id": "4",
+    "categoryId": "1",
+    "categoryName": "Web Exploitation",
+    "name": "SQL Injection Challenge",
+    "description": "Exploit a vulnerable web application using SQL injection.",
+    "points": 200,
+    "deadlineEnabled": false,
+    "maxAttempts": 0,
+    "solveCount": 150,
+    "tags": [
+      "Intermediate",
+      "PWNEU 2024"
+    ],
+    "artifacts": [],
+    "hints": []
+  },
+  {
+    "id": "5",
+    "categoryId": "1",
+    "categoryName": "Reverse Engineering",
+    "name": "Binary Cracker",
+    "description": "Reverse engineer a binary to extract a secret flag.",
+    "points": 250,
+    "deadlineEnabled": false,
+    "maxAttempts": 0,
+    "solveCount": 75,
+    "tags": [
+      "Expert",
+      "PWNEU 2024"
+    ],
+    "artifacts": [],
+    "hints": []
+  },
+  {
+    "id": "6",
+    "categoryId": "1",
+    "categoryName": "Forensics",
+    "name": "Digital Forensics Task",
+    "description": "Analyze digital evidence to recover a lost flag.",
+    "points": 300,
+    "deadlineEnabled": false,
+    "maxAttempts": 0,
+    "solveCount": 50,
+    "tags": [
+      "Intermediate",
+      "PWNEU 2024"
+    ],
+    "artifacts": [],
+    "hints": []
+  },
+  {
+    "id": "7",
+    "categoryId": "1",
+    "categoryName": "Pwn",
+    "name": "Exploitation Challenge",
+    "description": "Pwn a service to retrieve a hidden flag.",
+    "points": 400,
+    "deadlineEnabled": false,
+    "maxAttempts": 0,
+    "solveCount": 30,
+    "tags": [
+      "Expert",
+      "PWNEU 2024"
+    ],
+    "artifacts": [],
+    "hints": []
+  },
+  {
+    "id": "8",
+    "categoryId": "1",
+    "categoryName": "Social Engineering",
+    "name": "Phishing Simulation",
+    "description": "Craft a phishing email to capture sensitive information.",
+    "points": 100,
+    "deadlineEnabled": false,
+    "maxAttempts": 0,
+    "solveCount": 200,
+    "tags": [
+      "Beginner",
+      "PWNEU 2024"
+    ],
+    "artifacts": [],
+    "hints": []
+  },
+  {
+    "id": "9",
+    "categoryId": "1",
+    "categoryName": "Mobile Security",
+    "name": "Android Vulnerability",
+    "description": "Identify vulnerabilities in an Android application.",
+    "points": 150,
+    "deadlineEnabled": false,
+    "maxAttempts": 0,
+    "solveCount": 45,
+    "tags": [
+      "Intermediate",
+      "PWNEU 2024"
+    ],
+    "artifacts": [],
+    "hints": []
+  },
+  {
+    "id": "10",
+    "categoryId": "1",
+    "categoryName": "Hardware Hacking",
+    "name": "Microcontroller Challenge",
+    "description": "Hack a microcontroller to extract the flag.",
+    "points": 250,
+    "deadlineEnabled": false,
+    "maxAttempts": 0,
+    "solveCount": 20,
+    "tags": [
+      "Expert",
+      "PWNEU 2024"
+    ],
+    "artifacts": [],
+    "hints": []
+  },
+ 
+  {
+    "id": "11",
+    "categoryId": "1",
+    "categoryName": "Network Security",
+    "name": "Packet Sniffing Challenge",
+    "description": "Capture and analyze network packets to find hidden flags.",
+    "points": 300,
+    "deadlineEnabled": false,
+    "maxAttempts": 0,
+    "solveCount": 25,
+    "tags": [
+      "Intermediate",
+      "PWNEU 2024"
+    ],
+    "artifacts": [],
+    "hints": []
+  },
+  {
+    "id": "12",
+    "categoryId": "1",
+    "categoryName": "Malware Analysis",
+    "name": "Malware Dissection",
+    "description": "Analyze a piece of malware to uncover its functionality and extract the flag.",
+    "points": 350,
+    "deadlineEnabled": false,
+    "maxAttempts": 0,
+    "solveCount": 10,
+    "tags": [
+      "Expert",
+      "PWNEU 2024"
+    ],
+    "artifacts": [],
+    "hints": []
+  },
+  {
+    "id": "13",
+    "categoryId": "1",
+    "categoryName": "Steganography",
+    "name": "Hidden Message",
+    "description": "Extract a hidden message from an image file.",
+    "points": 150,
+    "deadlineEnabled": false,
+    "maxAttempts": 0,
+    "solveCount": 40,
+    "tags": [
+      "Beginner",
+      "PWNEU 2024"
+    ],
+    "artifacts": [],
+    "hints": []
+  },
+  {
+    "id": "14",
+    "categoryId": "1",
+    "categoryName": "Web Exploitation",
+    "name": "Cross-Site Scripting (XSS)",
+    "description": "Find and exploit XSS vulnerabilities in a web application.",
+    "points": 200,
+    "deadlineEnabled": false,
+    "maxAttempts": 0,
+    "solveCount": 60,
+    "tags": [
+      "Intermediate",
+      "PWNEU 2024"
+    ],
+    "artifacts": [],
+    "hints": []
+  },
+  {
+    "id": "15",
+    "categoryId": "1",
+    "categoryName": "OSINT",
+    "name": "Open Source Intelligence",
+    "description": "Gather information using open-source techniques to find the flag.",
+    "points": 250,
+    "deadlineEnabled": false,
+    "maxAttempts": 0,
+    "solveCount": 35,
+    "tags": [
+      "Expert",
+      "PWNEU 2024"
+    ],
+    "artifacts": [],
+    "hints": []
+  },
+  {
+    "id": "16",
+    "categoryId": "1",
+    "categoryName": "Digital Forensics",
+    "name": "Memory Analysis",
+    "description": "Analyze a memory dump to recover sensitive information.",
+    "points": 300,
+    "deadlineEnabled": false,
+    "maxAttempts": 0,
+    "solveCount": 15,
+    "tags": [
+      "Expert",
+      "PWNEU 2024"
+    ],
+    "artifacts": [],
+    "hints": []
+  },
+  {
+    "id": "17",
+    "categoryId": "1",
+    "categoryName": "Physical Security",
+    "name": "Lockpicking Challenge",
+    "description": "Demonstrate physical security skills by picking a lock to retrieve the flag.",
+    "points": 400,
+    "deadlineEnabled": false,
+    "maxAttempts": 0,
+    "solveCount": 5,
+    "tags": [
+      "Expert",
+      "PWNEU 2024"
+    ],
+    "artifacts": [],
+    "hints": []
+  }
 
-
-
-export const catagories = [
-  "All Categories",
-  "Cryptography",
-  "Reverse Engineering",
-  "Forensics",
-  "Web Exploitation",
-  "Binary Exploitation",
-  "Stenography",
-  "Miscellaneous (Misc)",
-  "Programming",
-  "Pwn",
-  "Social Engineering",
-  "Mobile Security",
-  "Hardware Hacking",
 ];
 
 
@@ -149,26 +361,24 @@ export const allCategories = [
 ];
 
 
-export const levels = [
-  { id: 1, title: "Beginner" },
-  { id: 2, title: "Intermediate" },
-  { id: 3, title: "Expert" },
+export const categories = [
+  { id: 1, categoryName: "Cryptography" },
+  { id: 2, categoryName: "Reverse Engineering" },
+  { id: 3, categoryName: "Forensics" },
+  { id: 4, categoryName: "Web Exploitation" },
+  { id: 5, categoryName: "Binary Exploitation" },
+  { id: 6, categoryName: "Stenography" },
+  { id: 7, categoryName: "Miscellaneous (Misc)" },
+  { id: 8, categoryName: "Programming" },
+  { id: 9, categoryName: "Pwn" },
+  { id: 10, categoryName: "Social Engineering" },
+ 
 ];
 
-
-export const categories = [
-  { id: 1, title: "Cryptography" },
-  { id: 2, title: "Reverse Engineering" },
-  { id: 3, title: "Forensics" },
-  { id: 4, title: "Web Exploitation" },
-  { id: 5, title: "Binary Exploitation" },
-  { id: 6, title: "Stenography" },
-  { id: 7, title: "Miscellaneous (Misc)" },
-  { id: 8, title: "Programming" },
-  { id: 9, title: "Pwn" },
-  { id: 10, title: "Social Engineering" },
-  { id: 11, title: "Mobile Security" },
-  { id: 12, title: "Hardware Hacking" }
+export const levels = [
+  { id: 1, tag: "Beginner" },
+  { id: 2, tag: "Intermediate" },
+  { id: 3, tag: "Expert" },
 ];
 
 export const duration = [
@@ -179,180 +389,3 @@ export const duration = [
 ];
 
 
-
-export const lessonItems = [
-  {
-    id: 1,
-    title: "Course Content",
-    duration: "87 min",
-    lessons: [
-      { id: 1, title: "Introduction to the User", duration: "03:56" },
-      { id: 2, title: "Getting started with your", duration: "03:56" },
-      {
-        id: 3,
-        title:
-          "What is UI vs UX - User Interface vs User Experience vs Product",
-        duration: "03:56",
-      },
-      { id: 4, title: "Wireframing (low fidelity) in", duration: "03:56" },
-      { id: 5, title: "Viewing your prototype on", duration: "03:56" },
-      { id: 6, title: "Sharing your design", duration: "03:56" },
-    ],
-  },
-  {
-    id: 2,
-    title: "The Brief",
-    duration: "87 min",
-    lessons: [
-      {
-        id: 1,
-        title: "Introduction to the User",
-        duration: "03:56",
-        questions: 5,
-      },
-      {
-        id: 2,
-        title: "Getting started with your",
-        duration: "03:56",
-        questions: 5,
-      },
-      {
-        id: 3,
-        title:
-          "What is UI vs UX - User Interface vs User Experience vs Product",
-        duration: "03:56",
-        questions: 5,
-      },
-      {
-        id: 4,
-        title: "Wireframing (low fidelity) in",
-        duration: "03:56",
-        questions: 5,
-      },
-      {
-        id: 5,
-        title: "Viewing your prototype on",
-        duration: "03:56",
-        questions: 5,
-      },
-      { id: 6, title: "Sharing your design", duration: "03:56", questions: 5 },
-    ],
-  },
-  {
-    id: 3,
-    title: "Type, Color & Icon Introduction",
-    duration: "87 min",
-    lessons: [
-      {
-        id: 1,
-        title: "Introduction to the User",
-        duration: "03:56",
-        questions: 5,
-      },
-      {
-        id: 2,
-        title: "Getting started with your",
-        duration: "03:56",
-        questions: 5,
-      },
-      {
-        id: 3,
-        title:
-          "What is UI vs UX - User Interface vs User Experience vs Product",
-        duration: "03:56",
-        questions: 5,
-      },
-      {
-        id: 4,
-        title: "Wireframing (low fidelity) in",
-        duration: "03:56",
-        questions: 5,
-      },
-      {
-        id: 5,
-        title: "Viewing your prototype on",
-        duration: "03:56",
-        questions: 5,
-      },
-      { id: 6, title: "Sharing your design", duration: "03:56", questions: 5 },
-    ],
-  },
-  {
-    id: 4,
-    title: "Prototyping a App - Introduction",
-    duration: "87 min",
-    lessons: [
-      {
-        id: 1,
-        title: "Introduction to the User",
-        duration: "03:56",
-        questions: 5,
-      },
-      {
-        id: 2,
-        title: "Getting started with your",
-        duration: "03:56",
-        questions: 5,
-      },
-      {
-        id: 3,
-        title:
-          "What is UI vs UX - User Interface vs User Experience vs Product",
-        duration: "03:56",
-        questions: 5,
-      },
-      {
-        id: 4,
-        title: "Wireframing (low fidelity) in",
-        duration: "03:56",
-        questions: 5,
-      },
-      {
-        id: 5,
-        title: "Viewing your prototype on",
-        duration: "03:56",
-        questions: 5,
-      },
-      { id: 6, title: "Sharing your design", duration: "03:56", questions: 5 },
-    ],
-  },
-  {
-    id: 5,
-    title: "Wireframe Feedback",
-    duration: "87 min",
-    lessons: [
-      {
-        id: 1,
-        title: "Introduction to the User",
-        duration: "03:56",
-        questions: 5,
-      },
-      {
-        id: 2,
-        title: "Getting started with your",
-        duration: "03:56",
-        questions: 5,
-      },
-      {
-        id: 3,
-        title:
-          "What is UI vs UX - User Interface vs User Experience vs Product",
-        duration: "03:56",
-        questions: 5,
-      },
-      {
-        id: 4,
-        title: "Wireframing (low fidelity) in",
-        duration: "03:56",
-        questions: 5,
-      },
-      {
-        id: 5,
-        title: "Viewing your prototype on",
-        duration: "03:56",
-        questions: 5,
-      },
-      { id: 6, title: "Sharing your design", duration: "03:56", questions: 5 },
-    ],
-  },
-];
