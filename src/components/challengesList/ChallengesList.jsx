@@ -1,97 +1,84 @@
 import {
   categories,
   challengesData,
-  duration,
-  levels,
-} from "@/data/challenges"; 
-import React, { useState, useEffect } from "react"; 
-import Star from "../common/Star"; 
-
-import { Link } from "react-router-dom"; 
-
-import PaginationTwo from "../common/PaginationTwo"; 
+  sortingOptions,
+} from "./challenges";
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import PaginationTwo from "./SidebarFilters";
 
 export default function ChallengesList() {
+  // State management
   const [categoryOpen, setCategoryOpen] = useState(true);
-  const [levelOpen, setLevelOpen] = useState(true);
-  const [durationOpen, setDurationOpen] = useState(true);
-  const [filterOpen] = useState(false);
+  const [filterOpen, setFilterOpen] = useState(false);
   const [filterCategories, setFilterCategories] = useState([]);
-
   const [filterCat] = useState("All");
-  const [filterLevels, setFilterLevels] = useState([]);
-
-  const [filterDuration, setFilterDuration] = useState([]);
   const [currentSortingOption] = useState("Default");
+  const [showSolved, setShowSolved] = useState(true); // State to manage showing solved challenges
   const [filteredData, setFilteredData] = useState([]);
   const [sortedFilteredData, setSortedFilteredData] = useState([]);
   const [pageNumber, setPageNumber] = useState(1);
 
+  // Effect for filtering challenges based on selected criteria
   useEffect(() => {
     const refItems = challengesData.filter((elm) => {
-      if (filterCat == "All") {
+      if (filterCat === "All") {
         return true;
       }
     });
 
     let filteredArrays = [];
 
+    // Filter by categories
     if (filterCategories.length > 0) {
-      const filtered = refItems.filter((elm) =>
-        filterCategories.includes(elm.category)
+      const filteredByCategory = refItems.filter((elm) =>
+        filterCategories.includes(elm.categoryName)
       );
-      filteredArrays = [...filteredArrays, filtered];
-    }
-    if (filterLevels.length > 0) {
-      const filtered = refItems.filter((elm) =>
-        filterLevels.includes(elm.level)
-      );
-      filteredArrays = [...filteredArrays, filtered];
+      filteredArrays.push(filteredByCategory);
     }
 
-    if (filterDuration.length > 0) {
-      const filtered = refItems.filter(
-        (elm) =>
-          elm.duration >= filterDuration[0] && elm.duration <= filterDuration[1]
-      );
-      filteredArrays = [...filteredArrays, filtered];
-    }
+    // Filter by solved status
+    const filteredBySolved = refItems.filter((elm) => {
+      return showSolved || !elm.solved; // Assuming elm.solved indicates if a challenge is solved
+    });
+    filteredArrays.push(filteredBySolved);
 
-    const commonItems = refItems.filter((item) =>
-      filteredArrays.every((array) => array.includes(item))
-    );
+    // Get common items that meet all filtering criteria
+    const commonItems = filteredArrays.reduce((acc, array) => {
+      return acc.filter(item => array.includes(item));
+    }, refItems);
+
     setFilteredData(commonItems);
     setPageNumber(1);
-  }, [filterCategories, filterLevels, filterDuration]);
+  }, [filterCategories, showSolved]); // Add showSolved to dependencies
 
+  // Effect for sorting filtered challenges
   useEffect(() => {
-    if (currentSortingOption == "Default") {
+    if (currentSortingOption === "Default") {
       setSortedFilteredData(filteredData);
     }
+    // Implement additional sorting options as needed
   }, [currentSortingOption, filteredData]);
 
+  // Handlers for filtering categories, levels, and duration
   const handleFilterCategories = (item) => {
     if (filterCategories.includes(item)) {
-      const filtered = filterCategories.filter((elm) => elm != item);
+      const filtered = filterCategories.filter((elm) => elm !== item);
       setFilterCategories([...filtered]);
     } else {
       setFilterCategories((pre) => [...pre, item]);
     }
   };
 
-  const handleFilterLevels = (item) => {
-    if (filterLevels.includes(item)) {
-      const filtered = filterLevels.filter((elm) => elm != item);
-      setFilterLevels([...filtered]);
-    } else {
-      setFilterLevels((pre) => [...pre, item]);
-    }
+  // Toggle show/hide solved challenges
+  const handleShowSolvedToggle = () => {
+    setShowSolved((prev) => !prev);
   };
 
-  const handleFilterDuration = (item) => {
-    setFilterDuration(item);
+  const handleSubmit = (e) => {
+    e.preventDefault();
   };
-
+ 
   return (
     <>
       <section className="page-header -type-1">
@@ -102,7 +89,6 @@ export default function ChallengesList() {
                 <div>
                   <h1 className="page-header__title">Challenges</h1>
                 </div>
-
                 <div>
                   <p className="page-header__text">
                     Explore a diverse range of cybersecurity challenges designed
@@ -120,19 +106,20 @@ export default function ChallengesList() {
           </div>
         </div>
       </section>
-
+     
       <section className="layout-pt-md layout-pb-lg">
         <div className="container">
+          
           <div className="row y-gap-50">
             <div className="col-xl-3 col-lg-4 lg:d-none">
               <div className="pr-30 lg:pr-0">
                 <div className="sidebar -courses">
                   <div className="sidebar__item">
+                    
                     <div className="accordion js-accordion">
                       <div
-                        className={`accordion__item js-accordion-item-active ${
-                          categoryOpen ? "is-active" : ""
-                        } `}
+                        className={`accordion__item js-accordion-item-active ${categoryOpen ? "is-active" : ""
+                          } `}
                       >
                         <div
                           className="accordion__button items-center"
@@ -178,7 +165,7 @@ export default function ChallengesList() {
                                 <div
                                   key={i}
                                   onClick={() =>
-                                    handleFilterCategories(elm.title)
+                                    handleFilterCategories(elm.categoryName)
                                   }
                                   className="sidebar-checkbox__item cursor"
                                 >
@@ -187,7 +174,9 @@ export default function ChallengesList() {
                                       type="checkbox"
                                       readOnly
                                       checked={
-                                        filterCategories.includes(elm.title)
+                                        filterCategories.includes(
+                                          elm.categoryName
+                                        )
                                           ? true
                                           : false
                                       }
@@ -198,193 +187,14 @@ export default function ChallengesList() {
                                   </div>
 
                                   <div className="sidebar-checkbox__title">
-                                    {elm.title}
-                                  </div>
-                                  <div className="sidebar-checkbox__count">
-                                    (
-                                    {
-                                      challengesData.filter(
-                                        (itm) => itm.category == elm.title
-                                      ).length
-                                    }
-                                    )
-                                  </div>
-                                </div>
-                              ))}
-                            </div>
-
-                            <div className="sidebar__more mt-15">
-                              <a
-                                href="#"
-                                className="text-14 fw-500 underline text-purple-1"
-                              >
-                                Show more
-                              </a>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="sidebar__item">
-                    <div className="accordion js-accordion">
-                      <div
-                        className={`accordion__item js-accordion-item-active ${
-                          levelOpen ? "is-active" : ""
-                        }  `}
-                      >
-                        <div
-                          className="accordion__button items-center"
-                          onClick={() => setLevelOpen((pre) => !pre)}
-                        >
-                          <h5 className="sidebar__title">Level</h5>
-
-                          <div className="accordion__icon">
-                            <div className="icon icon-chevron-down"></div>
-                            <div className="icon icon-chevron-up"></div>
-                          </div>
-                        </div>
-
-                        <div
-                          className="accordion__content"
-                          style={levelOpen ? { maxHeight: "350px" } : {}}
-                        >
-                          <div className="accordion__content__inner">
-                            <div className="sidebar-checkbox">
-                              <div
-                                className="sidebar-checkbox__item cursor"
-                                onClick={() => setFilterLevels([])}
-                              >
-                                <div className="form-checkbox">
-                                  <input
-                                    type="checkbox"
-                                    readOnly
-                                    checked={
-                                      filterLevels.length < 1 ? true : false
-                                    }
-                                  />
-                                  <div className="form-checkbox__mark">
-                                    <div className="form-checkbox__icon icon-check"></div>
-                                  </div>
-                                </div>
-
-                                <div className="sidebar-checkbox__title">
-                                  All
-                                </div>
-                                
-                              </div>
-                              {levels.map((elm, i) => (
-                                <div
-                                  key={i}
-                                  className="sidebar-checkbox__item cursor"
-                                  onClick={() => handleFilterLevels(elm.title)}
-                                >
-                                  <div className="form-checkbox">
-                                    <input
-                                      type="checkbox"
-                                      readOnly
-                                      checked={
-                                        filterLevels.includes(elm.title)
-                                          ? true
-                                          : false
-                                      }
-                                    />
-                                    <div className="form-checkbox__mark">
-                                      <div className="form-checkbox__icon icon-check"></div>
-                                    </div>
-                                  </div>
-                                  <div className="sidebar-checkbox__title">
-                                    {elm.title}
-                                  </div>             
-                                </div>
-                              ))}
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="sidebar__item">
-                    <div className="accordion js-accordion">
-                      <div
-                        className={`accordion__item js-accordion-item-active ${
-                          durationOpen ? "is-active" : ""
-                        } `}
-                      >
-                        <div
-                          className="accordion__button items-center"
-                          onClick={() => setDurationOpen((pre) => !pre)}
-                        >
-                          <h5 className="sidebar__title">Events</h5>
-
-                          <div className="accordion__icon">
-                            <div className="icon icon-chevron-down"></div>
-                            <div className="icon icon-chevron-up"></div>
-                          </div>
-                        </div>
-
-                        <div
-                          className="accordion__content"
-                          style={durationOpen ? { maxHeight: "350px" } : {}}
-                        >
-                          <div className="accordion__content__inner">
-                            <div className="sidebar-checkbox">
-                              <div
-                                className="sidebar-checkbox__item"
-                                onClick={() => setFilterDuration([])}
-                              >
-                                <div className="form-checkbox">
-                                  <input
-                                    type="checkbox"
-                                    readOnly
-                                    checked={
-                                      filterDuration.length ? false : true
-                                    }
-                                  />
-                                  <div className="form-checkbox__mark">
-                                    <div className="form-checkbox__icon icon-check"></div>
-                                  </div>
-                                </div>
-                                <div className="sidebar-checkbox__title">
-                                  All
-                                </div>
-                                <div className="sidebar-checkbox__count"></div>
-                              </div>
-                              {duration.map((elm, i) => (
-                                <div
-                                  key={i}
-                                  className="sidebar-checkbox__item cursor"
-                                  onClick={() =>
-                                    handleFilterDuration(elm.range)
-                                  }
-                                >
-                                  <div className="form-checkbox">
-                                    <input
-                                      type="checkbox"
-                                      readOnly
-                                      checked={
-                                        filterDuration.toString() ==
-                                        elm.range.toString()
-                                          ? true
-                                          : false
-                                      }
-                                    />
-                                    <div className="form-checkbox__mark">
-                                      <div className="form-checkbox__icon icon-check"></div>
-                                    </div>
-                                  </div>
-                                  <div className="sidebar-checkbox__title">
-                                    {elm.title}
+                                    {elm.categoryName}
                                   </div>
                                   <div className="sidebar-checkbox__count">
                                     (
                                     {
                                       challengesData.filter(
                                         (itm) =>
-                                          itm.duration >= elm.range[0] &&
-                                          itm.duration <= elm.range[1]
+                                          itm.categoryName == elm.categoryName
                                       ).length
                                     }
                                     )
@@ -404,9 +214,8 @@ export default function ChallengesList() {
             <div className="col-xl-9 col-lg-8">
               <div className="accordion js-accordion">
                 <div
-                  className={`accordion__item ${
-                    filterOpen ? "is-active" : ""
-                  } `}
+                  className={`accordion__item ${filterOpen ? "is-active" : ""
+                    } `}
                 >
                   <div className="row y-gap-20 items-center justify-between pb-30">
                     <div className="col-auto">
@@ -418,8 +227,95 @@ export default function ChallengesList() {
                         total results
                       </div>
                     </div>
+
+                    <div className="col-auto">
+                      <div className="row x-gap-20 y-gap-20">
+                        <div className="col-auto">
+                          
+                          <div className="d-flex items-center">
+                            <div className="text-14 lh-12 fw-500 text-dark-1 mr-20">
+                              Sort by:
+                            </div>
+
+                            <div
+                              id="dd41button"
+                              className="dropdown js-dropdown js-category-active"
+                            >
+                              <div
+                                onClick={() => {
+                                  document
+                                    .getElementById("dd41button")
+                                    .classList.toggle("-is-dd-active");
+                                  document
+                                    .getElementById("dd41content")
+                                    .classList.toggle("-is-el-visible");
+                                }}
+                                className="dropdown__button d-flex items-center text-14 rounded-8 px-20 py-10 text-14 lh-12"
+                                data-el-toggle=".js-category-toggle"
+                                data-el-toggle-active=".js-category-active"
+                              >
+                                <span className="js-dropdown-title">
+                                  {currentSortingOption}
+                                </span>
+                                <i className="icon text-9 ml-40 icon-chevron-down"></i>
+                              </div>
+
+                              <div
+                                id="dd41content"
+                                className="toggle-element -dropdown -dark-bg-dark-2 -dark-border-white-10 js-click-dropdown js-category-toggle"
+                              >
+                                <div className="text-14 y-gap-15 js-dropdown-list">
+                                  {sortingOptions.map((elm, i) => (
+                                    <div
+                                      key={i}
+                                      onClick={() => {
+                                        setCurrentSortingOption((pre) =>
+                                          pre == elm ? "Default" : elm
+                                        );
+                                        document
+                                          .getElementById("dd41button")
+                                          .classList.toggle("-is-dd-active");
+                                        document
+                                          .getElementById("dd41content")
+                                          .classList.toggle("-is-el-visible");
+                                      }}
+                                    >
+                                      <span
+                                        className={`d-block js-dropdown-link cursor ${currentSortingOption == elm
+                                            ? "activeMenu"
+                                            : ""
+                                          } `}
+                                      >
+                                        {elm}
+                                      </span>
+                                    </div>
+                                  ))}
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        
+
+
+                        <div className="col-auto d-none lg:d-block">
+                          <div className="accordion__button w-unset">
+                            <button
+                              className="button h-50 px-30 -light-7 text-purple-1"
+                              onClick={() => setFilterOpen((pre) => !pre)}
+                            >
+                              <i className="icon-filter mr-10"></i>
+                              Filter
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                   </div>
 
+
+                  {/* Mobile Filter */}
                   <div
                     className="accordion__content d-none lg:d-block"
                     style={filterOpen ? { maxHeight: "1800px" } : {}}
@@ -452,12 +348,12 @@ export default function ChallengesList() {
                                 </div>
                                 <div className="sidebar-checkbox__count"></div>
                               </div>
-                              {categories.map((item, index) => (
+                              {categories.map((elm, index) => (
                                 <div
                                   className="sidebar-checkbox__item cursor"
                                   key={index}
                                   onClick={() =>
-                                    handleFilterCategories(item.title)
+                                    handleFilterCategories(elm.categoryName)
                                   }
                                 >
                                   <div className="form-checkbox">
@@ -465,7 +361,9 @@ export default function ChallengesList() {
                                       type="checkbox"
                                       readOnly
                                       checked={
-                                        filterCategories.includes(item.title)
+                                        filterCategories.includes(
+                                          elm.categoryName
+                                        )
                                           ? true
                                           : false
                                       }
@@ -476,154 +374,14 @@ export default function ChallengesList() {
                                   </div>
 
                                   <div className="sidebar-checkbox__title">
-                                    {item.title}
-                                  </div>
-                                  <div className="sidebar-checkbox__count">
-                                    (
-                                    {
-                                      challengesData.filter(
-                                        (itm) => itm.category == item.title
-                                      ).length
-                                    }
-                                    )
-                                  </div>
-                                </div>
-                              ))}
-                            </div>
-                            <div className="sidebar__more mt-15">
-                              <a
-                                href="#"
-                                className="text-14 fw-500 underline text-purple-1"
-                              >
-                                Show more
-                              </a>
-                            </div>
-                          </div>
-                        </div>
-
-                        <div className="col-xl-3 col-lg-4 col-sm-6">
-                          <div className="sidebar__item">
-                            <h5 className="sidebar__title">Level</h5>
-                            <div className="sidebar-checkbox">
-                              <div
-                                className="sidebar-checkbox__item cursor"
-                                onClick={() => setFilterLevels([])}
-                              >
-                                <div className="form-checkbox">
-                                  <input
-                                    type="checkbox"
-                                    readOnly
-                                    checked={
-                                      filterLevels.length < 1 ? true : false
-                                    }
-                                  />
-                                  <div className="form-checkbox__mark">
-                                    <div className="form-checkbox__icon icon-check"></div>
-                                  </div>
-                                </div>
-
-                                <div className="sidebar-checkbox__title">
-                                  All
-                                </div>
-                                <div className="sidebar-checkbox__count"></div>
-                              </div>
-                              {levels.map((item, index) => (
-                                <div
-                                  className="sidebar-checkbox__item cursor"
-                                  key={index}
-                                  onClick={() => handleFilterLevels(item.title)}
-                                >
-                                  <div className="form-checkbox">
-                                    <input
-                                      type="checkbox"
-                                      readOnly
-                                      checked={
-                                        filterLevels.includes(item.title)
-                                          ? true
-                                          : false
-                                      }
-                                    />
-                                    <div className="form-checkbox__mark">
-                                      <div className="form-checkbox__icon icon-check"></div>
-                                    </div>
-                                  </div>
-
-                                  <div className="sidebar-checkbox__title">
-                                    {item.title}
-                                  </div>
-                                  <div className="sidebar-checkbox__count">
-                                    (
-                                    {
-                                      challengesData.filter(
-                                        (itm) => itm.level == item.title
-                                      ).length
-                                    }
-                                    )
-                                  </div>
-                                </div>
-                              ))}
-                            </div>
-                          </div>
-                        </div>
-
-                        <div className="col-xl-3 col-lg-4 col-sm-6">
-                          <div className="sidebar__item">
-                            <h5 className="sidebar__title">Events</h5>
-                            <div className="sidebar-checkbox">
-                              <div
-                                className="sidebar-checkbox__item cursor"
-                                onClick={() => setFilterDuration([])}
-                              >
-                                <div className="form-checkbox">
-                                  <input
-                                    type="checkbox"
-                                    readOnly
-                                    checked={
-                                      filterDuration.length ? false : true
-                                    }
-                                  />
-                                  <div className="form-checkbox__mark">
-                                    <div className="form-checkbox__icon icon-check"></div>
-                                  </div>
-                                </div>
-                                <div className="sidebar-checkbox__title">
-                                  All
-                                </div>
-                                <div className="sidebar-checkbox__count"></div>
-                              </div>
-                              {duration.map((item, index) => (
-                                <div
-                                  className="sidebar-checkbox__item cursor"
-                                  key={index}
-                                  onClick={() =>
-                                    handleFilterDuration(item.range)
-                                  }
-                                >
-                                  <div className="form-checkbox">
-                                    <input
-                                      type="checkbox"
-                                      readOnly
-                                      checked={
-                                        filterDuration.toString() ==
-                                        item.range.toString()
-                                          ? true
-                                          : false
-                                      }
-                                    />
-                                    <div className="form-checkbox__mark">
-                                      <div className="form-checkbox__icon icon-check"></div>
-                                    </div>
-                                  </div>
-                                  <div className="sidebar-checkbox__title">
-                                    {item.title}
+                                    {elm.categoryName}
                                   </div>
                                   <div className="sidebar-checkbox__count">
                                     (
                                     {
                                       challengesData.filter(
                                         (itm) =>
-                                          itm.duration >= item.range[0] &&
-                                          itm.duration <= item.range[1]
+                                          itm.categoryName == elm.categoryName
                                       ).length
                                     }
                                     )
@@ -636,91 +394,50 @@ export default function ChallengesList() {
                       </div>
                     </div>
                   </div>
-                </div>
-              </div>
 
-              <div className="row y-gap-30 side-content__wrap">
-                {sortedFilteredData
-                  .slice((pageNumber - 1) * 12, pageNumber * 12)
-                  .map((elm, i) => (
-                    <div
-                      key={i}
-                      className="side-content col-xl-4 col-lg-6 col-md-4 col-sm-6"
-                    >
-                      <div className="coursesCard -type-1 ">
-                        <div className="relative">
-                          <div className="coursesCard__image overflow-hidden rounded-8">
-                            <img
-                              className="w-1/1"
-                              src={elm.imageSrc}
-                              alt="image"
-                            />
-                            <div className="coursesCard__image_overlay rounded-8"></div>
-                          </div>
-                        </div>
-
-                        <div className="h-100 pt-15">
-                          <div className="d-flex items-center">
-                            <div className="text-14 lh-1 text-yellow-1 mr-10">
-                              {elm.rating}
-                            </div>
-                            <div className="d-flex x-gap-5 items-center">
-                              <Star star={elm.rating} />
-                            </div>
-                          </div>
-
-                          <div className="text-17 lh-15 fw-500 text-dark-1 mt-10">
-                            <Link className="linkCustom" to={`/#/${elm.id}`}>
-                              {elm.title}
-                            </Link>
-                          </div>
-
-                          <div className="d-flex x-gap-10 items-center pt-10">
+                  {/* Challenge List viewCard */}
+                  <div className="row y-gap-30 side-content__wrap">
+                    {sortedFilteredData
+                      .slice((pageNumber - 1) * 15, pageNumber * 15)
+                      .map((elm, i) => (
+                        <div
+                          key={i}
+                          className="side-content col-xl-4 col-lg-6 col-md-4 col-sm-6"
+                        >
+                          <div className="charCard h-100 pt-15">
                             <div className="d-flex items-center">
-                              <div className="mr-8">
-                                <img
-                                  src="/assets/img/challengesCards/icons/1.svg"
-                                  alt="icon"
-                                />
+                              <div className="text-17 lh-15 fw-500 text-dark-1">
+                                <Link
+                                  className="badge px-4 py-5 text-15 bg-purple-1 text-white fw-400"
+                                  to={`/challengeDetails/${elm.id}`}
+                                >
+                                  {elm.name}
+                                </Link>
                               </div>
                             </div>
-
-                            <div className="d-flex items-center">
-                              <div className="mr-8">
-                                <img
-                                  src="/assets/img/challengesCards/icons/2.svg"
-                                  alt="icon"
-                                />
+                            <div className="d-flex x-gap-10 items-center cpt-10">
+                              <div className="text-14 lh-1">
+                                {elm.tags.join(", ")} <br /> <br />
+                                Category: {elm.categoryName} <br />
+                                Points: {elm.points} <br />
+                                Solve Count: {elm.solveCount} <br />
                               </div>
-                              <div className="text-14 lh-1">{`${Math.floor(
-                                elm.duration / 60
-                              )}h ${Math.floor(elm.duration % 60)}m`}</div>
-                            </div>
-
-                            <div className="d-flex items-center">
-                              <div className="mr-8">
-                                <img
-                                  src="/assets/img/challengesCards/icons/3.svg"
-                                  alt="icon"
-                                />
-                              </div>
-                              <div className="text-14 lh-1">{elm.level}</div>
                             </div>
                           </div>
                         </div>
-                      </div>
+                      ))}
+                  </div>
+
+                  <div className="row justify-center pt-90 lg:pt-50">
+                    <div className="col-auto">
+                      <PaginationTwo
+                        pageNumber={pageNumber}
+                        setPageNumber={setPageNumber}
+                        data={sortedFilteredData}
+                        pageCapacity={12}
+                      />
                     </div>
-                  ))}
-              </div>
-
-              <div className="row justify-center pt-90 lg:pt-50">
-                <div className="col-auto">
-                  <PaginationTwo
-                    pageNumber={pageNumber}
-                    setPageNumber={setPageNumber}
-                    data={sortedFilteredData}
-                    pageCapacity={12}
-                  />
+                  </div>
                 </div>
               </div>
             </div>
