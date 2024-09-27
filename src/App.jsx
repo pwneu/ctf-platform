@@ -25,6 +25,8 @@ import TermsandConditionsPage from "./pages/ownership/terms-and-conditions";
 
 import UniversityPage from "./pages/campuses/campuses";
 import ListofChallenges from "./pages/challengesList/list-of-challenges";
+import ChallengeDetails from "./pages/challengeDetails/challenge-details";
+
 
 import OurStoryPage from "./pages/about/our-story";
 import WhoWeArePage from "./pages/about/who-we-are";
@@ -89,6 +91,7 @@ function App() {
 
           {/* Compete */}
           <Route path="list-of-challenges" element={<ListofChallenges />} />
+          <Route path="challengeDetails/:id" element={<ChallengeDetails />} />
 
           {/* Community */}
           <Route path="discussion-forum" element={<DiscussionPage />} />
