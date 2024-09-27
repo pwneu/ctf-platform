@@ -389,3 +389,21 @@ export const duration = [
 ];
 
 
+export const sortingOptions = [
+  "Default",
+  "Sort by Points (Ascending)",
+  "Sort by Points (Descending)",
+  "Sort by Name (A-Z)",
+  "Sort by Name (Z-A)",
+];
+
+
+export const solvetracker = [
+  { id: 1, hidesolve: "All" },
+  { id: 2, hidesolve: "Hide Solved" },
+  { id: 3, unsolve: "Show Unsolved" }, 
+  { id: 4, showsolve: "Show Solved" },
+];
+
+
+
