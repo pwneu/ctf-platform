@@ -15822,4 +15822,195 @@ table.table td {
   border: 3px solid transparent; 
 }
 
+.charCard {
+  background-color: #f9f9f9; 
+  border-radius: 8px; 
+  box-shadow: 0 4px 20px rgba(0, 4, 238, 0.418); 
+  transition: transform 0.3s, box-shadow 0.3s; 
+  padding: 20px; 
+}
 
+.charCard:hover {
+  transform: translateY(-5px); 
+  box-shadow: 0 4px 20px rgba(55, 189, 2, 0.979); 
+}
+
+.pt-15 {
+  padding-top: 25px; 
+}
+
+.cpt-10 {
+  margin-top: 19px; 
+}
+
+
+.submit-button {
+  background-color: #000000; 
+  color: white;
+  border: none;
+  padding: 1px 50px;
+  font-size: 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+ 
+}
+
+.submit-button:hover {
+  background-color: #000000; 
+  margin-left: 10px;
+  box-shadow: 0 6px 10px rgb(87, 0, 228);
+  transform: translateY(-3px);
+  
+}
+
+.submit-button:active {
+  background-color: #1d0152;
+  transform: translateY(0);
+}
+
+.submit-button:focus {
+  outline: none;
+  box-shadow: 0 0 0 4px rgba(115, 255, 1, 0.5); 
+}
+
+
+.flagsubmit { /* Form for submitting the flag */
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px; 
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background-color: #f2f2f2; 
+  border-radius: 8px;
+  max-width: 500px; 
+  margin: 0 auto; 
+  box-shadow:  rgb(9, 0, 17); 
+}
+
+/* Adjustments to form control input fields */
+.form-control {
+  border: 2px solid #0781fc;
+  box-shadow: 0 4px 20px rgba(0, 0, 255, 0.418); 
+  border-radius: 6px;
+  padding: 9px;
+  font-size: 16px;
+  width: 100%; 
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 5 5px rgb(125, 0, 241); 
+}
+
+
+.artifact-button {
+  background-color: rgb(0, 0, 0);       /* Button background color */
+  color: white;                 /* Text color */
+  border: none;                 /* No border */
+  border-radius: 20px;          /* Rounded corners */
+  cursor: pointer;              /* Pointer cursor on hover */
+  transition: background-color 0.3s; /* Transition effect */
+}
+
+.artifact-button:hover {
+  background-color: darkblue;   /* Darker background on hover */
+}
+
+/* Hints Button */
+.hint-button {
+  background-color: #000000; 
+  color: white;
+  padding: 5px 80px;
+  border: none;
+  border-radius: 5px;
+  font-size: 15px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  margin-top: 30px;
+}
+
+.hint-button:hover {
+  background-color: #0056b3; /* Darker shade on hover */
+  transform: translateY(-12px); /* Slight lift effect */
+}
+
+.hint-button:active {
+  background-color: #004494; /* Even darker shade when active */
+  transform: translateY(0); /* Reset lift effect */
+}
+
+.hint-button:focus {
+  outline: none; /* Remove default focus outline */
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.5); /* Add custom focus effect */
+}
+
+
+
+.modal-content {
+  background: rgb(26, 13, 13);
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  text-align: center;
+}
+.modal-buttons {
+  margin-top: 20px;
+}
+.confirm-button,
+.cancel-button {
+  margin: 0 10px;
+  padding: 10px 30px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.confirm-button {
+  background-color: #02162b;
+  color: white;
+}
+.cancel-button {
+  background-color: #b30505;
+  color: white;
+}
+.confirm-button:hover {
+  background-color: #0056b3;
+}
+.cancel-button:hover {
+  background-color: #ff0019;
+}
+
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.747); /* Semi-transparent background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999; /* Ensure modal is on top of other elements */
+}
+
+.modal-content {
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 8px;
+  width: 80%;
+  max-width: 900px;
+  max-height: 80%;
+  overflow-y: auto; /* Allows scrolling if content is too long */
+  position: relative;
+}
+
+.close-button {
+
+  position: absolute;
+  top: 0px;
+  right: 40px;
+  background: none;
+  border: none;
+  font-size: 50px;
+  cursor: pointer;
+}
