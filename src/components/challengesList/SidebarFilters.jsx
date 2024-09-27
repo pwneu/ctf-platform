@@ -1,8 +1,6 @@
-
-
 import React from "react";
 
-export default function PaginationTwo({
+export default function SidebarFilters({
   pageNumber,
   setPageNumber,
   data,
