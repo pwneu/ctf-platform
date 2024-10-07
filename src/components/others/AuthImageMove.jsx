@@ -1,11 +1,7 @@
 import gsap from "gsap"; 
-
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 
 export default function AuthImageMove() {
-  const handleSubmit = (e) => {
-    e.preventDefault();
-  };
   useEffect(() => {
     const parallaxIt = () => {
       const target = document.querySelectorAll(".js-mouse-move-container");
