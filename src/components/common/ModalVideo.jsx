@@ -1,6 +1,6 @@
-
-import React from "react";
 import ModalVideo from "react-modal-video";
+import PropTypes from 'prop-types';
+
 export default function ModalVideoComponent({ isOpen, setIsOpen, videoId }) {
   return (
     <ModalVideo
@@ -12,3 +12,10 @@ export default function ModalVideoComponent({ isOpen, setIsOpen, videoId }) {
     />
   );
 }
+
+// Define prop types
+ModalVideoComponent.propTypes = {
+  isOpen: PropTypes.bool.isRequired,
+  setIsOpen: PropTypes.func.isRequired,
+  videoId: PropTypes.string.isRequired,
+};
