@@ -1,5 +1,5 @@
 import { challengesData } from "../challengesList/challenges";
-import React, { useState, useEffect } from "react";
+import  { useState, useEffect } from "react";
 
 export default function ChallengeDetails({ id }) {
   const [pageItem, setPageItem] = useState(challengesData[0]);
