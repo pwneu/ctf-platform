@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef } from "react";
 
 export default function GeneralSantosBranch() {
   const [animate, setAnimate] = useState(false);
@@ -23,11 +23,6 @@ export default function GeneralSantosBranch() {
       observer.observe(sectionRef.current);
     }
 
-    return () => {
-      if (sectionRef.current) {
-        observer.unobserve(sectionRef.current);
-      }
-    };
   }, []);
 
   return (

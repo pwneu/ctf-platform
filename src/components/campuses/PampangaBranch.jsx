@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef } from "react";
 
 export default function PampangaBranch() {
   const [animate, setAnimate] = useState(false);
@@ -22,12 +22,6 @@ export default function PampangaBranch() {
     if (sectionRef.current) {
       observer.observe(sectionRef.current);
     }
-
-    return () => {
-      if (sectionRef.current) {
-        observer.unobserve(sectionRef.current);
-      }
-    };
   }, []);
 
   return (
@@ -50,14 +44,14 @@ export default function PampangaBranch() {
           >
             <h3 className="text-20 lh-1 text-center">Pampanga Branch</h3>
             <p className="mt-25 text-center">
-              New Era University's first branch outside Metro Manila is situated
-              in a sprawling six-hectare campus in the City of San Fernando,
-              Pampanga. New Era University – Pampanga City Branch was
-              established on June 25, 1994. The school initially offered
-              Preparatory and Elementary Education Programs followed by the
-              Secondary Education Program and is now offering Collegiate
-              Programs in the branch – Bachelor of Elementary Education and BS
-              Business Administration.
+              New Era University&#39;s first branch outside Metro Manila is
+              situated in a sprawling six-hectare campus in the City of San
+              Fernando, Pampanga. New Era University &ndash; Pampanga City
+              Branch was established on June 25, 1994. The school initially
+              offered Preparatory and Elementary Education Programs followed by
+              the Secondary Education Program and is now offering Collegiate
+              Programs in the branch &ndash; Bachelor of Elementary Education
+              and BS Business Administration.
             </p>
           </div>
         </div>
