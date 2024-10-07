@@ -1,5 +1,3 @@
-import { Link } from "react-router-dom";
-import React from "react";
 
 export default function CampusePreview() {
   return (
@@ -23,7 +21,7 @@ export default function CampusePreview() {
               facilities and a supportive learning environment. Students can
               explore various fields of study, engage in practical experiences,
               and benefit from a curriculum that adapts to the demands of the
-              global workforce. Whether you're pursuing undergraduate or
+              global workforce. Whether youre pursuing undergraduate or
               advanced studies, New Era University prepares you for success in
               your chosen career path.
             </p>

@@ -1,6 +1,5 @@
-import React from "react";
+import { ourapproach } from "@/data/learningPaths";
 
-import { ourapproach } from "../../data/learningPaths";
 export default function OurApproachs() {
   return (
     <section className="layout-pt-lg layout-pb-lg">
