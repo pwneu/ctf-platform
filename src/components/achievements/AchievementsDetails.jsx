@@ -1,11 +1,8 @@
-import React from "react";
 import { achievements } from "@/data/achievements"; 
 
-export default function AchievementsDetails({ id }) {
-  const data = achievements.filter((elm) => elm.id == id)[0] || achievements[0];
-  const handleSubmit = (e) => {
-    e.preventDefault();
-  };
+export default function AchievementsDetails() {
+
+  const data = achievements.filter( )[0] || achievements[0];
   return (
     <>
       <section className="page-header -type-1">
