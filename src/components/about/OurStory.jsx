@@ -1,6 +1,4 @@
-import React from "react";
 
-import { Link } from "react-router-dom";
 export default function OurStory() {
   return (
     <>
@@ -21,8 +19,8 @@ export default function OurStory() {
                     and a desire to empower students at New Era University. We
                     recognized the growing need for skilled cybersecurity
                     professionals and understood that hands-on experience was
-                    key to mastering the complexities of this field. That's why
-                    we founded PWNEU—to create a platform where students can
+                    key to mastering the complexities of this field. That&apos;s
+                    why we founded PWNEU—to create a platform where students can
                     learn, grow, and challenge themselves through Capture The
                     Flag (CTF) competitions and other interactive learning
                     experiences. Our story is one of innovation, community, and

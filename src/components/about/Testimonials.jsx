@@ -1,10 +1,9 @@
-import React from "react";
 import { Navigation, Pagination } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { ExpertTestimonials } from "@/data/tesimonials";
 import { useRef, useEffect, useState } from "react";
 
-export default function Testimonials({ backgroundComponent }) {
+export default function Testimonials() { 
   const swiperRef = useRef(null);
   const [setCurrentSlideIndex] = useState(0);
   const [showSlider, setShowSlider] = useState(false);
@@ -28,12 +27,6 @@ export default function Testimonials({ backgroundComponent }) {
 
   return (
     <section className="layout-pt-lg layout-pb-lg section-bg">
-      <div
-        className={`section-bg__item  ${
-          backgroundComponent ? "bg-white-two" : "bg-light-6"
-        }`}
-      ></div>
-
       <div className="container">
         <div className="row y-gap-20 justify-center text-center">
           <div className="col-auto">

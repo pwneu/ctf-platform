@@ -1,5 +1,4 @@
-import React from "react";
-import { Link } from "react-router-dom";
+
 export default function WhoWeAre() {
   return (
     <>
@@ -15,12 +14,12 @@ export default function WhoWeAre() {
                 and empower students by offering them the tools, resources, and
                 support they need to excel in the field of cybersecurity. We
                 believe in hands-on learning through real-world challenges.
-                That's why we focus on creating an environment where students
-                can participate in CTF competitions, gain practical experience,
-                and develop critical problem-solving skills. Whether you're a
-                beginner just starting out or an advanced learner looking to
-                hone your skills, our platform offers a range of challenges that
-                cater to all skill levels.
+                That&apos;s why we focus on creating an environment where
+                students can participate in CTF competitions, gain practical
+                experience, and develop critical problem-solving skills. Whether
+                you&apos;re a beginner just starting out or an advanced learner
+                looking to hone your skills, our platform offers a range of
+                challenges that cater to all skill levels.
               </p>
             </div>
 

@@ -1,17 +1,12 @@
-import { Navigation, Pagination } from "swiper";
-import { Swiper, SwiperSlide } from "swiper/react";
-import SwiperCore from "swiper";
 import "swiper/css";
 import "swiper/css/pagination";
+import { feature } from "@/data/herostory";
+import { slidesData } from "@/data/herostory";
+import { Navigation, Pagination } from "swiper";
+import { Swiper, SwiperSlide } from "swiper/react";
 import { useEffect, useState } from "react";
 
-import React from "react";
-import { feature } from "../../data/herostory";
-import { slidesData } from "../../data/herostory";
-import { useNavigate } from "react-router-dom";
-
 export default function HeroStory() {
-  const navigate = useNavigate();
   const [showSlider, setShowSlider] = useState(false);
 
   useEffect(() => {
