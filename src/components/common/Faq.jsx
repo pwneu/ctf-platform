@@ -1,7 +1,8 @@
-import React, { useState } from "react"; 
 import { faq } from "@/data/faq"; 
+import { useState } from "react"; 
 import { faMinus, faPlus } from "@fortawesome/free-solid-svg-icons"; 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"; 
+
 export default function Faq() {
   const [activeFaq, setActiveFaq] = useState(0);
   return (
