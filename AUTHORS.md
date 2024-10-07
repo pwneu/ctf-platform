@@ -1,2 +1,2 @@
 David King Roderos <dk.roderos@proton.me>
-Sharon Grace Hangaan <sharonygracehangaan@gmail.com>
+Sharon Grace Hangaan <sghangaan@proton.me>
