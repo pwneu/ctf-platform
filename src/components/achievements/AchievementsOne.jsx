@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from "react";  
+import { useState, useEffect } from "react";  
 import { achievements3 } from "@/data/achievements"; 
 import { Link } from "react-router-dom"; 
+
 export default function AchievementsOne() {
   const [pageItems, setPageItems] = useState([]);
-  const [currentCategory, setCurrentCategory] = useState("All Categories");
+  const [currentCategory] = useState("All Categories");
   useEffect(() => {
     if (currentCategory == "All Categories") {
       setPageItems(achievements3);
