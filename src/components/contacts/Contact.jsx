@@ -1,7 +1,4 @@
-import React, { useState, useEffect } from "react";
-
-import { contactData } from "@/data/contactLinks"; 
-
+import { contactData } from "@/data/contactlinks"; 
 import MapComponent from "./Map"; 
 
 export default function Contact() {
