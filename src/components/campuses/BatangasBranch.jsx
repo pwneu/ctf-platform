@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef } from "react";
 
 export default function BatangasBranch() {
   const [animate, setAnimate] = useState(false);
@@ -22,12 +22,6 @@ export default function BatangasBranch() {
     if (sectionRef.current) {
       observer.observe(sectionRef.current);
     }
-
-    return () => {
-      if (sectionRef.current) {
-        observer.unobserve(sectionRef.current);
-      }
-    };
   }, []);
 
   return (
@@ -37,7 +31,7 @@ export default function BatangasBranch() {
           <div className={`col-xl-5 col-lg-6 col-md-9 lg:order-2 ${animate ? "fade-in-right" : ""}`}>
             <h3 className="text-10 lh-1 text-center">Batangas Branch</h3>
             <p className="mt-25 text-center">
-              As part of the celebration of New Era University's 25th
+              As part of the celebration of New Era University&apos;s 25th
               anniversary, the New Era University – Lipa City Branch was
               established on May 5, 2000 in Batangas. The school, located in a
               four-hectare land, initially offered Preschool and Elementary
