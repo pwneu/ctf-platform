@@ -37,6 +37,17 @@ import {
 } from "./pages/contact";
 import { PrivacyPolicyPage, TermsAndConditionsPage } from "./pages/ownership";
 import { ChallengesListPage, ChallengeDetailsPage } from "./pages/play";
+import {
+  AccessKeysPage,
+  AdminPage,
+  CategoriesPage,
+  ChallengesPage,
+  ChallengeDetailsAdminPage,
+  UserDetailsPage,
+  UsersPage,
+  LeaderboardsPage,
+  ConfigurationsPage,
+} from "./pages/admin";
 
 // import {
 //   AchievementDetailsPage,
@@ -117,7 +128,23 @@ function App() {
           </Route>
 
           {/* Routes that require the user to have a manager role in order to give access */}
-          <Route element={<RequireAuth allowedRoles={["Manager"]} />}></Route>
+          <Route element={<RequireAuth allowedRoles={["Manager"]} />}>
+            <Route path="/admin" element={<AdminPage />} />
+            <Route path="/admin/keys" element={<AccessKeysPage />} />
+            <Route path="/admin/categories" element={<CategoriesPage />} />
+            <Route path="/admin/challenges" element={<ChallengesPage />} />
+            <Route
+              path="/admin/challenge"
+              element={<ChallengeDetailsAdminPage />}
+            />
+            <Route path="/admin/users" element={<UsersPage />} />
+            <Route path="/admin/user" element={<UserDetailsPage />} />
+            <Route
+              path="/admin/configurations"
+              element={<ConfigurationsPage />}
+            />
+            <Route path="/admin/leaderboards" element={<LeaderboardsPage />} />
+          </Route>
 
           {/* Achievements */}
           {/* <Route path="achievements/:id" element={<AchievementsdetailsPage />} /> */}
