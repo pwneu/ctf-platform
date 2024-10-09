@@ -5,6 +5,7 @@ import { useState } from "react";
 import { api } from "@/api";
 import { toast } from "react-toastify";
 import useAuth from "@/hooks/useAuth";
+import { Turnstile } from "@marsidev/react-turnstile";
 
 const LOGIN_API = "/identity/login";
 
@@ -13,7 +14,6 @@ export default function LoginForm() {
     username: "",
     password: "",
   });
-  
 
   const [errors, setErrors] = useState({
     username: "",
@@ -25,6 +25,8 @@ export default function LoginForm() {
   });
 
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
+
+  const [turnstileToken, setTurnstileToken] = useState("");
 
   const { setAuth } = useAuth();
 
@@ -104,16 +106,22 @@ export default function LoginForm() {
         const response = await api.post(LOGIN_API, {
           userName: formData.username,
           password: formData.password,
+          turnstileToken,
         });
-
-        // console.log(response.data);
 
         setAuth(response.data);
         // toast.success(`Logged in with user id: ${response.data.id}`);
         navigate(fromLocation, { replace: true });
       } catch (error) {
-        toast.error(`Error loggin in: ${error.response.data.message}`);
-        console.error(`Error loggin in: ${error.response.data.message}`);
+        const status = error?.response?.status;
+
+        if (status === 400) {
+          toast.error(`Error logging in: ${error.response.data.message}`);
+        } else {
+          toast.error(
+            "Something went wrong logging in. Please try again later"
+          );
+        }
       } finally {
         setIsButtonDisabled(false);
       }
@@ -192,6 +200,14 @@ export default function LoginForm() {
                     <p className="error-text">{errors.password}</p>
                   )}
                 </div>
+
+                <Turnstile
+                  siteKey={import.meta.env.VITE_TURNSTILE_SITE_KEY}
+                  onSuccess={(token) => setTurnstileToken(token)}
+                  onError={() => setTurnstileToken("")}
+                  onExpire={() => setTurnstileToken("")}
+                />
+
                 <div className="col-12 d-flex justify-content-between align-items-center mt-4">
                   <Link
                     to="/forgot-password"
