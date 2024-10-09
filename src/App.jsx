@@ -8,36 +8,51 @@ import "react-calendar/dist/Calendar.css";
 import { Routes, Route } from "react-router-dom";
 import { useEffect } from "react";
 import { ToastContainer } from "react-toastify";
+import RequireNoAuth from "./components/RequireNoAuth";
+import RequireAuth from "./components/RequireAuth";
 
-// Authentication-related pages
-import LoginPage from "./features/authentication/login";
-import ForgotPasswordPage from "./features/authentication/login/UserForgotPassword";
-import VerifyCodePage from "./features/authentication/login/UserVerifyCode";
-import SetPasswordPage from "./features/authentication/login/UserSetPassword";
-import PasswordCompletedPage from "./features/authentication/login/UserPasswordCompleted";
-import VerifyEmailPage from "./features/authentication/signup/VerifyEmail";
-import SignupPage from "./features/authentication/signup";
-import AccountCreatedPage from "./features/authentication/signup/UserAccountCreated";
-import AccountHasVerifiedPage from "@/features/authentication/signup/UserGetStarted";
+import {
+  LoginPage,
+  ForgotPasswordPage,
+  VerifyCodePage,
+  SetPasswordPage,
+  PasswordCompletedPage,
+  VerifyEmailPage,
+  SignupPage,
+  AccountCreatedPage,
+  AccountVerifiedPage,
+} from "./pages/authentication";
+import {
+  CampusesPage,
+  // DiscussionForumsPage,
+  HomePage,
+  WhoWeArePage,
+  OurStoryPage,
+  MissionVisionPage,
+} from "./pages/main";
+import {
+  ContactPage,
+  HelpCenterPage,
+  DiscussionForumsPage,
+} from "./pages/contact";
+import { PrivacyPolicyPage, TermsAndConditionsPage } from "./pages/ownership";
+import { ChallengesListPage, ChallengeDetailsPage } from "./pages/play";
+import {
+  AccessKeysPage,
+  AdminPage,
+  CategoriesPage,
+  ChallengesPage,
+  ChallengeDetailsAdminPage,
+  UserDetailsPage,
+  UsersPage,
+  LeaderboardsPage,
+  ConfigurationsPage,
+} from "./pages/admin";
 
-// Main application pages
-import HomePage from "./pages/HomePage.jsx";
-import ContactPage from "./pages/ContactPage";
-import PrivacyPolicyPage from "./pages/PrivacyPolicyPage";
-import TermsandConditionsPage from "./pages/TermsAndConditionsPage";
-import UniversityPage from "./pages/CampusesPage";
-import ListofChallenges from "./pages/ChallengeListPage";
-import ChallengeDetails from "./pages/ChallengesDetailsPage";
-
-// Informational pages
-import OurStoryPage from "./pages/OurStoryPage";
-import WhoWeArePage from "./pages/WhoWeArePage";
-import MissionVisionPage from "./pages/MissionVisionsPage";
-import HelpCenterPage from "./pages/HelpCenterPage";
-import DiscussionPage from "./pages/DiscussionForumsPage";
-
-// import AchievementsdetailsPage from "./pages/achivements/achievements";
-// import AchievementsListPage from "./pages/achivements/achievements-list";
+// import {
+//   AchievementDetailsPage,
+//   AchievementsListPage,
+// } from "./pages/achievements";
 
 function App() {
   useEffect(() => {
@@ -56,21 +71,8 @@ function App() {
           {/* Homepage */}
           <Route index element={<HomePage />} />
 
-          {/* User Authentication */}
-          <Route path="login" element={<LoginPage />} />
-          <Route path="forgot-password" element={<ForgotPasswordPage />} />
-          <Route path="verify-code" element={<VerifyCodePage />} />
-          <Route path="set-new-password" element={<SetPasswordPage />} />
-          <Route path="password-completed" element={<PasswordCompletedPage />}/>
-          <Route path="verify-email" element={<VerifyEmailPage />} />
-
-          {/* User Registration */}
-          <Route path="signup" element={<SignupPage />} />
-          <Route path="user-account-created" element={<AccountCreatedPage />} />
-          <Route path="account-verified" element={<AccountHasVerifiedPage />} />
-
           {/* Main Application Pages */}
-          <Route path="campuses" element={<UniversityPage />} />
+          <Route path="campuses" element={<CampusesPage />} />
 
           {/* About Us */}
           <Route path="our-story" element={<OurStoryPage />} />
@@ -81,22 +83,83 @@ function App() {
           <Route path="contact" element={<ContactPage />} />
           <Route path="help-center" element={<HelpCenterPage />} />
           <Route path="privacy-policy" element={<PrivacyPolicyPage />} />
-          <Route path="terms-and-conditions" element={<TermsandConditionsPage />} />
-
-          {/* Challenges */}
-          <Route path="list-of-challenges" element={<ListofChallenges />} />
-          <Route path="challengeDetails/:id" element={<ChallengeDetails />} />
+          <Route
+            path="terms-and-conditions"
+            element={<TermsAndConditionsPage />}
+          />
 
           {/* Community */}
-          <Route path="discussion-forum" element={<DiscussionPage />} />
+          <Route path="discussion-forum" element={<DiscussionForumsPage />} />
+
+          {/* Routes that requires the user to be logged out */}
+          <Route element={<RequireNoAuth />}>
+            {/* User Authentication */}
+            <Route path="login" element={<LoginPage />} />
+            <Route path="forgot-password" element={<ForgotPasswordPage />} />
+            <Route path="verify-code" element={<VerifyCodePage />} />
+            <Route path="set-new-password" element={<SetPasswordPage />} />
+            <Route
+              path="password-completed"
+              element={<PasswordCompletedPage />}
+            />
+            <Route path="verify-email" element={<VerifyEmailPage />} />
+
+            {/* User Registration */}
+            <Route path="signup" element={<SignupPage />} />
+            <Route
+              path="user-account-created"
+              element={<AccountCreatedPage />}
+            />
+            <Route path="account-verified" element={<AccountVerifiedPage />} />
+          </Route>
+
+          {/* Routes that require the user to be logged in */}
+          <Route
+            element={
+              <RequireAuth allowedRoles={["Member", "Manager", "Admin"]} />
+            }
+          >
+            {/* Challenges */}
+            <Route path="list-of-challenges" element={<ChallengesListPage />} />
+            <Route
+              path="challengeDetails/:id"
+              element={<ChallengeDetailsPage />}
+            />
+          </Route>
+
+          {/* Routes that require the user to have a manager role in order to give access */}
+          <Route element={<RequireAuth allowedRoles={["Manager"]} />}>
+            <Route path="/admin" element={<AdminPage />} />
+            <Route path="/admin/keys" element={<AccessKeysPage />} />
+            <Route path="/admin/categories" element={<CategoriesPage />} />
+            <Route path="/admin/challenges" element={<ChallengesPage />} />
+            <Route
+              path="/admin/challenge"
+              element={<ChallengeDetailsAdminPage />}
+            />
+            <Route path="/admin/users" element={<UsersPage />} />
+            <Route path="/admin/user" element={<UserDetailsPage />} />
+            <Route
+              path="/admin/configurations"
+              element={<ConfigurationsPage />}
+            />
+            <Route path="/admin/leaderboards" element={<LeaderboardsPage />} />
+          </Route>
 
           {/* Achievements */}
           {/* <Route path="achievements/:id" element={<AchievementsdetailsPage />} /> */}
           {/* <Route path="achievements-list" element={<AchievementsListPage />} />  */}
         </Route>
       </Routes>
-      <ToastContainer />
+
+      <ToastContainer
+        position="top-right"
+        autoClose={1000}
+        hideProgressBar
+        pauseOnHover={false}
+      />
     </>
   );
 }
+
 export default App;

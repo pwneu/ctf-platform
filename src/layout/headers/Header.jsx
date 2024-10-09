@@ -1,11 +1,11 @@
-import { HeaderExplore } from "../component/header-explore";
+import { HeaderExplore } from "../components/header-explore";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { api } from "@/api";
 import { toast } from "react-toastify";
-import Menu from "../component/Menu";
-import MobileMenu from "../component/MobileMenu";
+import Menu from "../components/Menu";
+import MobileMenu from "../components/MobileMenu";
 import useAuth from "@/hooks/useAuth";
 
 const LOGOUT_API = "/identity/logout";
