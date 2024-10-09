@@ -1,5 +1,3 @@
-
-
 function AccountVerificationFailed() {
   return <div>Verification Failed</div>;
 }

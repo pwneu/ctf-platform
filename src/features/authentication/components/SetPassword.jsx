@@ -104,12 +104,12 @@ export default function SetPassword() {
                 <input
                   type="hidden"
                   name="username"
-                  value={formData.email || ""} 
+                  value={formData.email || ""}
                   aria-hidden="true"
                 />
                 <div className="col-lg-13">
                   <label className="text-13 lh-1 fw-500 text-dark-1 mb-10">
-                  Create Password *
+                    Create Password *
                   </label>
                   <div className="position-relative">
                     <input
@@ -148,7 +148,7 @@ export default function SetPassword() {
                 </div>
                 <div className="col-lg-13">
                   <label className="text-13 lh-1 fw-500 text-dark-1 mb-10">
-                  Re-enter Password *
+                    Re-enter Password *
                   </label>
                   <div className="position-relative">
                     <input
@@ -176,7 +176,9 @@ export default function SetPassword() {
                         zIndex: 1,
                         color: "#000",
                       }}
-                      onClick={() => togglePasswordVisibility("confirmPassword")}
+                      onClick={() =>
+                        togglePasswordVisibility("confirmPassword")
+                      }
                     ></i>
                   </div>
                   {errors.confirmPassword && (

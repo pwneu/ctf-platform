@@ -35,7 +35,7 @@ export default function AccountHasbeenCreated() {
               <p className="mt-10 text-center">
                 {"If you're lost, navigate to "}
                 <Link to="/" className="text-custom-color">
-                Home Page
+                  Home Page
                 </Link>
               </p>
             </div>

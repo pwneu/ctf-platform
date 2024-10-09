@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
 import { api } from "@/api";
-import HeaderAuth from "@/layout/headers/HeaderAuth";
-import AuthImageMove from "@/components/others/AuthImageMove";
 import Preloader from "@/components/common/Preloader";
 import MetaComponent from "@/components/common/MetaComponent";
-import AccountHasVerified from "./AccountHasVerified";
-import AccountVerificationFailed from "./AccountVerificationFailed";
+import {
+  AccountHasVerified,
+  AccountVerificationFailed,
+  AuthImageMove,
+  HeaderAuth,
+} from "@/features/authentication";
 
 const VERIFY_EMAIL_API = "/identity/verify";
 
@@ -51,7 +53,7 @@ export default function VerifyEmailPage() {
           ) : verificationStatus === "failed" ? (
             <AccountVerificationFailed />
           ) : (
-            <div>Loading...</div> 
+            <div>Loading...</div>
           )}
         </section>
       </div>

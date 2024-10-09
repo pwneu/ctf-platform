@@ -1,4 +1,5 @@
 import axios from "axios";
+
 // Axios instance for the entire application
 const BASE_URL = "/api";
 
