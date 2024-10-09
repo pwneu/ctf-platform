@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { api } from "@/api";
-import Preloader from "@/components/common/Preloader";
-import MetaComponent from "@/components/common/MetaComponent";
+import Preloader from "@/components/Preloader";
+import MetaComponent from "@/components/MetaComponent";
 import {
   AccountHasVerified,
   AccountVerificationFailed,
