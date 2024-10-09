@@ -1,4 +1,4 @@
-import { contactData } from "@/data/contactlinks"; 
+import { contactData } from "@/data/contactLinks"; 
 import MapComponent from "./Map"; 
 
 export default function Contact() {
