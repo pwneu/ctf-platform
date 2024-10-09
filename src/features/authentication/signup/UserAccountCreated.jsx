@@ -22,7 +22,7 @@ export default function UserAccountCreatedPage() {
 
           <AuthImageMove />
           <AccountHasbeenCreated />
-          
+
         </section>
       </div>
     </div>

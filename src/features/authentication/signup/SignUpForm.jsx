@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import { api } from "@/api";
+import { Turnstile } from "@marsidev/react-turnstile";
 
 const REGISTER_API = "/identity/register";
 
@@ -32,6 +33,8 @@ export default function SignUpForm() {
   });
 
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
+
+  const [turnstileToken, setTurnstileToken] = useState("");
 
   const togglePasswordVisibility = (field) => {
     setShowPassword((prev) => ({
@@ -115,14 +118,23 @@ export default function SignUpForm() {
         password: formData.password,
         fullName: formData.firstName + " " + formData.lastName,
         accessKey: formData.accessKey,
+        turnstileToken,
       });
 
-      toast.success(`The verification link has been sent to ${formData.email}. Please check to activate your account.`)
+      toast.success(
+        `The verification link has been sent to ${formData.email}. Please check to activate your account.`
+      );
 
-      // navigate("/user-account-created");
-      navigate("/login");
+      navigate("/user-account-created");
+      // navigate("/login");
     } catch (error) {
-      toast.error(`Unable to register: ${error.response.data.message}`);
+      const status = error?.response?.status;
+
+      if (status === 400) {
+        toast.error(`Unable to register: ${error.response.data.message}`);
+      } else {
+        toast.error("Something went wrong registering. Please try again later");
+      }
     } finally {
       setIsButtonDisabled(false);
     }
@@ -290,6 +302,13 @@ export default function SignUpForm() {
                     autoComplete="accesskey"
                   />
                 </div>
+
+                <Turnstile
+                  siteKey={import.meta.env.VITE_TURNSTILE_SITE_KEY}
+                  onSuccess={(token) => setTurnstileToken(token)}
+                  onError={() => setTurnstileToken("")}
+                  onExpire={() => setTurnstileToken("")}
+                />
 
                 <div className="col-lg-12">
                   <label className="text-13 lh-1 fw-500 text-dark-1 mb-10">

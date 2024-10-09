@@ -1,5 +1,12 @@
+import { Link, useNavigate } from "react-router-dom";
 
 export default function AccountHasbeenCreated() {
+  const navigate = useNavigate();
+
+  const handleNavigate = () => {
+    navigate("/login");
+  };
+
   return (
     <div className="form-page__content lg:py-50">
       <div className="container">
@@ -13,6 +20,23 @@ export default function AccountHasbeenCreated() {
               <p className="mt-50 text-34  text-center">
                 An email has also been sent to the email address you just signed
                 up for. Please check to activate your account
+              </p>
+            </div>
+            <div className="col-12">
+              <button
+                type="button"
+                name="submit"
+                id="submit"
+                className="button -md fw-500 w-1/1"
+                onClick={handleNavigate}
+              >
+                Navigate to Login Page
+              </button>
+              <p className="mt-10 text-center">
+                {"If you're lost, navigate to "}
+                <Link to="/" className="text-custom-color">
+                Home Page
+                </Link>
               </p>
             </div>
           </div>
