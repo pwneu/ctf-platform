@@ -8,6 +8,8 @@ import "react-calendar/dist/Calendar.css";
 import { Routes, Route } from "react-router-dom";
 import { useEffect } from "react";
 import { ToastContainer } from "react-toastify";
+import RequireNoAuth from "./components/RequireNoAuth";
+import RequireAuth from "./components/RequireAuth";
 
 import {
   LoginPage,
@@ -26,9 +28,13 @@ import {
   HomePage,
   WhoWeArePage,
   OurStoryPage,
-  MissionVisionPage
+  MissionVisionPage,
 } from "./pages/main";
-import { ContactPage, HelpCenterPage, DiscussionForumsPage } from "./pages/contact";
+import {
+  ContactPage,
+  HelpCenterPage,
+  DiscussionForumsPage,
+} from "./pages/contact";
 import { PrivacyPolicyPage, TermsAndConditionsPage } from "./pages/ownership";
 import { ChallengesListPage, ChallengeDetailsPage } from "./pages/play";
 
@@ -54,22 +60,6 @@ function App() {
           {/* Homepage */}
           <Route index element={<HomePage />} />
 
-          {/* User Authentication */}
-          <Route path="login" element={<LoginPage />} />
-          <Route path="forgot-password" element={<ForgotPasswordPage />} />
-          <Route path="verify-code" element={<VerifyCodePage />} />
-          <Route path="set-new-password" element={<SetPasswordPage />} />
-          <Route
-            path="password-completed"
-            element={<PasswordCompletedPage />}
-          />
-          <Route path="verify-email" element={<VerifyEmailPage />} />
-
-          {/* User Registration */}
-          <Route path="signup" element={<SignupPage />} />
-          <Route path="user-account-created" element={<AccountCreatedPage />} />
-          <Route path="account-verified" element={<AccountVerifiedPage />} />
-
           {/* Main Application Pages */}
           <Route path="campuses" element={<CampusesPage />} />
 
@@ -87,15 +77,47 @@ function App() {
             element={<TermsAndConditionsPage />}
           />
 
-          {/* Challenges */}
-          <Route path="list-of-challenges" element={<ChallengesListPage />} />
-          <Route
-            path="challengeDetails/:id"
-            element={<ChallengeDetailsPage />}
-          />
-
           {/* Community */}
           <Route path="discussion-forum" element={<DiscussionForumsPage />} />
+
+          {/* Routes that requires the user to be logged out */}
+          <Route element={<RequireNoAuth />}>
+            {/* User Authentication */}
+            <Route path="login" element={<LoginPage />} />
+            <Route path="forgot-password" element={<ForgotPasswordPage />} />
+            <Route path="verify-code" element={<VerifyCodePage />} />
+            <Route path="set-new-password" element={<SetPasswordPage />} />
+            <Route
+              path="password-completed"
+              element={<PasswordCompletedPage />}
+            />
+            <Route path="verify-email" element={<VerifyEmailPage />} />
+
+            {/* User Registration */}
+            <Route path="signup" element={<SignupPage />} />
+            <Route
+              path="user-account-created"
+              element={<AccountCreatedPage />}
+            />
+            <Route path="account-verified" element={<AccountVerifiedPage />} />
+          </Route>
+
+          {/* Routes that require the user to be logged in */}
+          <Route
+            element={
+              <RequireAuth allowedRoles={["Member", "Manager", "Admin"]} />
+            }
+          >
+            {/* Challenges */}
+            <Route path="list-of-challenges" element={<ChallengesListPage />} />
+            <Route
+              path="challengeDetails/:id"
+              element={<ChallengeDetailsPage />}
+            />
+          </Route>
+
+          {/* Routes that require the user to have a manager role in order to give access */}
+          <Route element={<RequireAuth allowedRoles={["Manager"]} />}></Route>
 
           {/* Achievements */}
           {/* <Route path="achievements/:id" element={<AchievementsdetailsPage />} /> */}
