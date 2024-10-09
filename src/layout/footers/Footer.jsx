@@ -1,6 +1,6 @@
-import Socials from "@/components/common/Socials"; 
-import FooterLinks from "../component/FooterLinks"; 
-import Links from "../component/Links"; 
+import Socials from "@/components/Socials"; 
+import FooterLinks from "../components/FooterLinks"; 
+import Links from "../components/Links"; 
 
 export default function Footer() {
  

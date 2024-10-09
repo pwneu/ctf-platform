@@ -1,0 +1,22 @@
+.tags-container,
+.flags-container {
+  margin-top: 10px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.tag-item,
+.flag-item {
+  background-color: #e2e6ea;
+  border-radius: 15px;
+  padding: 5px 10px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.tag-item Button,
+.flag-item Button {
+  margin-left: 5px;
+}
