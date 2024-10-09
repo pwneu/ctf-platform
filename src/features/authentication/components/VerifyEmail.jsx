@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import { api } from "@/api";
 import HeaderAuth from "@/features/authentication/layout/HeaderAuth";
 import AuthImageMove from "@/features/authentication/layout/AuthImageMove";
-import Preloader from "@/components/common/Preloader";
-import MetaComponent from "@/components/common/MetaComponent";
+import Preloader from "@/components/Preloader";
+import MetaComponent from "@/components/MetaComponent";
 import AccountHasVerified from "./AccountHasVerified";
 import AccountVerificationFailed from "./AccountVerificationFailed";
 

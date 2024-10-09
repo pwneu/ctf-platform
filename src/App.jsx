@@ -9,7 +9,6 @@ import { Routes, Route } from "react-router-dom";
 import { useEffect } from "react";
 import { ToastContainer } from "react-toastify";
 
-// Authentication-related pages
 import {
   LoginPage,
   ForgotPasswordPage,
@@ -21,25 +20,22 @@ import {
   AccountCreatedPage,
   AccountVerifiedPage,
 } from "./pages/authentication";
+import {
+  CampusesPage,
+  // DiscussionForumsPage,
+  HomePage,
+  WhoWeArePage,
+  OurStoryPage,
+  MissionVisionPage
+} from "./pages/main";
+import { ContactPage, HelpCenterPage, DiscussionForumsPage } from "./pages/contact";
+import { PrivacyPolicyPage, TermsAndConditionsPage } from "./pages/ownership";
+import { ChallengesListPage, ChallengeDetailsPage } from "./pages/play";
 
-// Main application pages
-import HomePage from "./pages/HomePage.jsx";
-import ContactPage from "./pages/ContactPage";
-import PrivacyPolicyPage from "./pages/PrivacyPolicyPage";
-import TermsandConditionsPage from "./pages/TermsAndConditionsPage";
-import UniversityPage from "./pages/CampusesPage";
-import ListofChallenges from "./pages/ChallengeListPage";
-import ChallengeDetails from "./pages/ChallengesDetailsPage";
-
-// Informational pages
-import OurStoryPage from "./pages/OurStoryPage";
-import WhoWeArePage from "./pages/WhoWeArePage";
-import MissionVisionPage from "./pages/MissionVisionsPage";
-import HelpCenterPage from "./pages/HelpCenterPage";
-import DiscussionPage from "./pages/DiscussionForumsPage";
-
-// import AchievementsdetailsPage from "./pages/achivements/achievements";
-// import AchievementsListPage from "./pages/achivements/achievements-list";
+// import {
+//   AchievementDetailsPage,
+//   AchievementsListPage,
+// } from "./pages/achievements";
 
 function App() {
   useEffect(() => {
@@ -75,7 +71,7 @@ function App() {
           <Route path="account-verified" element={<AccountVerifiedPage />} />
 
           {/* Main Application Pages */}
-          <Route path="campuses" element={<UniversityPage />} />
+          <Route path="campuses" element={<CampusesPage />} />
 
           {/* About Us */}
           <Route path="our-story" element={<OurStoryPage />} />
@@ -88,15 +84,18 @@ function App() {
           <Route path="privacy-policy" element={<PrivacyPolicyPage />} />
           <Route
             path="terms-and-conditions"
-            element={<TermsandConditionsPage />}
+            element={<TermsAndConditionsPage />}
           />
 
           {/* Challenges */}
-          <Route path="list-of-challenges" element={<ListofChallenges />} />
-          <Route path="challengeDetails/:id" element={<ChallengeDetails />} />
+          <Route path="list-of-challenges" element={<ChallengesListPage />} />
+          <Route
+            path="challengeDetails/:id"
+            element={<ChallengeDetailsPage />}
+          />
 
           {/* Community */}
-          <Route path="discussion-forum" element={<DiscussionPage />} />
+          <Route path="discussion-forum" element={<DiscussionForumsPage />} />
 
           {/* Achievements */}
           {/* <Route path="achievements/:id" element={<AchievementsdetailsPage />} /> */}
@@ -107,4 +106,5 @@ function App() {
     </>
   );
 }
+
 export default App;
