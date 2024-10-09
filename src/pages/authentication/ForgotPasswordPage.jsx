@@ -1,16 +1,18 @@
 import Preloader from "@/components/common/Preloader";
-import HeaderAuth from "@/layout/headers/HeaderAuth";
-import AuthImageMove from "@/components/others/AuthImageMove";
-import LoginForm from "@/features/authentication/login/LoginForm";
 import MetaComponent from "@/components/common/MetaComponent";
+import {
+  ForgotPassword,
+  AuthImageMove,
+  HeaderAuth,
+} from "@/features/authentication";
 
 const metadata = {
-  title: "Login || PWNEU",
+  title: "Forgot Password || PWNEU",
   description:
-    "Access your account to explore our platform and participate in challenges.",
+    "Reset your password to regain access to your account and continue exploring our platform.",
 };
 
-export default function LoginPage() {
+export default function ForgotPasswordPage() {
   return (
     <div className="main-content  ">
       <MetaComponent meta={metadata} />
@@ -19,10 +21,8 @@ export default function LoginPage() {
 
       <div className="content-wrapper js-content-wrapper overflow-hidden">
         <section className="form-page js-mouse-move-container">
-
           <AuthImageMove />
-          <LoginForm />
-          
+          <ForgotPassword />
         </section>
       </div>
     </div>

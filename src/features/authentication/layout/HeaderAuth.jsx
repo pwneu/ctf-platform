@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import Menu from "../component/Menu"; 
-import MobileMenu from "../component/MobileMenu";  
+import Menu from "../../../layout/component/Menu"; 
+import MobileMenu from "../../../layout/component/MobileMenu";  
 
 export default function HeaderAuth() {
   const [activeMobileMenu, setActiveMobileMenu] = useState(false);

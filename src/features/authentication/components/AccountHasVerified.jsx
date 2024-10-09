@@ -19,7 +19,10 @@ export default function AccountHasVerified({ email }) {
 
               <p className="mt-15 text-34 text-center">
                 To get started, go to{" "}
-                <Link to="/list-of-challenges" className="text-custom-color text-bold">
+                <Link
+                  to="/list-of-challenges"
+                  className="text-custom-color text-bold"
+                >
                   PWNEU Competition
                 </Link>{" "}
                 and begin your journey!

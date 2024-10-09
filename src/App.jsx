@@ -10,15 +10,17 @@ import { useEffect } from "react";
 import { ToastContainer } from "react-toastify";
 
 // Authentication-related pages
-import LoginPage from "./features/authentication/login";
-import ForgotPasswordPage from "./features/authentication/login/UserForgotPassword";
-import VerifyCodePage from "./features/authentication/login/UserVerifyCode";
-import SetPasswordPage from "./features/authentication/login/UserSetPassword";
-import PasswordCompletedPage from "./features/authentication/login/UserPasswordCompleted";
-import VerifyEmailPage from "./features/authentication/signup/VerifyEmail";
-import SignupPage from "./features/authentication/signup";
-import AccountCreatedPage from "./features/authentication/signup/UserAccountCreated";
-import AccountHasVerifiedPage from "@/features/authentication/signup/UserGetStarted";
+import {
+  LoginPage,
+  ForgotPasswordPage,
+  VerifyCodePage,
+  SetPasswordPage,
+  PasswordCompletedPage,
+  VerifyEmailPage,
+  SignupPage,
+  AccountCreatedPage,
+  AccountVerifiedPage,
+} from "./pages/authentication";
 
 // Main application pages
 import HomePage from "./pages/HomePage.jsx";
@@ -61,13 +63,16 @@ function App() {
           <Route path="forgot-password" element={<ForgotPasswordPage />} />
           <Route path="verify-code" element={<VerifyCodePage />} />
           <Route path="set-new-password" element={<SetPasswordPage />} />
-          <Route path="password-completed" element={<PasswordCompletedPage />}/>
+          <Route
+            path="password-completed"
+            element={<PasswordCompletedPage />}
+          />
           <Route path="verify-email" element={<VerifyEmailPage />} />
 
           {/* User Registration */}
           <Route path="signup" element={<SignupPage />} />
           <Route path="user-account-created" element={<AccountCreatedPage />} />
-          <Route path="account-verified" element={<AccountHasVerifiedPage />} />
+          <Route path="account-verified" element={<AccountVerifiedPage />} />
 
           {/* Main Application Pages */}
           <Route path="campuses" element={<UniversityPage />} />
@@ -81,7 +86,10 @@ function App() {
           <Route path="contact" element={<ContactPage />} />
           <Route path="help-center" element={<HelpCenterPage />} />
           <Route path="privacy-policy" element={<PrivacyPolicyPage />} />
-          <Route path="terms-and-conditions" element={<TermsandConditionsPage />} />
+          <Route
+            path="terms-and-conditions"
+            element={<TermsandConditionsPage />}
+          />
 
           {/* Challenges */}
           <Route path="list-of-challenges" element={<ListofChallenges />} />
