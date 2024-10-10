@@ -48,6 +48,7 @@ import {
   LeaderboardsPage,
   ConfigurationsPage,
 } from "./pages/admin";
+import RequireDefinedAuth from "./components/RequireDefinedAuth";
 
 // import {
 //   AchievementDetailsPage,
@@ -68,28 +69,30 @@ function App() {
     <>
       <Routes>
         <Route path="/">
-          {/* Homepage */}
-          <Route index element={<HomePage />} />
+          <Route element={<RequireDefinedAuth />}>
+            {/* Homepage */}
+            <Route index element={<HomePage />} />
 
-          {/* Main Application Pages */}
-          <Route path="campuses" element={<CampusesPage />} />
+            {/* Main Application Pages */}
+            <Route path="campuses" element={<CampusesPage />} />
 
-          {/* About Us */}
-          <Route path="our-story" element={<OurStoryPage />} />
-          <Route path="who-we-are" element={<WhoWeArePage />} />
-          <Route path="mission-vision" element={<MissionVisionPage />} />
+            {/* About Us */}
+            <Route path="our-story" element={<OurStoryPage />} />
+            <Route path="who-we-are" element={<WhoWeArePage />} />
+            <Route path="mission-vision" element={<MissionVisionPage />} />
 
-          {/* Contact */}
-          <Route path="contact" element={<ContactPage />} />
-          <Route path="help-center" element={<HelpCenterPage />} />
-          <Route path="privacy-policy" element={<PrivacyPolicyPage />} />
-          <Route
-            path="terms-and-conditions"
-            element={<TermsAndConditionsPage />}
-          />
+            {/* Contact */}
+            <Route path="contact" element={<ContactPage />} />
+            <Route path="help-center" element={<HelpCenterPage />} />
+            <Route path="privacy-policy" element={<PrivacyPolicyPage />} />
+            <Route
+              path="terms-and-conditions"
+              element={<TermsAndConditionsPage />}
+            />
 
-          {/* Community */}
-          <Route path="discussion-forum" element={<DiscussionForumsPage />} />
+            {/* Community */}
+            <Route path="discussion-forum" element={<DiscussionForumsPage />} />
+          </Route>
 
           {/* Routes that requires the user to be logged out */}
           <Route element={<RequireNoAuth />}>
@@ -152,11 +155,7 @@ function App() {
         </Route>
       </Routes>
 
-      <ToastContainer
-        position="top-right"
-        autoClose={2000}
-        hideProgressBar
-      />
+      <ToastContainer position="top-right" autoClose={2000} hideProgressBar />
     </>
   );
 }
