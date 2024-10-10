@@ -12,18 +12,22 @@ const LOGOUT_API = "/identity/logout";
 
 export default function Header() {
   const [activeMobileMenu, setActiveMobileMenu] = useState(false);
+  const [isLoggingOut, setIsLoggingOut] = useState(false);
   const { auth, setAuth } = useAuth();
   const navigate = useNavigate();
 
   const isManager = auth?.roles?.includes("Manager");
 
   const handleLogout = async () => {
+    setIsLoggingOut(true);
     try {
       await api.post(LOGOUT_API);
       setAuth(null);
       navigate("/login");
     } catch (error) {
       toast.error("Unable to log out");
+    } finally {
+      setIsLoggingOut(false); 
     }
   };
 
@@ -31,7 +35,7 @@ export default function Header() {
     if (isManager) {
       navigate("/admin");
     } else {
-      navigate("/profile")
+      navigate("/profile");
     }
   };
 
@@ -89,8 +93,9 @@ export default function Header() {
                       <button
                         onClick={handleLogout}
                         className="button -sm -white text-dark-1 ml-30"
+                        disabled={isLoggingOut}
                       >
-                        Log out
+                        {isLoggingOut ? "Logging out..." : "Log out"}{" "}
                       </button>
                     </>
                   ) : (
