@@ -36,7 +36,7 @@ export default function UserDetails({
       try {
         await api.delete(`/identity/users/${userDetails.id}`);
         toast.success(`User deleted successfully: ${userDetails.id}`);
-        navigate("/users");
+        navigate("/admin/users");
       } catch (error) {
         const status = error?.response?.status;
 
