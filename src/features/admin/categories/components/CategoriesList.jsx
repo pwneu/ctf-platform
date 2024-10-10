@@ -16,6 +16,7 @@ export default function CategoriesList({
 }) {
   const [showConfirmDeleteModal, setShowConfirmDeleteModal] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState(null);
+  const [isDoubleConfirmed, setIsDoubleConfirmed] = useState(false);
 
   const handleDeleteClick = (category) => {
     setSelectedCategory(category);
@@ -23,7 +24,17 @@ export default function CategoriesList({
   };
 
   const confirmDelete = () => {
-    onDeleteCategory(selectedCategory);
+    if (!isDoubleConfirmed) {
+      setIsDoubleConfirmed(true);
+    } else {
+      onDeleteCategory(selectedCategory);
+      setShowConfirmDeleteModal(false);
+      setIsDoubleConfirmed(false);
+    }
+  };
+
+  const cancelDelete = () => {
+    setIsDoubleConfirmed(false);
     setShowConfirmDeleteModal(false);
   };
 
@@ -87,25 +98,59 @@ export default function CategoriesList({
           <Modal.Title id="confirmModalLabel">Confirm Delete</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          Are you sure you want to delete the category &quot;
-          {selectedCategory?.name}&quot;?
+          {isDoubleConfirmed ? (
+            <>
+              <p>Are you really sure?</p>
+              <p>
+                This action is irreversible and will delete the challenges in
+                this category.
+              </p>
+            </>
+          ) : (
+            <p>
+              Do you want to delete the category &quot;
+              {selectedCategory?.name}&quot;?
+            </p>
+          )}
         </Modal.Body>
         <Modal.Footer>
-          <Button
-            variant="secondary"
-            onClick={() => setShowConfirmDeleteModal(false)}
-            disabled={isBusy}
-          >
-            <FontAwesomeIcon icon={faTimes} /> Cancel
-          </Button>
-          <Button
-            variant="danger"
-            onClick={confirmDelete}
-            disabled={isBusy || !isAdmin}
-          >
-            <FontAwesomeIcon icon={faTrash} />{" "}
-            {isBusy ? "Deleting..." : "Delete"}
-          </Button>
+          {isDoubleConfirmed ? (
+            <>
+              <Button
+                variant="danger"
+                onClick={confirmDelete}
+                disabled={isBusy || !isAdmin}
+              >
+                <FontAwesomeIcon icon={faTrash} />{" "}
+                {isBusy ? "Deleting..." : "Delete"}
+              </Button>
+              <Button
+                variant="secondary"
+                onClick={cancelDelete}
+                disabled={isBusy}
+              >
+                <FontAwesomeIcon icon={faTimes} /> Cancel
+              </Button>
+            </>
+          ) : (
+            <>
+              <Button
+                variant="secondary"
+                onClick={cancelDelete}
+                disabled={isBusy}
+              >
+                <FontAwesomeIcon icon={faTimes} /> Cancel
+              </Button>
+              <Button
+                variant="danger"
+                onClick={confirmDelete}
+                disabled={isBusy || !isAdmin}
+              >
+                <FontAwesomeIcon icon={faTrash} />{" "}
+                {isBusy ? "Deleting..." : "Delete"}
+              </Button>
+            </>
+          )}
         </Modal.Footer>
       </Modal>
     </>
