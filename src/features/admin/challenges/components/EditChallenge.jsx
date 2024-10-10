@@ -20,7 +20,7 @@ export default function EditChallenge({
   const [visibleFlags, setVisibleFlags] = useState({});
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
-  
+
   const handleTagAdd = () => {
     if (tagInput.trim() && !formData.tags.includes(tagInput.trim())) {
       setFormData((prevData) => ({
