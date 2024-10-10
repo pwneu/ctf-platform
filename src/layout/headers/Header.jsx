@@ -15,6 +15,8 @@ export default function Header() {
   const { auth, setAuth } = useAuth();
   const navigate = useNavigate();
 
+  const isManager = auth?.roles?.includes("Manager");
+
   const handleLogout = async () => {
     try {
       await api.post(LOGOUT_API);
@@ -22,6 +24,14 @@ export default function Header() {
       navigate("/login");
     } catch (error) {
       toast.error("Unable to log out");
+    }
+  };
+
+  const handleUserNameClick = () => {
+    if (isManager) {
+      navigate("/admin");
+    } else {
+      navigate("/profile")
     }
   };
 
@@ -69,7 +79,13 @@ export default function Header() {
                 <div className="header-right__buttons d-flex items-center ml-30 md:d-none">
                   {auth?.userName ? (
                     <>
-                      <span className="text-white-1">{auth.userName}</span>
+                      <span
+                        className="text-white-1"
+                        style={{ cursor: "pointer" }}
+                        onClick={handleUserNameClick}
+                      >
+                        {auth.userName}
+                      </span>
                       <button
                         onClick={handleLogout}
                         className="button -sm -white text-dark-1 ml-30"
