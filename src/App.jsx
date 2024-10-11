@@ -14,7 +14,6 @@ import RequireAuth from "./components/RequireAuth";
 import {
   LoginPage,
   ForgotPasswordPage,
-  VerifyCodePage,
   ResetPasswordPage,
   VerifyEmailPage,
   SignupPage,
@@ -96,7 +95,6 @@ function App() {
             {/* User Authentication */}
             <Route path="login" element={<LoginPage />} />
             <Route path="forgot-password" element={<ForgotPasswordPage />} />
-            <Route path="verify-code" element={<VerifyCodePage />} />
             <Route path="reset-password" element={<ResetPasswordPage />} />
             <Route path="verify-email" element={<VerifyEmailPage />} />
 
