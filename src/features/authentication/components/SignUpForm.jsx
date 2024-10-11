@@ -1,6 +1,6 @@
 /* eslint-disable react/no-unescaped-entities */
 /* eslint-disable no-useless-escape */
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import { api } from "@/api";
@@ -8,9 +8,7 @@ import { Turnstile } from "@marsidev/react-turnstile";
 
 const REGISTER_API = "/identity/register";
 
-export default function SignUpForm() {
-  const navigate = useNavigate();
-
+export default function SignUpForm({ setHasRegistered }) {
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -125,8 +123,7 @@ export default function SignUpForm() {
         `The verification link has been sent to ${formData.email}. Please check to activate your account.`
       );
 
-      navigate("/user-account-created");
-      // navigate("/login");
+      setHasRegistered(true);
     } catch (error) {
       const status = error?.response?.status;
 

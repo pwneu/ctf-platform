@@ -14,13 +14,9 @@ import RequireAuth from "./components/RequireAuth";
 import {
   LoginPage,
   ForgotPasswordPage,
-  VerifyCodePage,
-  SetPasswordPage,
-  PasswordCompletedPage,
+  ResetPasswordPage,
   VerifyEmailPage,
   SignupPage,
-  AccountCreatedPage,
-  AccountVerifiedPage,
 } from "./pages/authentication";
 import {
   CampusesPage,
@@ -48,6 +44,7 @@ import {
   LeaderboardsPage,
   ConfigurationsPage,
 } from "./pages/admin";
+import RequireDefinedAuth from "./components/RequireDefinedAuth";
 
 // import {
 //   AchievementDetailsPage,
@@ -68,49 +65,41 @@ function App() {
     <>
       <Routes>
         <Route path="/">
-          {/* Homepage */}
-          <Route index element={<HomePage />} />
+          <Route element={<RequireDefinedAuth />}>
+            {/* Homepage */}
+            <Route index element={<HomePage />} />
 
-          {/* Main Application Pages */}
-          <Route path="campuses" element={<CampusesPage />} />
+            {/* Main Application Pages */}
+            <Route path="campuses" element={<CampusesPage />} />
 
-          {/* About Us */}
-          <Route path="our-story" element={<OurStoryPage />} />
-          <Route path="who-we-are" element={<WhoWeArePage />} />
-          <Route path="mission-vision" element={<MissionVisionPage />} />
+            {/* About Us */}
+            <Route path="our-story" element={<OurStoryPage />} />
+            <Route path="who-we-are" element={<WhoWeArePage />} />
+            <Route path="mission-vision" element={<MissionVisionPage />} />
 
-          {/* Contact */}
-          <Route path="contact" element={<ContactPage />} />
-          <Route path="help-center" element={<HelpCenterPage />} />
-          <Route path="privacy-policy" element={<PrivacyPolicyPage />} />
-          <Route
-            path="terms-and-conditions"
-            element={<TermsAndConditionsPage />}
-          />
+            {/* Contact */}
+            <Route path="contact" element={<ContactPage />} />
+            <Route path="help-center" element={<HelpCenterPage />} />
+            <Route path="privacy-policy" element={<PrivacyPolicyPage />} />
+            <Route
+              path="terms-and-conditions"
+              element={<TermsAndConditionsPage />}
+            />
 
-          {/* Community */}
-          <Route path="discussion-forum" element={<DiscussionForumsPage />} />
+            {/* Community */}
+            <Route path="discussion-forum" element={<DiscussionForumsPage />} />
+          </Route>
 
           {/* Routes that requires the user to be logged out */}
           <Route element={<RequireNoAuth />}>
             {/* User Authentication */}
             <Route path="login" element={<LoginPage />} />
             <Route path="forgot-password" element={<ForgotPasswordPage />} />
-            <Route path="verify-code" element={<VerifyCodePage />} />
-            <Route path="set-new-password" element={<SetPasswordPage />} />
-            <Route
-              path="password-completed"
-              element={<PasswordCompletedPage />}
-            />
+            <Route path="reset-password" element={<ResetPasswordPage />} />
             <Route path="verify-email" element={<VerifyEmailPage />} />
 
             {/* User Registration */}
             <Route path="signup" element={<SignupPage />} />
-            <Route
-              path="user-account-created"
-              element={<AccountCreatedPage />}
-            />
-            <Route path="account-verified" element={<AccountVerifiedPage />} />
           </Route>
 
           {/* Routes that require the user to be logged in */}
@@ -152,12 +141,7 @@ function App() {
         </Route>
       </Routes>
 
-      <ToastContainer
-        position="top-right"
-        autoClose={1000}
-        hideProgressBar
-        pauseOnHover={false}
-      />
+      <ToastContainer position="top-right" autoClose={2000} hideProgressBar />
     </>
   );
 }

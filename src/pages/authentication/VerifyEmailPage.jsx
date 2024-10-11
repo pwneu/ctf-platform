@@ -28,6 +28,8 @@ export default function VerifyEmailPage() {
     if (emailParam && confirmationToken) {
       setEmail(emailParam);
       verifyEmail(emailParam, confirmationToken);
+    } else {
+      setVerificationStatus("failed");
     }
   }, []);
 
@@ -53,7 +55,7 @@ export default function VerifyEmailPage() {
           ) : verificationStatus === "failed" ? (
             <AccountVerificationFailed />
           ) : (
-            <div>Loading...</div>
+            <div>Loading...</div> // TODO -- Design
           )}
         </section>
       </div>

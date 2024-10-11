@@ -1,9 +1,15 @@
-import { Link, useNavigate } from "react-router-dom";
+/* eslint-disable no-useless-escape */
+import { Link } from "react-router-dom";
 import { useState } from "react";
+import { toast } from "react-toastify";
+import { api } from "@/api";
 
-export default function SetPassword() {
+export default function ResetPassword({
+  email,
+  resetToken,
+  setPasswordResetHasCompleted,
+}) {
   const [formData, setFormData] = useState({
-    email: "",
     password: "",
     confirmPassword: "",
   });
@@ -18,7 +24,7 @@ export default function SetPassword() {
     confirmPassword: false,
   });
 
-  const navigate = useNavigate(); // useNavigate hook for redirection
+  const [isBusy, setIsBusy] = useState(false);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -36,28 +42,36 @@ export default function SetPassword() {
   };
 
   const validatePassword = (password) => {
-    const lengthRegex = /^.{8,12}$/; // 8 to 12 characters
+    const minLengthRegex = /^.{12,}$/; // At least 12 characters
+    const maxLengthRegex = /^.{1,128}$/; // Maximum 128 characters
     const uppercaseRegex = /[A-Z]/;
     const lowercaseRegex = /[a-z]/;
     const digitRegex = /\d/;
-    const specialCharRegex = /[!@#$%^&*()_+{}[\]:;<>,.?~\\/-]/;
+    const specialCharRegex = /[!@#$%^&*()_+{}\[\]:;<>,.?~\\/-]/;
 
-    if (!lengthRegex.test(password)) {
-      return "Password must be between 8 and 12 characters.";
+    let error = "";
+
+    if (!minLengthRegex.test(password)) {
+      error = "Password must be at least 12 characters.";
+    } else if (!maxLengthRegex.test(password)) {
+      error = "Password must not exceed 128 characters.";
     } else if (!uppercaseRegex.test(password)) {
-      return "Password must include at least one uppercase letter.";
+      error = "Password must include at least one uppercase letter.";
     } else if (!lowercaseRegex.test(password)) {
-      return "Password must include at least one lowercase letter.";
+      error = "Password must include at least one lowercase letter.";
     } else if (!digitRegex.test(password)) {
-      return "Password must include at least one digit.";
+      error = "Password must include at least one digit.";
     } else if (!specialCharRegex.test(password)) {
-      return "Password must include at least one special character.";
+      error = "Password must include at least one special character.";
     }
-    return "";
+
+    return error;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
+    setIsBusy(true);
 
     const passwordError = validatePassword(formData.password);
     const confirmPasswordError =
@@ -73,8 +87,26 @@ export default function SetPassword() {
     if (passwordError || confirmPasswordError) {
       setErrors(newErrors);
     } else {
-      console.log("New Password Set: ", formData.password);
-      navigate("/password-completed");
+      try {
+        await api.put("/identity/resetPassword", {
+          email,
+          passwordResetToken: resetToken,
+          newPassword: formData.password,
+          repeatPassword: formData.confirmPassword,
+        });
+
+        setPasswordResetHasCompleted(true);
+      } catch (error) {
+        const status = error?.response?.status;
+
+        if (status === 400) {
+          toast.error(`Error: ${error.response.data.message}`);
+        } else {
+          toast.error("Something went wrong. Please try again later");
+        }
+      } finally {
+        setIsBusy(false);
+      }
     }
   };
 
@@ -90,10 +122,11 @@ export default function SetPassword() {
                 </Link>
               </div>
 
-              <h3 className="text-25 lh-13 mt-5 text-center">Set a Password</h3>
+              <h3 className="text-25 lh-13 mt-5 text-center">
+                {`Set a new password for ${email}`}
+              </h3>
               <p className="mt-10 text-center">
-                Your previous password has been reset. Please set a new password
-                for your account.
+                Please set a new password for your account.
               </p>
 
               <form
@@ -101,15 +134,9 @@ export default function SetPassword() {
                 className="contact-form respondForm__form row y-gap-20 pt-30"
                 onSubmit={handleSubmit}
               >
-                <input
-                  type="hidden"
-                  name="username"
-                  value={formData.email || ""}
-                  aria-hidden="true"
-                />
                 <div className="col-lg-13">
                   <label className="text-13 lh-1 fw-500 text-dark-1 mb-10">
-                    Create Password *
+                    New Password *
                   </label>
                   <div className="position-relative">
                     <input
@@ -120,8 +147,8 @@ export default function SetPassword() {
                       value={formData.password}
                       onChange={handleInputChange}
                       autoComplete="new-password"
-                      minLength="8"
-                      maxLength="12"
+                      minLength="12"
+                      maxLength="128"
                       className="form-control pe-5"
                       aria-describedby="password-error"
                     />
@@ -159,8 +186,8 @@ export default function SetPassword() {
                       value={formData.confirmPassword}
                       onChange={handleInputChange}
                       autoComplete="new-password"
-                      minLength="8"
-                      maxLength="12"
+                      minLength="12"
+                      maxLength="128"
                       className="form-control pe-5"
                       aria-describedby="confirm-password-error"
                     />
@@ -193,8 +220,9 @@ export default function SetPassword() {
                     name="submit"
                     id="submit"
                     className="button -md fw-500 w-1/1"
+                    disabled={isBusy}
                   >
-                    Set Password
+                    {isBusy ? "Processing..." : "Set Password"}
                   </button>
                 </div>
               </form>

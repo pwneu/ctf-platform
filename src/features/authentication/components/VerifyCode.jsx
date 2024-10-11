@@ -1,6 +1,8 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 
+// Unused but keep it
+
 export default function VerifyCode() {
   const [formData, setFormData] = useState({
     code: "",

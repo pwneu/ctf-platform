@@ -5,6 +5,7 @@ const RequireNoAuth = () => {
   const { auth } = useAuth();
   const location = useLocation();
 
+  // TODO -- Design
   if (auth === undefined) {
     return <div>Loading...</div>;
   }

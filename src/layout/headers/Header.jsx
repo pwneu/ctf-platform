@@ -12,16 +12,30 @@ const LOGOUT_API = "/identity/logout";
 
 export default function Header() {
   const [activeMobileMenu, setActiveMobileMenu] = useState(false);
+  const [isLoggingOut, setIsLoggingOut] = useState(false);
   const { auth, setAuth } = useAuth();
   const navigate = useNavigate();
 
+  const isManager = auth?.roles?.includes("Manager");
+
   const handleLogout = async () => {
+    setIsLoggingOut(true);
     try {
       await api.post(LOGOUT_API);
       setAuth(null);
       navigate("/login");
     } catch (error) {
       toast.error("Unable to log out");
+    } finally {
+      setIsLoggingOut(false); 
+    }
+  };
+
+  const handleUserNameClick = () => {
+    if (isManager) {
+      navigate("/admin");
+    } else {
+      navigate("/profile");
     }
   };
 
@@ -69,12 +83,19 @@ export default function Header() {
                 <div className="header-right__buttons d-flex items-center ml-30 md:d-none">
                   {auth?.userName ? (
                     <>
-                      <span className="text-white-1">{auth.userName}</span>
+                      <span
+                        className="text-white-1"
+                        style={{ cursor: "pointer" }}
+                        onClick={handleUserNameClick}
+                      >
+                        {auth.userName}
+                      </span>
                       <button
                         onClick={handleLogout}
                         className="button -sm -white text-dark-1 ml-30"
+                        disabled={isLoggingOut}
                       >
-                        Log out
+                        {isLoggingOut ? "Logging out..." : "Log out"}{" "}
                       </button>
                     </>
                   ) : (
