@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-export default function PasswordCompleted() {
+export default function PasswordResetCompleted() {
   return (
     <div className="form-page__content lg:py-50">
       <div className="container">
@@ -8,7 +8,7 @@ export default function PasswordCompleted() {
           <div className="col-xl-8 col-lg-9">
             <div className="px-50 py-50 md:px-25 md:py-25 bg-white rounded-16">
               <h3 className="text-32 lh-17 text-center">
-                Password Changes Successfully!
+                Password reset was successful!
               </h3>
               <p className="mt-5 text-19 text-center">
                 Please{" "}

@@ -15,11 +15,9 @@ import {
   LoginPage,
   ForgotPasswordPage,
   VerifyCodePage,
-  SetPasswordPage,
-  PasswordCompletedPage,
+  ResetPasswordPage,
   VerifyEmailPage,
   SignupPage,
-  AccountVerifiedPage,
 } from "./pages/authentication";
 import {
   CampusesPage,
@@ -99,16 +97,11 @@ function App() {
             <Route path="login" element={<LoginPage />} />
             <Route path="forgot-password" element={<ForgotPasswordPage />} />
             <Route path="verify-code" element={<VerifyCodePage />} />
-            <Route path="set-new-password" element={<SetPasswordPage />} />
-            <Route
-              path="password-completed"
-              element={<PasswordCompletedPage />}
-            />
+            <Route path="reset-password" element={<ResetPasswordPage />} />
             <Route path="verify-email" element={<VerifyEmailPage />} />
 
             {/* User Registration */}
             <Route path="signup" element={<SignupPage />} />
-            <Route path="account-verified" element={<AccountVerifiedPage />} />
           </Route>
 
           {/* Routes that require the user to be logged in */}

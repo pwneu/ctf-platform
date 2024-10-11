@@ -3,9 +3,9 @@ import AccountHasVerified from "./components/AccountHasVerified";
 import AccountVerificationFailed from "./components/AccountVerificationFailed";
 import ForgotPassword from "./components/ForgotPassword";
 import LoginForm from "./components/LoginForm";
-import PasswordCompleted from "./components/PasswordCompleted";
+import PasswordResetCompleted from "./components/PasswordResetCompleted";
 import PasswordResetSent from "./components/PasswordResetSent";
-import SetPassword from "./components/SetPassword";
+import ResetPassword from "./components/ResetPassword";
 import SignUpForm from "./components/SignUpForm";
 import VerifyCode from "./components/VerifyCode";
 import VerifyEmailPage from "./components/VerifyEmail";
@@ -18,9 +18,9 @@ export {
   AccountVerificationFailed,
   ForgotPassword,
   LoginForm,
-  PasswordCompleted,
+  PasswordResetCompleted,
   PasswordResetSent,
-  SetPassword,
+  ResetPassword,
   SignUpForm,
   VerifyCode,
   VerifyEmailPage,
