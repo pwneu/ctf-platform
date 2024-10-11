@@ -4,7 +4,9 @@ import {
   ForgotPassword,
   AuthImageMove,
   HeaderAuth,
+  PasswordResetSent,
 } from "@/features/authentication";
+import { useState } from "react";
 
 const metadata = {
   title: "Forgot Password || PWNEU",
@@ -13,6 +15,8 @@ const metadata = {
 };
 
 export default function ForgotPasswordPage() {
+  const [passwordResetSent, setPasswordResetSent] = useState(false);
+
   return (
     <div className="main-content  ">
       <MetaComponent meta={metadata} />
@@ -22,7 +26,11 @@ export default function ForgotPasswordPage() {
       <div className="content-wrapper js-content-wrapper overflow-hidden">
         <section className="form-page js-mouse-move-container">
           <AuthImageMove />
-          <ForgotPassword />
+          {passwordResetSent ? (
+            <PasswordResetSent />
+          ) : (
+            <ForgotPassword setPasswordResetSent={setPasswordResetSent} />
+          )}
         </section>
       </div>
     </div>

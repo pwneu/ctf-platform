@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 
-function AccountVerificationFailed() {
+export default function PasswordResetSent() {
   const navigate = useNavigate();
 
   return (
@@ -9,12 +9,10 @@ function AccountVerificationFailed() {
         <div className="row justify-center items-center">
           <div className="col-xl-8 col-lg-9">
             <div className="px-50 py-50 md:px-25 md:py-25 bg-white rounded-16">
-              <h3 className="text-30 lh-17 text-center">
-                Account Verification Failed
-              </h3>
+              <h3 className="text-30 lh-17 text-center">Password Reset Sent</h3>
               <p className="mt-20 text-34 text-center">
                 {
-                  "We encountered an issue verifying your account. Please try again later. If the problem persists, feel free to contact support for assistance."
+                  "If the provided email is valid, you will receive a link to reset your password."
                 }
                 <br />
               </p>
@@ -34,5 +32,3 @@ function AccountVerificationFailed() {
     </div>
   );
 }
-
-export default AccountVerificationFailed;

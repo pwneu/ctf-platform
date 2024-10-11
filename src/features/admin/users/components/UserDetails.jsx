@@ -36,7 +36,7 @@ export default function UserDetails({
       try {
         await api.delete(`/identity/users/${userDetails.id}`);
         toast.success(`User deleted successfully: ${userDetails.id}`);
-        navigate("/users");
+        navigate("/admin/users");
       } catch (error) {
         const status = error?.response?.status;
 
@@ -53,6 +53,11 @@ export default function UserDetails({
         setIsDeleting(false);
       }
     }
+  };
+
+  const cancelDelete = () => {
+    setIsDoubleConfirmed(false);
+    setShowConfirmDeleteModal(false);
   };
 
   const handleVerifyClick = () => {
@@ -165,23 +170,37 @@ export default function UserDetails({
                 </p>
               </>
             ) : (
-              <p>Do you really want to delete this user?</p>
+              <p>Do you want to delete this user?</p>
             )}
           </Modal.Body>
           <Modal.Footer>
-            <Button
-              variant="secondary"
-              onClick={() => setShowConfirmDeleteModal(false)}
-            >
-              Close
-            </Button>
-            <Button variant="danger" onClick={confirmDelete}>
-              {isDeleting ? (
-                <Spinner animation="border" size="sm" />
-              ) : (
-                "Delete User"
-              )}
-            </Button>
+            {isDoubleConfirmed ? (
+              <>
+                <Button variant="danger" onClick={confirmDelete}>
+                  {isDeleting ? (
+                    <Spinner animation="border" size="sm" />
+                  ) : (
+                    "Delete User"
+                  )}
+                </Button>
+                <Button variant="secondary" onClick={cancelDelete}>
+                  Cancel
+                </Button>
+              </>
+            ) : (
+              <>
+                <Button variant="secondary" onClick={cancelDelete}>
+                  Cancel
+                </Button>
+                <Button variant="danger" onClick={confirmDelete}>
+                  {isDeleting ? (
+                    <Spinner animation="border" size="sm" />
+                  ) : (
+                    "Delete User"
+                  )}
+                </Button>
+              </>
+            )}
           </Modal.Footer>
         </Modal>
 

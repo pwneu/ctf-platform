@@ -76,7 +76,7 @@ export default function EditChallenge({
     try {
       await api.delete(`/play/challenges/${challengeDetails.id}`);
       toast.success(`Challenge deleted successfully: ${challengeDetails.id}`);
-      navigate("/challenges");
+      navigate("/admin/challenges");
     } catch (error) {
       if (error.response) {
         const status = error.response.status;
@@ -110,12 +110,29 @@ export default function EditChallenge({
       <Card>
         <Card.Header>
           <h4>Edit Challenge</h4>
-          <span className="badge bg-primary">
-            {challengeDetails.categoryName}
-          </span>
         </Card.Header>
         <Card.Body>
           <Form>
+            <Form.Group controlId="formPoints">
+              <Form.Label>Category</Form.Label>
+              <Form.Control
+                type="text"
+                name="id"
+                value={challengeDetails.categoryName}
+                readOnly
+              />
+            </Form.Group>
+
+            <Form.Group controlId="formPoints">
+              <Form.Label>Challenge Id</Form.Label>
+              <Form.Control
+                type="text"
+                name="id"
+                value={challengeDetails.id}
+                readOnly
+              />
+            </Form.Group>
+
             <Form.Group controlId="formChallengeName">
               <Form.Label>Challenge Name</Form.Label>
               <Form.Control

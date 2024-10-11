@@ -1,7 +1,10 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useState } from "react";
+import { Turnstile } from "@marsidev/react-turnstile";
+import { api } from "@/api";
+import { toast } from "react-toastify";
 
-export default function ForgotPassword() {
+export default function ForgotPassword({ setPasswordResetSent }) {
   const [formData, setFormData] = useState({
     email: "",
   });
@@ -10,7 +13,8 @@ export default function ForgotPassword() {
     email: "",
   });
 
-  const navigate = useNavigate();
+  const [turnstileToken, setTurnstileToken] = useState("");
+  const [isBusy, setIsBusy] = useState(false);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -25,8 +29,10 @@ export default function ForgotPassword() {
     return emailRegex.test(email);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
+    setIsBusy(true);
 
     let hasErrors = false;
     const newErrors = {
@@ -43,8 +49,26 @@ export default function ForgotPassword() {
     }
 
     if (!hasErrors) {
-      console.log("Reset Password Request Submitted: ", formData.email);
-      navigate("/verify-code");
+      try {
+        const queryParams = new URLSearchParams({
+          email: formData.email,
+          turnstileToken: turnstileToken || "",
+        });
+
+        await api.post(`/identity/forgotPassword?${queryParams.toString()}`);
+
+        setPasswordResetSent(true);
+      } catch (error) {
+        const status = error?.response?.status;
+
+        if (status === 400) {
+          toast.error(`Error: ${error.response.data.message}`);
+        } else {
+          toast.error("Something went wrong. Please try again later");
+        }
+      } finally {
+        setIsBusy(false);
+      }
     }
   };
 
@@ -87,14 +111,23 @@ export default function ForgotPassword() {
                   />
                   {errors.email && <p className="error-text">{errors.email}</p>}
                 </div>
+
+                <Turnstile
+                  siteKey={import.meta.env.VITE_TURNSTILE_SITE_KEY}
+                  onSuccess={(token) => setTurnstileToken(token)}
+                  onError={() => setTurnstileToken("")}
+                  onExpire={() => setTurnstileToken("")}
+                />
+
                 <div className="col-12 mt-20">
                   <button
                     type="submit"
                     name="submit"
                     id="submit"
                     className="button -md fw-500 w-1/1"
+                    disabled={isBusy}
                   >
-                    Submit
+                    {isBusy ? "Processing..." : "Submit"}
                   </button>
                 </div>
               </form>
