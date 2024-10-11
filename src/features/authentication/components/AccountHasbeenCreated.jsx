@@ -19,7 +19,7 @@ export default function AccountHasbeenCreated() {
               </h3>
               <p className="mt-50 text-34  text-center">
                 An email has also been sent to the email address you just signed
-                up for. Please check to activate your account
+                up for. Please check to activate your account.
               </p>
             </div>
             <div className="col-12">
