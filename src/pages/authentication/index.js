@@ -1,4 +1,3 @@
-import AccountCreatedPage from "./AccountCreatedPage";
 import AccountVerifiedPage from "./AccountVerifiedPage";
 import ForgotPasswordPage from "./ForgotPasswordPage";
 import LoginPage from "./LoginPage";
@@ -9,7 +8,6 @@ import VerifyCodePage from "./VerifyCodePage";
 import VerifyEmailPage from "./VerifyEmailPage";
 
 export {
-  AccountCreatedPage,
   AccountVerifiedPage,
   ForgotPasswordPage,
   LoginPage,

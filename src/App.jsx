@@ -19,7 +19,6 @@ import {
   PasswordCompletedPage,
   VerifyEmailPage,
   SignupPage,
-  AccountCreatedPage,
   AccountVerifiedPage,
 } from "./pages/authentication";
 import {
@@ -109,10 +108,6 @@ function App() {
 
             {/* User Registration */}
             <Route path="signup" element={<SignupPage />} />
-            <Route
-              path="user-account-created"
-              element={<AccountCreatedPage />}
-            />
             <Route path="account-verified" element={<AccountVerifiedPage />} />
           </Route>
 

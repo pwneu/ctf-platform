@@ -4,7 +4,9 @@ import {
   SignUpForm,
   AuthImageMove,
   HeaderAuth,
+  AccountHasbeenCreated,
 } from "@/features/authentication";
+import { useState } from "react";
 
 const metadata = {
   title: "Sign Up || PWNEU",
@@ -13,6 +15,8 @@ const metadata = {
 };
 
 export default function SignupPage() {
+  const [hasRegistered, setHasRegistered] = useState(false);
+
   return (
     <div className="main-content  ">
       <MetaComponent meta={metadata} />
@@ -22,7 +26,11 @@ export default function SignupPage() {
       <div className="content-wrapper js-content-wrapper overflow-hidden">
         <section className="form-page js-mouse-move-container">
           <AuthImageMove />
-          <SignUpForm />
+          {hasRegistered ? (
+            <AccountHasbeenCreated />
+          ) : (
+            <SignUpForm setHasRegistered={setHasRegistered} />
+          )}
         </section>
       </div>
     </div>
