@@ -19,6 +19,9 @@ import {
   SignupPage,
 } from "./pages/authentication";
 import {
+  UserProfilePage
+} from "./pages/profile";
+import {
   CampusesPage,
   // DiscussionForumsPage,
   HomePage,
@@ -93,6 +96,8 @@ function App() {
           {/* Routes that requires the user to be logged out */}
           <Route element={<RequireNoAuth />}>
             {/* User Authentication */}
+
+            
             <Route path="login" element={<LoginPage />} />
             <Route path="forgot-password" element={<ForgotPasswordPage />} />
             <Route path="reset-password" element={<ResetPasswordPage />} />
@@ -114,6 +119,7 @@ function App() {
               path="challengeDetails/:id"
               element={<ChallengeDetailsPage />}
             />
+            <Route path="/profile" element={<UserProfilePage />} />
           </Route>
 
           {/* Routes that require the user to have a manager role in order to give access */}
@@ -122,6 +128,7 @@ function App() {
             <Route path="/admin/keys" element={<AccessKeysPage />} />
             <Route path="/admin/categories" element={<CategoriesPage />} />
             <Route path="/admin/challenges" element={<ChallengesPage />} />
+            
             <Route
               path="/admin/challenge"
               element={<ChallengeDetailsAdminPage />}
@@ -134,6 +141,9 @@ function App() {
             />
             <Route path="/admin/leaderboards" element={<LeaderboardsPage />} />
           </Route>
+
+
+
 
           {/* Achievements */}
           {/* <Route path="achievements/:id" element={<AchievementsdetailsPage />} /> */}
