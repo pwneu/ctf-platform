@@ -67,7 +67,7 @@ export default function UserSolves({ userId }) {
   };
 
   const handleChallengeClick = (challengeId) => {
-    navigate(`/challengeDetails?challengeId=${challengeId}`);
+    navigate(`/admin/challenge?challengeId=${challengeId}`);
   };
 
   return (
@@ -163,8 +163,8 @@ export default function UserSolves({ userId }) {
       <Table striped bordered hover className="mt-4">
         <thead>
           <tr>
-            <th>User Id</th>
-            <th>Username</th>
+            <th>Challenge Id</th>
+            <th>Challenge Name</th>
             <th>Solved At</th>
           </tr>
         </thead>
