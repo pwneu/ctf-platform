@@ -1,7 +1,5 @@
-import gsap from "gsap";
 import { Link } from "react-router-dom";
 import { ShapeRendering } from "@/styles";
-import { useEffect } from "react";
 
 const masthead_info = [
   {
@@ -48,51 +46,15 @@ const hero_content = {
       tomorrow.
     </>
   ),
-  starts: [
-    "icon-star text-yellow-1 text-11",
-    "icon-star text-yellow-1 text-11",
-    "icon-star text-yellow-1 text-11",
-    "icon-star text-yellow-1 text-11",
-    "icon-star text-yellow-1 text-11",
-  ],
+  
 };
 const { title, text_underline, info_hero } = hero_content;
 
 const HomeHero = () => {
-  useEffect(() => {
-    const parallaxIt = () => {
-      const target = document.querySelectorAll(".js-mouse-move-container");
-
-      target.forEach((container) => {
-        const targets = container.querySelectorAll(".js-mouse-move");
-
-        targets.forEach((el) => {
-          const movement = el.getAttribute("data-move");
-
-          document.addEventListener("mousemove", (e) => {
-            const relX = e.pageX - container.offsetLeft;
-            const relY = e.pageY - container.offsetTop;
-
-            gsap.to(el, {
-              x:
-                ((relX - container.offsetWidth / 2) / container.offsetWidth) *
-                Number(movement),
-              y:
-                ((relY - container.offsetHeight / 2) / container.offsetHeight) *
-                Number(movement),
-              duration: 0.2,
-            });
-          });
-        });
-      });
-    };
-
-    parallaxIt();
-  }, []);
 
   return (
     <>
-      <section className="masthead -type-1 js-mouse-move-container">
+      <section className="masthead -type-1 js-mouse-move-container mt-50">
         <div className="masthead__bg">
           <img
             src={"/assets/img/learningPaths/learning/herobg1.gif"}
@@ -101,10 +63,10 @@ const HomeHero = () => {
         </div>
 
         <div className="container">
-          <div className="row y-gap-30 justify-between items-end">
-            <div className="col-xl-6 col-lg-6 col-sm-10">
+          <div className="row y-gap-50 justify-between items-end">
+            <div className="col-xl-7 col-lg-6 col-sm-10">
               <div
-                className="masthead__content"
+                className="masthead__content "
                 data-aos="fade-up"
                 data-aos-delay="500"
               >
@@ -139,7 +101,7 @@ const HomeHero = () => {
                     <Link
                       data-barba
                       to="/mission-vision"
-                      className="buttonhero button-learn-more text-white"
+                      className="button -md -green-1 text-dark-1"
                     >
                       Learn More About Our Mission
                     </Link>
