@@ -71,8 +71,6 @@ export default function ResetPassword({
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    setIsBusy(true);
-
     const passwordError = validatePassword(formData.password);
     const confirmPasswordError =
       formData.confirmPassword === formData.password
@@ -87,6 +85,8 @@ export default function ResetPassword({
     if (passwordError || confirmPasswordError) {
       setErrors(newErrors);
     } else {
+      setIsBusy(true);
+
       try {
         await api.put("/identity/resetPassword", {
           email,
