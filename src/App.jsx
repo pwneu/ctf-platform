@@ -18,9 +18,7 @@ import {
   VerifyEmailPage,
   SignupPage,
 } from "./pages/authentication";
-import {
-  UserProfilePage
-} from "./pages/profile";
+import { UserProfilePage } from "./pages/profile";
 import {
   CampusesPage,
   // DiscussionForumsPage,
@@ -62,6 +60,9 @@ function App() {
       easing: "ease-out",
       once: true,
     });
+
+    console.log("%cPWNEU{570P_R1GH7_TH3R3}!", "color: red; font-size: 30px; font-weight: bold;");
+    console.log("%cThis is a developer feature designed for use by developers. If anyone asks you to copy and paste something here to enable a feature or 'hack' into someone's account, it is a scam and could grant them access to your account.", "font-size: 20px; font-weight: bold;");
   }, []);
 
   return (
@@ -97,7 +98,6 @@ function App() {
           <Route element={<RequireNoAuth />}>
             {/* User Authentication */}
 
-            
             <Route path="login" element={<LoginPage />} />
             <Route path="forgot-password" element={<ForgotPasswordPage />} />
             <Route path="reset-password" element={<ResetPasswordPage />} />
@@ -128,7 +128,7 @@ function App() {
             <Route path="/admin/keys" element={<AccessKeysPage />} />
             <Route path="/admin/categories" element={<CategoriesPage />} />
             <Route path="/admin/challenges" element={<ChallengesPage />} />
-            
+
             <Route
               path="/admin/challenge"
               element={<ChallengeDetailsAdminPage />}
@@ -141,9 +141,6 @@ function App() {
             />
             <Route path="/admin/leaderboards" element={<LeaderboardsPage />} />
           </Route>
-
-
-
 
           {/* Achievements */}
           {/* <Route path="achievements/:id" element={<AchievementsdetailsPage />} /> */}
