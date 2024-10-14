@@ -117,6 +117,10 @@ export default function LoginForm() {
 
         if (status === 400) {
           toast.error(`Error logging in: ${error.response.data.message}`);
+        } else if (status === 429) {
+          toast.error(
+            "Too many request in your IP address. Please try again later"
+          );
         } else {
           toast.error(
             "Something went wrong logging in. Please try again later"

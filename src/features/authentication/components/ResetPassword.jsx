@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import { api } from "@/api";
+import { Turnstile } from "@marsidev/react-turnstile";
 
 export default function ResetPassword({
   email,
@@ -23,6 +24,8 @@ export default function ResetPassword({
     password: false,
     confirmPassword: false,
   });
+
+  const [turnstileToken, setTurnstileToken] = useState("");
 
   const [isBusy, setIsBusy] = useState(false);
 
@@ -93,6 +96,7 @@ export default function ResetPassword({
           passwordResetToken: resetToken,
           newPassword: formData.password,
           repeatPassword: formData.confirmPassword,
+          turnstileToken,
         });
 
         setPasswordResetHasCompleted(true);
@@ -101,6 +105,10 @@ export default function ResetPassword({
 
         if (status === 400) {
           toast.error(`Error: ${error.response.data.message}`);
+        } else if (status === 429) {
+          toast.error(
+            "Too many request in your IP address. Please try again later"
+          );
         } else {
           toast.error("Something went wrong. Please try again later");
         }
@@ -214,6 +222,14 @@ export default function ResetPassword({
                     </p>
                   )}
                 </div>
+
+                <Turnstile
+                  siteKey={import.meta.env.VITE_TURNSTILE_SITE_KEY}
+                  onSuccess={(token) => setTurnstileToken(token)}
+                  onError={() => setTurnstileToken("")}
+                  onExpire={() => setTurnstileToken("")}
+                />
+
                 <div className="col-12 mt-20">
                   <button
                     type="submit"

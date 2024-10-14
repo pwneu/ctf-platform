@@ -18,8 +18,10 @@ export default function AccountHasbeenCreated() {
                 Successfully!
               </h3>
               <p className="mt-50 text-34  text-center">
-                An email has also been sent to the email address you just signed
-                up for. Please check to activate your account.
+                {
+                  `A verification link has been sent to the email address you just signed up with. 
+                   If you didn't receive an email, please contact an administrator so they can assist you.`
+                }
               </p>
             </div>
             <div className="col-12">

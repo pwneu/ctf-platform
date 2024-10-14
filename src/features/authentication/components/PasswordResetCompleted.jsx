@@ -11,11 +11,7 @@ export default function PasswordResetCompleted() {
                 Password reset was successful!
               </h3>
               <p className="mt-5 text-19 text-center">
-                Please{" "}
-                <Link to="/login" className="text-custom-color text-bold">
-                  Login
-                </Link>{" "}
-                to your email account again.
+                You can now login with your new password!
               </p>
               <div className="col-12">
                 <Link to="/login">
@@ -25,7 +21,7 @@ export default function PasswordResetCompleted() {
                     id="submit"
                     className="mt-20 button -md fw-500 w-1/1"
                   >
-                    Log In
+                    Return to Login Page
                   </button>
                 </Link>
               </div>
