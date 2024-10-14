@@ -1,4 +1,4 @@
-import { RankPoints } from "../data/dashboard"; 
+import { RankPoints } from "../data/dashboard";
 
 export default function UserDashbord() {
   return (
@@ -17,9 +17,7 @@ export default function UserDashbord() {
           <div className="col-xl-12 col-lg-12">
             <div className="row y-gap-30">
               <div className="d-flex items-center flex-column text-center py-40 px-40 rounded-16 bg-white -dark-bg-dark-1 shadow-1">
-              <div className="text-28 fw-500 text-dark-1 mt-2">
-                  @Asthreya
-                </div>
+                <div className="text-28 fw-500 text-dark-1 mt-2">@Asthreya</div>
                 <div className="text-40 fw-500 text-dark-1 ">
                   David King Roderos
                 </div>
@@ -31,7 +29,9 @@ export default function UserDashbord() {
                 <div key={i} className="col-xl-3 col-md-6">
                   <div className="d-flex justify-between items-center py-35 px-30 rounded-16 bg-white -dark-bg-dark-1 shadow-1">
                     <div>
-                      <div className="lh-1  items-center text-20 fw-500">{elm.title}</div>
+                      <div className="lh-1  items-center text-20 fw-500">
+                        {elm.title}
+                      </div>
                       <div className="text-30 lh-2 fw-700 text-dark-1 mt-20">
                         {elm.value}
                       </div>

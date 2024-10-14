@@ -1,11 +1,34 @@
 import { Row, Col, Card } from "react-bootstrap";
 import { Pie, Bar } from "react-chartjs-2";
 import "chart.js/auto"; // Required for automatic Chart.js version management
+import { api } from "@/api";
+import { useEffect, useState } from "react";
 
-export default function UserProfileEvaluation({ userEvaluations }) {
-  // Check if userEvaluations is null or undefined
+export default function UserProfileEvaluation() {
+  const [userEvaluations, setUserEvaluations] = useState();
+
+  const getMyEvaluations = async () => {
+    try {
+      const response = await api.get("/play/me/evaluate");
+      console.log(response.data);
+      setUserEvaluations(response.data);
+    } catch {
+      setUserEvaluations(null);
+    }
+  };
+
+  useEffect(() => {
+    getMyEvaluations();
+  }, []); // Add empty dependency array to prevent continuous API calls
+
+  // Display loading message if userEvaluations is undefined
+  if (userEvaluations === undefined) {
+    return <p>Loading...</p>;
+  }
+
+  // Check if userEvaluations or categoryEvaluations is null or undefined
   if (!userEvaluations || !userEvaluations.categoryEvaluations) {
-    return <p>No user evaluations available.</p>; // Display a message if no evaluations are present
+    return <p>No user evaluations available.</p>;
   }
 
   // Render each category evaluation
