@@ -32,8 +32,6 @@ export default function ForgotPassword({ setPasswordResetSent }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    setIsBusy(true);
-
     let hasErrors = false;
     const newErrors = {
       email: formData.email
@@ -49,6 +47,8 @@ export default function ForgotPassword({ setPasswordResetSent }) {
     }
 
     if (!hasErrors) {
+      setIsBusy(true);
+
       try {
         const queryParams = new URLSearchParams({
           email: formData.email,

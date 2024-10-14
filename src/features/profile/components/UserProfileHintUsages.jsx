@@ -96,7 +96,6 @@ export default function UserProfileHintUsages() {
               >
                 <option value="">Select...</option>
                 <option value="username">Username</option>{" "}
-                {/* TODO -- Not working */}
                 <option value="deduction">Deduction</option>
                 <option value="usedat">Used At</option>
               </Form.Select>
