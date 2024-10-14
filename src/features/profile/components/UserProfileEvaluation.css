@@ -1,0 +1,30 @@
+:root {
+    --color-purple-1: #3a045e;
+    --color-dark-1: #010124;
+    --color-breadcrums-1: #5fff1a;
+  }
+  
+  .animated-chart {
+    transition: all 0.3s ease;
+  }
+  
+  .animated-chart:hover {
+    transform: scale(1.05); /* Enlarge the pie chart on hover */
+  }
+  
+  .animated-bar {
+    transition: all 0.3s ease;
+  }
+  
+  .animated-bar:hover {
+    transform: scale(1.05); /* Enlarge the bar chart on hover */
+  }
+  
+  canvas {
+    transition: background-color 0.5s ease-in-out;
+  }
+  
+  canvas:hover {
+    background-color: var(--color-dark-1);
+  }
+  

@@ -1,167 +1,115 @@
-import { useState } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { api } from "@/api";
 import { Form, Button, Row, Col, Table } from "react-bootstrap";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import { FaArrowLeft, FaArrowRight, FaSync } from "react-icons/fa";
 
 export default function UserProfileHintUsages() {
   const navigate = useNavigate();
-  const [userHintUsages, setUserHintUsages] = useState();
-  const [searchTermInput, setSearchTermInput] = useState("");
+  const [userHintUsages, setUserHintUsages] = useState([]);
   const [sortByInput, setSortByInput] = useState("");
-  const [sortOrderInput, setSortOrderInput] = useState("");
-  const [pageInput, setPageInput] = useState("");
-  const [pageSizeInput, setPageSizeInput] = useState("");
+  const [sortOrderInput, setSortOrderInput] = useState("asc");
   const [totalCount, setTotalCount] = useState(0);
   const [page, setPage] = useState(1);
-  const [pageSize, setPageSize] = useState(10);
-  const [hasNextPage, setHasNextPage] = useState(false);
-  const [hasPreviousPage, setHasPreviousPage] = useState(false);
+  const [pageSize] = useState(10);
   const [isBusy, setIsBusy] = useState(false);
 
-  const handleSearch = async () => {
+  const fetchUserHintUsages = useCallback(async (pageNumber) => {
     setIsBusy(true);
-    const pageValue = pageInput ? Math.max(1, Number(pageInput)) : 1;
-    const pageSizeValue = pageSizeInput
-      ? Math.max(1, Number(pageSizeInput))
-      : 10;
-
     const params = {
-      ...(searchTermInput && { searchTerm: searchTermInput }),
       ...(sortByInput && { sortBy: sortByInput }),
-      ...(sortOrderInput && { sortOrder: sortOrderInput }),
-      page: pageValue,
-      pageSize: pageSizeValue,
+      sortOrder: sortOrderInput,
+      page: pageNumber,
+      pageSize,
     };
 
     try {
-      const response = await api.get(`/play/me/hintUsages`, {
-        params,
-      });
-
+      const response = await api.get(`/play/me/hintUsages`, { params });
       setUserHintUsages(response.data.items);
       setTotalCount(response.data.totalCount);
-      setPage(response.data.page);
-      setPageSize(response.data.pageSize);
-      setHasNextPage(response.data.hasNextPage);
-      setHasPreviousPage(response.data.hasPreviousPage);
     } catch (error) {
       const status = error?.response?.status;
 
       if (status === 401) {
         navigate("/login");
-      } else if (status === 429) {
-        toast.warn("Slow down!");
       } else {
         toast.error(
-          "Something went wrong getting user solves. Please try again later"
+          "Something went wrong getting user hint usages. Please try again later."
         );
       }
     } finally {
       setIsBusy(false);
     }
-  };
+  }, [navigate, pageSize, sortByInput, sortOrderInput]);
 
-  const selectAll = (e) => {
-    e.target.select();
-  };
+  useEffect(() => {
+    fetchUserHintUsages(page);
+  }, [page, fetchUserHintUsages]);
 
   const handleChallengeClick = (challengeId) => {
     navigate(`/admin/challenge?challengeId=${challengeId}`);
   };
 
+  const handlePagination = (direction) => {
+    setPage((prev) => (direction === "next" ? prev + 1 : Math.max(1, prev - 1)));
+  };
+
   return (
-    <>
-      <h2>User Hint Usages</h2>
-      <Form>
-        <Row>
-          <Col md={4}>
-            <Form.Group controlId="formSearchTerm">
-              <Form.Label>Search Term</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Enter search term"
-                value={searchTermInput}
-                onChange={(e) => setSearchTermInput(e.target.value)}
-                onFocus={selectAll}
-              />
-            </Form.Group>
-          </Col>
-          <Col md={4}>
-            <Form.Group controlId="formSortColumn">
+    <div className="text-center mb-4"> {/* Added text-center for centering */}
+    <br>
+    </br>
+       <h2 className="text-2xl font-semibold text-center mb-2">Hint Usages</h2>
+      
+                
+
+      <Form className="mb-6">
+        <Row className="justify-content-center">
+          <Col md={2} className="text-center mb-12">
+            <Form.Group controlId="formSortColumn ">
               <Form.Label>Sort By</Form.Label>
               <Form.Select
                 value={sortByInput}
                 onChange={(e) => setSortByInput(e.target.value)}
               >
                 <option value="">Select...</option>
-                <option value="username">Username</option>{" "}
+                <option value="username">Username</option>
                 <option value="deduction">Deduction</option>
                 <option value="usedat">Used At</option>
               </Form.Select>
             </Form.Group>
           </Col>
-          <Col md={4}>
+          <Col md={2} className="text-center mb-12">
             <Form.Group controlId="formSortOrder">
               <Form.Label>Sort Order</Form.Label>
               <Form.Select
                 value={sortOrderInput}
                 onChange={(e) => setSortOrderInput(e.target.value)}
               >
-                <option value="">Select...</option>
+                <option value="asc">Ascending</option>
                 <option value="desc">Descending</option>
               </Form.Select>
             </Form.Group>
           </Col>
-        </Row>
-        <Row className="mt-4">
-          <Col md={4}>
-            <Form.Group controlId="formPage">
-              <Form.Label>Page</Form.Label>
-              <Form.Control
-                type="number"
-                value={pageInput}
-                onChange={(e) =>
-                  setPageInput(
-                    e.target.value ? Math.max(1, Number(e.target.value)) : ""
-                  )
-                }
-                placeholder="1"
-                min={1}
-                onFocus={selectAll}
-              />
-            </Form.Group>
-          </Col>
-          <Col md={4}>
-            <Form.Group controlId="formPageSize">
-              <Form.Label>Page Size</Form.Label>
-              <Form.Control
-                type="number"
-                value={pageSizeInput}
-                onChange={(e) =>
-                  setPageSizeInput(
-                    e.target.value ? Math.max(1, Number(e.target.value)) : ""
-                  )
-                }
-                placeholder="10"
-                min={1}
-                onFocus={selectAll}
-              />
-            </Form.Group>
-          </Col>
-          <Col md={4}>
+          <Col md={1} className="text-center mb-3">
             <Button
               variant="primary"
-              onClick={handleSearch}
-              className="mt-4 w-100"
+              onClick={() => fetchUserHintUsages(page)}
               disabled={isBusy}
+              className="w-100 d-flex align-items-center justify-content-center"
             >
-              {isBusy ? "Searching..." : "Search"}
+              <FaSync className="me-2" />
+              {isBusy ? "Loading..." : "Refresh"}
             </Button>
           </Col>
         </Row>
       </Form>
-      <Table striped bordered hover className="mt-4">
+
+
+
+
+
+      <Table striped bordered hover className="mx-auto"> {/* Centering the table */}
         <thead>
           <tr>
             <th>Hint Id</th>
@@ -172,24 +120,18 @@ export default function UserProfileHintUsages() {
           </tr>
         </thead>
         <tbody>
-          {userHintUsages === undefined ? (
-            <tr>
-              <td colSpan={5} className="text-center">
-                Click the search button to view user hint usages.
-              </td>
-            </tr>
-          ) : userHintUsages.length > 0 ? (
-            userHintUsages.map((userSolve) => (
+          {userHintUsages.length > 0 ? (
+            userHintUsages.map((usage) => (
               <tr
-                key={userSolve.challengeId}
+                key={usage.hintId}
                 style={{ cursor: "pointer" }}
-                onClick={() => handleChallengeClick(userSolve.challengeId)}
+                onClick={() => handleChallengeClick(usage.challengeId)}
               >
-                <td>{userSolve.challengeId}</td>
-                <td>{userSolve.hintId}</td>
-                <td>{userSolve.challengeName}</td>
-                <td>{new Date(userSolve.usedAt).toLocaleString()}</td>
-                <td>{userSolve.deduction}</td>
+                <td>{usage.hintId}</td>
+                <td>{usage.challengeId}</td>
+                <td>{usage.challengeName}</td>
+                <td>{new Date(usage.usedAt).toLocaleString()}</td>
+                <td>{usage.deduction}</td>
               </tr>
             ))
           ) : (
@@ -201,15 +143,27 @@ export default function UserProfileHintUsages() {
           )}
         </tbody>
       </Table>
-      <div className="mt-3">
+      <div className="text-center mt-3"> {/* Centering the pagination controls */}
         <p>Total User Hint Usages: {totalCount}</p>
-        <p>
-          Page: {page} of {Math.ceil(totalCount / (pageSize || 1))}
-        </p>
-        <p>Page Size: {pageSize}</p>
-        <p>Next Page: {hasNextPage ? "Yes" : "No"}</p>
-        <p>Previous Page: {hasPreviousPage ? "Yes" : "No"}</p>
+        <p>Page: {page} of {Math.ceil(totalCount / pageSize)}</p>
+        <div className="d-flex justify-content-center">
+          <Button
+            variant="secondary"
+            onClick={() => handlePagination("prev")}
+            disabled={page <= 1}
+            className="me-2"
+          >
+            <FaArrowLeft className="me-1" /> Previous
+          </Button>
+          <Button
+            variant="secondary"
+            onClick={() => handlePagination("next")}
+            disabled={page >= Math.ceil(totalCount / pageSize)}
+          >
+            Next <FaArrowRight className="ms-1" />
+          </Button>
+        </div>
       </div>
-    </>
+    </div>
   );
 }
