@@ -37,7 +37,7 @@ export default function HeaderAdmin() {
             {auth?.userName ? (
               <>
                 <Nav.Item>
-                  <Nav.Link href="#profile">{auth.userName}</Nav.Link>
+                  <Nav.Link href="/admin">{auth.userName}</Nav.Link>
                 </Nav.Item>
                 <Nav.Item>
                   <Nav.Link onClick={handleLogout}>Logout</Nav.Link>
