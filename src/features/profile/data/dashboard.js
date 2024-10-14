@@ -13,15 +13,15 @@ export const RankPoints = [
   },
   {
     id: 3,
-    title: "asdasd",
-    value: 3676,
+    title: "Total Solves",
+    value: 150,
     iconClass: "icon-person-3",
   },
   {
     id: 3,
-    title: "asdasd",
-    value: 3676,
-    iconClass: "icon-setting",
+    title: "Hint Usage",
+    value: 22,
+    iconClass: "icon-search",
   },
   
   

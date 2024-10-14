@@ -21,12 +21,12 @@ export default function UserProfileGraph() {
 
   // Display loading message if userGraph is undefined
   if (userGraph === undefined) {
-    return <p>Loading...</p>;
+    return <p className="text-center text-gray-500">Loading...</p>;
   }
 
   // Check if userGraph is null, undefined, or empty
   if (!userGraph || userGraph.length === 0) {
-    return <p>No data available.</p>;
+    return <p className="text-center text-gray-500">No data available.</p>;
   }
 
   // Prepare data for the chart
@@ -40,7 +40,7 @@ export default function UserProfileGraph() {
     labels,
     datasets: [
       {
-        label: "User Activity Score",
+        label: "Activity Score",
         data: scores,
         fill: false,
         backgroundColor: "rgba(75, 192, 192, 0.2)",
@@ -68,9 +68,11 @@ export default function UserProfileGraph() {
   };
 
   return (
-    <>
-      <h2>User Graph</h2>
-      <Line data={data} options={options} />
-    </>
+    <div className="max-w-sm mx-auto p-2 bg-white shadow-md rounded-lg">
+      <h2 className="text-xl font-semibold text-center mb-2">Graph Activity</h2>
+      <div className="h-12 md:h-24 lg:h-36 mb-2"> {/* Adjusted height values */}
+        <Line data={data} options={options} aria-label="User Activity Graph" />
+      </div>
+    </div>
   );
 }
