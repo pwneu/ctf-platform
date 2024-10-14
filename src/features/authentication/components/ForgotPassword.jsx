@@ -63,6 +63,10 @@ export default function ForgotPassword({ setPasswordResetSent }) {
 
         if (status === 400) {
           toast.error(`Error: ${error.response.data.message}`);
+        } else if (status === 429) {
+          toast.error(
+            "Too many request in your IP address. Please try again later"
+          );
         } else {
           toast.error("Something went wrong. Please try again later");
         }
