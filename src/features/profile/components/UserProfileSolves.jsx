@@ -12,7 +12,7 @@ export default function UserProfileSolves({
   const [userSolves, setUserSolves] = useState([]);
   const [sortByInput, setSortByInput] = useState("solvedat");
   const [sortOrderInput, setSortOrderInput] = useState("asc");
-  const [page, setPage] = useState(1);
+  const [page, setPage] = useState(0); // Initial of 0 so useEffect will work
   const [requestedPage, setRequestedPage] = useState(1); // Track requested page
   const [pageSize] = useState(10);
   const [isBusy, setIsBusy] = useState(false);
@@ -58,7 +58,7 @@ export default function UserProfileSolves({
   }, [requestedPage, fetchUserSolves, page]);
 
   const handleChallengeClick = (challengeId) => {
-    navigate(`/admin/challenge?challengeId=${challengeId}`);
+    navigate(`/play/${challengeId}`);
   };
 
   const handlePagination = (direction) => {
