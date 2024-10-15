@@ -6,6 +6,7 @@ import {
   faEye,
   faEyeSlash,
   faCheck,
+  faClipboard,
 } from "@fortawesome/free-solid-svg-icons";
 import { toast } from "react-toastify";
 import { api } from "@/api";
@@ -20,9 +21,14 @@ export default function UserDetails({
   const [showEmail, setShowEmail] = useState(false);
   const [showConfirmDeleteModal, setShowConfirmDeleteModal] = useState(false);
   const [showConfirmVerifyModal, setShowConfirmVerifyModal] = useState(false);
+  const [
+    showConfirmGeneratePasswordResetLink,
+    setShowConfirmGeneratePasswordResetLink,
+  ] = useState(false);
   const [isDoubleConfirmed, setIsDoubleConfirmed] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
   const [isVerifying, setIsVerifying] = useState(false);
+  const [isGenerating, setIsGenerating] = useState(false);
 
   const handleDeleteClick = () => {
     setShowConfirmDeleteModal(true);
@@ -78,11 +84,43 @@ export default function UserDetails({
       } else if (status === 403) {
         toast.error("You are not allowed to verify a user");
       } else if (status === 400) {
-        toast.error(error.response.data.message || "Error verifying user");
+        toast.error(error.response.data.message);
+      } else {
+        toast.error("Error verifying user. Please try again later");
       }
     } finally {
       setShowConfirmVerifyModal(false);
       setIsVerifying(false);
+    }
+  };
+
+  const handleGenerateClick = () => {
+    setShowConfirmGeneratePasswordResetLink(true);
+  };
+
+  const confirmGenerate = async () => {
+    setIsGenerating(true);
+    try {
+      const response = await api.post(
+        `/identity/users/${userDetails.id}/resetPassword`
+      );
+      await navigator.clipboard.writeText(response.data);
+      toast.success("Password reset link copied to clipboard!");
+    } catch (error) {
+      const status = error?.response?.status;
+
+      if (status === 401) {
+        navigate("/login");
+      } else if (status === 403) {
+        toast.error("You are not allowed to generate password reset links");
+      } else if (status === 400) {
+        toast.error(error.response.data.message);
+      } else {
+        toast.error("Error generating. Please try again later");
+      }
+    } finally {
+      setShowConfirmGeneratePasswordResetLink(false);
+      setIsGenerating(false);
     }
   };
 
@@ -148,6 +186,19 @@ export default function UserDetails({
                 <FontAwesomeIcon icon={faCheck} />
               )}{" "}
               {isVerifying ? "Verifying..." : "Verify User"}
+            </Button>
+            <Button
+              className="ml-3"
+              variant="primary"
+              onClick={handleGenerateClick}
+              disabled={isGenerating}
+            >
+              {isGenerating ? (
+                <Spinner animation="border" size="sm" />
+              ) : (
+                <FontAwesomeIcon icon={faClipboard} />
+              )}{" "}
+              {isGenerating ? "Generating..." : "Generate Password Reset Link"}
             </Button>
           </>
         )}
@@ -226,6 +277,36 @@ export default function UserDetails({
                 <Spinner animation="border" size="sm" />
               ) : (
                 "Verify User"
+              )}
+            </Button>
+          </Modal.Footer>
+        </Modal>
+
+        <Modal
+          show={showConfirmGeneratePasswordResetLink}
+          onHide={() => setShowConfirmGeneratePasswordResetLink(false)}
+        >
+          <Modal.Header closeButton>
+            <Modal.Title>Confirm Password Reset Link Generation</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <p>
+              Do you want to generate a password reset link? It will be copied
+              to your clipboard
+            </p>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button
+              variant="secondary"
+              onClick={() => setShowConfirmVerifyModal(false)}
+            >
+              Close
+            </Button>
+            <Button variant="primary" onClick={confirmGenerate}>
+              {isGenerating ? (
+                <Spinner animation="border" size="sm" />
+              ) : (
+                "Generate"
               )}
             </Button>
           </Modal.Footer>
