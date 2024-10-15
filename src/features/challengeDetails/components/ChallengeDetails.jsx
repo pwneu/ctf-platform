@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { api } from "@/api";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import useAuth from "@/hooks/useAuth";
 
 export default function ChallengeDetails({ id }) {
   const [challengeDetails, setChallengeDetails] = useState();
@@ -16,7 +17,12 @@ export default function ChallengeDetails({ id }) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmissionDisabled, setIsSubmissionDisabled] = useState(false);
 
+  const [isSubmittingTooOften, setIsSubmittingTooOften] = useState(false);
+
   const [recentSolvers, setRecentSolvers] = useState();
+
+  const { auth } = useAuth();
+  const isManager = auth?.roles?.includes("Manager");
 
   const navigate = useNavigate();
 
@@ -49,6 +55,8 @@ export default function ChallengeDetails({ id }) {
         setIsSubmissionDisabled(true);
       } else if (response.data === "SubmittingTooOften") {
         toast.warn("Submitting too often. Slow down!");
+        setIsSubmittingTooOften(true); // Disable button
+        setTimeout(() => setIsSubmittingTooOften(false), 15000);
       } else {
         toast.info(response.data);
       }
@@ -69,6 +77,8 @@ export default function ChallengeDetails({ id }) {
         } else {
           toast.error(error.response?.data?.message);
         }
+      } else if (status === 403) {
+        toast.info("Managers and admins are not allowed solve challenges");
       } else if (status === 429) {
         toast.warn("Slow down on using hints!");
       } else {
@@ -80,6 +90,10 @@ export default function ChallengeDetails({ id }) {
   };
 
   const handleCheckHintStatus = async (hint) => {
+    if (alreadySolved) {
+      toast.info("Challenge already solved");
+      return;
+    }
     try {
       setSelectedHint(hint);
       setIsUsingHint(true);
@@ -106,6 +120,8 @@ export default function ChallengeDetails({ id }) {
         } else {
           toast.error(error.response?.data?.message);
         }
+      } else if (status === 403) {
+        toast.info("Managers and admins are not allowed to use hints");
       } else if (status === 429) {
         toast.warn("Slow down on using hints!");
       } else {
@@ -137,6 +153,8 @@ export default function ChallengeDetails({ id }) {
         }
       } else if (status === 429) {
         toast.warn("Slow down on using hints!");
+      } else if (status === 403) {
+        toast.info("Managers and admins are not allowed to use hints");
       } else {
         toast.error("Error using hint. Please try again later");
       }
@@ -185,13 +203,22 @@ export default function ChallengeDetails({ id }) {
         const status = error?.response?.status;
 
         if (status === 404) {
-          toast.error(error.response.data.message || "Challenge not found");
+          // toast.error(error.response.data.message || "Challenge not found");
         } else {
           toast.error(
             "Something went wrong getting challenge details. Please try again later"
           );
         }
         setChallengeDetails(null);
+      }
+    };
+
+    const checkIfChallengeSolved = async () => {
+      try {
+        const response = await api.get(`/play/challenges/${id}/check`);
+        setAlreadySolved(response.data);
+      } catch (error) {
+        setAlreadySolved(false);
       }
     };
 
@@ -204,24 +231,26 @@ export default function ChallengeDetails({ id }) {
             sortBy: "solvedat",
           },
         });
-        console.log(response.data);
+        // console.log(response.data);
         setRecentSolvers(response.data.items);
       } catch (error) {
         const status = error?.response?.status;
 
         if (status === 429) {
           toast.warn("Slow down on fetching recent solvers!");
-        } else {
-          toast.error(
-            "Something went wrong getting challenge solves. Please try again later"
-          );
-        }
+        } 
+        // else {
+        //   toast.error(
+        //     "Something went wrong getting challenge solves. Please try again later"
+        //   );
+        // }
 
         setRecentSolvers([]);
       }
     };
 
     fetchChallengeDetails();
+    checkIfChallengeSolved();
     fetchRecentSolvers();
   }, [id]);
 
@@ -233,6 +262,8 @@ export default function ChallengeDetails({ id }) {
             <div className="row y-gap-30">
               {challengeDetails === undefined ? (
                 <div>Loading...</div>
+              ) : challengeDetails === null ? (
+                <div>Challenge Not Found</div>
               ) : (
                 <div className="">
                   <h1 className="text-40 lh-14 mt-20 ">
@@ -252,7 +283,7 @@ export default function ChallengeDetails({ id }) {
                     </div>
                     <div>
                       <div className="mt-23 badge px-15 py-8 text-14 bg-green-1 text-dark-1 fw-400">
-                        Solve: {challengeDetails.solveCount}
+                        Solvers: {challengeDetails.solveCount}
                       </div>
                     </div>
                     <div>
@@ -266,7 +297,7 @@ export default function ChallengeDetails({ id }) {
                     <div>
                       <div className="mt-23 badge px-15 py-8 text-14 bg-green-1 text-dark-1 fw-400">
                         Deadline:{" "}
-                        {challengeDetails.deadLineEnabled
+                        {challengeDetails.deadlineEnabled
                           ? new Date(challengeDetails.deadline).toLocaleString()
                           : "Disabled"}
                       </div>
@@ -286,19 +317,25 @@ export default function ChallengeDetails({ id }) {
                       onChange={(e) => setFlag(e.target.value)}
                       placeholder="PWNEU {FLAG}"
                       className="form-control mx-2"
+                      hidden={isManager}
                       required
                     />
                     <button
                       type="submit"
                       className="submit-button"
+                      hidden={isManager}
                       disabled={
+                        isManager ||
                         isSubmitting ||
                         isSubmissionDisabled ||
                         alreadySolved ||
-                        !flag
+                        !flag ||
+                        isSubmittingTooOften
                       }
                     >
-                      {isSubmitting
+                      {isSubmittingTooOften
+                        ? "Wait..."
+                        : isSubmitting
                         ? "Submitting..."
                         : isSubmissionDisabled
                         ? "Submission Disabled"
