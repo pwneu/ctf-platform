@@ -1,4 +1,4 @@
 import ChallengeDetailsPage from "./ChallengeDetailsPage";
-import ChallengesListPage from "./ChallengeListPage";
+import ChallengesPage from "./ChallengesPage";
 
-export { ChallengeDetailsPage, ChallengesListPage };
+export { ChallengeDetailsPage, ChallengesPage };
