@@ -5,12 +5,13 @@ import PageLinks from "@/components/PageLinks";
 import Footer from "@/layout/footers/Footer";
 import {
   UserProfile,
-  UserOverview,
+  // UserOverview,
   UserProfileEvaluation,
   UserProfileGraph,
   UserProfileSolves,
   UserProfileHintUsages,
 } from "@/features/profile";
+import { useState } from "react";
 
 const metadata = {
   title: "",
@@ -18,6 +19,10 @@ const metadata = {
 };
 
 export default function UserProfilePage() {
+  const [userDetails, setUserDetails] = useState();
+  const [totalSolveCount, setTotalSolveCount] = useState(0);
+  const [totalHintUsagesCount, setTotalHintUsagesCount] = useState(0);
+
   return (
     <div className="main-content  ">
       <MetaComponent meta={metadata} />
@@ -26,12 +31,23 @@ export default function UserProfilePage() {
 
       <div className="content-wrapper  js-content-wrapper ">
         <PageLinks />
-        <UserOverview />
-        <UserProfile />
+        {/* <UserOverview /> */}
+        <UserProfile
+          totalSolveCount={totalSolveCount}
+          totalHintUsagesCount={totalHintUsagesCount}
+          userDetails={userDetails}
+          setUserDetails={setUserDetails}
+        />
         <UserProfileEvaluation />
         <UserProfileGraph />
-        <UserProfileSolves />
-        <UserProfileHintUsages />
+        <UserProfileSolves
+          totalSolveCount={totalSolveCount}
+          setTotalSolveCount={setTotalSolveCount}
+        />
+        <UserProfileHintUsages
+          totalHintUsagesCount={totalHintUsagesCount}
+          setTotalHintUsagesCount={setTotalHintUsagesCount}
+        />
         <Footer />
       </div>
     </div>

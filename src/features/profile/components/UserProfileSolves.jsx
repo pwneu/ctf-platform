@@ -1,44 +1,51 @@
 import { useState, useEffect, useCallback } from "react";
-import { Table, Form, Row, Col, Button } from "react-bootstrap";
+import { Table, Form, Row, Col, Button } from "react-bootstrap"; // TODO -- Bootstrap destroying mobile ui
 import { api } from "@/api";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { FaArrowLeft, FaArrowRight, FaSync } from "react-icons/fa";
 
-export default function UserProfileSolves() {
+export default function UserProfileSolves({
+  totalSolveCount,
+  setTotalSolveCount,
+}) {
   const [userSolves, setUserSolves] = useState([]);
   const [sortByInput, setSortByInput] = useState("solvedat");
   const [sortOrderInput, setSortOrderInput] = useState("asc");
-  const [totalCount, setTotalCount] = useState(0);
   const [page, setPage] = useState(1);
   const [pageSize] = useState(10);
   const [isBusy, setIsBusy] = useState(false);
   const navigate = useNavigate();
 
-  const fetchUserSolves = useCallback(async (pageNumber) => {
-    setIsBusy(true);
-    const params = {
-      sortBy: sortByInput,
-      sortOrder: sortOrderInput,
-      page: pageNumber,
-      pageSize,
-    };
+  const fetchUserSolves = useCallback(
+    async (pageNumber) => {
+      setIsBusy(true);
+      const params = {
+        sortBy: sortByInput,
+        sortOrder: sortOrderInput,
+        page: pageNumber,
+        pageSize,
+      };
 
-    try {
-      const response = await api.get("/play/me/solves", { params });
-      setUserSolves(response.data.items);
-      setTotalCount(response.data.totalCount);
-    } catch (error) {
-      const status = error?.response?.status;
-      if (status === 401) {
-        navigate("/login");
-      } else {
-        toast.error("Error fetching user solves. Please try again later.");
+      try {
+        const response = await api.get("/play/me/solves", { params });
+        setUserSolves(response.data.items);
+        setTotalSolveCount(response.data.totalCount);
+      } catch (error) {
+        const status = error?.response?.status;
+        if (status === 401) {
+          navigate("/login");
+        } else if (status === 429) {
+          toast.warn("Slow down!");
+        } else {
+          toast.error("Error fetching user solves. Please try again later.");
+        }
+      } finally {
+        setIsBusy(false);
       }
-    } finally {
-      setIsBusy(false);
-    }
-  }, [navigate, pageSize, sortByInput, sortOrderInput]);
+    },
+    [navigate, pageSize, setTotalSolveCount, sortByInput, sortOrderInput]
+  );
 
   useEffect(() => {
     fetchUserSolves(page);
@@ -49,12 +56,17 @@ export default function UserProfileSolves() {
   };
 
   const handlePagination = (direction) => {
-    setPage((prev) => (direction === "next" ? prev + 1 : Math.max(1, prev - 1)));
+    if (isBusy) return;
+    setPage((prev) =>
+      direction === "next" ? prev + 1 : Math.max(1, prev - 1)
+    );
   };
 
   return (
     <>
-       <h2 className="text-2xl font-semibold text-center mb-4">Solve Overview</h2>
+      <h2 className="text-2xl font-semibold text-center mb-4">
+        Solve Overview
+      </h2>
       <Form className="mb-6">
         <Row className="justify-content-center">
           <Col md={2} className="text-center mb-12">
@@ -95,7 +107,8 @@ export default function UserProfileSolves() {
         </Row>
       </Form>
       <div className="overflow-x-auto d-flex justify-content-center">
-        <Table striped bordered hover className="w-75"> {/* Adjusted width */}
+        <Table striped bordered hover className="w-75">
+          {/* Adjusted width */}
           <thead>
             <tr>
               <th>Challenge Id</th>
@@ -118,7 +131,8 @@ export default function UserProfileSolves() {
               ))
             ) : (
               <tr>
-                <td colSpan={5} className="text-center"> {/* Adjusted colspan */}
+                <td colSpan={5} className="text-center">
+                  {/* Adjusted colspan */}
                   No user solves found.
                 </td>
               </tr>
@@ -127,13 +141,15 @@ export default function UserProfileSolves() {
         </Table>
       </div>
       <div className="text-center mt-3">
-        <p>Total User Solves: {totalCount}</p>
-        <p>Page: {page} of {Math.ceil(totalCount / pageSize)}</p>
+        <p>Total User Solves: {totalSolveCount}</p>
+        <p>
+          Page: {page} of {Math.ceil(totalSolveCount / pageSize)}
+        </p>
         <div className="d-flex justify-content-center">
           <Button
             variant="secondary"
             onClick={() => handlePagination("prev")}
-            disabled={page <= 1}
+            disabled={isBusy || page <= 1}
             className="me-2"
           >
             <FaArrowLeft className="me-1" /> Previous
@@ -141,7 +157,7 @@ export default function UserProfileSolves() {
           <Button
             variant="secondary"
             onClick={() => handlePagination("next")}
-            disabled={page >= Math.ceil(totalCount / pageSize)}
+            disabled={isBusy || page >= Math.ceil(totalSolveCount / pageSize)}
           >
             Next <FaArrowRight className="ms-1" />
           </Button>
