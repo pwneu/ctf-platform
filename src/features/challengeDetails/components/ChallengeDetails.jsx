@@ -3,38 +3,147 @@ import { api } from "@/api";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
-// TODO -- Implement hint
-// TODO -- Submit flag
-
 export default function ChallengeDetails({ id }) {
   const [challengeDetails, setChallengeDetails] = useState();
   const [flag, setFlag] = useState("");
-  const [message, setMessage] = useState("");
-  const [showModal, setShowModal] = useState(false);
+  // const [message, setMessage] = useState("");
+  const [selectedHint, setSelectedHint] = useState(null);
+  const [showConfirmUseHintModal, setShowConfirmUseHintModal] = useState(false);
+
+  const [alreadySolved, setAlreadySolved] = useState(false);
   const [isDownloading, setIsDownloading] = useState(false);
+  const [isUsingHint, setIsUsingHint] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmissionDisabled, setIsSubmissionDisabled] = useState(false);
+
+  const [recentSolvers, setRecentSolvers] = useState();
 
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (flag === "PWNEU {FLAG}") {
-      setMessage("Correct flag! Challenge solved.");
-    } else {
-      setMessage("Incorrect flag. Try again.");
+    try {
+      setIsSubmitting(true);
+      const response = await api.post(`/play/challenges/${id}/submit`, null, {
+        params: { flag },
+      });
+
+      if (response.data === "Correct") {
+        setAlreadySolved(true);
+        toast.success("Correct");
+      } else if (response.data === "AlreadySolved") {
+        setAlreadySolved(true);
+        toast.info("Already Solved");
+      } else if (response.data === "DeadlineReached") {
+        toast.error(
+          "Deadline has been reached. You cannot solve the challenge anymore"
+        );
+        setIsSubmissionDisabled(true);
+      } else if (response.data === "SubmissionsNotAllowed") {
+        toast.error("Flag submission has been disabled by the admin");
+        setIsSubmissionDisabled(true);
+      } else if (response.data === "MaxAttempReached") {
+        toast.error(
+          "Max attempts has been reached. You cannot solve the challenge anymore"
+        );
+        setIsSubmissionDisabled(true);
+      } else if (response.data === "SubmittingTooOften") {
+        toast.warn("Submitting too often. Slow down!");
+      } else {
+        toast.info(response.data);
+      }
+    } catch (error) {
+      const status = error?.response?.status;
+
+      if (status === 401) {
+        navigate("/login");
+      } else if (status === 400) {
+        if (
+          error?.response?.data?.code ===
+          "CheckIfHintUsed.ChallengeAlreadySolved"
+        ) {
+          setAlreadySolved(true);
+          toast.info(error.response?.data?.message);
+        } else if (error?.response?.data?.code === "CheckIfHintUsed.NotFound") {
+          toast.error(error.response?.data?.message);
+        } else {
+          toast.error(error.response?.data?.message);
+        }
+      } else if (status === 429) {
+        toast.warn("Slow down on using hints!");
+      } else {
+        toast.error("Error checking submitting flag. Please try again later");
+      }
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
-  const handleHintRequest = (id) => {
-    console.log(id);
-    setShowModal(true);
+  const handleCheckHintStatus = async (hint) => {
+    try {
+      setSelectedHint(hint);
+      setIsUsingHint(true);
+      const response = await api.get(`/play/hints/${hint.id}/check`);
+      if (response.data === true) {
+        await handleUseHint(hint);
+      } else if (response.data === false) {
+        setShowConfirmUseHintModal(true);
+      }
+    } catch (error) {
+      const status = error?.response?.status;
+
+      if (status === 401) {
+        navigate("/login");
+      } else if (status === 400) {
+        if (
+          error?.response?.data?.code ===
+          "CheckIfHintUsed.ChallengeAlreadySolved"
+        ) {
+          setAlreadySolved(true);
+          toast.info(error.response?.data?.message);
+        } else if (error?.response?.data?.code === "CheckIfHintUsed.NotFound") {
+          toast.error(error.response?.data?.message);
+        } else {
+          toast.error(error.response?.data?.message);
+        }
+      } else if (status === 429) {
+        toast.warn("Slow down on using hints!");
+      } else {
+        toast.error("Error checking hint status. Please try again later");
+      }
+    } finally {
+      setIsUsingHint(false);
+    }
   };
 
-  const confirmHint = () => {
-    setShowModal(false);
-  };
+  const handleUseHint = async (hint) => {
+    try {
+      setIsUsingHint(true);
+      const response = await api.post(`/play/hints/${hint.id}`);
+      toast.info(`Hint: ${response.data}`);
+    } catch (error) {
+      const status = error?.response?.status;
 
-  const cancelHint = () => {
-    setShowModal(false);
+      if (status === 401) {
+        navigate("/login");
+      } else if (status === 400) {
+        if (error?.response?.data?.code === "UseHint.ChallengeAlreadySolved") {
+          setAlreadySolved(true);
+          toast.info(error.response?.data?.message);
+        } else if (error?.response?.data?.code === "UseHint.NotFound") {
+          toast.error(error.response?.data?.message);
+        } else {
+          toast.error(error.response?.data?.message);
+        }
+      } else if (status === 429) {
+        toast.warn("Slow down on using hints!");
+      } else {
+        toast.error("Error using hint. Please try again later");
+      }
+    } finally {
+      setIsUsingHint(false);
+      setShowConfirmUseHintModal(false);
+    }
   };
 
   const handleDownloadArtifact = async (artifact) => {
@@ -70,7 +179,7 @@ export default function ChallengeDetails({ id }) {
     const fetchChallengeDetails = async () => {
       try {
         const response = await api.get(`/play/challenges/${id}`);
-        console.log(response.data);
+        // console.log(response.data);
         setChallengeDetails(response.data);
       } catch (error) {
         const status = error?.response?.status;
@@ -86,7 +195,34 @@ export default function ChallengeDetails({ id }) {
       }
     };
 
+    const fetchRecentSolvers = async () => {
+      try {
+        const response = await api.get(`/play/challenges/${id}/solves`, {
+          params: {
+            sortOrder: "desc",
+            pageSize: 20,
+            sortBy: "solvedat",
+          },
+        });
+        console.log(response.data);
+        setRecentSolvers(response.data.items);
+      } catch (error) {
+        const status = error?.response?.status;
+
+        if (status === 429) {
+          toast.warn("Slow down on fetching recent solvers!");
+        } else {
+          toast.error(
+            "Something went wrong getting challenge solves. Please try again later"
+          );
+        }
+
+        setRecentSolvers([]);
+      }
+    };
+
     fetchChallengeDetails();
+    fetchRecentSolvers();
   }, [id]);
 
   return (
@@ -152,22 +288,40 @@ export default function ChallengeDetails({ id }) {
                       className="form-control mx-2"
                       required
                     />
-                    <button type="submit" className="submit-button">
-                      Submit Flag
+                    <button
+                      type="submit"
+                      className="submit-button"
+                      disabled={
+                        isSubmitting ||
+                        isSubmissionDisabled ||
+                        alreadySolved ||
+                        !flag
+                      }
+                    >
+                      {isSubmitting
+                        ? "Submitting..."
+                        : isSubmissionDisabled
+                        ? "Submission Disabled"
+                        : alreadySolved
+                        ? "Solved!"
+                        : "Submit"}
                     </button>
                   </form>
 
-                  {message && <p className="mt-20">{message}</p>}
+                  {/* {message && <p className="mt-20">{message}</p>} */}
 
                   <h4 className="mt-20">Hints</h4>
                   {challengeDetails.hints.length > 0 ? (
                     challengeDetails.hints.map((hint, index) => (
                       <div key={index} className="hint-container">
                         <button
-                          onClick={() => handleHintRequest(hint.id)}
+                          onClick={() => handleCheckHintStatus(hint)}
                           className="hint-button"
+                          disabled={isUsingHint}
                         >
-                          Use hint (-{hint.deduction} Points)
+                          {isUsingHint
+                            ? "Loading..."
+                            : `Use hint (-${hint.deduction} Points)`}
                         </button>
                       </div>
                     ))
@@ -194,24 +348,44 @@ export default function ChallengeDetails({ id }) {
                     </div>
                   )}
 
+                  <h4 className="mt-20">Recent Solvers</h4>
+                  {recentSolvers === undefined ? (
+                    <p>Loading...</p>
+                  ) : recentSolvers === null || recentSolvers.length === 0 ? (
+                    <p>No solvers found.</p>
+                  ) : (
+                    <ul>
+                      {recentSolvers.map((solver, index) => (
+                        <li key={index}>
+                          {solver.userName} -{" "}
+                          {new Date(solver.solvedAt).toLocaleString()}
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+
                   {/* Confirmation Modal */}
-                  {showModal && (
+                  {showConfirmUseHintModal && (
                     <div className="modal-overlay">
                       <div className="modal-content">
-                        <h3>Confirmation</h3>
-                        <p>This will deduct 1 point. Do you want to proceed?</p>
+                        <h3>Use Hint?</h3>
+                        <p>{`This will deduct ${selectedHint?.deduction} point${
+                          selectedHint?.deduction === 1 ? "" : "s"
+                        }. Do you want to proceed?`}</p>
                         <div className="modal-buttons">
                           <button
-                            onClick={confirmHint}
+                            onClick={handleUseHint(selectedHint)}
                             className="confirm-button"
+                            disabled={isUsingHint}
                           >
-                            Yes
+                            {isUsingHint ? "Loading..." : "Confirm"}
                           </button>
                           <button
-                            onClick={cancelHint}
+                            onClick={() => setShowConfirmUseHintModal(false)}
                             className="cancel-button"
+                            disabled={isUsingHint}
                           >
-                            No
+                            {isUsingHint ? "Loading..." : "Cancel"}
                           </button>
                         </div>
                       </div>

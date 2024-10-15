@@ -13,7 +13,7 @@ export default function UserProfileHintUsages({
   const [userHintUsages, setUserHintUsages] = useState([]);
   const [sortByInput, setSortByInput] = useState("");
   const [sortOrderInput, setSortOrderInput] = useState("asc");
-  const [page, setPage] = useState(1);
+  const [page, setPage] = useState(0); // Initial of 0 so useEffect will work
   const [requestedPage, setRequestedPage] = useState(1); // Track requested page
   const [pageSize] = useState(10);
   const [isBusy, setIsBusy] = useState(false);
@@ -63,12 +63,12 @@ export default function UserProfileHintUsages({
 
   useEffect(() => {
     if (requestedPage !== page) {
-      fetchUserHintUsages(requestedPage); // Fetch using requestedPage
+      fetchUserHintUsages(requestedPage);
     }
   }, [requestedPage, fetchUserHintUsages, page]);
 
   const handleChallengeClick = (challengeId) => {
-    navigate(`/admin/challenge?challengeId=${challengeId}`);
+    navigate(`/play/${challengeId}`);
   };
 
   const handlePagination = (direction) => {
