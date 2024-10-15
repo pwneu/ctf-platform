@@ -16,6 +16,10 @@ import ExcludeSolvesFilter from "../components/ExcludeSolvesFilter";
 import CategoryMobileFilter from "../components/CategoryMobileFilter";
 import ExcludeSolvesMobileFilter from "../components/ExcludeSolvesMobileFilter";
 
+// TODO -- Fix displaying no challenges found and displaying the list afterwards
+// TODO -- Change page size to 1 when changing excludeSolves and selected category 
+// TODO -- Mobile
+
 export default function ChallengesContainer() {
   const [categories, setCategories] = useState([]);
   const [challenges, setChallenges] = useState();
@@ -35,7 +39,7 @@ export default function ChallengesContainer() {
   );
 
   const [page, setPage] = useState(1);
-  const pageSize = 12;
+  const pageSize = 15;
   const [filterOpen, setFilterOpen] = useState(false);
 
   useEffect(() => {
