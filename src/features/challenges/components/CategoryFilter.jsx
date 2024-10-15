@@ -4,8 +4,15 @@ export default function CategoryFilter({
   categories,
   selectedCategory,
   setSelectedCategory,
+  isBusy,
 }) {
   const [categoryOpen, setCategoryOpen] = useState(true);
+
+  const handleSelectedCategoryChange = (category) => {
+    if (isBusy) return;
+    setSelectedCategory(category);
+  };
+
   return (
     <>
       <div className="sidebar__item">
@@ -34,8 +41,8 @@ export default function CategoryFilter({
               <div className="accordion__content__inner">
                 <div className="sidebar-checkbox">
                   <div
-                    onClick={() => setSelectedCategory(null)}
-                    className="sidebar-checkbox__item"
+                    onClick={() => handleSelectedCategoryChange(null)}
+                    className="sidebar-checkbox__item cursor"
                   >
                     <div className="form-checkbox">
                       <input
@@ -53,7 +60,7 @@ export default function CategoryFilter({
                   {categories.map((category, i) => (
                     <div
                       key={i}
-                      onClick={() => setSelectedCategory(category)}
+                      onClick={() => handleSelectedCategoryChange(category)}
                       className="sidebar-checkbox__item cursor"
                     >
                       <div className="form-checkbox">

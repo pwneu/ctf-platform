@@ -25,11 +25,11 @@ export default function ChallengesSortOrder({
                   .getElementById("sortOrderContent")
                   .classList.toggle("-is-el-visible");
               }}
-              className="dropdown__button d-flex items-center text-14 rounded-8 px-20 py-10 text-14 lh-12"
-              data-el-toggle=".js-category-toggle"
-              data-el-toggle-active=".js-category-active"
+              className="dropdown__button d-flex items-center text-14 rounded-8 px-20 py-10"
             >
-              <span className="js-dropdown-title">{selectedSortOrder}</span>
+              <span className="js-dropdown-title">
+                {selectedSortOrder.value}
+              </span>
               <i className="icon text-9 ml-40 icon-chevron-down"></i>
             </div>
 
@@ -38,9 +38,9 @@ export default function ChallengesSortOrder({
               className="toggle-element -dropdown -dark-bg-dark-2 -dark-border-white-10 js-click-dropdown js-category-toggle"
             >
               <div className="text-14 y-gap-15 js-dropdown-list">
-                {sortOrderOptions.map((sortOrderOption, i) => (
+                {sortOrderOptions.map((sortOrderOption) => (
                   <div
-                    key={i}
+                    key={sortOrderOption.id}
                     onClick={() => {
                       setSelectedSortOrder(sortOrderOption);
                       document
@@ -53,10 +53,12 @@ export default function ChallengesSortOrder({
                   >
                     <span
                       className={`d-block js-dropdown-link cursor ${
-                        selectedSortOrder == sortOrderOption ? "activeMenu" : ""
-                      } `}
+                        selectedSortOrder.id === sortOrderOption.id
+                          ? "activeMenu"
+                          : ""
+                      }`}
                     >
-                      {sortOrderOption}
+                      {sortOrderOption.value}
                     </span>
                   </div>
                 ))}

@@ -16,17 +16,14 @@ import ExcludeSolvesFilter from "../components/ExcludeSolvesFilter";
 import CategoryMobileFilter from "../components/CategoryMobileFilter";
 import ExcludeSolvesMobileFilter from "../components/ExcludeSolvesMobileFilter";
 
-// TODO -- Apply filtering
-
 export default function ChallengesContainer() {
   const [categories, setCategories] = useState([]);
   const [challenges, setChallenges] = useState();
+  const [totalChallengesCount, setTotalChallengesCount] = useState(0);
 
   const [isBusy, setIsBusy] = useState(false);
 
   const navigate = useNavigate();
-
-  const [excludeSolvesOpen, setExcludeSolvesOpen] = useState(true);
 
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [selectedSortBy, setSelectedSortBy] = useState(sortByOptions[0]);
@@ -34,10 +31,11 @@ export default function ChallengesContainer() {
     sortOrderOptions[0]
   );
   const [selectedExcludeSolves, setSelectedExcludeSolves] = useState(
-    excludeSolveOptions[1]
+    excludeSolveOptions[0]
   );
 
   const [page, setPage] = useState(1);
+  const pageSize = 12;
   const [filterOpen, setFilterOpen] = useState(false);
 
   useEffect(() => {
@@ -46,19 +44,44 @@ export default function ChallengesContainer() {
         const response = await api.get("/play/categories/all");
         setCategories(response.data);
       } catch {
-        toast.error("Something went wrong getting categories. Please try again later");
+        toast.error(
+          "Something went wrong getting categories. Please try again later"
+        );
       }
     };
 
     fetchCategories();
+    setSelectedCategory(null);
   }, []);
 
+  // Reset page when selectedCategory or selectedExcludeSolves changes
+  useEffect(() => {
+    setPage(1);
+  }, [selectedCategory, selectedExcludeSolves]);
+
+  // Fetch challenges whenever dependencies change
   useEffect(() => {
     const fetchChallenges = async () => {
       setIsBusy(true);
+      const prevSortBy = selectedSortBy;
+      const prevSortOrder = selectedSortOrder;
+      const prevExcludeSolves = selectedExcludeSolves;
+
       try {
-        const response = await api.get("/play/challenges?pageSize=12");
+        const params = new URLSearchParams({
+          ...(selectedCategory && { categoryId: selectedCategory.id }),
+          excludeSolves: selectedExcludeSolves.id,
+          sortBy: selectedSortBy,
+          sortOrder: selectedSortOrder.id,
+          page,
+          pageSize,
+        });
+
+        console.log(params.toString());
+
+        const response = await api.get(`/play/challenges?${params.toString()}`);
         setChallenges(response.data);
+        setTotalChallengesCount(response.data.totalCount);
       } catch (error) {
         const status = error?.response?.status;
 
@@ -71,6 +94,11 @@ export default function ChallengesContainer() {
             "Something went wrong getting challenges. Please try again later"
           );
         }
+
+        // Revert states to previous values on error
+        setSelectedSortBy(prevSortBy);
+        setSelectedSortOrder(prevSortOrder);
+        setSelectedExcludeSolves(prevExcludeSolves);
       } finally {
         setIsBusy(false);
       }
@@ -78,6 +106,7 @@ export default function ChallengesContainer() {
 
     fetchChallenges();
   }, [
+    page,
     selectedCategory,
     selectedSortBy,
     selectedSortOrder,
@@ -101,12 +130,11 @@ export default function ChallengesContainer() {
                     categories={categories}
                     selectedCategory={selectedCategory}
                     setSelectedCategory={setSelectedCategory}
+                    isBusy={isBusy}
                   />
 
                   {/* End Category Dropdown */}
                   <ExcludeSolvesFilter
-                    excludeSolvesOpen={excludeSolvesOpen}
-                    setExcludeSolvesOpen={setExcludeSolvesOpen}
                     selectedExcludeSolves={selectedExcludeSolves}
                     setSelectedExcludeSolves={setSelectedExcludeSolves}
                   />
@@ -127,9 +155,11 @@ export default function ChallengesContainer() {
                     {/* Total Challenges */}
                     <div className="col-auto">
                       <div className="text-14 lh-12">
-                        Showing{" "}
-                        <span className="text-dark-1 fw-500">{"99"}</span> total
-                        results
+                        {"There are "}
+                        <span className="text-dark-1 fw-500">
+                          {totalChallengesCount}
+                        </span>
+                        {" challenges available."}
                       </div>
                     </div>
                     {/* End Total Challenges */}
@@ -175,7 +205,12 @@ export default function ChallengesContainer() {
                   {/* End Mobile Filter */}
 
                   <ChallengesList challenges={challenges} isBusy={isBusy} />
-                  <ChallengesPagination page={page} setPage={setPage} />
+                  <ChallengesPagination
+                    page={page}
+                    setPage={setPage}
+                    pageSize={pageSize}
+                    totalChallengesCount={totalChallengesCount}
+                  />
                 </div>
               </div>
             </div>

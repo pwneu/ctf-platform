@@ -12,7 +12,7 @@ export default function ChallengesList({ challenges, isBusy }) {
   return (
     <>
       <div className="row y-gap-30 side-content__wrap">
-        {isBusy || !challenges ? (
+        {isBusy || challenges === undefined ? (
           <div style={loadingStyle}>Loading...</div>
         ) : challenges.items.length === 0 ? (
           <div style={loadingStyle}>No challenges found</div>
