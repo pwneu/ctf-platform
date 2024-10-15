@@ -14,6 +14,7 @@ export default function UserProfileHintUsages({
   const [sortByInput, setSortByInput] = useState("");
   const [sortOrderInput, setSortOrderInput] = useState("asc");
   const [page, setPage] = useState(1);
+  const [requestedPage, setRequestedPage] = useState(1); // Track requested page
   const [pageSize] = useState(10);
   const [isBusy, setIsBusy] = useState(false);
 
@@ -31,6 +32,7 @@ export default function UserProfileHintUsages({
         const response = await api.get(`/play/me/hintUsages`, { params });
         setUserHintUsages(response.data.items);
         setTotalHintUsagesCount(response.data.totalCount);
+        setPage(pageNumber); // Only update page after a successful fetch
       } catch (error) {
         const status = error?.response?.status;
 
@@ -43,16 +45,27 @@ export default function UserProfileHintUsages({
             "Something went wrong getting user hint usages. Please try again later."
           );
         }
+        // Revert requestedPage back to the last successful page if there's an error
+        setRequestedPage(page);
       } finally {
         setIsBusy(false);
       }
     },
-    [navigate, pageSize, setTotalHintUsagesCount, sortByInput, sortOrderInput]
+    [
+      navigate,
+      pageSize,
+      setTotalHintUsagesCount,
+      sortByInput,
+      sortOrderInput,
+      page,
+    ]
   );
 
   useEffect(() => {
-    fetchUserHintUsages(page);
-  }, [page, fetchUserHintUsages]);
+    if (requestedPage !== page) {
+      fetchUserHintUsages(requestedPage); // Fetch using requestedPage
+    }
+  }, [requestedPage, fetchUserHintUsages, page]);
 
   const handleChallengeClick = (challengeId) => {
     navigate(`/admin/challenge?challengeId=${challengeId}`);
@@ -60,15 +73,13 @@ export default function UserProfileHintUsages({
 
   const handlePagination = (direction) => {
     if (isBusy) return;
-    setPage((prev) =>
+    setRequestedPage((prev) =>
       direction === "next" ? prev + 1 : Math.max(1, prev - 1)
     );
   };
 
   return (
     <div className="text-center mb-4">
-      {" "}
-      {/* Added text-center for centering */}
       <br></br>
       <h2 className="text-2xl font-semibold text-center mb-2">Hint Usages</h2>
       <Form className="mb-6">
@@ -102,7 +113,7 @@ export default function UserProfileHintUsages({
           <Col md={1} className="text-center mb-3">
             <Button
               variant="primary"
-              onClick={() => fetchUserHintUsages(page)}
+              onClick={() => fetchUserHintUsages(requestedPage)} // Use requestedPage for refresh
               disabled={isBusy}
               className="w-100 d-flex align-items-center justify-content-center"
             >
@@ -113,8 +124,6 @@ export default function UserProfileHintUsages({
         </Row>
       </Form>
       <Table striped bordered hover className="mx-auto">
-        {" "}
-        {/* Centering the table */}
         <thead>
           <tr>
             <th>Hint Id</th>
@@ -149,8 +158,6 @@ export default function UserProfileHintUsages({
         </tbody>
       </Table>
       <div className="text-center mt-3">
-        {" "}
-        {/* Centering the pagination controls */}
         <p>Total User Hint Usages: {totalHintUsagesCount}</p>
         <p>
           Page: {page} of {Math.ceil(totalHintUsagesCount / pageSize)}

@@ -13,6 +13,7 @@ export default function UserProfileSolves({
   const [sortByInput, setSortByInput] = useState("solvedat");
   const [sortOrderInput, setSortOrderInput] = useState("asc");
   const [page, setPage] = useState(1);
+  const [requestedPage, setRequestedPage] = useState(1); // Track requested page
   const [pageSize] = useState(10);
   const [isBusy, setIsBusy] = useState(false);
   const navigate = useNavigate();
@@ -31,6 +32,7 @@ export default function UserProfileSolves({
         const response = await api.get("/play/me/solves", { params });
         setUserSolves(response.data.items);
         setTotalSolveCount(response.data.totalCount);
+        setPage(pageNumber); // Only update page after successful fetch
       } catch (error) {
         const status = error?.response?.status;
         if (status === 401) {
@@ -40,16 +42,20 @@ export default function UserProfileSolves({
         } else {
           toast.error("Error fetching user solves. Please try again later.");
         }
+        // Revert requestedPage back to page if there was an error
+        setRequestedPage(page);
       } finally {
         setIsBusy(false);
       }
     },
-    [navigate, pageSize, setTotalSolveCount, sortByInput, sortOrderInput]
+    [navigate, pageSize, setTotalSolveCount, sortByInput, sortOrderInput, page]
   );
 
   useEffect(() => {
-    fetchUserSolves(page);
-  }, [page, fetchUserSolves]);
+    if (requestedPage !== page) {
+      fetchUserSolves(requestedPage); // Fetch using requestedPage
+    }
+  }, [requestedPage, fetchUserSolves, page]);
 
   const handleChallengeClick = (challengeId) => {
     navigate(`/admin/challenge?challengeId=${challengeId}`);
@@ -57,7 +63,7 @@ export default function UserProfileSolves({
 
   const handlePagination = (direction) => {
     if (isBusy) return;
-    setPage((prev) =>
+    setRequestedPage((prev) =>
       direction === "next" ? prev + 1 : Math.max(1, prev - 1)
     );
   };
@@ -96,7 +102,7 @@ export default function UserProfileSolves({
           <Col md={1} className="text-center mb-3">
             <Button
               variant="primary"
-              onClick={() => fetchUserSolves(page)}
+              onClick={() => fetchUserSolves(requestedPage)} // Use requestedPage for refresh
               disabled={isBusy}
               className="w-100 d-flex align-items-center justify-content-center"
             >
