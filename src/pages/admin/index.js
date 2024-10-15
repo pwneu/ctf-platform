@@ -2,7 +2,7 @@ import AccessKeysPage from "./AccessKeysPage";
 import AdminPage from "./AdminPage";
 import CategoriesPage from "./CategoriesPage";
 import ChallengeDetailsAdminPage from "./ChallengeDetailsAdminPage";
-import ChallengesPage from "./ChallengesPage";
+import ChallengesAdminPage from "./ChallengesAdminPage";
 import ConfigurationsPage from "./ConfigurationsPage";
 import LeaderboardsPage from "./LeaderboardsPage";
 import UserDetailsPage from "./UserDetailsPage";
@@ -13,7 +13,7 @@ export {
   AdminPage,
   CategoriesPage,
   ChallengeDetailsAdminPage,
-  ChallengesPage,
+  ChallengesAdminPage,
   ConfigurationsPage,
   LeaderboardsPage,
   UserDetailsPage,
