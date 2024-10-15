@@ -4,7 +4,7 @@ import MetaComponent from "@/components/MetaComponent";
 import Header from "@/layout/headers/Header";
 import PageLinks from "@/components/PageLinks";
 import Footer from "@/layout/footers/Footer";
-import { ChallengeDetails } from "@/features/challenges";
+import { ChallengeDetails } from "@/features/challengeDetails";
 
 const metadata = {
   title:
@@ -15,12 +15,12 @@ const metadata = {
 
 export default function ChallengeDetailsPage() {
   let params = useParams();
-  <Preloader />;
+
   return (
     <div className="main-content  ">
       <MetaComponent meta={metadata} />
+      <Preloader />;
       <Header />
-
       <div className="content-wrapper  js-content-wrapper ">
         <PageLinks />
         <ChallengeDetails id={params.id} />

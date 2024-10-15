@@ -35,7 +35,7 @@ export default function ChallengesList({ challenges, isBusy }) {
                 </div>
                 <div className="d-flex x-gap-10 items-center cpt-10">
                   <div className="text-14 lh-1">
-                    Category: {challenge.categoryName} <br />
+                    {/* Category: {challenge.categoryName} <br /> */}
                     Points: {challenge.points} <br />
                     Solve Count: {challenge.solveCount} <br />
                   </div>
