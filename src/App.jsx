@@ -5,7 +5,7 @@ import "@fortawesome/fontawesome-svg-core/styles.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "react-toastify/dist/ReactToastify.css";
 import "react-calendar/dist/Calendar.css";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import { useEffect } from "react";
 import { ToastContainer } from "react-toastify";
 import RequireNoAuth from "./components/RequireNoAuth";
@@ -26,6 +26,7 @@ import {
   WhoWeArePage,
   OurStoryPage,
   MissionVisionPage,
+  NotFoundPage,
 } from "./pages/main";
 import {
   ContactPage,
@@ -149,6 +150,8 @@ function App() {
             <Route path="/admin/leaderboards" element={<LeaderboardsPage />} />
           </Route>
 
+          <Route path="/not-found" element={<NotFoundPage />} />
+          <Route path="*" element={<Navigate to="/not-found" />} />
           {/* Achievements */}
           {/* <Route path="achievements/:id" element={<AchievementsdetailsPage />} /> */}
           {/* <Route path="achievements-list" element={<AchievementsListPage />} />  */}
