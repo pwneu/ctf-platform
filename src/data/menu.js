@@ -13,7 +13,7 @@ export const menuList = [
     title: "Compete",
     links: [
       {
-        href: "/list-of-challenges" 
+        href: "/play" 
       }
      ],
   },

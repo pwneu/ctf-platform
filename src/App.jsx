@@ -114,9 +114,9 @@ function App() {
             }
           >
             {/* Challenges */}
-            <Route path="list-of-challenges" element={<ChallengesListPage />} />
+            <Route path="play" element={<ChallengesListPage />} />
             <Route
-              path="challengeDetails/:id"
+              path="/play/:id"
               element={<ChallengeDetailsPage />}
             />
             <Route path="/profile" element={<UserProfilePage />} />

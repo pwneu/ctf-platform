@@ -483,7 +483,7 @@ export default function ChallengesList() {
                             <div className="text-17 lh-15 fw-500 text-dark-1">
                               <Link
                                 className="badge px-4 py-5 text-15 bg-purple-1 text-white fw-400"
-                                to={`/challengeDetails/${challenge.id}`}
+                                to={`/play/${challenge.id}`}
                               >
                                 {challenge.name}
                               </Link>
