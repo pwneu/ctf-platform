@@ -65,7 +65,7 @@ export default function ChallengeArtifacts({
         toast.error(error.response?.data?.message);
       } else if (status === 413) { // Nginx file error
         toast.error(
-          "The file is too large. Please choose a file smaller than 100 MB."
+          "The file is too large. Please choose a file smaller than 30 MB."
         );
       } else {
         toast.error("Error creating artifact. Please try again later");
@@ -190,8 +190,7 @@ export default function ChallengeArtifacts({
           <Modal.Body>
             <Form>
               <Form.Group controlId="formFile">
-                {/* Max size is fake lol */}
-                <Form.Label>Upload Artifact (Max 100MB)</Form.Label>
+                <Form.Label>Upload Artifact (Max 30MB)</Form.Label>
                 <Form.Control
                   type="file"
                   accept="*/*" // Allow any file type
