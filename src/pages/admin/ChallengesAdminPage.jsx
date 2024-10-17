@@ -10,7 +10,7 @@ import {
 } from "@/features/admin/challenges";
 import HeaderAdmin from "@/layout/headers/HeaderAdmin";
 
-export default function ChallengesPage() {
+export default function ChallengesAdminPage() {
   const navigate = useNavigate();
   const [categories, setCategories] = useState([]);
   const [selectedCategoryIdInput, setSelectedCategoryIdInput] = useState("");
