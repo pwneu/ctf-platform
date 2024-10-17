@@ -5,7 +5,7 @@ import "@fortawesome/fontawesome-svg-core/styles.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "react-toastify/dist/ReactToastify.css";
 import "react-calendar/dist/Calendar.css";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import { useEffect } from "react";
 import { ToastContainer } from "react-toastify";
 import RequireNoAuth from "./components/RequireNoAuth";
@@ -26,6 +26,7 @@ import {
   WhoWeArePage,
   OurStoryPage,
   MissionVisionPage,
+  NotFoundPage,
 } from "./pages/main";
 import {
   ContactPage,
@@ -33,17 +34,17 @@ import {
   DiscussionForumsPage,
 } from "./pages/contact";
 import { PrivacyPolicyPage, TermsAndConditionsPage } from "./pages/ownership";
-import { ChallengesListPage, ChallengeDetailsPage } from "./pages/play";
+import { ChallengeDetailsPage, ChallengesPage } from "./pages/play";
 import {
   AccessKeysPage,
   AdminPage,
   CategoriesPage,
-  ChallengesPage,
   ChallengeDetailsAdminPage,
   UserDetailsPage,
   UsersPage,
   LeaderboardsPage,
   ConfigurationsPage,
+  ChallengesAdminPage,
 } from "./pages/admin";
 import RequireDefinedAuth from "./components/RequireDefinedAuth";
 
@@ -61,8 +62,14 @@ function App() {
       once: true,
     });
 
-    console.log("%cPWNEU{570P_R1GH7_TH3R3!}", "color: red; font-size: 30px; font-weight: bold;");
-    console.log("%cThis is a developer feature designed for use by developers. If anyone asks you to copy and paste something here to enable a feature or 'hack' into someone's account, it is a scam and could grant them access to your account.", "font-size: 20px; font-weight: bold;");
+    console.log(
+      "%cPWNEU{570P_R1GH7_TH3R3!}",
+      "color: red; font-size: 30px; font-weight: bold;"
+    );
+    console.log(
+      "%cThis is a developer feature designed for use by developers. If anyone asks you to copy and paste something here to enable a feature or 'hack' into someone's account, it is a scam and could grant them access to your account.",
+      "font-size: 20px; font-weight: bold;"
+    );
   }, []);
 
   return (
@@ -114,11 +121,12 @@ function App() {
             }
           >
             {/* Challenges */}
-            <Route path="list-of-challenges" element={<ChallengesListPage />} />
-            <Route
-              path="challengeDetails/:id"
-              element={<ChallengeDetailsPage />}
-            />
+            <Route path="play" element={<ChallengesPage />} />
+            <Route path="/play/:id" element={<ChallengeDetailsPage />} />
+          </Route>
+
+          {/* Routes that require the user to be a member */}
+          <Route element={<RequireAuth allowedRoles={["Member"]} />}>
             <Route path="/profile" element={<UserProfilePage />} />
           </Route>
 
@@ -127,7 +135,7 @@ function App() {
             <Route path="/admin" element={<AdminPage />} />
             <Route path="/admin/keys" element={<AccessKeysPage />} />
             <Route path="/admin/categories" element={<CategoriesPage />} />
-            <Route path="/admin/challenges" element={<ChallengesPage />} />
+            <Route path="/admin/challenges" element={<ChallengesAdminPage />} />
 
             <Route
               path="/admin/challenge"
@@ -142,6 +150,8 @@ function App() {
             <Route path="/admin/leaderboards" element={<LeaderboardsPage />} />
           </Route>
 
+          <Route path="/not-found" element={<NotFoundPage />} />
+          <Route path="*" element={<Navigate to="/not-found" />} />
           {/* Achievements */}
           {/* <Route path="achievements/:id" element={<AchievementsdetailsPage />} /> */}
           {/* <Route path="achievements-list" element={<AchievementsListPage />} />  */}

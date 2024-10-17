@@ -22,7 +22,7 @@ export default function TopCategories() {
             <div className="row y-gap-30">
               {topCatagoriesThree.slice(0, 4).map((elm, i) => (
                 <Link
-                  to={`/list-of-challenges`}
+                  to={`/play`}
                   className="col-md-6 linkCustomTwo"
                   key={i}
                 >
@@ -51,7 +51,7 @@ export default function TopCategories() {
           <div className="col-lg-3 col-md-6">
             <div className="row y-gap-30">
               <div className="col-12">
-                <Link to={`/list-of-challenges`} className="categoryCard -type-1">
+                <Link to={`/play`} className="categoryCard -type-1">
                   <div className="categoryCard__image">
                     <div
                       className="bg-image ratio ratio-30:35 js-lazy"
@@ -74,7 +74,7 @@ export default function TopCategories() {
             <div className="row y-gap-30">
               {topCatagoriesThree.slice(5, 7).map((elm, i) => (
                 <Link
-                  to={`/list-of-challenges`}
+                  to={`/play`}
                   key={i}
                   className="col-lg-12"
                 >

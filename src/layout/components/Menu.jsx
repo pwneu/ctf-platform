@@ -61,6 +61,15 @@ export default function Menu({ allClasses, headerPosition }) {
                 Learn
               </Link>
             </li>
+            <li className="menu-item-has-children -has-mega-menu">
+              <Link
+                data-barba
+                to="/play"
+                className={menuItem === "Courses" ? "activeMenu" : ""}
+              >
+                Play
+              </Link>
+            </li>
             <li className="menu-item-has-children">
               <Link
                 data-barba
@@ -68,15 +77,6 @@ export default function Menu({ allClasses, headerPosition }) {
                 className={menuItem === "Campuses" ? "activeMenu" : ""}
               >
                 University
-              </Link>
-            </li>
-            <li className="menu-item-has-children -has-mega-menu">
-              <Link
-                data-barba
-                to="/list-of-challenges"
-                className={menuItem === "Courses" ? "activeMenu" : ""}
-              >
-                Compete
               </Link>
             </li>
             <li className="menu-item-has-children -has-mega-menu">

@@ -61,8 +61,14 @@ export default function ChallengeArtifacts({
 
       if (status === 401) {
         navigate("/login");
+      } else if (status === 400) {
+        toast.error(error.response?.data?.message);
+      } else if (status === 413) { // Nginx file error
+        toast.error(
+          "The file is too large. Please choose a file smaller than 30 MB."
+        );
       } else {
-        toast.error(error.response?.data?.message || "Error creating artifact");
+        toast.error("Error creating artifact. Please try again later");
       }
     } finally {
       setIsLoading(false);
@@ -87,10 +93,10 @@ export default function ChallengeArtifacts({
 
       if (status === 401) {
         navigate("/login");
+      } else if (status === 404) {
+        toast.error(error.response?.data?.message);
       } else {
-        toast.error(
-          error.response?.data?.message || "Error downloading artifact"
-        );
+        toast.error("Error downloading artifact. Please try again later");
       }
     }
   };
@@ -184,8 +190,7 @@ export default function ChallengeArtifacts({
           <Modal.Body>
             <Form>
               <Form.Group controlId="formFile">
-                {/* Max size is fake lol */}
-                <Form.Label>Upload Artifact (Max 500MB)</Form.Label>
+                <Form.Label>Upload Artifact (Max 30MB)</Form.Label>
                 <Form.Control
                   type="file"
                   accept="*/*" // Allow any file type
