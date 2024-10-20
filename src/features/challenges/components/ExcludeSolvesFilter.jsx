@@ -4,8 +4,15 @@ import { useState } from "react";
 export default function ExcludeSolvesFilter({
   selectedExcludeSolves,
   setSelectedExcludeSolves,
+  isBusy,
 }) {
   const [excludeSolvesOpen, setExcludeSolvesOpen] = useState(true);
+
+  const handleSelectedExcludeSolvesChange = (excludeSolveOption) => {
+    if (isBusy) return;
+    setSelectedExcludeSolves(excludeSolveOption);
+  };
+
   return (
     <>
       <div className="sidebar__item">
@@ -37,7 +44,7 @@ export default function ExcludeSolvesFilter({
                     <div
                       key={i}
                       onClick={() =>
-                        setSelectedExcludeSolves(excludeSolveOption)
+                        handleSelectedExcludeSolvesChange(excludeSolveOption)
                       }
                       className="sidebar-checkbox__item cursor"
                     >

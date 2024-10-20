@@ -10,7 +10,7 @@ export default function UserProfileEvaluation() {
   const getMyEvaluations = async () => {
     try {
       const response = await api.get("/play/me/evaluate");
-      console.log(response.data);
+      // console.log(response.data);
       setUserEvaluations(response.data);
     } catch {
       setUserEvaluations(null);

@@ -3,22 +3,26 @@ export default function ChallengesPagination({
   setPage,
   pageSize,
   totalChallengesCount,
+  isBusy,
 }) {
   const totalPages = Math.ceil(totalChallengesCount / pageSize);
 
   const handlePrevious = () => {
+    if (isBusy) return;
     if (page > 1) {
       setPage((prev) => prev - 1);
     }
   };
 
   const handleNext = () => {
+    if (isBusy) return;
     if (page < totalPages) {
       setPage((prev) => prev + 1);
     }
   };
 
   const handlePageClick = (pageNumber) => {
+    if (isBusy) return;
     setPage(pageNumber);
   };
 

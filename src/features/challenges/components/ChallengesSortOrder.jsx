@@ -3,7 +3,19 @@ import { sortOrderOptions } from "../data/challengesFilterOptions";
 export default function ChallengesSortOrder({
   selectedSortOrder,
   setSelectedSortOrder,
+  isBusy,
 }) {
+  const handleSelectedSortOrderChange = (sortOrderOption) => {
+    if (isBusy) return;
+    setSelectedSortOrder(sortOrderOption);
+    document
+      .getElementById("sortOrderButton")
+      .classList.toggle("-is-dd-active");
+    document
+      .getElementById("sortOrderContent")
+      .classList.toggle("-is-el-visible");
+  };
+
   return (
     <>
       <div className="col-auto">
@@ -42,13 +54,7 @@ export default function ChallengesSortOrder({
                   <div
                     key={sortOrderOption.id}
                     onClick={() => {
-                      setSelectedSortOrder(sortOrderOption);
-                      document
-                        .getElementById("sortOrderButton")
-                        .classList.toggle("-is-dd-active");
-                      document
-                        .getElementById("sortOrderContent")
-                        .classList.toggle("-is-el-visible");
+                      handleSelectedSortOrderChange(sortOrderOption);
                     }}
                   >
                     <span
