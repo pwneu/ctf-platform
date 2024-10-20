@@ -2,16 +2,21 @@ export default function CategoryMobileFilter({
   categories,
   selectedCategory,
   setSelectedCategory,
+  isBusy,
 }) {
+  const handleSelectedCategoryChange = (category) => {
+    if (isBusy) return;
+    setSelectedCategory(category);
+  };
+
   return (
     <>
-      {/* Category Mobile Filter */}
       <div className="sidebar__item">
         <h5 className="sidebar__title">Category</h5>
         <div className="sidebar-checkbox">
           <div
             className="sidebar-checkbox__item"
-            onClick={() => setSelectedCategory(null)}
+            onClick={() => handleSelectedCategoryChange(null)}
           >
             <div className="form-checkbox">
               <input
@@ -31,7 +36,7 @@ export default function CategoryMobileFilter({
             <div
               className="sidebar-checkbox__item cursor"
               key={index}
-              onClick={() => setSelectedCategory(category)}
+              onClick={() => handleSelectedCategoryChange(category)}
             >
               <div className="form-checkbox">
                 <input
@@ -49,7 +54,6 @@ export default function CategoryMobileFilter({
           ))}
         </div>
       </div>
-      {/* End Category Mobile Filter */}
     </>
   );
 }

@@ -3,7 +3,15 @@ import { sortByOptions } from "../data/challengesFilterOptions";
 export default function ChallengesSortBy({
   selectedSortBy,
   setSelectedSortBy,
+  isBusy,
 }) {
+  const handleSelectedSortByChange = (sortByOption) => {
+    if (isBusy) return;
+    setSelectedSortBy(sortByOption);
+    document.getElementById("sortByButton").classList.toggle("-is-dd-active");
+    document.getElementById("sortByContent").classList.toggle("-is-el-visible");
+  };
+
   return (
     <>
       <div className="col-auto">
@@ -40,13 +48,7 @@ export default function ChallengesSortBy({
                   <div
                     key={i}
                     onClick={() => {
-                      setSelectedSortBy(sortByOption);
-                      document
-                        .getElementById("sortByButton")
-                        .classList.toggle("-is-dd-active");
-                      document
-                        .getElementById("sortByContent")
-                        .classList.toggle("-is-el-visible");
+                      handleSelectedSortByChange(sortByOption);
                     }}
                   >
                     <span
