@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 import useAuth from "@/hooks/useAuth";
 import HeaderAdmin from "@/layout/headers/HeaderAdmin";
 
-export default function LeaderboardsPage() {
+export default function LeaderboardsAdminPage() {
   const [leaderboards, setLeaderboards] = useState();
 
   const { auth } = useAuth();
