@@ -4,7 +4,7 @@ import CategoriesPage from "./CategoriesPage";
 import ChallengeDetailsAdminPage from "./ChallengeDetailsAdminPage";
 import ChallengesAdminPage from "./ChallengesAdminPage";
 import ConfigurationsPage from "./ConfigurationsPage";
-import LeaderboardsPage from "./LeaderboardsPage";
+import LeaderboardsAdminPage from "./LeaderboardsAdminPage";
 import UserDetailsPage from "./UserDetailsPage";
 import UsersPage from "./UsersPage";
 
@@ -15,7 +15,7 @@ export {
   ChallengeDetailsAdminPage,
   ChallengesAdminPage,
   ConfigurationsPage,
-  LeaderboardsPage,
+  LeaderboardsAdminPage,
   UserDetailsPage,
   UsersPage,
 };

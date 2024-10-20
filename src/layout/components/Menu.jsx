@@ -70,6 +70,15 @@ export default function Menu({ allClasses, headerPosition }) {
                 Play
               </Link>
             </li>
+            <li className="menu-item-has-children -has-mega-menu">
+              <Link
+                data-barba
+                to="/leaderboards"
+                className={menuItem === "Courses" ? "activeMenu" : ""}
+              >
+                Leaderboards
+              </Link>
+            </li>
             <li className="menu-item-has-children">
               <Link
                 data-barba
