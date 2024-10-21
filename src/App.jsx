@@ -18,7 +18,7 @@ import {
   VerifyEmailPage,
   SignupPage,
 } from "./pages/authentication";
-import { UserProfilePage } from "./pages/profile";
+import { CertifyPage, UserProfilePage } from "./pages/profile";
 import {
   CampusesPage,
   // DiscussionForumsPage,
@@ -133,6 +133,7 @@ function App() {
           {/* Routes that require the user to be a member */}
           <Route element={<RequireAuth allowedRoles={["Member"]} />}>
             <Route path="/profile" element={<UserProfilePage />} />
+            <Route path="/certify" element={<CertifyPage />} />
           </Route>
 
           {/* Routes that require the user to have a manager role in order to give access */}
