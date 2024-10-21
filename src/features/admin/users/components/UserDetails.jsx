@@ -7,6 +7,7 @@ import {
   faEyeSlash,
   faCheck,
   faClipboard,
+  faDownload,
 } from "@fortawesome/free-solid-svg-icons";
 import { toast } from "react-toastify";
 import { api } from "@/api";
@@ -28,7 +29,9 @@ export default function UserDetails({
   const [isDoubleConfirmed, setIsDoubleConfirmed] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
   const [isVerifying, setIsVerifying] = useState(false);
-  const [isGenerating, setIsGenerating] = useState(false);
+  const [isGeneratingPasswordResetToken, setIsGeneratingPasswordResetToken] =
+    useState(false);
+  const [isGeneratingStatsReport, setIsGeneratingStatsReport] = useState(false);
 
   const handleDeleteClick = () => {
     setShowConfirmDeleteModal(true);
@@ -99,7 +102,7 @@ export default function UserDetails({
   };
 
   const confirmGenerate = async () => {
-    setIsGenerating(true);
+    setIsGeneratingPasswordResetToken(true);
     try {
       const response = await api.post(
         `/identity/users/${userDetails.id}/resetPassword`
@@ -111,8 +114,6 @@ export default function UserDetails({
 
       if (status === 401) {
         navigate("/login");
-      } else if (status === 403) {
-        toast.error("You are not allowed to generate password reset links");
       } else if (status === 400) {
         toast.error(error.response.data.message);
       } else {
@@ -120,7 +121,43 @@ export default function UserDetails({
       }
     } finally {
       setShowConfirmGeneratePasswordResetLink(false);
-      setIsGenerating(false);
+      setIsGeneratingPasswordResetToken(false);
+    }
+  };
+
+  const generateStatsReport = async () => {
+    if (isGeneratingStatsReport) return;
+    try {
+      setIsGeneratingStatsReport(true);
+      const response = await api.get(`/play/users/${userDetails.id}/stats`, {
+        responseType: "blob",
+      });
+
+      const blob = new Blob([response.data], { type: "text/html" });
+      const url = URL.createObjectURL(blob);
+
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "stats_report.html";
+      document.body.appendChild(a);
+      a.click();
+
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    } catch (error) {
+      const status = error?.response?.status;
+
+      if (status === 401) {
+        navigate("/login");
+      } else if (status === 404) {
+        toast.error(error.response.data.message || "User not found");
+      } else {
+        toast.error(
+          "Something went wrong generating user stats. Please try again later"
+        );
+      }
+    } finally {
+      setIsGeneratingStatsReport(false);
     }
   };
 
@@ -169,6 +206,19 @@ export default function UserDetails({
             <p>{userDetails.emailConfirmed ? "Verified" : "Not Verified"}</p>
           </Col>
         </Row>
+        <Button
+          className="ml-3"
+          variant="primary"
+          onClick={generateStatsReport}
+          disabled={isGeneratingStatsReport}
+        >
+          {isGeneratingStatsReport ? (
+            <Spinner animation="border" size="sm" />
+          ) : (
+            <FontAwesomeIcon icon={faDownload} />
+          )}{" "}
+          {isGeneratingStatsReport ? "Generating..." : "Generate Stats Report"}
+        </Button>
         {isAdmin && (
           <>
             <Button variant="danger" onClick={handleDeleteClick}>
@@ -191,14 +241,16 @@ export default function UserDetails({
               className="ml-3"
               variant="primary"
               onClick={handleGenerateClick}
-              disabled={isGenerating}
+              disabled={isGeneratingPasswordResetToken}
             >
-              {isGenerating ? (
+              {isGeneratingPasswordResetToken ? (
                 <Spinner animation="border" size="sm" />
               ) : (
                 <FontAwesomeIcon icon={faClipboard} />
               )}{" "}
-              {isGenerating ? "Generating..." : "Generate Password Reset Link"}
+              {isGeneratingPasswordResetToken
+                ? "Generating..."
+                : "Generate Password Reset Link"}
             </Button>
           </>
         )}
@@ -303,7 +355,7 @@ export default function UserDetails({
               Close
             </Button>
             <Button variant="primary" onClick={confirmGenerate}>
-              {isGenerating ? (
+              {isGeneratingPasswordResetToken ? (
                 <Spinner animation="border" size="sm" />
               ) : (
                 "Generate"
