@@ -1,3 +1,4 @@
+import CertifyPage from "./CertifyPage";
 import UserProfilePage from "./UserProfilePage";
 
-export { UserProfilePage };
+export { CertifyPage, UserProfilePage };
