@@ -3,7 +3,7 @@ import {
   sortByOptions,
   sortOrderOptions,
 } from "../data/challengesFilterOptions";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { api } from "@/api";
 import { toast } from "react-toastify";
@@ -16,8 +16,6 @@ import ExcludeSolvesFilter from "../components/ExcludeSolvesFilter";
 import CategoryMobileFilter from "../components/CategoryMobileFilter";
 import ExcludeSolvesMobileFilter from "../components/ExcludeSolvesMobileFilter";
 
-// TODO -- Fix displaying no challenges found and displaying the list afterwards
-// TODO -- Change page size to 1 when changing excludeSolves and selected category 
 // TODO -- Mobile
 
 export default function ChallengesContainer() {
@@ -39,8 +37,12 @@ export default function ChallengesContainer() {
   );
 
   const [page, setPage] = useState(1);
+  const pageRef = useRef(1);
   const pageSize = 15;
   const [filterOpen, setFilterOpen] = useState(false);
+
+  const isFirstRender = useRef(true);
+  const pageChanged = useRef(false);
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -60,16 +62,30 @@ export default function ChallengesContainer() {
 
   // Reset page when selectedCategory or selectedExcludeSolves changes
   useEffect(() => {
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      return;
+    }
+    if (pageRef.current !== 1) pageChanged.current = true;
     setPage(1);
-  }, [selectedCategory, selectedExcludeSolves]);
+    pageRef.current = 1;
+  }, [
+    selectedCategory,
+    selectedExcludeSolves,
+    selectedSortBy,
+    selectedSortOrder,
+  ]);
 
   // Fetch challenges whenever dependencies change
   useEffect(() => {
+    // Prevent double api call
+    if (pageChanged.current) {
+      pageChanged.current = false;
+      return;
+    }
+
     const fetchChallenges = async () => {
       setIsBusy(true);
-      const prevSortBy = selectedSortBy;
-      const prevSortOrder = selectedSortOrder;
-      const prevExcludeSolves = selectedExcludeSolves;
 
       try {
         const params = new URLSearchParams({
@@ -80,8 +96,6 @@ export default function ChallengesContainer() {
           page,
           pageSize,
         });
-
-        console.log(params.toString());
 
         const response = await api.get(`/play/challenges?${params.toString()}`);
         setChallenges(response.data);
@@ -98,13 +112,9 @@ export default function ChallengesContainer() {
             "Something went wrong getting challenges. Please try again later"
           );
         }
-
-        // Revert states to previous values on error
-        setSelectedSortBy(prevSortBy);
-        setSelectedSortOrder(prevSortOrder);
-        setSelectedExcludeSolves(prevExcludeSolves);
       } finally {
         setIsBusy(false);
+        pageRef.current = page;
       }
     };
 
@@ -141,6 +151,7 @@ export default function ChallengesContainer() {
                   <ExcludeSolvesFilter
                     selectedExcludeSolves={selectedExcludeSolves}
                     setSelectedExcludeSolves={setSelectedExcludeSolves}
+                    isBusy={isBusy}
                   />
                 </div>
               </div>
@@ -173,10 +184,12 @@ export default function ChallengesContainer() {
                         <ChallengesSortBy
                           selectedSortBy={selectedSortBy}
                           setSelectedSortBy={setSelectedSortBy}
+                          isBusy={isBusy}
                         />
                         <ChallengesSortOrder
                           selectedSortOrder={selectedSortOrder}
                           setSelectedSortOrder={setSelectedSortOrder}
+                          isBusy={isBusy}
                         />
                         <FilterButton setFilterOpen={setFilterOpen} />
                       </div>
@@ -196,11 +209,13 @@ export default function ChallengesContainer() {
                             categories={categories}
                             selectedCategory={selectedCategory}
                             setSelectedCategory={setSelectedCategory}
+                            isBusy={isBusy}
                           />
 
                           <ExcludeSolvesMobileFilter
                             selectedExcludeSolves={selectedExcludeSolves}
                             setSelectedExcludeSolves={setSelectedExcludeSolves}
+                            isBusy={isBusy}
                           />
                         </div>
                       </div>
@@ -214,6 +229,7 @@ export default function ChallengesContainer() {
                     setPage={setPage}
                     pageSize={pageSize}
                     totalChallengesCount={totalChallengesCount}
+                    isBusy={isBusy}
                   />
                 </div>
               </div>

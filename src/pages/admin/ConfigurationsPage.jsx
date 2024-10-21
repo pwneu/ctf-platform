@@ -25,12 +25,21 @@ export default function ConfigurationsPage() {
 
   const [isEnablingTurnstile, setIsEnablingTurnstile] = useState(false);
 
+  const [isEnablingCertifications, setIsEnablingCertifications] =
+    useState(false);
+
+  const [isCertificationSetModalVisible, setIsCertificationSetModalVisbile] =
+    useState(false);
+
+  const [isBusy, setIsBusy] = useState(false);
+
   const { auth } = useAuth();
   const isAdmin = auth?.roles?.includes("Admin");
 
   useEffect(() => {
     const fetchPlayConfigurations = async () => {
       try {
+        setIsBusy(true);
         const response = await api.get("/play/configurations");
         setPlayConfigurations(response.data);
 
@@ -45,17 +54,23 @@ export default function ConfigurationsPage() {
         toast.error(
           "Something went wrong getting play configurations. Please try again later"
         );
+      } finally {
+        setIsBusy(false);
       }
     };
 
     const fetchIdentityConfigurations = async () => {
       try {
+        setIsBusy(true);
         const response = await api.get("/identity/configurations");
         setIdentityConfigurations(response.data);
+        console.log(response.data);
       } catch {
         toast.error(
           "Something went wrong getting identity configurations. Please try again later"
         );
+      } finally {
+        setIsBusy(false);
       }
     };
 
@@ -74,6 +89,7 @@ export default function ConfigurationsPage() {
 
   const handleConfirmSubmissionsChange = async () => {
     try {
+      setIsBusy(true);
       const url = isEnablingSubmissions
         ? "/play/configurations/submissionsAllowed/allow"
         : "/play/configurations/submissionsAllowed/deny";
@@ -91,6 +107,8 @@ export default function ConfigurationsPage() {
       setPlayConfigurations(response.data);
     } catch (error) {
       handleApiError(error);
+    } finally {
+      setIsBusy(false);
     }
   };
 
@@ -107,6 +125,7 @@ export default function ConfigurationsPage() {
 
   const handleConfirmLeaderboardSave = async () => {
     try {
+      setIsBusy(true);
       await api.put(
         `/play/configurations/publicLeaderboardCount?count=${leaderboardCount}`
       );
@@ -118,6 +137,8 @@ export default function ConfigurationsPage() {
       setIsLeaderboardSaveModalVisible(false);
     } catch (error) {
       handleApiError(error);
+    } finally {
+      setIsBusy(false);
     }
   };
 
@@ -132,6 +153,7 @@ export default function ConfigurationsPage() {
 
   const handleConfirmTurnstileChange = async () => {
     try {
+      setIsBusy(true);
       const url = isEnablingTurnstile
         ? "/identity/configurations/isTurnstileEnabled/enable"
         : "/identity/configurations/isTurnstileEnabled/disable";
@@ -149,6 +171,42 @@ export default function ConfigurationsPage() {
       setIdentityConfigurations(response.data);
     } catch (error) {
       handleApiError(error);
+    } finally {
+      setIsBusy(false);
+    }
+  };
+
+  const isCertificationEnabledConfig = identityConfigurations.find(
+    (config) => config.key === "IsCertificationEnabled"
+  );
+
+  const handleCertificationSwitchChanged = (isTurningOn) => {
+    setIsEnablingCertifications(isTurningOn);
+    setIsCertificationSetModalVisbile(true);
+  };
+
+  const handleConfirmCertificationChange = async () => {
+    try {
+      setIsBusy(true);
+      const url = isEnablingCertifications
+        ? "/identity/configurations/isCertificationEnabled/enable"
+        : "/identity/configurations/isCertificationEnabled/disable";
+
+      await api.put(url);
+      setIsCertificationSetModalVisbile(false);
+
+      if (isEnablingCertifications) {
+        toast.success("Certification has been enabled successfully!");
+      } else {
+        toast.success("Certification has been disabled successfully!");
+      }
+
+      const response = await api.get("/identity/configurations");
+      setIdentityConfigurations(response.data);
+    } catch (error) {
+      handleApiError(error);
+    } finally {
+      setIsBusy(false);
     }
   };
 
@@ -169,10 +227,6 @@ export default function ConfigurationsPage() {
       );
     }
   };
-
-  // useEffect(() => {
-  //   import("bootstrap/dist/css/bootstrap.min.css");
-  // }, []);
 
   // Hack fix because of educrat overriding bootstrap classes :(
   useEffect(() => {
@@ -259,6 +313,25 @@ export default function ConfigurationsPage() {
                 />
               </Form.Group>
             )}
+
+            {isCertificationEnabledConfig && (
+              <Form.Group controlId="isCertificationEnabled">
+                <Form.Label>Is Certification Enabled</Form.Label>
+                <Form.Check
+                  type="switch"
+                  label={
+                    isCertificationEnabledConfig.value === "true"
+                      ? "Enabled"
+                      : "Disabled"
+                  }
+                  checked={isCertificationEnabledConfig.value === "true"}
+                  onChange={(e) =>
+                    handleCertificationSwitchChanged(e.target.checked)
+                  }
+                  disabled={!isAdmin}
+                />
+              </Form.Group>
+            )}
           </Card.Body>
         </Card>
       </Container>
@@ -280,11 +353,16 @@ export default function ConfigurationsPage() {
           <Button
             variant="secondary"
             onClick={() => setIsSubmissionModalVisible(false)}
+            disabled={isBusy}
           >
-            Cancel
+            {isBusy ? "Loading..." : "Cancel"}
           </Button>
-          <Button variant="primary" onClick={handleConfirmSubmissionsChange}>
-            Confirm
+          <Button
+            variant="primary"
+            onClick={handleConfirmSubmissionsChange}
+            disabled={isBusy}
+          >
+            {isBusy ? "Loading..." : "Save"}
           </Button>
         </Modal.Footer>
       </Modal>
@@ -304,11 +382,16 @@ export default function ConfigurationsPage() {
           <Button
             variant="secondary"
             onClick={() => setIsLeaderboardSaveModalVisible(false)}
+            disabled={isBusy}
           >
-            Cancel
+            {isBusy ? "Loading..." : "Cancel"}
           </Button>
-          <Button variant="primary" onClick={handleConfirmLeaderboardSave}>
-            Save
+          <Button
+            variant="primary"
+            onClick={handleConfirmLeaderboardSave}
+            disabled={isBusy}
+          >
+            {isBusy ? "Loading..." : "Save"}
           </Button>
         </Modal.Footer>
       </Modal>
@@ -330,11 +413,47 @@ export default function ConfigurationsPage() {
           <Button
             variant="secondary"
             onClick={() => setIsTurnstileSetModalVisbile(false)}
+            disabled={isBusy}
           >
-            Cancel
+            {isBusy ? "Loading..." : "Cancel"}
           </Button>
-          <Button variant="primary" onClick={handleConfirmTurnstileChange}>
-            Confirm
+          <Button
+            variant="primary"
+            onClick={handleConfirmTurnstileChange}
+            disabled={isBusy}
+          >
+            {isBusy ? "Loading..." : "Confirm"}
+          </Button>
+        </Modal.Footer>
+      </Modal>
+
+      {/* Modal for enabling or disabling certification*/}
+      <Modal
+        show={isCertificationSetModalVisible}
+        onHide={() => setIsCertificationSetModalVisbile(false)}
+      >
+        <Modal.Header closeButton>
+          <Modal.Title>Confirm Action</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          {isEnablingTurnstile
+            ? "Are you sure you want to enable certifications?"
+            : "Are you sure you want to disable certifications?"}
+        </Modal.Body>
+        <Modal.Footer>
+          <Button
+            variant="secondary"
+            onClick={() => setIsCertificationSetModalVisbile(false)}
+            disabled={isBusy}
+          >
+            {isBusy ? "Loading..." : "Cancel"}
+          </Button>
+          <Button
+            variant="primary"
+            onClick={handleConfirmCertificationChange}
+            disabled={isBusy}
+          >
+            {isBusy ? "Loading..." : "Confirm"}
           </Button>
         </Modal.Footer>
       </Modal>

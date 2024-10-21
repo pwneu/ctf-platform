@@ -3,7 +3,13 @@ import { excludeSolveOptions } from "../data/challengesFilterOptions";
 export default function ExcludeSolvesMobileFilter({
   selectedExcludeSolves,
   setSelectedExcludeSolves,
+  isBusy,
 }) {
+  const handleSelectedExcludeSolvesChange = (excludeSolveOption) => {
+    if (isBusy) return;
+    setSelectedExcludeSolves(excludeSolveOption);
+  };
+
   return (
     <>
       <div className="sidebar__item">
@@ -13,7 +19,9 @@ export default function ExcludeSolvesMobileFilter({
             <div
               className="sidebar-checkbox__item cursor"
               key={index}
-              onClick={() => setSelectedExcludeSolves(excludeSolveOption)}
+              onClick={() =>
+                handleSelectedExcludeSolvesChange(excludeSolveOption)
+              }
             >
               <div className="form-checkbox">
                 <input
@@ -33,7 +41,6 @@ export default function ExcludeSolvesMobileFilter({
           ))}
         </div>
       </div>
-      {/* End Category Mobile Filter */}
     </>
   );
 }

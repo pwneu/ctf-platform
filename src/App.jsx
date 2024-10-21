@@ -34,7 +34,11 @@ import {
   DiscussionForumsPage,
 } from "./pages/contact";
 import { PrivacyPolicyPage, TermsAndConditionsPage } from "./pages/ownership";
-import { ChallengeDetailsPage, ChallengesPage } from "./pages/play";
+import {
+  ChallengeDetailsPage,
+  ChallengesPage,
+  LeaderboardsPage,
+} from "./pages/play";
 import {
   AccessKeysPage,
   AdminPage,
@@ -42,7 +46,7 @@ import {
   ChallengeDetailsAdminPage,
   UserDetailsPage,
   UsersPage,
-  LeaderboardsPage,
+  LeaderboardsAdminPage,
   ConfigurationsPage,
   ChallengesAdminPage,
 } from "./pages/admin";
@@ -123,6 +127,7 @@ function App() {
             {/* Challenges */}
             <Route path="play" element={<ChallengesPage />} />
             <Route path="/play/:id" element={<ChallengeDetailsPage />} />
+            <Route path="/leaderboards" element={<LeaderboardsPage />} />
           </Route>
 
           {/* Routes that require the user to be a member */}
@@ -147,7 +152,10 @@ function App() {
               path="/admin/configurations"
               element={<ConfigurationsPage />}
             />
-            <Route path="/admin/leaderboards" element={<LeaderboardsPage />} />
+            <Route
+              path="/admin/leaderboards"
+              element={<LeaderboardsAdminPage />}
+            />
           </Route>
 
           <Route path="/not-found" element={<NotFoundPage />} />
