@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { api } from "@/api";
+import { useNavigate } from "react-router-dom";
 
 export default function UserProfile({
   totalSolveCount,
@@ -11,6 +12,9 @@ export default function UserProfile({
 }) {
   const [userEmail, setUserEmail] = useState("");
   const [userRank, setUserRank] = useState();
+  const [isDownloading, setIsDownloading] = useState(false);
+
+  const navigate = useNavigate();
 
   const getMyEmail = async () => {
     try {
@@ -29,6 +33,46 @@ export default function UserProfile({
       // eslint-disable-next-line no-unused-vars
     } catch (error) {
       setUserRank(null);
+    }
+  };
+
+  const generateStatsReport = async () => {
+    if (isDownloading) return;
+    try {
+      setIsDownloading(true);
+      const response = await api.get(`/play/me/stats`, {
+        responseType: "blob",
+      });
+
+      const blob = new Blob([response.data], { type: "text/html" });
+      const url = URL.createObjectURL(blob);
+
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "stats_report.html";
+      document.body.appendChild(a);
+      a.click();
+
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    } catch (error) {
+      const status = error?.response?.status;
+
+      if (status === 401) {
+        navigate("/login");
+      } else 
+      if (status === 404) {
+        toast.error(error.response.data.message || "User not found");
+      } else if (status === 429) {
+        toast.warn("Slow down on generating your user stats!");
+      }
+      else {
+        toast.error(
+          "Something went wrong generating user stats. Please try again later"
+        );
+      }
+    } finally {
+      setIsDownloading(false);
     }
   };
 
@@ -121,7 +165,7 @@ export default function UserProfile({
                       {"Points"}
                     </div>
                     <div className="text-30 lh-2 fw-700 text-dark-1 mt-20">
-                       {userRank === undefined
+                      {userRank === undefined
                         ? "Loading..."
                         : userRank?.points || "Unranked"}
                     </div>
@@ -187,6 +231,10 @@ export default function UserProfile({
             </div>*/}
           </div>
         </div>
+        {/* TODO -- Design */}
+        <button onClick={generateStatsReport} disabled={isDownloading}>
+            {isDownloading ? 'Downloading...' : 'Download Stats Report'}
+        </button>
       </div>
     </div>
   );
