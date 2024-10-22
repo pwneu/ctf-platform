@@ -35,11 +35,11 @@ export default function LeaderboardsPage() {
   }, []);
 
   return (
-    <div className="main-content  ">
+    <div className="main-content">
       <MetaComponent meta={metadata} />
-      <Preloader />;
+      <Preloader />
       <Header />
-      <div className="content-wrapper  js-content-wrapper ">
+      <div className="content-wrapper js-content-wrapper">
         <PageLinks />
         {leaderboards ? (
           leaderboards.userRanks && leaderboards.userRanks.length > 0 ? (
@@ -52,10 +52,10 @@ export default function LeaderboardsPage() {
               />
             </>
           ) : (
-            <p>No leaderboards available.</p>
+            <p style={{ minHeight: "1000px" }}>No leaderboards available.</p>
           )
         ) : (
-          <p>Loading leaderboards...</p>
+          <p style={{ minHeight: "1000px" }}>Loading leaderboards...</p>
         )}
         <Footer />
       </div>

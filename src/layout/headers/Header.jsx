@@ -84,7 +84,8 @@ export default function Header() {
                   {auth?.userName ? (
                     <>
                       <span
-                        className="text-white-1"
+                        className="text-white"
+                        // className="text-white-1"
                         style={{ cursor: "pointer" }}
                         onClick={handleUserNameClick}
                       >
