@@ -1,21 +1,35 @@
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export default function UserRanks({ userRanks, requesterRank, isManager }) {
+  const navigate = useNavigate();
+
   const renderUserRankItem = (rank, isRequester) => {
     const userLink = `/admin/user?userId=${rank.id}`;
     const style = isRequester ? { backgroundColor: "yellow" } : {};
 
+    const handleRowClick = () => {
+      if (isRequester) {
+        navigate("/profile");
+      } else if (isManager) {
+        navigate(userLink);
+      }
+    };
+
     return (
-      <tr key={rank.id} style={style}>
-        <td>
-          {isManager ? (
-            <Link to={userLink}>{rank.userName}</Link>
-          ) : (
-            rank.userName
-          )}
+      <tr
+        key={rank.id}
+        style={{
+          ...style,
+          cursor: isRequester || isManager ? "pointer" : "default",
+        }}
+        onClick={handleRowClick}
+      >
+        <td style={{ textAlign: "center" }}>{rank.userName}</td>
+        <td style={{ textAlign: "center" }}>{rank.position}</td>
+        <td style={{ textAlign: "center" }}>{rank.points}</td>
+        <td style={{ textAlign: "center" }}>
+          {new Date(rank.latestCorrectSubmission).toLocaleString()}
         </td>
-        <td>{rank.position}</td>
-        <td>{new Date(rank.latestCorrectSubmission).toLocaleString()}</td>
       </tr>
     );
   };
@@ -25,34 +39,33 @@ export default function UserRanks({ userRanks, requesterRank, isManager }) {
     requesterRank && userRanks.some((rank) => rank.id === requesterRank.id);
 
   return (
-    <>
-      <div style={{ display: "flex", justifyContent: "center" }}>
-        <table>
-          <thead>
-            <tr>
-              <th>Username</th>
-              <th>Rank</th>
-              <th>Latest Correct Submission</th>
-            </tr>
-          </thead>
-          <tbody>
-            {userRanks.map((rank) =>
-              renderUserRankItem(
-                rank,
-                isRequesterInUserRanks && rank.id === requesterRank.id
-              )
-            )}
-            {requesterRank && !isRequesterInUserRanks && (
-              <>
-                <tr>
-                  <td colSpan={1} style={{ height: "20px" }}></td>{" "}
-                </tr>
-                {renderUserRankItem(requesterRank, true)}
-              </>
-            )}
-          </tbody>
-        </table>
-      </div>
-    </>
+    <div style={{ minHeight: "500px" }}>
+      <table style={{ width: "100%", borderCollapse: "collapse" }}>
+        <thead>
+          <tr>
+            <th style={{ textAlign: "center" }}>Username</th>
+            <th style={{ textAlign: "center" }}>Rank</th>
+            <th style={{ textAlign: "center" }}>Points</th>
+            <th style={{ textAlign: "center" }}>Latest Correct Submission</th>
+          </tr>
+        </thead>
+        <tbody>
+          {userRanks.map((rank) =>
+            renderUserRankItem(
+              rank,
+              isRequesterInUserRanks && rank.id === requesterRank.id
+            )
+          )}
+          {requesterRank && !isRequesterInUserRanks && (
+            <>
+              <tr>
+                <td colSpan={4} style={{ height: "20px" }}></td>
+              </tr>
+              {renderUserRankItem(requesterRank, true)}
+            </>
+          )}
+        </tbody>
+      </table>
+    </div>
   );
 }
