@@ -411,7 +411,7 @@ export default function ChallengeDetails({ id }) {
                         }. Do you want to proceed?`}</p>
                         <div className="modal-buttons">
                           <button
-                            onClick={handleUseHint(selectedHint)}
+                            onClick={() => handleUseHint(selectedHint)}
                             className="confirm-button"
                             disabled={isUsingHint}
                           >
