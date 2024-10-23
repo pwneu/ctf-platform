@@ -48,13 +48,13 @@ export default function ChallengeDetails({ id }) {
       } else if (response.data === "SubmissionsNotAllowed") {
         toast.error("Flag submission has been disabled by the admin");
         setIsSubmissionDisabled(true);
-      } else if (response.data === "MaxAttempReached") {
+      } else if (response.data === "MaxAttemptReached") {
         toast.error(
           "Max attempts has been reached. You cannot solve the challenge anymore"
         );
         setIsSubmissionDisabled(true);
       } else if (response.data === "SubmittingTooOften") {
-        toast.warn("Submitting too often. Slow down!");
+        toast.warn("Submitting too often. Please wait for a few seconds!");
         setIsSubmittingTooOften(true); // Disable button
         setTimeout(() => setIsSubmittingTooOften(false), 15000);
       } else {
