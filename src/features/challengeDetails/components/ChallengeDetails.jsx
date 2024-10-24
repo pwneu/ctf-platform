@@ -48,13 +48,13 @@ export default function ChallengeDetails({ id }) {
       } else if (response.data === "SubmissionsNotAllowed") {
         toast.error("Flag submission has been disabled by the admin");
         setIsSubmissionDisabled(true);
-      } else if (response.data === "MaxAttempReached") {
+      } else if (response.data === "MaxAttemptReached") {
         toast.error(
           "Max attempts has been reached. You cannot solve the challenge anymore"
         );
         setIsSubmissionDisabled(true);
       } else if (response.data === "SubmittingTooOften") {
-        toast.warn("Submitting too often. Slow down!");
+        toast.warn("Submitting too often. Please wait for a few seconds!");
         setIsSubmittingTooOften(true); // Disable button
         setTimeout(() => setIsSubmittingTooOften(false), 15000);
       } else {
@@ -80,9 +80,9 @@ export default function ChallengeDetails({ id }) {
       } else if (status === 403) {
         toast.info("Managers and admins are not allowed solve challenges");
       } else if (status === 429) {
-        toast.warn("Slow down on using hints!");
+        toast.warn("Slow down on solving challenges!");
       } else {
-        toast.error("Error checking submitting flag. Please try again later");
+        toast.error("Error submitting flag. Please try again later");
       }
     } finally {
       setIsSubmitting(false);
