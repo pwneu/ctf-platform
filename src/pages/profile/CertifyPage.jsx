@@ -15,7 +15,7 @@ export default function CertifyPage() {
         setCertificationStatus("generating");
 
         const doc = new jsPDF({
-          orientation: "portrait",
+          orientation: "landscape",
           unit: "px",
           format: [2480, 3508],
           hotfixes: [],
