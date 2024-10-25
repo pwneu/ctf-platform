@@ -49,6 +49,7 @@ export default function LeaderboardsPage() {
                 requesterRank={leaderboards.requesterRank}
                 userRanks={leaderboards.userRanks}
                 isManager={isManager}
+                totalLeaderboardCount={leaderboards.totalLeaderboardCount}
               />
             </>
           ) : (
