@@ -1,6 +1,11 @@
 import { useNavigate } from "react-router-dom";
 
-export default function UserRanks({ userRanks, requesterRank, isManager }) {
+export default function UserRanks({
+  userRanks,
+  requesterRank,
+  isManager,
+  totalLeaderboardCount,
+}) {
   const navigate = useNavigate();
 
   const renderUserRankItem = (rank, isRequester) => {
@@ -40,6 +45,9 @@ export default function UserRanks({ userRanks, requesterRank, isManager }) {
 
   return (
     <div style={{ minHeight: "500px" }}>
+      <p
+        style={{ textAlign: "center" }}
+      >{`There are currently ${totalLeaderboardCount} participants.`}</p>
       <table style={{ width: "100%", borderCollapse: "collapse" }}>
         <thead>
           <tr>
