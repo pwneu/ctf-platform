@@ -67,7 +67,7 @@ export default function ChallengeSolves({ challengeId }) {
   };
 
   const handleUserClick = (userId) => {
-    navigate(`/userDetails?userId=${userId}`);
+    navigate(`/user?userId=${userId}`);
   };
 
   return (

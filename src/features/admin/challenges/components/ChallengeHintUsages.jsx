@@ -68,7 +68,7 @@ export default function ChallengeHintUsages({ challengeId }) {
   };
 
   const handleUserClick = (userId) => {
-    navigate(`/userDetails?userId=${userId}`);
+    navigate(`/user?userId=${userId}`);
   };
 
   return (
