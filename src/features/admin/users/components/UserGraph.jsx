@@ -2,9 +2,14 @@ import { Line } from "react-chartjs-2";
 import "chart.js/auto"; // Required for automatic Chart.js version management
 
 export default function UserGraph({ userGraph }) {
-  // Check if userGraph is null, undefined, or empty
+  // Check if userGraph is undefined (loading state)
+  if (userGraph === undefined) {
+    return <p>Loading user graph data...</p>; // Display loading message if userGraph is undefined
+  }
+
+  // Check if userGraph is null or empty
   if (!userGraph || userGraph.length === 0) {
-    return <p>No data available.</p>;
+    return <p>No data available.</p>; // Display message if no data is available
   }
 
   // Prepare data for the chart

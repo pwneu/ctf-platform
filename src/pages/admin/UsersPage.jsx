@@ -65,7 +65,7 @@ export default function UsersPage() {
   };
 
   const handleUserClick = (userId) => {
-    navigate(`/admin/user?userId=${userId}`);
+    navigate(`/admin/user/${userId}`);
   };
 
   const toggleEmailVisibility = () => {
