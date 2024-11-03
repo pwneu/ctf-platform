@@ -7,7 +7,7 @@ import ChallengesContainer from "@/features/challenges/layout/ChallengesContaine
 import Footer from "@/layout/footers/Footer";
 
 const metadata = {
-  title: "Compete || PWNEU",
+  title: "Play || PWNEU",
   description:
     "Join the competition, test your skills, and climb the leaderboard in exciting challenges.",
 };

@@ -85,11 +85,11 @@ export default function ChallengesAdminPage() {
   };
 
   const handleChallengeClick = (id) => {
-    navigate(`/admin/challenge?challengeId=${id}`);
+    navigate(`/admin/challenge/${id}`);
   };
 
   const handleCreateChallenge = (challengeId) => {
-    navigate(`/admin/challenge?challengeId=${challengeId}`);
+    navigate(`/admin/challenge/${challengeId}`);
   };
 
   // useEffect(() => {

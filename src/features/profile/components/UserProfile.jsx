@@ -152,7 +152,7 @@ export default function UserProfile({
                     <div className="text-30 lh-2 fw-700 text-dark-1 mt-20">
                       {userRank === undefined
                         ? "Loading..."
-                        : userRank?.position || "Unranked"}
+                        : userRank?.position || "0"}
                     </div>
                   </div>
                   <i className={`text-40 icon-bar-chart-2 text-black-2 `}></i>

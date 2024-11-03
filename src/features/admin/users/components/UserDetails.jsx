@@ -208,6 +208,19 @@ export default function UserDetails({
         </Row>
         <Button
           className="ml-3"
+          variant="success"
+          onClick={handleVerifyClick}
+          disabled={userDetails.emailConfirmed || isVerifying}
+        >
+          {isVerifying ? (
+            <Spinner animation="border" size="sm" />
+          ) : (
+            <FontAwesomeIcon icon={faCheck} />
+          )}{" "}
+          {isVerifying ? "Verifying..." : "Verify User"}
+        </Button>
+        <Button
+          className="ml-3"
           variant="primary"
           onClick={generateStatsReport}
           disabled={isGeneratingStatsReport}
@@ -221,25 +234,9 @@ export default function UserDetails({
         </Button>
         {isAdmin && (
           <>
-            <Button variant="danger" onClick={handleDeleteClick}>
-              <FontAwesomeIcon icon={faTrash} /> Delete User
-            </Button>
             <Button
               className="ml-3"
-              variant="primary"
-              onClick={handleVerifyClick}
-              disabled={userDetails.emailConfirmed || isVerifying}
-            >
-              {isVerifying ? (
-                <Spinner animation="border" size="sm" />
-              ) : (
-                <FontAwesomeIcon icon={faCheck} />
-              )}{" "}
-              {isVerifying ? "Verifying..." : "Verify User"}
-            </Button>
-            <Button
-              className="ml-3"
-              variant="primary"
+              variant="info"
               onClick={handleGenerateClick}
               disabled={isGeneratingPasswordResetToken}
             >
@@ -251,6 +248,9 @@ export default function UserDetails({
               {isGeneratingPasswordResetToken
                 ? "Generating..."
                 : "Generate Password Reset Link"}
+            </Button>
+            <Button className="ml-3" variant="danger" onClick={handleDeleteClick}>
+              <FontAwesomeIcon icon={faTrash} /> Delete User
             </Button>
           </>
         )}

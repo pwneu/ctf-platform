@@ -3,7 +3,12 @@ import { Pie, Bar } from "react-chartjs-2";
 import "chart.js/auto"; // Required for automatic Chart.js version management
 
 export default function UserEvaluations({ userEvaluations }) {
-  // Check if userEvaluations is null or undefined
+  // Check if userEvaluations is undefined (loading state)
+  if (userEvaluations === undefined) {
+    return <p>Loading user evaluations...</p>; // Display loading message if userEvaluations is undefined
+  }
+
+  // Check if userEvaluations is null or has no categoryEvaluations
   if (!userEvaluations || !userEvaluations.categoryEvaluations) {
     return <p>No user evaluations available.</p>; // Display a message if no evaluations are present
   }

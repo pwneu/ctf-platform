@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Container, Spinner } from "react-bootstrap";
 import { api } from "@/api";
 import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import useAuth from "@/hooks/useAuth";
 import {
   UserSolves,
@@ -14,6 +14,8 @@ import {
 import HeaderAdmin from "@/layout/headers/HeaderAdmin";
 
 export default function UserDetailsPage() {
+  const params = useParams();
+
   const [userDetails, setUserDetails] = useState();
   const [userEmail, setUserEmail] = useState("");
   const [userGraph, setUserGraph] = useState();
@@ -74,8 +76,7 @@ export default function UserDetailsPage() {
   };
 
   useEffect(() => {
-    const queryParams = new URLSearchParams(window.location.search);
-    const userIdParam = queryParams.get("userId");
+    const userIdParam = params.id;
 
     if (userIdParam) {
       getUserDetails(userIdParam);
@@ -88,7 +89,7 @@ export default function UserDetailsPage() {
       setUserGraph(null);
       setUserEvaluations(null);
     }
-  }, []);
+  }, [params.id]);
 
   // useEffect(() => {
   //   import("bootstrap/dist/css/bootstrap.min.css");
