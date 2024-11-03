@@ -144,11 +144,11 @@ function App() {
             <Route path="/admin/challenges" element={<ChallengesAdminPage />} />
 
             <Route
-              path="/admin/challenge"
+              path="/admin/challenge/:id"
               element={<ChallengeDetailsAdminPage />}
             />
             <Route path="/admin/users" element={<UsersPage />} />
-            <Route path="/admin/user" element={<UserDetailsPage />} />
+            <Route path="/admin/user/:id" element={<UserDetailsPage />} />
             <Route
               path="/admin/configurations"
               element={<ConfigurationsPage />}

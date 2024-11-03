@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 export default function UserRanks({ userRanks, requesterRank, isManager }) {
   const renderUserRankItem = (rank, isRequester) => {
-    const userLink = `/admin/user?userId=${rank.id}`;
+    const userLink = `/admin/user/${rank.id}`;
 
     const listItem = (
       <ListGroup.Item

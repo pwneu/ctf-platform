@@ -10,10 +10,12 @@ import {
   ChallengeHintUsages,
 } from "@/features/admin/challenges";
 import HeaderAdmin from "@/layout/headers/HeaderAdmin";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 export default function ChallengeDetailsAdminPage() {
+  const params = useParams();
   const navigate = useNavigate();
+
   const [challengeDetails, setChallengeDetails] = useState();
   const [challengeFlags, setChallengeFlags] = useState();
   const [formData, setFormData] = useState({});
@@ -123,15 +125,14 @@ export default function ChallengeDetailsAdminPage() {
   };
 
   useEffect(() => {
-    const queryParams = new URLSearchParams(window.location.search);
-    const challengeIdParam = queryParams.get("challengeId");
+    const challengeIdParam = params.id;
 
     if (challengeIdParam) {
       getChallengeDetails(challengeIdParam);
     } else {
       setChallengeDetails(null);
     }
-  }, []);
+  }, [params.id]);
 
   // useEffect(() => {
   //   import("bootstrap/dist/css/bootstrap.min.css");
