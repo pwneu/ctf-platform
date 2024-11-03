@@ -10,7 +10,7 @@ import { LeaderboardGraph, UserRanks } from "@/features/leaderboards";
 import { api } from "@/api";
 
 const metadata = {
-  title: "Leaderbaords",
+  title: "Leaderboards",
   description: "PWNEU Leaderboards",
 };
 

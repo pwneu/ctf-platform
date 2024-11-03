@@ -9,7 +9,7 @@ export default function UserRanks({
   const navigate = useNavigate();
 
   const renderUserRankItem = (rank, isRequester) => {
-    const userLink = `/admin/user?userId=${rank.id}`;
+    const userLink = `/admin/user/${rank.id}`;
     const style = isRequester ? { backgroundColor: "yellow" } : {};
 
     const handleRowClick = () => {
