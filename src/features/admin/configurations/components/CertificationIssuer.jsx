@@ -44,30 +44,30 @@ export default function CertificationIssuer({
 
   return (
     <>
-      {initialCertificationIssuer && (
-        <Form.Group controlId="certificationIssuer" className="mt-3">
-          <Form.Label>Certification Issuer</Form.Label>
-          <div className="d-flex">
-            <Form.Control
-              type="text"
-              value={certificationIssuer}
-              onChange={(e) => setCertificationIssuer(e.target.value)}
-              placeholder="Enter certification issuer"
-              className="me-2"
-              disabled={!isAdmin}
-            />
-            <Button
-              variant="primary"
-              onClick={handleCertifcationSaveClick}
-              disabled={
-                certificationIssuer === initialCertificationIssuer || !isAdmin
-              }
-            >
-              Save
-            </Button>
-          </div>
-        </Form.Group>
-      )}
+      <Form.Group controlId="certificationIssuer" className="mt-3">
+        <Form.Label>Certification Issuer</Form.Label>
+        <div className="d-flex">
+          <Form.Control
+            type="text"
+            value={certificationIssuer ?? ""}
+            onChange={(e) => setCertificationIssuer(e.target.value)}
+            placeholder="Enter certification issuer"
+            className="me-2"
+            disabled={!isAdmin}
+          />
+          <Button
+            variant="primary"
+            onClick={handleCertifcationSaveClick}
+            disabled={
+              !certificationIssuer?.trim() ||
+              certificationIssuer === initialCertificationIssuer ||
+              !isAdmin
+            }
+          >
+            Save
+          </Button>
+        </div>
+      </Form.Group>
 
       {/* Modal for confirming certification issuer save */}
       <Modal
