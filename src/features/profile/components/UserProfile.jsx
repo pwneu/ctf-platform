@@ -152,7 +152,7 @@ export default function UserProfile({
                     <div className="text-30 lh-2 fw-700 text-dark-1 mt-20">
                       {userRank === undefined
                         ? "Loading..."
-                        : userRank?.position || "0"}
+                        : userRank?.position || "Unranked"}
                     </div>
                   </div>
                   <i className={`text-40 icon-bar-chart-2 text-black-2 `}></i>
@@ -167,7 +167,7 @@ export default function UserProfile({
                     <div className="text-30 lh-2 fw-700 text-dark-1 mt-20">
                       {userRank === undefined
                         ? "Loading..."
-                        : userRank?.points || "Unranked"}
+                        : userRank?.points || "0"}
                     </div>
                   </div>
                   <i className={`text-40 icon-graduation-1 text-black-2 `}></i>
