@@ -38,7 +38,7 @@ export default function ChallengesContainer() {
 
   const [page, setPage] = useState(1);
   const pageRef = useRef(1);
-  const pageSize = 18;
+  const pageSize = 12;
   const [filterOpen, setFilterOpen] = useState(false);
 
   const isFirstRender = useRef(true);
@@ -132,7 +132,7 @@ export default function ChallengesContainer() {
     <>
       <section
         className="layout-pt-md layout-pb-lg"
-        style={{ minHeight: "800px" }}
+        style={{ minHeight: "85vh" }}
       >
         <div className="container">
           <div className="row y-gap-50">

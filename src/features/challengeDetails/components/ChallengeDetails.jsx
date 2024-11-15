@@ -261,11 +261,27 @@ export default function ChallengeDetails({ id }) {
           <div className="page-header__content pt-90 pb-90 text-center">
             <div className="row y-gap-30">
               {challengeDetails === undefined ? (
-                <div>Loading...</div>
+                <div
+                  style={{
+                    minHeight: "80vh",
+                    // display: "flex",
+                    // justifyContent: "center",
+                    // alignItems: "center",
+                  }}
+                >
+                  Loading...
+                </div>
               ) : challengeDetails === null ? (
-                <div>Challenge Not Found</div>
+                <div
+                  style={{
+                    minHeight: "80vh",
+                  }}
+                >
+                  Challenge Not Found
+                </div>
               ) : (
-                <div className="">
+                <div style={{ minHeight: "80vh" }}>
+                  {/* <div> */}
                   <h1 className="text-40 lh-14 mt-20 ">
                     {challengeDetails.name}
                   </h1>
@@ -344,24 +360,6 @@ export default function ChallengeDetails({ id }) {
                     </button>
                   </form>
                   {/* {message && <p className="mt-20">{message}</p>} */}
-                  <h4 className="mt-20">Hints</h4>
-                  {challengeDetails.hints.length > 0 ? (
-                    challengeDetails.hints.map((hint, index) => (
-                      <div key={index} className="hint-container">
-                        <button
-                          onClick={() => handleCheckHintStatus(hint)}
-                          className="hint-button"
-                          disabled={isUsingHint}
-                        >
-                          {isUsingHint
-                            ? "Loading..."
-                            : `Use hint (-${hint.deduction} Points)`}
-                        </button>
-                      </div>
-                    ))
-                  ) : (
-                    <div className="no-hints-message">No hints available</div>
-                  )}
                   <h4 className="mt-20">Artifacts</h4>
                   {challengeDetails.artifacts.length > 0 ? (
                     challengeDetails.artifacts.map((artifact, index) => (
@@ -379,6 +377,24 @@ export default function ChallengeDetails({ id }) {
                     <div className="no-artifacts-message">
                       No artifacts available
                     </div>
+                  )}
+                  <h4 className="mt-20">Hints</h4>
+                  {challengeDetails.hints.length > 0 ? (
+                    challengeDetails.hints.map((hint, index) => (
+                      <div key={index} className="hint-container">
+                        <button
+                          onClick={() => handleCheckHintStatus(hint)}
+                          className="hint-button"
+                          disabled={isUsingHint}
+                        >
+                          {isUsingHint
+                            ? "Loading..."
+                            : `Use hint (-${hint.deduction} Points)`}
+                        </button>
+                      </div>
+                    ))
+                  ) : (
+                    <div className="no-hints-message">No hints available</div>
                   )}
                   <h4 className="mt-20">Recent Solvers</h4>
                   {recentSolvers === undefined ? (
