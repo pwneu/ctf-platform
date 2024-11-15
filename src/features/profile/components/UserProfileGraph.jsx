@@ -31,7 +31,7 @@ export default function UserProfileGraph() {
 
   // Prepare data for the chart
   const labels = userGraph.map((entry) =>
-    new Date(entry.activityDate).toLocaleTimeString()
+    new Date(entry.activityDate).toLocaleString()
   );
   const scores = userGraph.map((entry) => entry.score);
 
@@ -70,7 +70,9 @@ export default function UserProfileGraph() {
   return (
     <div className="max-w-sm mx-auto p-2 bg-white shadow-md rounded-lg">
       <h2 className="text-xl font-semibold text-center mb-2">Graph Activity</h2>
-      <div className="h-12 md:h-24 lg:h-36 mb-2"> {/* Adjusted height values */}
+      <div className="h-12 md:h-24 lg:h-36 mb-2">
+        {" "}
+        {/* Adjusted height values */}
         <Line data={data} options={options} aria-label="User Activity Graph" />
       </div>
     </div>

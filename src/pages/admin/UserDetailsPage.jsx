@@ -17,6 +17,7 @@ export default function UserDetailsPage() {
   const params = useParams();
 
   const [userDetails, setUserDetails] = useState();
+  const [userRank, setUserRank] = useState();
   const [userEmail, setUserEmail] = useState("");
   const [userGraph, setUserGraph] = useState();
   const [userEvaluations, setUserEvaluations] = useState();
@@ -75,6 +76,16 @@ export default function UserDetailsPage() {
     }
   };
 
+  const getUserRank = async (id) => {
+    try {
+      const response = await api.get(`/play/users/${id}/rank`);
+      setUserRank(response.data);
+      // eslint-disable-next-line no-unused-vars
+    } catch (error) {
+      setUserRank(null);
+    }
+  };
+
   useEffect(() => {
     const userIdParam = params.id;
 
@@ -83,11 +94,13 @@ export default function UserDetailsPage() {
       getUserEmail(userIdParam);
       getUserGraph(userIdParam);
       getUserEvaluations(userIdParam);
+      getUserRank(userIdParam);
     } else {
       setUserDetails(null);
       setUserEmail(null);
       setUserGraph(null);
       setUserEvaluations(null);
+      setUserRank(null);
     }
   }, [params.id]);
 
@@ -121,6 +134,7 @@ export default function UserDetailsPage() {
             <UserDetails
               userDetails={userDetails}
               userEmail={userEmail}
+              userRank={userRank}
               isAdmin={isAdmin}
               navigate={navigate}
               getUserDetails={getUserDetails}

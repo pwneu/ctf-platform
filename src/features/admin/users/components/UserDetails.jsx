@@ -15,6 +15,7 @@ import { api } from "@/api";
 export default function UserDetails({
   userDetails,
   userEmail,
+  userRank,
   isAdmin,
   navigate,
   getUserDetails,
@@ -189,6 +190,24 @@ export default function UserDetails({
         </Row>
         <Row>
           <Col md={6} className="mb-3">
+            <h5>Position</h5>
+            <p>
+              {userRank === undefined
+                ? "Loading..."
+                : userRank?.position || "Unranked"}
+            </p>
+          </Col>
+          <Col md={6} className="mb-3">
+            <h5>Points</h5>
+            <p>
+              {userRank === undefined
+                ? "Loading..."
+                : userRank?.points || "0"}
+            </p>
+          </Col>
+        </Row>
+        <Row>
+          <Col md={6} className="mb-3">
             <h5>Email</h5>
             <p>{showEmail ? userEmail : "••••••••••"}</p>
             <Button
@@ -249,7 +268,11 @@ export default function UserDetails({
                 ? "Generating..."
                 : "Generate Password Reset Link"}
             </Button>
-            <Button className="ml-3" variant="danger" onClick={handleDeleteClick}>
+            <Button
+              className="ml-3"
+              variant="danger"
+              onClick={handleDeleteClick}
+            >
               <FontAwesomeIcon icon={faTrash} /> Delete User
             </Button>
           </>

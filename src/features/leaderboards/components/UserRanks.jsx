@@ -47,7 +47,7 @@ export default function UserRanks({
     <div style={{ minHeight: "500px" }}>
       <p
         style={{ textAlign: "center" }}
-      >{`There are currently ${totalLeaderboardCount} participants.`}</p>
+      >{`There are currently ${totalLeaderboardCount} participant(s).`}</p>
       <table style={{ width: "100%", borderCollapse: "collapse" }}>
         <thead>
           <tr>
