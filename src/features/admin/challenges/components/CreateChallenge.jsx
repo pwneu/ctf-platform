@@ -206,7 +206,7 @@ export default function CreateChallenge({ show, onHide, onSuccess }) {
           <Form.Group controlId="formChallengeDescription">
             <Form.Label>Description</Form.Label>
             <Form.Control
-              type="text"
+              as="textarea"
               name="description"
               value={formData.description}
               onChange={handleDescriptionChange}
