@@ -14,7 +14,7 @@ export default function UserGraph({ userGraph }) {
 
   // Prepare data for the chart
   const labels = userGraph.map((entry) =>
-    new Date(entry.activityDate).toLocaleTimeString()
+    new Date(entry.activityDate).toLocaleString()
   );
   const scores = userGraph.map((entry) => entry.score);
 
