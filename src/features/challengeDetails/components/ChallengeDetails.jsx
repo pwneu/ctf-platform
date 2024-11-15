@@ -238,7 +238,7 @@ export default function ChallengeDetails({ id }) {
 
         if (status === 429) {
           toast.warn("Slow down on fetching recent solvers!");
-        } 
+        }
         // else {
         //   toast.error(
         //     "Something went wrong getting challenge solves. Please try again later"
@@ -303,10 +303,9 @@ export default function ChallengeDetails({ id }) {
                       </div>
                     </div>
                   </div>
-
-                  <p>{challengeDetails.description}</p>
-
-                  {/* Form for submitting the flag */}
+                  <p style={{ whiteSpace: "pre-line" }}>
+                    {challengeDetails.description}
+                  </p>
                   <form
                     onSubmit={handleSubmit}
                     className="d-flex justify-content-center mt-20"
@@ -344,9 +343,7 @@ export default function ChallengeDetails({ id }) {
                         : "Submit"}
                     </button>
                   </form>
-
                   {/* {message && <p className="mt-20">{message}</p>} */}
-
                   <h4 className="mt-20">Hints</h4>
                   {challengeDetails.hints.length > 0 ? (
                     challengeDetails.hints.map((hint, index) => (
@@ -365,7 +362,6 @@ export default function ChallengeDetails({ id }) {
                   ) : (
                     <div className="no-hints-message">No hints available</div>
                   )}
-
                   <h4 className="mt-20">Artifacts</h4>
                   {challengeDetails.artifacts.length > 0 ? (
                     challengeDetails.artifacts.map((artifact, index) => (
@@ -384,7 +380,6 @@ export default function ChallengeDetails({ id }) {
                       No artifacts available
                     </div>
                   )}
-
                   <h4 className="mt-20">Recent Solvers</h4>
                   {recentSolvers === undefined ? (
                     <p>Loading...</p>
@@ -400,7 +395,6 @@ export default function ChallengeDetails({ id }) {
                       ))}
                     </ul>
                   )}
-
                   {/* Confirmation Modal */}
                   {showConfirmUseHintModal && (
                     <div className="modal-overlay">
