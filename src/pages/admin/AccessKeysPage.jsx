@@ -48,7 +48,7 @@ export default function AccessKeysPage() {
       } else {
         toast.error(
           error?.response?.data?.message ||
-            "Something went wrong. Please try again later"
+            "Something went wrong deleting access key. Please try again later"
         );
       }
     } finally {
@@ -100,7 +100,7 @@ export default function AccessKeysPage() {
             isAdmin={isAdmin}
           />
         ) : (
-          <p className="text-center mt-4">No access keys available</p>
+          <p className="text-center mt-4">No access keys available.</p>
         )}
 
         <CreateAccessKey

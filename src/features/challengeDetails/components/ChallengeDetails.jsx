@@ -394,7 +394,7 @@ export default function ChallengeDetails({ id }) {
                       </div>
                     ))
                   ) : (
-                    <div className="no-hints-message">No hints available</div>
+                    <div className="no-hints-message">No hints available.</div>
                   )}
                   <h4 className="mt-20">Recent Solvers</h4>
                   {recentSolvers === undefined ? (

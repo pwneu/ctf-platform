@@ -25,8 +25,8 @@ export default function UserRanks({ userRanks, requesterRank, isManager }) {
         placement="right"
         overlay={
           <Tooltip id={`tooltip-${rank.id}`}>
-            Latest correct submission:{" "}
-            {new Date(rank.latestCorrectSubmission).toLocaleString()}
+            Latest Solve Time:{" "}
+            {new Date(rank.latestSolve).toLocaleString()}
           </Tooltip>
         }
       >
