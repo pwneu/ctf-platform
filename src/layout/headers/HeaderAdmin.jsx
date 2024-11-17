@@ -32,6 +32,7 @@ export default function HeaderAdmin() {
             <Nav.Link href="/admin/users">Users</Nav.Link>
             <Nav.Link href="/admin/configurations">Configurations</Nav.Link>
             <Nav.Link href="/admin/leaderboards">Leaderboards</Nav.Link>
+            <Nav.Link href="/admin/blacklist">Blacklist</Nav.Link>
           </Nav>
           <Nav className="ms-auto">
             {auth?.userName ? (
