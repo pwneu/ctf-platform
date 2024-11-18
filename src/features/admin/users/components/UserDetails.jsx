@@ -17,6 +17,7 @@ export default function UserDetails({
   userEmail,
   userRank,
   isAdmin,
+  cannotBeDeleted,
   navigate,
   getUserDetails,
 }) {
@@ -272,6 +273,7 @@ export default function UserDetails({
               className="ml-3"
               variant="danger"
               onClick={handleDeleteClick}
+              disabled={cannotBeDeleted}
             >
               <FontAwesomeIcon icon={faTrash} /> Delete User
             </Button>

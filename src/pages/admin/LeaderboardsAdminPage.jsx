@@ -1,4 +1,4 @@
-import { LeaderboardGraph, UserRanks } from "@/features/admin/submissions";
+import { LeaderboardGraph, UserRanksAdmin } from "@/features/admin/submissions";
 import { useEffect, useState } from "react";
 import { api } from "@/api";
 import { toast } from "react-toastify";
@@ -91,7 +91,7 @@ export default function LeaderboardsAdminPage() {
                   ? "Clearing..."
                   : "Clear Leaderboards Cache"}
               </Button>
-              <UserRanks
+              <UserRanksAdmin
                 requesterRank={leaderboards.requesterRank}
                 userRanks={leaderboards.userRanks}
                 isManager={isManager}

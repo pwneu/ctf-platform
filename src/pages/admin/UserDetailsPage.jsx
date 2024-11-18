@@ -136,6 +136,7 @@ export default function UserDetailsPage() {
               userEmail={userEmail}
               userRank={userRank}
               isAdmin={isAdmin}
+              cannotBeDeleted={userDetails.userName === auth?.userName}
               navigate={navigate}
               getUserDetails={getUserDetails}
             />

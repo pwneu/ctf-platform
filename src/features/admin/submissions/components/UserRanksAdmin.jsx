@@ -1,7 +1,7 @@
 import { ListGroup, OverlayTrigger, Tooltip } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
-export default function UserRanks({ userRanks, requesterRank, isManager }) {
+export default function UserRanksAdmin({ userRanks, requesterRank, isManager }) {
   const renderUserRankItem = (rank, isRequester) => {
     const userLink = `/admin/user/${rank.id}`;
 
