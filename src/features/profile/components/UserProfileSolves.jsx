@@ -119,6 +119,7 @@ export default function UserProfileSolves({
             <tr>
               <th>Challenge Id</th>
               <th>Challenge Name</th>
+              <th>Challenge Points</th>
               <th>Solved At</th>
             </tr>
           </thead>
@@ -132,6 +133,7 @@ export default function UserProfileSolves({
                 >
                   <td>{userSolve.challengeId}</td>
                   <td>{userSolve.challengeName}</td>
+                  <td>{userSolve.points}</td>
                   <td>{new Date(userSolve.solvedAt).toLocaleString()}</td>
                 </tr>
               ))

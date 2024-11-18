@@ -174,7 +174,7 @@ export default function ChallengesContainer() {
                         <span className="text-dark-1 fw-500">
                           {totalChallengesCount}
                         </span>
-                        {" challenges available."}
+                        {" challenge(s) available."}
                       </div>
                     </div>
                     {/* End Total Challenges */}

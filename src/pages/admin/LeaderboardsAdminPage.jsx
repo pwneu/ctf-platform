@@ -1,15 +1,20 @@
-import { LeaderboardGraph, UserRanks } from "@/features/admin/submissions";
+import { LeaderboardGraph, UserRanksAdmin } from "@/features/admin/submissions";
 import { useEffect, useState } from "react";
 import { api } from "@/api";
 import { toast } from "react-toastify";
 import useAuth from "@/hooks/useAuth";
 import HeaderAdmin from "@/layout/headers/HeaderAdmin";
+import { useNavigate } from "react-router-dom";
+import { Button } from "react-bootstrap";
 
 export default function LeaderboardsAdminPage() {
+  const navigate = useNavigate();
   const [leaderboards, setLeaderboards] = useState();
 
   const { auth } = useAuth();
   const isManager = auth?.roles?.includes("Manager");
+  const [isClearingLeaderboardsCache, setIsClearingLeaderboardsCache] =
+    useState(false);
 
   const getLeaderboards = async () => {
     try {
@@ -18,6 +23,32 @@ export default function LeaderboardsAdminPage() {
     } catch {
       toast.error("Something went wrong getting leaderboards");
       setLeaderboards([]);
+    }
+  };
+
+  const clearLeaderboardsCache = async () => {
+    try {
+      setIsClearingLeaderboardsCache(true);
+      await api.post("/play/leaderboards/clear");
+
+      toast.success("Leaderboards cache cleared");
+
+      setLeaderboards(undefined);
+      getLeaderboards();
+    } catch (error) {
+      const status = error?.response?.status;
+
+      if (status === 401) {
+        navigate("/login");
+      } else if (status === 429) {
+        toast.warn("Slow down!");
+      } else {
+        toast.error(
+          "Something went wrong getting clearing leaderboards cache. Please try again later"
+        );
+      }
+    } finally {
+      setIsClearingLeaderboardsCache(false);
     }
   };
 
@@ -51,7 +82,16 @@ export default function LeaderboardsAdminPage() {
           leaderboards.userRanks && leaderboards.userRanks.length > 0 ? (
             <>
               <LeaderboardGraph topUsersGraph={leaderboards.topUsersGraph} />
-              <UserRanks
+              <Button
+                onClick={clearLeaderboardsCache}
+                className="mb-3"
+                disabled={isClearingLeaderboardsCache}
+              >
+                {isClearingLeaderboardsCache
+                  ? "Clearing..."
+                  : "Clear Leaderboards Cache"}
+              </Button>
+              <UserRanksAdmin
                 requesterRank={leaderboards.requesterRank}
                 userRanks={leaderboards.userRanks}
                 isManager={isManager}

@@ -51,6 +51,7 @@ import {
   ChallengesAdminPage,
 } from "./pages/admin";
 import RequireDefinedAuth from "./components/RequireDefinedAuth";
+import BlacklistPage from "./pages/admin/BlacklistPage";
 
 // import {
 //   AchievementDetailsPage,
@@ -142,7 +143,6 @@ function App() {
             <Route path="/admin/keys" element={<AccessKeysPage />} />
             <Route path="/admin/categories" element={<CategoriesPage />} />
             <Route path="/admin/challenges" element={<ChallengesAdminPage />} />
-
             <Route
               path="/admin/challenge/:id"
               element={<ChallengeDetailsAdminPage />}
@@ -153,6 +153,7 @@ function App() {
               path="/admin/configurations"
               element={<ConfigurationsPage />}
             />
+            <Route path="/admin/blacklist" element={<BlacklistPage />} />
             <Route
               path="/admin/leaderboards"
               element={<LeaderboardsAdminPage />}
@@ -167,7 +168,7 @@ function App() {
         </Route>
       </Routes>
 
-      <ToastContainer position="top-right" autoClose={2000} hideProgressBar />
+      <ToastContainer position="top-right" autoClose={2000} hideProgressBar style={{ width: "500px" }} />
     </>
   );
 }
