@@ -191,7 +191,7 @@ export default function ChallengeHints({ challengeId }) {
             onClick={handleCreateHint}
             disabled={isCreating}
           >
-            Submit
+            Add
           </Button>
         </Modal.Footer>
       </Modal>

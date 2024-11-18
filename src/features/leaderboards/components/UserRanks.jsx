@@ -33,7 +33,7 @@ export default function UserRanks({
         <td style={{ textAlign: "center" }}>{rank.position}</td>
         <td style={{ textAlign: "center" }}>{rank.points}</td>
         <td style={{ textAlign: "center" }}>
-          {new Date(rank.latestCorrectSubmission).toLocaleString()}
+          {new Date(rank.latestSolve).toLocaleString()}
         </td>
       </tr>
     );
@@ -54,7 +54,7 @@ export default function UserRanks({
             <th style={{ textAlign: "center" }}>Username</th>
             <th style={{ textAlign: "center" }}>Rank</th>
             <th style={{ textAlign: "center" }}>Points</th>
-            <th style={{ textAlign: "center" }}>Latest Correct Submission</th>
+            <th style={{ textAlign: "center" }}>Latest Solve Time</th>
           </tr>
         </thead>
         <tbody>

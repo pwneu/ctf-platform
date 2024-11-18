@@ -1,4 +1,4 @@
-import UserRanks from "./components/UserRanks";
+import UserRanksAdmin from "./components/UserRanksAdmin";
 import LeaderboardGraph from "./components/LeaderboardGraph";
 
-export { UserRanks, LeaderboardGraph };
+export { UserRanksAdmin, LeaderboardGraph };
