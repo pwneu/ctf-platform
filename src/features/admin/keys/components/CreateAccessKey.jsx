@@ -90,7 +90,7 @@ export default function CreateAccessKey({ show, onHide, onSuccess }) {
             />
           </Form.Group>
           <Form.Group controlId="formExpirationDate">
-            <Form.Label>Expiration Date (UTC)</Form.Label>
+            <Form.Label>Expiration Date</Form.Label>
             <Form.Control
               type="datetime-local"
               value={expiration}
