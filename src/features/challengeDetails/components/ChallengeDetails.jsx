@@ -54,9 +54,9 @@ export default function ChallengeDetails({ id }) {
         );
         setIsSubmissionDisabled(true);
       } else if (response.data === "SubmittingTooOften") {
-        toast.warn("Submitting too often. Please wait for a few seconds!");
+        toast.warn("Submitting too often. Please wait for 30 seconds!");
         setIsSubmittingTooOften(true); // Disable button
-        setTimeout(() => setIsSubmittingTooOften(false), 15000);
+        setTimeout(() => setIsSubmittingTooOften(false), 30_000);
       } else {
         toast.info(response.data);
       }
@@ -213,11 +213,17 @@ export default function ChallengeDetails({ id }) {
       }
     };
 
-    const checkIfChallengeSolved = async () => {
+    const checkChallengeStatus = async () => {
       try {
         const response = await api.get(`/play/challenges/${id}/check`);
-        setAlreadySolved(response.data);
+        console.log(response.data);
+        if (response.data === "AlreadySolved") {
+          setAlreadySolved(true);
+        } else if (response.data === "Disabled") {
+          setIsSubmissionDisabled(true);
+        }
       } catch (error) {
+        setIsSubmissionDisabled(false);
         setAlreadySolved(false);
       }
     };
@@ -250,7 +256,7 @@ export default function ChallengeDetails({ id }) {
     };
 
     fetchChallengeDetails();
-    checkIfChallengeSolved();
+    checkChallengeStatus();
     fetchRecentSolvers();
   }, [id]);
 
@@ -353,7 +359,7 @@ export default function ChallengeDetails({ id }) {
                         : isSubmitting
                         ? "Submitting..."
                         : isSubmissionDisabled
-                        ? "Submission Disabled"
+                        ? "Disabled!"
                         : alreadySolved
                         ? "Solved!"
                         : "Submit"}
