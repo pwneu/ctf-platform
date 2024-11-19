@@ -13,6 +13,7 @@ export default function LeaderboardsAdminPage() {
 
   const { auth } = useAuth();
   const isManager = auth?.roles?.includes("Manager");
+  const isAdmin = auth?.roles?.includes("Admin");
   const [isClearingLeaderboardsCache, setIsClearingLeaderboardsCache] =
     useState(false);
 
@@ -85,7 +86,7 @@ export default function LeaderboardsAdminPage() {
               <Button
                 onClick={clearLeaderboardsCache}
                 className="mb-3"
-                disabled={isClearingLeaderboardsCache}
+                disabled={!isAdmin || isClearingLeaderboardsCache}
               >
                 {isClearingLeaderboardsCache
                   ? "Clearing..."
