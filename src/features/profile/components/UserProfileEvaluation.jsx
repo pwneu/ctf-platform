@@ -45,20 +45,17 @@ export default function UserProfileEvaluation() {
                   category.totalChallenges - category.totalSolves,
                 ],
                 backgroundColor: [
-                  "rgba(58, 4, 94, 0.8)",  // #3a045e with 80% opacity
-                  "rgba(255, 206, 86, 1)",  // Hover yellow
-                 
-                  
+                  "rgba(58, 4, 94, 0.8)", // #3a045e with 80% opacity
+                  "rgba(255, 206, 86, 1)", // Hover yellow
                 ],
                 hoverOffset: 10, // Increases hover size
                 hoverBackgroundColor: [
                   "rgba(75, 192, 192, 1)", // Hover green
-                  "rgba(207, 247, 23)",  // #cff721 with 80% opacity
-                  
+                  "rgba(207, 247, 23)", // #cff721 with 80% opacity
                 ],
                 borderWidth: 2,
                 borderColor: [
-                  "rgba(207, 247, 23)",  // #cff721 with 80% opacity
+                  "rgba(207, 247, 23)", // #cff721 with 80% opacity
                   "rgba(255, 255, 255, 79)", // White border for clear separation
                 ],
                 shadowOffsetX: 7,
@@ -81,14 +78,14 @@ export default function UserProfileEvaluation() {
                   category.hintsUsed,
                 ],
                 backgroundColor: [
-                  "rgba(58, 4, 94, 1)",    // #3a045e for Solves
+                  "rgba(58, 4, 94, 1)", // #3a045e for Solves
                   "rgba(75, 192, 192, 1)", // Hover green  Incorrect Attempts
                   "rgba(207, 247, 33, 0.8)", // #cff721 for Hint Used
                 ],
                 hoverBackgroundColor: [
-                  "rgba(58, 4, 94, 1)",    // Hover for #3a045e (Solves)                
-                  "rgba(207, 247, 33, 1)",  // Hover for #cff721 (Hint Used)
-                  "rgba(207, 247, 33, 1)",  // Hover for #cff721 
+                  "rgba(58, 4, 94, 1)", // Hover for #3a045e (Solves)
+                  "rgba(207, 247, 33, 1)", // Hover for #cff721 (Hint Used)
+                  "rgba(207, 247, 33, 1)", // Hover for #cff721
                 ],
                 borderColor: "rgba(0, 0, 0, 2)", // Subtle border for contrast
                 borderWidth: 1,
@@ -149,7 +146,6 @@ export default function UserProfileEvaluation() {
                         style={{
                           height: "150px",
                           marginTop: "20px",
-                       
                         }}
                       >
                         <Bar
@@ -174,6 +170,11 @@ export default function UserProfileEvaluation() {
                                 title: {
                                   display: true,
                                   text: "Count",
+                                },
+                                ticks: {
+                                  callback: function (value) {
+                                    return value % 1 === 0 ? value : ""; // Display only whole numbers
+                                  },
                                 },
                               },
                             },
