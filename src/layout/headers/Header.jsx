@@ -27,15 +27,7 @@ export default function Header() {
     } catch (error) {
       toast.error("Unable to log out");
     } finally {
-      setIsLoggingOut(false); 
-    }
-  };
-
-  const handleUserNameClick = () => {
-    if (isManager) {
-      navigate("/admin");
-    } else {
-      navigate("/profile");
+      setIsLoggingOut(false);
     }
   };
 
@@ -83,14 +75,14 @@ export default function Header() {
                 <div className="header-right__buttons d-flex items-center ml-30 md:d-none">
                   {auth?.userName ? (
                     <>
-                      <span
+                      <Link
                         className="text-white"
-                        // className="text-white-1"
-                        style={{ cursor: "pointer" }}
-                        onClick={handleUserNameClick}
+                        style={{ cursor: "pointer", textDecoration: "none" }}
+                        to={isManager ? "/admin" : "/profile"}
                       >
                         {auth.userName}
-                      </span>
+                      </Link>
+
                       <button
                         onClick={handleLogout}
                         className="button -sm -white text-dark-1 ml-30"
