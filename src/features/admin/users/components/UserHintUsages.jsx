@@ -54,7 +54,7 @@ export default function UserHintUsages({ userId }) {
         toast.warn("Slow down!");
       } else {
         toast.error(
-          "Something went wrong getting user solves. Please try again later"
+          "Something went wrong getting user hint usages. Please try again later"
         );
       }
     } finally {
