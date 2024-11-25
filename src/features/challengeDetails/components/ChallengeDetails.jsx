@@ -381,7 +381,7 @@ export default function ChallengeDetails({ id }) {
                     ))
                   ) : (
                     <div className="no-artifacts-message">
-                      No artifacts available
+                      No artifacts available.
                     </div>
                   )}
                   <h4 className="mt-20">Hints</h4>
