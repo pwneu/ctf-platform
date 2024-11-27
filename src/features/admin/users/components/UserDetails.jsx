@@ -388,9 +388,9 @@ export default function UserDetails({
           <Modal.Footer>
             <Button
               variant="secondary"
-              onClick={() => setShowConfirmVerifyModal(false)}
+              onClick={() => setShowConfirmGeneratePasswordResetLink(false)}
             >
-              Close
+              Cancel
             </Button>
             <Button variant="primary" onClick={confirmGenerate}>
               {isGeneratingPasswordResetToken ? (
