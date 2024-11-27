@@ -30,8 +30,9 @@ export default function ChallengeDetails({ id }) {
     e.preventDefault();
     try {
       setIsSubmitting(true);
+      const trimmedFlag = flag.trim();
       const response = await api.post(`/play/challenges/${id}/submit`, null, {
-        params: { flag },
+        params: { flag: trimmedFlag },
       });
 
       if (response.data === "Correct") {
