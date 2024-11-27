@@ -35,6 +35,9 @@ export default function UserDetails({
     useState(false);
   const [isGeneratingStatsReport, setIsGeneratingStatsReport] = useState(false);
 
+  const userIsMember = userDetails?.roles?.includes("Member");
+  const userIsAdmin = userDetails?.roles?.includes("Admin");
+
   const handleDeleteClick = () => {
     setShowConfirmDeleteModal(true);
   };
@@ -189,24 +192,26 @@ export default function UserDetails({
             <p>{new Date(userDetails.createdAt).toLocaleString()}</p>
           </Col>
         </Row>
-        <Row>
-          <Col md={6} className="mb-3">
-            <h5>Position</h5>
-            <p>
-              {userRank === undefined
-                ? "Loading..."
-                : userRank?.position || "Unranked"}
-            </p>
-          </Col>
-          <Col md={6} className="mb-3">
-            <h5>Points</h5>
-            <p>
-              {userRank === undefined
-                ? "Loading..."
-                : userRank?.points || "0"}
-            </p>
-          </Col>
-        </Row>
+        {userIsMember && (
+          <Row>
+            <Col md={6} className="mb-3">
+              <h5>Position</h5>
+              <p>
+                {userRank === undefined
+                  ? "Loading..."
+                  : userRank?.position || "Unranked"}
+              </p>
+            </Col>
+            <Col md={6} className="mb-3">
+              <h5>Points</h5>
+              <p>
+                {userRank === undefined
+                  ? "Loading..."
+                  : userRank?.points || "0"}
+              </p>
+            </Col>
+          </Row>
+        )}
         <Row>
           <Col md={6} className="mb-3">
             <h5>Email</h5>
@@ -226,57 +231,65 @@ export default function UserDetails({
             <p>{userDetails.emailConfirmed ? "Verified" : "Not Verified"}</p>
           </Col>
         </Row>
-        <Button
-          className="ml-3"
-          variant="success"
-          onClick={handleVerifyClick}
-          disabled={userDetails.emailConfirmed || isVerifying}
-        >
-          {isVerifying ? (
-            <Spinner animation="border" size="sm" />
-          ) : (
-            <FontAwesomeIcon icon={faCheck} />
-          )}{" "}
-          {isVerifying ? "Verifying..." : "Verify User"}
-        </Button>
-        <Button
-          className="ml-3"
-          variant="primary"
-          onClick={generateStatsReport}
-          disabled={isGeneratingStatsReport}
-        >
-          {isGeneratingStatsReport ? (
-            <Spinner animation="border" size="sm" />
-          ) : (
-            <FontAwesomeIcon icon={faDownload} />
-          )}{" "}
-          {isGeneratingStatsReport ? "Generating..." : "Generate Stats Report"}
-        </Button>
-        {isAdmin && (
+        {!userIsAdmin && (
           <>
             <Button
               className="ml-3"
-              variant="info"
-              onClick={handleGenerateClick}
-              disabled={isGeneratingPasswordResetToken}
+              variant="success"
+              onClick={handleVerifyClick}
+              disabled={userDetails.emailConfirmed || isVerifying}
             >
-              {isGeneratingPasswordResetToken ? (
+              {isVerifying ? (
                 <Spinner animation="border" size="sm" />
               ) : (
-                <FontAwesomeIcon icon={faClipboard} />
+                <FontAwesomeIcon icon={faCheck} />
               )}{" "}
-              {isGeneratingPasswordResetToken
-                ? "Generating..."
-                : "Generate Password Reset Link"}
+              {isVerifying ? "Verifying..." : "Verify User"}
             </Button>
-            <Button
-              className="ml-3"
-              variant="danger"
-              onClick={handleDeleteClick}
-              disabled={cannotBeDeleted}
-            >
-              <FontAwesomeIcon icon={faTrash} /> Delete User
-            </Button>
+            {userIsMember && (
+              <Button
+                className="ml-3"
+                variant="primary"
+                onClick={generateStatsReport}
+                disabled={isGeneratingStatsReport}
+              >
+                {isGeneratingStatsReport ? (
+                  <Spinner animation="border" size="sm" />
+                ) : (
+                  <FontAwesomeIcon icon={faDownload} />
+                )}{" "}
+                {isGeneratingStatsReport
+                  ? "Generating..."
+                  : "Generate Stats Report"}
+              </Button>
+            )}
+            {isAdmin && (
+              <>
+                <Button
+                  className="ml-3"
+                  variant="info"
+                  onClick={handleGenerateClick}
+                  disabled={isGeneratingPasswordResetToken}
+                >
+                  {isGeneratingPasswordResetToken ? (
+                    <Spinner animation="border" size="sm" />
+                  ) : (
+                    <FontAwesomeIcon icon={faClipboard} />
+                  )}{" "}
+                  {isGeneratingPasswordResetToken
+                    ? "Generating..."
+                    : "Generate Password Reset Link"}
+                </Button>
+                <Button
+                  className="ml-3"
+                  variant="danger"
+                  onClick={handleDeleteClick}
+                  disabled={cannotBeDeleted}
+                >
+                  <FontAwesomeIcon icon={faTrash} /> Delete User
+                </Button>
+              </>
+            )}
           </>
         )}
 
