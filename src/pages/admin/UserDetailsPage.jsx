@@ -27,10 +27,12 @@ export default function UserDetailsPage() {
 
   const { auth } = useAuth();
   const isAdmin = auth?.roles?.includes("Admin");
+  const shouldShowPlayData = userDetails?.roles?.includes("Member");
 
   const getUserDetails = async (id) => {
     try {
       const response = await api.get(`/identity/users/${id}/details`);
+      console.log(response.data);
       setUserDetails(response.data);
     } catch (error) {
       const status = error?.response?.status;
@@ -141,11 +143,14 @@ export default function UserDetailsPage() {
               getUserDetails={getUserDetails}
             />
 
-            <UserEvaluations userEvaluations={userEvaluations} />
-            <UserGraph userGraph={userGraph} />
-
-            <UserSolves userId={userDetails.id} />
-            <UserHintUsages userId={userDetails.id} />
+            {shouldShowPlayData && (
+              <>
+                <UserEvaluations userEvaluations={userEvaluations} />
+                <UserGraph userGraph={userGraph} />
+                <UserSolves userId={userDetails.id} />
+                <UserHintUsages userId={userDetails.id} />
+              </>
+            )}
           </>
         )}
       </Container>
