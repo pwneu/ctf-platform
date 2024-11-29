@@ -11,6 +11,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { toast } from "react-toastify";
 import { api } from "@/api";
+import jsPDF from "jspdf";
 
 export default function UserDetails({
   userDetails,
@@ -34,6 +35,10 @@ export default function UserDetails({
   const [isGeneratingPasswordResetToken, setIsGeneratingPasswordResetToken] =
     useState(false);
   const [isGeneratingStatsReport, setIsGeneratingStatsReport] = useState(false);
+  const [isGeneratingCertificate, setIsGeneratingCertificate] = useState(false);
+  const [isResetingCertificate, setIsResettingCertificate] = useState(false);
+  const [showConfirmResetCertificate, setShowConfirmResetCertificate] =
+    useState(false);
 
   const userIsMember = userDetails?.roles?.includes("Member");
   const userIsAdmin = userDetails?.roles?.includes("Admin");
@@ -106,6 +111,77 @@ export default function UserDetails({
     setShowConfirmGeneratePasswordResetLink(true);
   };
 
+  const generateCertificate = async () => {
+    if (isGeneratingCertificate) return;
+    try {
+      setIsGeneratingCertificate(true);
+      const response = await api.post("/identity/certificates", {
+        userId: userDetails.id,
+      });
+
+      const doc = new jsPDF({
+        orientation: "landscape",
+        unit: "px",
+        format: [2480, 3508],
+        hotfixes: [],
+      });
+
+      doc.html(response.data, {
+        html2canvas: { scale: 2 },
+        callback: function (doc) {
+          doc.save(`${userDetails.id}_certificate.pdf`);
+        },
+        autoPaging: "text",
+        x: 0,
+        y: 0,
+        width: 2480,
+        windowWidth: 2480,
+      });
+    } catch (error) {
+      const status = error?.response?.status;
+
+      if (status === 401) {
+        navigate("/login");
+      } else if (status === 400) {
+        toast.error(error.response.data.message);
+      } else {
+        toast.error(
+          "Something went wrong generating user certificate. Please try again later"
+        );
+      }
+    } finally {
+      setIsGeneratingCertificate(false);
+    }
+  };
+
+  const handleResetCertificateClick = () => {
+    setShowConfirmResetCertificate(true);
+  };
+
+  const confirmResetCertificate = async () => {
+    if (isResetingCertificate) return;
+    setIsResettingCertificate(true);
+    try {
+      await api.delete(`/identity/users/${userDetails.id}/certificate`);
+      toast.success("Successfully reset user certificate");
+    } catch (error) {
+      const status = error?.response?.status;
+
+      if (status === 401) {
+        navigate("/login");
+      } else if (status === 400) {
+        toast.error(error.response.data.message);
+      } else {
+        toast.error(
+          "Something went wrong resetting user certificate. Please try again later"
+        );
+      }
+    } finally {
+      setShowConfirmResetCertificate(false);
+      setIsResettingCertificate(false);
+    }
+  };
+
   const confirmGenerate = async () => {
     setIsGeneratingPasswordResetToken(true);
     try {
@@ -143,7 +219,7 @@ export default function UserDetails({
 
       const a = document.createElement("a");
       a.href = url;
-      a.download = "stats_report.html";
+      a.download = `${userDetails.id}_stats-report.html`;
       document.body.appendChild(a);
       a.click();
 
@@ -154,8 +230,8 @@ export default function UserDetails({
 
       if (status === 401) {
         navigate("/login");
-      } else if (status === 404) {
-        toast.error(error.response.data.message || "User not found");
+      } else if (status === 400) {
+        toast.error(error.response.data.message);
       } else {
         toast.error(
           "Something went wrong generating user stats. Please try again later"
@@ -247,49 +323,81 @@ export default function UserDetails({
               {isVerifying ? "Verifying..." : "Verify User"}
             </Button>
             {userIsMember && (
-              <Button
-                className="ml-3"
-                variant="primary"
-                onClick={generateStatsReport}
-                disabled={isGeneratingStatsReport}
-              >
-                {isGeneratingStatsReport ? (
-                  <Spinner animation="border" size="sm" />
-                ) : (
-                  <FontAwesomeIcon icon={faDownload} />
-                )}{" "}
-                {isGeneratingStatsReport
-                  ? "Generating..."
-                  : "Generate Stats Report"}
-              </Button>
-            )}
-            {isAdmin && (
               <>
                 <Button
                   className="ml-3"
-                  variant="info"
-                  onClick={handleGenerateClick}
-                  disabled={isGeneratingPasswordResetToken}
+                  variant="primary"
+                  onClick={generateStatsReport}
+                  disabled={isGeneratingStatsReport}
                 >
-                  {isGeneratingPasswordResetToken ? (
+                  {isGeneratingStatsReport ? (
                     <Spinner animation="border" size="sm" />
                   ) : (
-                    <FontAwesomeIcon icon={faClipboard} />
+                    <FontAwesomeIcon icon={faDownload} />
                   )}{" "}
-                  {isGeneratingPasswordResetToken
+                  {isGeneratingStatsReport
                     ? "Generating..."
-                    : "Generate Password Reset Link"}
+                    : "Generate Stats Report"}
                 </Button>
+
                 <Button
                   className="ml-3"
-                  variant="danger"
-                  onClick={handleDeleteClick}
-                  disabled={cannotBeDeleted}
+                  variant="success"
+                  onClick={generateCertificate}
+                  disabled={isGeneratingCertificate}
                 >
-                  <FontAwesomeIcon icon={faTrash} /> Delete User
+                  {isGeneratingCertificate ? (
+                    <Spinner animation="border" size="sm" />
+                  ) : (
+                    <FontAwesomeIcon icon={faDownload} />
+                  )}{" "}
+                  {isGeneratingCertificate
+                    ? "Generating..."
+                    : "Generate Certificate"}
+                </Button>
+
+                <Button
+                  className="ml-3"
+                  variant="warning"
+                  onClick={handleResetCertificateClick}
+                  disabled={isResetingCertificate}
+                >
+                  {isResetingCertificate ? (
+                    <Spinner animation="border" size="sm" />
+                  ) : (
+                    <FontAwesomeIcon icon={faTrash} />
+                  )}{" "}
+                  {isResetingCertificate ? "Resetting..." : "Reset Certificate"}
                 </Button>
               </>
             )}
+          </>
+        )}
+        {isAdmin && (
+          <>
+            <Button
+              className="ml-3"
+              variant="info"
+              onClick={handleGenerateClick}
+              disabled={isGeneratingPasswordResetToken}
+            >
+              {isGeneratingPasswordResetToken ? (
+                <Spinner animation="border" size="sm" />
+              ) : (
+                <FontAwesomeIcon icon={faClipboard} />
+              )}{" "}
+              {isGeneratingPasswordResetToken
+                ? "Generating..."
+                : "Generate Password Reset Link"}
+            </Button>
+            <Button
+              className="ml-3"
+              variant="danger"
+              onClick={handleDeleteClick}
+              disabled={cannotBeDeleted}
+            >
+              <FontAwesomeIcon icon={faTrash} /> Delete User
+            </Button>
           </>
         )}
 
@@ -360,13 +468,40 @@ export default function UserDetails({
               variant="secondary"
               onClick={() => setShowConfirmVerifyModal(false)}
             >
-              Close
+              Cancel
             </Button>
             <Button variant="primary" onClick={confirmVerify}>
               {isVerifying ? (
                 <Spinner animation="border" size="sm" />
               ) : (
                 "Verify User"
+              )}
+            </Button>
+          </Modal.Footer>
+        </Modal>
+
+        <Modal
+          show={showConfirmResetCertificate}
+          onHide={() => setShowConfirmResetCertificate(false)}
+        >
+          <Modal.Header closeButton>
+            <Modal.Title>Confirm Reset User Certificate</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <p>Do you want to reset the certificate of this user?</p>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button
+              variant="secondary"
+              onClick={() => setShowConfirmResetCertificate(false)}
+            >
+              Cancel
+            </Button>
+            <Button variant="primary" onClick={confirmResetCertificate}>
+              {isResetingCertificate ? (
+                <Spinner animation="border" size="sm" />
+              ) : (
+                "Reset"
               )}
             </Button>
           </Modal.Footer>
