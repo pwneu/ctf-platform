@@ -61,8 +61,8 @@ export default function UserProfile({
       if (status === 401) {
         navigate("/login");
       } else 
-      if (status === 404) {
-        toast.error(error.response.data.message || "User not found");
+      if (status === 400) {
+        toast.error(error.response.data.message);
       } else if (status === 429) {
         toast.warn("Slow down on generating your user stats!");
       }
