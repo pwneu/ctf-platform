@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Card, Row, Col, Button, Spinner, Modal } from "react-bootstrap";
+import { Card, Row, Col, Button, Spinner, Modal, Form } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faTrash,
@@ -8,10 +8,10 @@ import {
   faCheck,
   faClipboard,
   faDownload,
+  faCertificate,
 } from "@fortawesome/free-solid-svg-icons";
 import { toast } from "react-toastify";
 import { api } from "@/api";
-import jsPDF from "jspdf";
 
 export default function UserDetails({
   userDetails,
@@ -35,7 +35,13 @@ export default function UserDetails({
   const [isGeneratingPasswordResetToken, setIsGeneratingPasswordResetToken] =
     useState(false);
   const [isGeneratingStatsReport, setIsGeneratingStatsReport] = useState(false);
-  const [isGeneratingCertificate, setIsGeneratingCertificate] = useState(false);
+  const [isDownloadingCertificate, setIsDownloadingCertificate] =
+    useState(false);
+
+  const [certFile, setCertFile] = useState(null);
+  const [isAddingCertificate, setIsAddingCertificate] = useState(false);
+  const [showAddCertificate, setShowAddCertificate] = useState(false);
+
   const [isResetingCertificate, setIsResettingCertificate] = useState(false);
   const [showConfirmResetCertificate, setShowConfirmResetCertificate] =
     useState(false);
@@ -111,32 +117,87 @@ export default function UserDetails({
     setShowConfirmGeneratePasswordResetLink(true);
   };
 
-  const generateCertificate = async () => {
-    if (isGeneratingCertificate) return;
+  const handleAddCertificate = () => {
+    setShowAddCertificate(true);
+  };
+
+  const handleCertFileChange = (e) => {
+    const selectedFile = e.target.files[0];
+    if (selectedFile && selectedFile.type === "application/pdf") {
+      setCertFile(selectedFile);
+    } else {
+      toast.error("Please select a valid PDF file");
+    }
+  };
+
+  const confirmAddCertificate = async () => {
+    if (isAddingCertificate || !certFile) return;
     try {
-      setIsGeneratingCertificate(true);
-      const response = await api.post("/identity/certificates", {
-        userId: userDetails.id,
-      });
+      setIsAddingCertificate(true);
 
-      const doc = new jsPDF({
-        orientation: "landscape",
-        unit: "px",
-        format: [2480, 3508],
-        hotfixes: [],
-      });
+      const formData = new FormData();
+      formData.append("file", certFile);
 
-      doc.html(response.data, {
-        html2canvas: { scale: 2 },
-        callback: function (doc) {
-          doc.save(`${userDetails.id}_certificate.pdf`);
-        },
-        autoPaging: "text",
-        x: 0,
-        y: 0,
-        width: 2480,
-        windowWidth: 2480,
-      });
+      const response = await api.post(
+        `/identity/users/${userDetails.id}/certificate`,
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+
+      toast.success(`Certificate added: ${response.data}`);
+      setShowAddCertificate(false);
+    } catch (error) {
+      const status = error?.response?.status;
+
+      console.log(error.response.data)
+      if (status === 401) {
+        navigate("/login");
+      } else if (status === 400) {
+        toast.error(error.response?.data?.message);
+      } else if (status === 413) {
+        toast.error(
+          "The file is too large. Please choose a file smaller than 30 MB."
+        );
+      } else {
+        toast.error("Error adding certificate. Please try again later");
+      }
+    } finally {
+      setIsAddingCertificate(false);
+    }
+  };
+
+  const downloadCertificate = async () => {
+    if (isDownloadingCertificate) return;
+
+    try {
+      setIsDownloadingCertificate(true);
+
+      const checkResponse = await api.get(`/identity/users/${userDetails.id}/certificate`);
+
+      if (checkResponse.data === false) {
+        toast.error("The user doesn't have a certificate yet");
+        return;
+      }
+
+      const response = await api.get(
+        `/identity/users/${userDetails.id}/certificate`,
+        {
+          responseType: "blob",
+        }
+      );
+
+      const url = window.URL.createObjectURL(new Blob([response.data]));
+      const link = document.createElement("a");
+      link.href = url;
+      link.setAttribute("download", "pwneu-certificate.pdf");
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      window.URL.revokeObjectURL(url);
     } catch (error) {
       const status = error?.response?.status;
 
@@ -146,11 +207,11 @@ export default function UserDetails({
         toast.error(error.response.data.message);
       } else {
         toast.error(
-          "Something went wrong generating user certificate. Please try again later"
+          "Something went wrong getting user certificate. Please try again later"
         );
       }
     } finally {
-      setIsGeneratingCertificate(false);
+      setIsDownloadingCertificate(false);
     }
   };
 
@@ -293,12 +354,20 @@ export default function UserDetails({
             <h5>Email</h5>
             <p>{showEmail ? userEmail : "••••••••••"}</p>
             <Button
-              variant="link"
+              variant="secondary"
               onClick={() => setShowEmail((prev) => !prev)}
             >
               <FontAwesomeIcon icon={showEmail ? faEyeSlash : faEye} />{" "}
               {showEmail ? "Hide Email" : "Show Email"}
             </Button>
+          </Col>
+          <Col md={6} className="mb-3">
+            <h5>Roles</h5>
+            <p>
+              {userDetails?.roles && userDetails.roles.length > 0
+                ? userDetails.roles.join(", ")
+                : "No roles assigned"}
+            </p>
           </Col>
         </Row>
         <Row>
@@ -310,7 +379,7 @@ export default function UserDetails({
         {!userIsAdmin && (
           <>
             <Button
-              className="ml-3"
+              className="ml-3 mb-1"
               variant="success"
               onClick={handleVerifyClick}
               disabled={userDetails.emailConfirmed || isVerifying}
@@ -325,7 +394,7 @@ export default function UserDetails({
             {userIsMember && (
               <>
                 <Button
-                  className="ml-3"
+                  className="ml-3 mb-1"
                   variant="primary"
                   onClick={generateStatsReport}
                   disabled={isGeneratingStatsReport}
@@ -341,23 +410,37 @@ export default function UserDetails({
                 </Button>
 
                 <Button
-                  className="ml-3"
-                  variant="success"
-                  onClick={generateCertificate}
-                  disabled={isGeneratingCertificate}
+                  className="ml-3 mb-1"
+                  variant="info"
+                  onClick={handleAddCertificate}
+                  disabled={isAddingCertificate}
                 >
-                  {isGeneratingCertificate ? (
+                  {isAddingCertificate ? (
+                    <Spinner animation="border" size="sm" />
+                  ) : (
+                    <FontAwesomeIcon icon={faCertificate} />
+                  )}{" "}
+                  {isAddingCertificate ? "Adding..." : "Add Certificate"}
+                </Button>
+
+                <Button
+                  className="ml-3 mb-1"
+                  variant="success"
+                  onClick={downloadCertificate}
+                  disabled={isDownloadingCertificate}
+                >
+                  {isDownloadingCertificate ? (
                     <Spinner animation="border" size="sm" />
                   ) : (
                     <FontAwesomeIcon icon={faDownload} />
                   )}{" "}
-                  {isGeneratingCertificate
-                    ? "Generating..."
-                    : "Generate Certificate"}
+                  {isDownloadingCertificate
+                    ? "Downloading..."
+                    : "Download Certificate"}
                 </Button>
 
                 <Button
-                  className="ml-3"
+                  className="ml-3 mb-1"
                   variant="warning"
                   onClick={handleResetCertificateClick}
                   disabled={isResetingCertificate}
@@ -371,33 +454,33 @@ export default function UserDetails({
                 </Button>
               </>
             )}
-          </>
-        )}
-        {isAdmin && (
-          <>
-            <Button
-              className="ml-3"
-              variant="info"
-              onClick={handleGenerateClick}
-              disabled={isGeneratingPasswordResetToken}
-            >
-              {isGeneratingPasswordResetToken ? (
-                <Spinner animation="border" size="sm" />
-              ) : (
-                <FontAwesomeIcon icon={faClipboard} />
-              )}{" "}
-              {isGeneratingPasswordResetToken
-                ? "Generating..."
-                : "Generate Password Reset Link"}
-            </Button>
-            <Button
-              className="ml-3"
-              variant="danger"
-              onClick={handleDeleteClick}
-              disabled={cannotBeDeleted}
-            >
-              <FontAwesomeIcon icon={faTrash} /> Delete User
-            </Button>
+            {isAdmin && (
+              <>
+                <Button
+                  className="ml-3 mb-1"
+                  variant="secondary"
+                  onClick={handleGenerateClick}
+                  disabled={isGeneratingPasswordResetToken}
+                >
+                  {isGeneratingPasswordResetToken ? (
+                    <Spinner animation="border" size="sm" />
+                  ) : (
+                    <FontAwesomeIcon icon={faClipboard} />
+                  )}{" "}
+                  {isGeneratingPasswordResetToken
+                    ? "Generating..."
+                    : "Generate Password Reset Link"}
+                </Button>
+                <Button
+                  className="ml-3 mb-1"
+                  variant="danger"
+                  onClick={handleDeleteClick}
+                  disabled={cannotBeDeleted}
+                >
+                  <FontAwesomeIcon icon={faTrash} /> Delete User
+                </Button>
+              </>
+            )}
           </>
         )}
 
@@ -476,6 +559,44 @@ export default function UserDetails({
               ) : (
                 "Verify User"
               )}
+            </Button>
+          </Modal.Footer>
+        </Modal>
+
+        <Modal
+          show={showAddCertificate}
+          onHide={() => setShowAddCertificate(false)}
+        >
+          <Modal.Header closeButton>
+            <Modal.Title>Add Certificate</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <Form>
+              <Form.Group controlId="certificateFile">
+                <Form.Label>Upload PDF Certificate (Max 30MB)</Form.Label>
+                <Form.Control
+                  type="file"
+                  accept="application/pdf"
+                  onChange={handleCertFileChange}
+                  disabled={isAddingCertificate}
+                />
+              </Form.Group>
+            </Form>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button
+              variant="secondary"
+              onClick={() => setShowAddCertificate(false)}
+              disabled={isAddingCertificate}
+            >
+              Cancel
+            </Button>
+            <Button
+              variant="primary"
+              onClick={confirmAddCertificate}
+              disabled={isAddingCertificate}
+            >
+              Add
             </Button>
           </Modal.Footer>
         </Modal>
