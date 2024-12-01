@@ -38,6 +38,7 @@ export default function ChallengeArtifacts({
   };
 
   const handleCreateArtifact = async () => {
+    if (isLoading || !file) return;
     const formData = new FormData();
     formData.append("file", file);
     setIsLoading(true);
@@ -52,6 +53,7 @@ export default function ChallengeArtifacts({
           },
         }
       );
+
       toast.success(`Artifact created: ${response.data}`);
       refreshArtifacts();
       setShowCreateModal(false);
