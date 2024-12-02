@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { api } from "@/api";
 import { toast } from "react-toastify";
-import jsPDF from "jspdf";
 
 // TODO -- Design
 
@@ -11,28 +10,26 @@ export default function CertifyPage() {
   useEffect(() => {
     const generateCertificate = async () => {
       try {
-        const response = await api.post("/identity/certificates/me");
+        const checkResponse = await api.get("/identity/me/certificate/check");
+
+        if (checkResponse.data === false) {
+          toast.error("Sorry! You don't have a certificate");
+          return;
+        }
+
         setCertificationStatus("generating");
-
-        const doc = new jsPDF({
-          orientation: "landscape",
-          unit: "px",
-          format: [2480, 3508],
-          hotfixes: [],
+        const response = await api.get("/identity/me/certificate", {
+          responseType: "blob",
         });
 
-        doc.html(response.data, {
-          html2canvas: { scale: 2 },
-          callback: function (doc) {
-            doc.save("certificate.pdf");
-          },
-          autoPaging: "text",
-          x: 0,
-          y: 0,
-          width: 2480,
-          windowWidth: 2480,
-        });
-
+        const url = window.URL.createObjectURL(new Blob([response.data]));
+        const link = document.createElement("a");
+        link.href = url;
+        link.setAttribute("download", "pwneu-certificate.pdf");
+        document.body.appendChild(link);
+        link.click();
+        link.remove();
+        window.URL.revokeObjectURL(url);
         setCertificationStatus("success");
       } catch (error) {
         toast.error(error.response.data.message);

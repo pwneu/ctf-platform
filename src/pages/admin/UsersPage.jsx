@@ -1,10 +1,12 @@
 import { useState, useEffect } from "react";
-import { Container, Button } from "react-bootstrap";
+import { Container, Button, Spinner } from "react-bootstrap";
 import { api } from "@/api";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { UsersQueryInput, UsersList } from "@/features/admin/users";
 import HeaderAdmin from "@/layout/headers/HeaderAdmin";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faDownload } from "@fortawesome/free-solid-svg-icons";
 
 export default function UsersPage() {
   const navigate = useNavigate();
@@ -22,6 +24,8 @@ export default function UsersPage() {
   const [hasPreviousPage, setHasPreviousPage] = useState(false);
   const [showEmail, setShowEmail] = useState(false);
   const [isBusy, setIsBusy] = useState(false);
+
+  const [isExportingMembers, setIsExportingMembers] = useState(false);
 
   const handleSearch = async () => {
     setIsBusy(true);
@@ -72,6 +76,45 @@ export default function UsersPage() {
     setShowEmail((prev) => !prev);
   };
 
+  const exportMembers = async () => {
+    if (isExportingMembers) return;
+
+    try {
+      setIsExportingMembers(true);
+
+      const response = await api.get("/identity/members/export", {
+        responseType: "blob",
+      });
+
+      const url = URL.createObjectURL(
+        new Blob([response.data], { type: "text/csv" })
+      );
+
+      const link = document.createElement("a");
+      link.href = url;
+      link.setAttribute("download", "pwneu-members.csv");
+      document.body.appendChild(link);
+      link.click();
+
+      link.remove();
+      URL.revokeObjectURL(url);
+    } catch (error) {
+      const status = error?.response?.status;
+
+      if (status === 401) {
+        navigate("/login");
+      } else if (status === 400) {
+        toast.error(error.response.data.message);
+      } else {
+        toast.error(
+          "Something went wrong exporting members. Please try again later"
+        );
+      }
+    } finally {
+      setIsExportingMembers(false);
+    }
+  };
+
   // useEffect(() => {
   //   import("bootstrap/dist/css/bootstrap.min.css");
   // }, []);
@@ -117,6 +160,20 @@ export default function UsersPage() {
           onClick={toggleEmailVisibility}
         >
           {showEmail ? "Hide Emails" : "Show Emails"}
+        </Button>
+
+        <Button
+          className="mt-4 ml-3"
+          variant="success"
+          onClick={exportMembers}
+          disabled={isExportingMembers}
+        >
+          {isExportingMembers ? (
+            <Spinner animation="border" size="sm" />
+          ) : (
+            <FontAwesomeIcon icon={faDownload} />
+          )}{" "}
+          {isExportingMembers ? "Exporting..." : "Export Members"}
         </Button>
 
         <UsersList
