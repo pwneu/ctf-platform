@@ -12,8 +12,15 @@ export default function CertifyPage() {
       try {
         const checkResponse = await api.get("/identity/me/certificate/check");
 
-        if (checkResponse.data === false) {
-          toast.error("Sorry! You don't have a certificate");
+        if (checkResponse.data === "WithoutCertificate") {
+          setCertificationStatus("failed");
+          toast.error("Sorry! You haven't received a certificate");
+          return;
+        }
+
+        if (checkResponse.data === "NotAllowed") {
+          setCertificationStatus("failed");
+          toast.error("Sorry! Not allowed to receive a certificate");
           return;
         }
 
@@ -32,7 +39,18 @@ export default function CertifyPage() {
         window.URL.revokeObjectURL(url);
         setCertificationStatus("success");
       } catch (error) {
-        toast.error(error.response.data.message);
+        const status = error?.response?.status;
+
+        if (status === 400) {
+          toast.error(error.response.data.message);
+        } else if (status === 429) {
+          toast.warn("Slow down on generating certificate!");
+        } else {
+          toast.error(
+            "Something went wrong getting user certificate. Please try again later"
+          );
+        }
+
         setCertificationStatus("failed");
       }
     };
