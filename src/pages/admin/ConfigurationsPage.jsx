@@ -6,7 +6,6 @@ import { useNavigate } from "react-router-dom";
 import useAuth from "@/hooks/useAuth";
 import HeaderAdmin from "@/layout/headers/HeaderAdmin";
 import {
-  CertificationIssuer,
   IsCertificationEnabled,
   IsTurnstileEnabled,
   PublicLeaderboardCount,
@@ -20,10 +19,6 @@ export default function ConfigurationsPage() {
 
   const [leaderboardCount, setLeaderboardCount] = useState("");
   const [initialLeaderboardCount, setInitialLeaderboardCount] = useState("");
-
-  const [certificationIssuer, setCertificationIssuer] = useState("");
-  const [initialCertificationIssuer, setInitialCertificationIssuer] =
-    useState("");
 
   const [isBusy, setIsBusy] = useState(false);
 
@@ -59,15 +54,6 @@ export default function ConfigurationsPage() {
         setIsBusy(true);
         const response = await api.get("/identity/configurations");
         setIdentityConfigurations(response.data);
-
-        const certificationIssuerConfig = response.data.find(
-          (config) => config.key === "CertificationIssuer"
-        );
-
-        if (certificationIssuerConfig) {
-          setCertificationIssuer(certificationIssuerConfig.value);
-          setInitialCertificationIssuer(certificationIssuerConfig.value);
-        }
       } catch {
         toast.error(
           "Something went wrong getting identity configurations. Please try again later"
@@ -156,18 +142,6 @@ export default function ConfigurationsPage() {
 
             <IsCertificationEnabled
               identityConfigurations={identityConfigurations}
-              setIdentityConfigurations={setIdentityConfigurations}
-              isAdmin={isAdmin}
-              isBusy={isBusy}
-              setIsBusy={setIsBusy}
-              handleApiError={handleApiError}
-            />
-
-            <CertificationIssuer
-              certificationIssuer={certificationIssuer}
-              setCertificationIssuer={setCertificationIssuer}
-              initialCertificationIssuer={initialCertificationIssuer}
-              setInitialCertificationIssuer={setInitialCertificationIssuer}
               setIdentityConfigurations={setIdentityConfigurations}
               isAdmin={isAdmin}
               isBusy={isBusy}
