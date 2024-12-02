@@ -153,7 +153,6 @@ export default function UserDetails({
     } catch (error) {
       const status = error?.response?.status;
 
-      console.log(error.response.data)
       if (status === 401) {
         navigate("/login");
       } else if (status === 400) {
@@ -176,10 +175,17 @@ export default function UserDetails({
     try {
       setIsDownloadingCertificate(true);
 
-      const checkResponse = await api.get(`/identity/users/${userDetails.id}/certificate/check`);
+      const checkResponse = await api.get(
+        `/identity/users/${userDetails.id}/certificate/check`
+      );
 
-      if (checkResponse.data === false) {
+      if (checkResponse.data === "WithoutCertificate") {
         toast.error("The user doesn't have a certificate yet");
+        return;
+      }
+
+      if (checkResponse.data === "NotAllowed") {
+        toast.error("Certification is disabled");
         return;
       }
 
@@ -205,6 +211,8 @@ export default function UserDetails({
         navigate("/login");
       } else if (status === 400) {
         toast.error(error.response.data.message);
+      } else if (status === 429) {
+        toast.warn("Slow down on generating certificate!");
       } else {
         toast.error(
           "Something went wrong getting user certificate. Please try again later"
