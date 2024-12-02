@@ -176,7 +176,7 @@ export default function UserDetails({
     try {
       setIsDownloadingCertificate(true);
 
-      const checkResponse = await api.get(`/identity/users/${userDetails.id}/certificate`);
+      const checkResponse = await api.get(`/identity/users/${userDetails.id}/certificate/check`);
 
       if (checkResponse.data === false) {
         toast.error("The user doesn't have a certificate yet");
