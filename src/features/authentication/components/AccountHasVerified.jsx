@@ -9,20 +9,25 @@ export default function AccountHasVerified({ email }) {
         <div className="row justify-center items-center">
           <div className="col-xl-8 col-lg-9">
             <div className="px-50 py-50 md:px-25 md:py-25 bg-white rounded-16">
-              <h3 className="text-30 lh-17 text-center">
+              <div className="text-center">
+                <img
+                  src="assets/img/login/AccountHasbeenCreated.svg"
+                  alt="Image Description"
+                  className="img-fluid"
+                  style={{ maxWidth: "40%", height: "auto" }}
+                />
+              </div>
+              <h3 className="text-30 text-center">
                 Thank you for confirming!
               </h3>
-              <p className="mt-20 text-34 text-center">
+              <p className="mt-10 text-34 text-center">
                 We’ve verified your account with the email <br />
                 {email}. You're all set!
               </p>
 
               <p className="mt-15 text-34 text-center">
                 To get started, go to{" "}
-                <Link
-                  to="/play"
-                  className="text-custom-color text-bold"
-                >
+                <Link to="/play" className="text-custom-color text-bold">
                   PWNEU Competition
                 </Link>{" "}
                 and begin your journey!
