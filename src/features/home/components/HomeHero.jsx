@@ -33,10 +33,7 @@ const hero_content = {
   title: (
     <>
       Unleash Your Potential and{" "}
-      <span style={{ textDecoration: "underline", color: "#cff721" }}>
-        Secure
-      </span>{" "}
-      the future
+      <span style={{ color: "#cff721" }}>Secure</span> the future
     </>
   ),
   info_hero: (
@@ -46,18 +43,15 @@ const hero_content = {
       tomorrow.
     </>
   ),
-  
 };
 const { title, text_underline, info_hero } = hero_content;
-
 const HomeHero = () => {
-
   return (
     <>
       <section className="masthead -type-1 js-mouse-move-container mt-50">
         <div className="masthead__bg">
           <img
-            src={"/assets/img/learningPaths/learning/herobg1.gif"}
+            src={"/assets/img/learningPaths/learning/herobg2.svg"}
             alt="image"
           />
         </div>
@@ -92,9 +86,11 @@ const HomeHero = () => {
                     <Link
                       data-barba
                       to="/signup"
-                      className="buttonhero button-get-started -md  text-white"
+                      className="buttonhero  -md  text-white mt-1"
                     >
-                      Get Started Today
+                      <span style={{ color: "#cff721", fontSize: "16px" }}>
+                        ► Get Started
+                      </span>{" "}
                     </Link>
                   </div>
                   <div className="col-12 col-sm-auto">

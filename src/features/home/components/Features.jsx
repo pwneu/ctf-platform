@@ -1,53 +1,47 @@
-import { Link } from "react-router-dom";
-import { feature } from "@/data/features"; 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"; 
-import { faCheck } from "@fortawesome/free-solid-svg-icons"; 
+import { feature } from "@/data/features";
 
 export default function Features() {
   return (
-    <section className="layout-pt-lg layout-pb-lg bg-beige-1">
+    <section className="layout-pt-lg layout-pb-lg ">
       <div className="container">
         <div className="row y-gap-30 justify-between items-center">
           <div className="col-xl-5 col-lg-6 col-md-10 order-2 order-lg-1">
-            <div className="about-content">
+            <div className="about-content col-xl-11 col-lg-6 col-md-1 ">
               <h2
-                className="about-content__title customSized"
+                className="about-content__title customSized "
                 data-aos="fade-up"
               >
                 <span>Master New Skills </span> on Your Own Terms.
               </h2>
-              <p className="about-content__text" data-aos="fade-up">
-                Explore the benefits of PWNEU Missions designed 
-                <br /> for university students.
+              <p className="about-content__text fw-600 text-13 lh-1" data-aos="fade-up">
+                College of Informatics and Computing Studies <br></br>New Era University
               </p>
-              <div className="y-gap-20 pt-30">
+
+              <p className="about-content__text lh-1" data-aos="fade-up">
+                Unlock the benefits of PWNEU Missions, designed specifically
+                <br /> for university students like you:
+              </p>
+              <div className="y-gap-20 pt-30 ">
                 {feature.map((elm, i) => (
                   <div
                     key={i}
                     className="d-flex items-center"
                     data-aos="fade-up"
                   >
-                    <div className="about-content-list__icon">
-                      <span
-                        className="text-white"
-                        style={{
-                          fontSize: "10px",
-                          fontWeight: "300",
-                        }}
-                        aria-hidden="true"
-                      >
-                        <FontAwesomeIcon icon={faCheck} />
-                      </span>
+                    <i
+                      className="fas fa-check-circle"
+                      style={{
+                        marginRight: "20px",
+                        marginBottom: "1px",
+                        marginTop: "12px",
+                        color: "black",
+                      }}
+                    ></i>
+                    <div className="about-content-list__title pt-20 lh-1">
+                      {elm.title}
                     </div>
-                    <div className="about-content-list__title">{elm.title}</div>
                   </div>
                 ))}
-              </div>
-
-              <div className="d-inline-block mt-30">
-                <Link to="/signup" className="button -md -dark-1 text-white">
-                  Join Free
-                </Link>
               </div>
             </div>
           </div>
