@@ -1,9 +1,8 @@
 import MetaComponent from "@/components/MetaComponent";
 import Preloader from "@/components/Preloader";
 import Header from "@/layout/headers/Header";
-import PageLinks from "@/components/PageLinks";
 import Footer from "@/layout/footers/Footer";
-import { OurPreview, DevFounder, WhoWeAre } from "@/features/about";
+import { DevFounder} from "@/features/about";
 
 const metadata = {
   title: "Who We Are || PWNEU",
@@ -19,9 +18,6 @@ export default function WhoWeArePage() {
       <Header />
 
       <div className="content-wrapper js-content-wrapper overflow-hidden">
-        <PageLinks />
-        <OurPreview />
-        <WhoWeAre />
         <DevFounder />
         <Footer />
       </div>
