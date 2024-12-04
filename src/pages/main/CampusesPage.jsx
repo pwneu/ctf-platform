@@ -1,16 +1,8 @@
 import MetaComponent from "@/components/MetaComponent";
 import Preloader from "@/components/Preloader";
 import Header from "@/layout/headers/Header";
-import CampusPreview from "@/features/campuses/components/CampusPreview";
+import CampusesBranch from "@/features/campuses/components/CampusesBranch";
 import Footer from "@/layout/footers/Footer";
-
-import {
-  MainBranch,
-  BatangasBranch,
-  PampangaBranch,
-  GeneralSantosBranch,
-  RizalBranch,
-} from "@/features/campuses";
 
 const metadata = {
   title: "University || PWNEU",
@@ -21,19 +13,12 @@ const metadata = {
 export default function CampusesPage() {
   return (
     <div className="main-content  ">
-      <section className="breadcrumbs  "></section>
-
       <MetaComponent meta={metadata} />
       <Preloader />
       <Header />
 
       <div className="content-wrapper js-content-wrapper overflow-hidden">
-        <CampusPreview />
-        <MainBranch />
-        <BatangasBranch />
-        <PampangaBranch />
-        <GeneralSantosBranch />
-        <RizalBranch />
+        <CampusesBranch />
         <Footer />
       </div>
     </div>
