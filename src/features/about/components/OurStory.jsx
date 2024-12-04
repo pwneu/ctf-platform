@@ -39,13 +39,13 @@ export default function OurStory() {
             <div className="col-lg-6 pr-50 sm:pr-15">
               <div className="composition -type-8">
                 <div className="-el-1">
-                  <img src="/assets/img/about/ourstory/1.png" alt="image" />
+                  <img src="/assets/img/about/ourstory/UnitggChampion3.svg" alt="image" className="img-fluid" style={{ maxWidth: "104%", height: "auto" }}/>
                 </div>
                 <div className="-el-2">
-                  <img src="/assets/img/about/ourstory/2.png" alt="image" />
+                  <img src="/assets/img/about/ourstory/UnitggChampion2.svg" alt="image" className="img-fluid" style={{ maxWidth: "100%", height: "auto" }} />
                 </div>
                 <div className="-el-3">
-                  <img src="/assets/img/about/ourstory/3.png" alt="image" />
+                  <img src="/assets/img/about/ourstory/UnitggChampion1.svg" alt="image" className="img-fluid" style={{ maxWidth: "100%", height: "auto" }} />
                 </div>
               </div>
             </div>

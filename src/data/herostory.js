@@ -1,15 +1,23 @@
 export const slidesData = [
     {
         id: 1,
-        bgImage: "/assets/img/about/herostory/mainslider/bg.png",
+        bgImage: "/assets/img/about/herostory/mainslider/mainslider-1.png",
     },
     {
         id: 2,
-        bgImage: "/assets/img/about/herostory/mainslider/bg.png",
+        bgImage: "/assets/img/about/herostory/mainslider/mainslider-2.png",
     },
     {
         id: 3,
-        bgImage: "/assets/img/about/herostory/mainslider/bg.png",
+        bgImage: "/assets/img/about/herostory/mainslider/mainslider-3.png",
+    },
+    {
+        id: 4,
+        bgImage: "/assets/img/about/herostory/mainslider/mainslider-4.png",
+    },
+    {
+        id: 5,
+        bgImage: "/assets/img/about/herostory/mainslider/mainslider-5.png",
     },
 ];
 
