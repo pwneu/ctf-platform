@@ -338,7 +338,7 @@ export default function ChallengeDetails({ id }) {
                       value={flag}
                       onChange={(e) => setFlag(e.target.value)}
                       placeholder="PWNEU{FLAG}"
-                      className="form-control mx-2"
+                      className="mx-2"
                       hidden={isManager}
                       required
                     />
