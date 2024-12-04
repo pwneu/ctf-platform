@@ -1,7 +1,6 @@
 import MetaComponent from "@/components/MetaComponent";
 import Preloader from "@/components/Preloader";
 import Header from "@/layout/headers/Header";
-import PageLinks from "@/components/PageLinks";
 // import ChallengesHeader from "@/features/challenges/layout/ChallengesHeader";
 import ChallengesContainer from "@/features/challenges/layout/ChallengesContainer";
 import Footer from "@/layout/footers/Footer";
@@ -20,7 +19,6 @@ export default function ChallengesPage() {
       <Header />
 
       <div className="content-wrapper  js-content-wrapper overflow-hidden">
-        <PageLinks />
         {/* <ChallengesHeader /> */}
         <ChallengesContainer />
         <Footer />

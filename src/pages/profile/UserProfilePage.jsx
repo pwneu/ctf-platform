@@ -1,7 +1,6 @@
 import Preloader from "@/components/Preloader";
 import MetaComponent from "@/components/MetaComponent";
 import Header from "@/layout/headers/Header";
-import PageLinks from "@/components/PageLinks";
 import Footer from "@/layout/footers/Footer";
 import {
   UserProfile,
@@ -30,7 +29,6 @@ export default function UserProfilePage() {
       <Header />
 
       <div className="content-wrapper  js-content-wrapper ">
-        <PageLinks />
         {/* <UserOverview /> */}
         <UserProfile
           totalSolveCount={totalSolveCount}

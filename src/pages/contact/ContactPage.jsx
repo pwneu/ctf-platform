@@ -14,7 +14,6 @@ export default function ContactPage() {
   return (
     <div className="main-content">
       <section className="breadcrumbs"></section>
-
       <MetaComponent meta={metadata} />
       <Preloader />
       <Header />

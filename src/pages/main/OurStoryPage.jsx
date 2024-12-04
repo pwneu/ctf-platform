@@ -2,7 +2,6 @@ import MetaComponent from "@/components/MetaComponent";
 import Preloader from "@/components/Preloader";
 import Header from "@/layout/headers/Header";
 import OurStory from "@/features/about/components/OurStory";
-import PageLinks from "@/components/PageLinks";
 import HeroStory from "@/features/about/components/HeroStory";
 import OurApproach from "@/features/about/components/OurApproach";
 import Footer from "@/layout/footers/Footer";
@@ -21,7 +20,6 @@ export default function OurStoryPage() {
       <Header />
 
       <div className="content-wrapper js-content-wrapper overflow-hidden">
-        <PageLinks />
         <HeroStory />
         <OurStory />
         <OurApproach />

@@ -2,7 +2,6 @@ import { useParams } from "react-router-dom";
 import Preloader from "@/components/Preloader";
 import MetaComponent from "@/components/MetaComponent";
 import Header from "@/layout/headers/Header";
-import PageLinks from "@/components/PageLinks";
 import Footer from "@/layout/footers/Footer";
 import { ChallengeDetails } from "@/features/challengeDetails";
 
@@ -22,7 +21,6 @@ export default function ChallengeDetailsPage() {
       <Preloader />;
       <Header />
       <div className="content-wrapper  js-content-wrapper ">
-        <PageLinks />
         <ChallengeDetails id={params.id} />
         <Footer />
       </div>
