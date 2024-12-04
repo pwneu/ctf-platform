@@ -53,7 +53,7 @@ export default function PrivacyPolicyTabs() {
               </button>
               <button
                 onClick={() => setActiveTab(3)}
-                className={`tabs__b utton js-tabs-button ml-30 ${
+                className={`tabs__button js-tabs-button ml-30 ${
                   activeTab == 3 ? "is-active" : ""
                 } `}
                 data-tab-target=".-tab-item-3"
@@ -61,6 +61,7 @@ export default function PrivacyPolicyTabs() {
               >
                 Retention of Information
               </button>
+
               <button
                 onClick={() => setActiveTab(4)}
                 className={`tabs__button js-tabs-button ml-30 ${

@@ -1,10 +1,8 @@
 import MetaComponent from "@/components/MetaComponent";
 import Preloader from "@/components/Preloader";
 import Header from "@/layout/headers/Header";
-import PageLinks from "@/components/PageLinks";
-import Mission from "@/features/about/components/Mission";
-import Vision from "@/features/about/components/Vision";
-import GoalsAndObjectives from "@/features/about/components/GoalsAndObjectives";
+// import Mission from "@/features/about/components/Mission";
+import MissionVision from "@/features/about/components/MissionVision";
 import Footer from "@/layout/footers/Footer";
 
 const metadata = {
@@ -21,10 +19,8 @@ export default function MissionVisionPage() {
       <Header />
 
       <div className="content-wrapper js-content-wrapper overflow-hidden">
-        <PageLinks />
-        <Mission />
-        <Vision />
-        <GoalsAndObjectives />
+        {/* <Mission /> */}
+        <MissionVision />
         <Footer />
       </div>
     </div>
