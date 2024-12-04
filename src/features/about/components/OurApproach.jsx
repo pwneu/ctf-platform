@@ -28,7 +28,7 @@ export default function OurApproach() {
                   <img src={elm.image} alt="image" />
                 </div>
                 <div className="coursesCard__content mt-30">
-                  <h5 className="coursesCard__title text-18 lh-1 fw-500">
+                  <h5 className="coursesCard__title text-18 lh-1 fw-700">
                     {elm.title}
                   </h5>
                   <p className="coursesCard__text text-14 mt-10">
@@ -44,25 +44,24 @@ export default function OurApproach() {
       <section className="layout-pt-lg layout-pb-lg">
         <div className="container">
           <div className="row y-gap-30 justify-between items-center">
-            <div className="col-xl-5 col-lg-6 col-md-9 lg:order-2">
-              <h3 className="text-25 lh-1 text-center">Connect With Us</h3>
-              <p className="mt-45 text-center">
-                We’re excited to connect with students, educators, and
-                cybersecurity enthusiasts who share our passion for learning and
-                growth. Whether you have questions, need support, or simply want
-                to engage with our community, we’re here to help. Follow us on
-                our social media channels for the latest updates, news, and
-                events, or reach out to us directly via email. Let’s build a
-                strong, collaborative cybersecurity community together at PWNEU!
-              </p>
-            </div>
-
-            <div className="col-lg-6 lg:order-1">
+            <div className="col-lg-5 lg:order-1">
               <img
                 className="w-1/1"
-                src="/assets/img/about/contact/1.png"
+                src="/assets/img/about/contact/searching.gif"
                 alt="image"
               />
+            </div>
+            <div className="col-xl- col-lg-6 col-md-9 lg:order-2">
+              <p className="mt-45 text-center">
+                &ldquo;We&rsquo;re excited to connect with students, educators,
+                and cybersecurity enthusiasts who share our passion for learning
+                and growth. Whether you have questions, need support, or simply
+                want to engage with our community, we&rsquo;re here to help.
+                Follow us on our social media channels for the latest updates,
+                news, and events, or reach out to us directly via email.
+                Let&rsquo;s build a strong, collaborative cybersecurity
+                community together at PWNEU!&rdquo;
+              </p>
             </div>
           </div>
         </div>

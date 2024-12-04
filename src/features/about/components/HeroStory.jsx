@@ -4,6 +4,7 @@ import { feature } from "@/data/herostory";
 import { slidesData } from "@/data/herostory";
 import { Navigation, Pagination } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay } from "swiper"; // Import Autoplay module
 import { useEffect, useState } from "react";
 
 export default function HeroStory() {
@@ -17,9 +18,7 @@ export default function HeroStory() {
       <div className="swiper-wrapper-two">
         {showSlider && (
           <Swiper
-            // {...setting}
-
-            modules={[Navigation, Pagination]}
+            modules={[Navigation, Pagination, Autoplay]} // Add Autoplay module
             navigation={{
               nextEl: ".hero-slider-next",
               prevEl: ".hero-slider-prev",
@@ -27,20 +26,23 @@ export default function HeroStory() {
             spaceBetween={0}
             slidesPerView={1}
             breakpoints={{
-              // when window width is >= 576px
               450: {
                 slidesPerView: 1,
               },
-              // when window width is >= 768px
               768: {
                 slidesPerView: 1,
               },
               1200: {
-                // when window width is >= 992px
                 slidesPerView: 1,
               },
             }}
             speed={1200}
+            autoplay={{
+              delay: 4000,
+              disableOnInteraction: false,
+            }}
+            loop={true}
+            onSlideChange={() => console.log("Slide changed!")}
           >
             {slidesData.map((item, i) => (
               <SwiperSlide key={i}>
@@ -53,7 +55,6 @@ export default function HeroStory() {
                   </div>
                 </div>
               </SwiperSlide>
-              // 140,90
             ))}
           </Swiper>
         )}
