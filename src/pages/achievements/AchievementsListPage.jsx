@@ -1,7 +1,6 @@
 import MetaComponent from "@/components/MetaComponent";
 import Preloader from "@/components/Preloader";
 import Header from "@/layout/headers/Header";
-import PageLinks from "@/components/PageLinks";
 import Footer from "@/layout/footers/Footer";
 import { AchievementsOne } from "@/features/achievements";
 
@@ -19,7 +18,6 @@ export default function AchievementsListPage() {
       <Header />
 
       <div className="content-wrapper js-content-wrapper overflow-hidden">
-        <PageLinks />
         <AchievementsOne />
         <Footer />
       </div>

@@ -1,7 +1,6 @@
 import Preloader from "@/components/Preloader";
 import MetaComponent from "@/components/MetaComponent";
 import Header from "@/layout/headers/Header";
-import PageLinks from "@/components/PageLinks";
 import Footer from "@/layout/footers/Footer";
 import { useState, useEffect } from "react";
 import useAuth from "@/hooks/useAuth";
@@ -40,7 +39,6 @@ export default function LeaderboardsPage() {
       <Preloader />
       <Header />
       <div className="content-wrapper js-content-wrapper">
-        <PageLinks />
         {leaderboards ? (
           leaderboards.userRanks && leaderboards.userRanks.length > 0 ? (
             <>

@@ -1,7 +1,6 @@
 import MetaComponent from "@/components/MetaComponent";
 import Preloader from "@/components/Preloader";
 import Header from "@/layout/headers/Header";
-import PageLinks from "@/components/PageLinks";
 import Footer from "@/layout/footers/Footer";
 import { PrivacyPolicyTabs } from "@/features/ownership";
 
@@ -19,7 +18,6 @@ export default function PrivacyPolicyPage() {
       <Header />
 
       <div className="content-wrapper js-content-wrapper overflow-hidden">
-        <PageLinks />
         <PrivacyPolicyTabs />
         <Footer />
       </div>

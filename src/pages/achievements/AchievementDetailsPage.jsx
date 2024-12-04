@@ -2,7 +2,6 @@ import { useParams } from "react-router-dom";
 import MetaComponent from "@/components/MetaComponent";
 import Preloader from "@/components/Preloader";
 import Header from "@/layout/headers/Header";
-import PageLinks from "@/components/PageLinks";
 import Footer from "@/layout/footers/Footer";
 import { AchievementsDetails } from "@/features/achievements";
 
@@ -21,7 +20,6 @@ export default function AchievementDetailsPage() {
       <Header />
 
       <div className="content-wrapper js-content-wrapper overflow-hidden">
-        <PageLinks />
         <AchievementsDetails id={params.id} />
         <Footer />
       </div>

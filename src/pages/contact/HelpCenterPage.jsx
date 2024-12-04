@@ -1,6 +1,5 @@
 import MetaComponent from "@/components/MetaComponent";
 import Preloader from "@/components/Preloader";
-import PageLinks from "@/components/PageLinks";
 import Faq from "@/components/Faq";
 import Header from "@/layout/headers/Header";
 import Footer from "@/layout/footers/Footer";
@@ -19,7 +18,6 @@ export default function HelpCenterPage() {
       <Header />
 
       <div className="content-wrapper js-content-wrapper overflow-hidden">
-        <PageLinks />
         <Faq />
         <Footer />
       </div>
