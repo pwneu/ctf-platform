@@ -13,15 +13,21 @@ export default function AccountHasbeenCreated() {
         <div className="row justify-center items-center">
           <div className="col-xl-8 col-lg-9">
             <div className="px-50 py-50 md:px-25 md:py-25 bg-white rounded-16">
-              <h3 className="text-32 lh-17 text-center">
+              <div className="text-center">
+                <img
+                  src="assets/img/login/AccountHasbeenCreated.svg"
+                  alt="Image Description"
+                  className="img-fluid"
+                  style={{ maxWidth: "40%", height: "auto" }}
+                />
+              </div>
+              <h3 className="text-30 text-center">
                 Welcome to PWNEU! <br></br> Your Account has just been created
                 Successfully!
               </h3>
-              <p className="mt-50 text-34  text-center">
-                {
-                  `A verification link has been sent to the email address you just signed up with. 
-                   If you didn't receive an email, please contact an administrator so they can assist you.`
-                }
+              <p className="mt-10 text-34 text-center">
+                {`A verification link has been sent to the email address you just signed up with. 
+                   If you didn't receive an email, please contact an administrator so they can assist you.`}
               </p>
             </div>
             <div className="col-12">

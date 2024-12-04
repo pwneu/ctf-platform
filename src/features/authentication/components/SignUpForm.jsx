@@ -146,19 +146,29 @@ export default function SignUpForm({ setHasRegistered }) {
       <div className="container mt-10">
         <div className="row justify-center items-center mt-8">
           <div className="col-xl-10 col-lg-9 mt-8">
-            <div className="mt-5 px-1 py-0 md:px-35 md:py-25 bg-white  rounded-16">
-              <h3 className="text-40 lh-2 mt-2 text-center">Join Us!</h3>
-              <p className="text-15 mt-13 text-center">
-                Sign up with your university's institutional account to get
-                started!
+            <div className="text-center mt-5 ">
+              <img
+                src="assets/img/login/JoinUs-Icon.gif"
+                alt="Image Description"
+                className="img-fluid"
+                style={{ maxWidth: "20%", height: "auto" }}
+              />
+            </div>
+            <div className="">
+              <h3 className="text-20 lh-2 text-center">Accept the Challenge</h3>
+              <p className="text-15  lh-2 text-center">
+                Sign up now using your university's institutional account and
+                unlock a world of exciting CTF challenges! Whether you're a
+                beginner or a seasoned hacker, there's something here for
+                everyone. Push your limits, climb the leaderboard, and represent
+                your university!
               </p>
-
               <form
                 className="contact-form respondForm__form row y-gap-20 pt-30"
                 onSubmit={handleSubmit}
               >
                 <div className="col-lg-6">
-                  <label className="text-13 lh-1 fw-500 text-dark-1 mb-10">
+                  <label className="text-12 lh-1 fw-500 text-dark-1 mb-10">
                     First Name *
                   </label>
                   <input
@@ -172,7 +182,7 @@ export default function SignUpForm({ setHasRegistered }) {
                   />
                 </div>
                 <div className="col-lg-6">
-                  <label className="text-13 lh-1 fw-500 text-dark-1 mb-10">
+                  <label className="text-12 lh-1 fw-500 text-dark-1 mb-10">
                     Last Name *
                   </label>
                   <input
@@ -186,7 +196,7 @@ export default function SignUpForm({ setHasRegistered }) {
                   />
                 </div>
                 <div className="col-lg-6">
-                  <label className="text-13 lh-1 fw-500 text-dark-1 mb-10">
+                  <label className="text-12 lh-1 fw-500 text-dark-1 mb-10">
                     Email address *
                   </label>
                   <input
@@ -200,7 +210,7 @@ export default function SignUpForm({ setHasRegistered }) {
                   />
                 </div>
                 <div className="col-lg-6">
-                  <label className="text-13 lh-1 fw-500 text-dark-1 mb-10">
+                  <label className="text-12 lh-1 fw-500 text-dark-1 mb-10">
                     Username *
                   </label>
                   <input
@@ -215,10 +225,10 @@ export default function SignUpForm({ setHasRegistered }) {
                 </div>
 
                 <div className="col-lg-6">
-                  <label className="text-13 lh-1 fw-500 text-dark-1 mb-10">
+                  <label className="text-12 lh-1 fw-500 text-dark-1 mb-10">
                     Password *
                   </label>
-                  <div className="position-relative">
+                  <div className="position-relative ">
                     <input
                       required
                       type={showPassword.password ? "text" : "password"}
@@ -229,7 +239,7 @@ export default function SignUpForm({ setHasRegistered }) {
                       autoComplete="new-password"
                       minLength="12"
                       maxLength="128"
-                      className="form-control pe-5"
+                      className="pe-5"
                     />
                     <i
                       className={`fas ${
@@ -251,7 +261,7 @@ export default function SignUpForm({ setHasRegistered }) {
                   )}
                 </div>
                 <div className="col-lg-6">
-                  <label className="text-13 lh-1 fw-500 text-dark-1 mb-10">
+                  <label className="text-12 lh-1 fw-500 text-dark-1 mb-10">
                     Confirm Password *
                   </label>
                   <div className="position-relative">
@@ -265,7 +275,7 @@ export default function SignUpForm({ setHasRegistered }) {
                       autoComplete="confirm-password"
                       minLength="12"
                       maxLength="128"
-                      className="form-control pe-5"
+                      className="pe-5"
                     />
                     <i
                       className={`fas ${
@@ -290,7 +300,7 @@ export default function SignUpForm({ setHasRegistered }) {
                 </div>
 
                 <div className="col-lg-12">
-                  <label className="text-13 lh-1 fw-500 text-dark-1 mb-10">
+                  <label className="text-12 lh-1 fw-500 text-dark-1 mb-10">
                     Access Key *
                   </label>
                   <input
@@ -312,7 +322,7 @@ export default function SignUpForm({ setHasRegistered }) {
                 />
 
                 <div className="col-lg-12">
-                  <label className="text-13 lh-1 fw-500 text-dark-1 mb-10">
+                  <label className="text-12 lh-1 fw-500 text-dark-1 mb-10">
                     <input
                       type="checkbox"
                       name="termsAgreed"
@@ -334,13 +344,26 @@ export default function SignUpForm({ setHasRegistered }) {
                   </label>
                 </div>
 
-                <div className="col-12">
+                <div className="col-12 mx-auto">
                   <button
                     type="submit"
                     name="submit"
                     id="submit"
                     className="button -md fw-500 w-1/1"
                     disabled={isButtonDisabled}
+                    style={{
+                      backgroundColor: "black",
+                      color: "white",
+                      border: "none",
+                    }}
+                    onMouseEnter={(e) => {
+                      e.target.style.backgroundColor = "#d0f721c7";
+                      e.target.style.color = "black";
+                    }}
+                    onMouseLeave={(e) => {
+                      e.target.style.backgroundColor = "black";
+                      e.target.style.color = "white";
+                    }}
                   >
                     {isButtonDisabled ? "Processing..." : "Create Account"}
                   </button>
