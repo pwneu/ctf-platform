@@ -1,4 +1,3 @@
-import { HeaderExplore } from "../components/header-explore";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -33,22 +32,21 @@ export default function Header() {
 
   return (
     <>
-      <header className="header -type-1 ">
+      <header className="header -type-1">
         <div className="header__container">
           <div className="row justify-between items-center">
             <div className="col-auto">
               <div className="header-left">
-                <div className="header__logo ">
+                <div className="header__logo">
                   <Link to="/">
-                    <img src="/assets/img/general/PWNEU_Logo.svg" alt="logo" />
+                    <img
+                      src="/assets/img/general/PWNEU_DarkGreenLogo.svg"
+                      alt="logo"
+                      className="img-fluid"
+                      style={{ maxWidth: "70%", height: "auto" }}
+                    />
                   </Link>
                 </div>
-
-                <HeaderExplore
-                  allClasses={
-                    "header__explore text-green-1 ml-60 xl:ml-30 xl:d-none"
-                  }
-                />
               </div>
             </div>
 
@@ -72,12 +70,12 @@ export default function Header() {
                   </div>
                 </div>
 
-                <div className="header-right__buttons d-flex items-center ml-30 md:d-none">
+                <div className="header-right__buttons d-flex items-center ml-30 md:d-none" >
                   {auth?.userName ? (
                     <>
                       <Link
                         className="text-white"
-                        style={{ cursor: "pointer", textDecoration: "none" }}
+                        style={{ cursor: "pointer", textDecoration: "none", marginRight: "10px"  }}
                         to={isManager ? "/admin" : "/profile"}
                       >
                         {auth.userName}
@@ -85,7 +83,7 @@ export default function Header() {
 
                       <button
                         onClick={handleLogout}
-                        className="button -sm -white text-dark-1 ml-30"
+                        className="button -sm -rounded -green-1 text-dark-1" 
                         disabled={isLoggingOut}
                       >
                         {isLoggingOut ? "Logging out..." : "Log out"}{" "}
@@ -93,12 +91,14 @@ export default function Header() {
                     </>
                   ) : (
                     <>
-                      <Link to="/login" className="-sm -white text-white-1">
-                        Log in
+                      <Link to="/login" className="--sm -white text-white" style={{ marginRight: "20px" }}>
+                        Log in 
                       </Link>
                       <Link
                         to="/signup"
-                        className="button -sm -white text-dark-1 ml-30"
+                        className="button -sm -rounded -green-1 text-dark-1"
+
+
                       >
                         Sign up
                       </Link>
