@@ -9,12 +9,26 @@ export default function PasswordResetSent() {
         <div className="row justify-center items-center">
           <div className="col-xl-8 col-lg-9">
             <div className="px-50 py-50 md:px-25 md:py-25 bg-white rounded-16">
-              <h3 className="text-30 lh-17 text-center">Password Reset Sent</h3>
-              <p className="mt-20 text-34 text-center">
+              <div className="text-center">
+                <img
+                  src="assets/img/login/Password Reset Requested.gif"
+                  alt="Image Description"
+                  className="img-fluid"
+                  style={{ maxWidth: "40%", height: "auto" }}
+                />
+              </div>
+
+              <h3 className="text-30 lh-17 text-center">
+                Password Reset Requested
+              </h3>
+              <p className="mt-10 text-34 text-center">
                 {
-                  "If the provided email is valid, you will receive a link to reset your password."
+                  "If the email you provided is valid, we’ve sent a link to reset your password. "
                 }
                 <br />
+                {
+                  "Please check your inbox (and your spam folder, just in case)."
+                }
               </p>
             </div>
             <button

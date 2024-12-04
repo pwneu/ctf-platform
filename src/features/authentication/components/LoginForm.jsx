@@ -136,15 +136,24 @@ export default function LoginForm() {
     <div className="form-page__content lg:py-90">
       <div className="container">
         <div className="row justify-center items-center">
-          <div className="col-xl-7 col-lg-9">
-            <div className="px-90 py-50 md:px-25 md:py-25 bg-white shadow-1 rounded-16">
-              <h3 className="text-25 lh-13 mt-5 text-center">
-                Welcome Back Eranians!
+          <div className="col-xl-8 col-lg-9">
+            <div className="px-90 py-90 md:px-25 md:py-25  rounded-16">
+            <div className="text-center">
+                <img
+                  src="assets/img/login/Login-Icon.svg"
+                  alt="Image Description"
+                  className="img-fluid"
+                  style={{ maxWidth: "20%", height: "auto" }}
+                />
+              </div>
+              <h3 className="text-12 lh-13 mt-5 text-center">
+                Welcome, Challenger!
               </h3>
-              <p className="mt-10">
+              <p className="mt-10 text-center">
                 {/* Log in with your university's institutional account. Don’t have
                 an account yet? Register through your school. */}
-                Log in with your username and your password.
+                Log in with your university's institutional account. Don’t have
+                an account yet? Register now and join the action!
               </p>
 
               <form
@@ -183,7 +192,7 @@ export default function LoginForm() {
                       autoComplete="new-password"
                       minLength="12"
                       maxLength="128"
-                      className="form-control pe-5"
+                      className="pe-5"
                     />
                     <i
                       className={`fas ${
@@ -212,15 +221,21 @@ export default function LoginForm() {
                   onExpire={() => setTurnstileToken("")}
                 />
 
-                <div className="col-12 d-flex justify-content-between align-items-center mt-4">
-                  <Link
-                    to="/forgot-password"
-                    className="text-custom-color text-14"
-                  >
+                {/* Footer Links */}
+                <div className="d-flex justify-content-between align-items-center">
+                  <p className="mb-0 text-black">
+                    Don’t have an account?{" "}
+                    <Link to="/signup" className="text-custom-color">
+                      Register
+                    </Link>
+                  </p>
+                  <Link to="/forgot-password" className="text-black text-14">
                     Forgot Password?
                   </Link>
                 </div>
-                <div className="col-12">
+
+                {/* Submit Button */}
+                <div className="col-6 mx-auto mt-4">
                   <button
                     type="submit"
                     name="submit"
@@ -228,16 +243,8 @@ export default function LoginForm() {
                     className="button -md fw-500 w-1/1"
                     disabled={isButtonDisabled}
                   >
-                    {isButtonDisabled ? "Processing..." : "Log In"}
+                    {isButtonDisabled ? "Processing..." : "LOG IN"}
                   </button>
-                </div>
-                <div className="col-12 text-center">
-                  <p>
-                    Don’t have an account?{" "}
-                    <Link to="/signup" className="text-custom-color">
-                      Register
-                    </Link>
-                  </p>
                 </div>
               </form>
             </div>

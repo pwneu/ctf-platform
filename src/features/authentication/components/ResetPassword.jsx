@@ -1,5 +1,4 @@
 /* eslint-disable no-useless-escape */
-import { Link } from "react-router-dom";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import { api } from "@/api";
@@ -123,18 +122,24 @@ export default function ResetPassword({
       <div className="container">
         <div className="row justify-center items-center">
           <div className="col-xl-8 col-lg-9">
-            <div className="px-80 py-50 md:px-25 md:py-25 bg-white shadow-1 rounded-16">
-              <div className="mb-20">
-                <Link to="/login" className="text-custom-color text-14">
-                  &lt; Back to Login
-                </Link>
+           
+              
+
+              <div className="text-center">
+                <img
+                  src="assets/img/login/ResetPassword-Icon.svg"
+                  alt="Image Description"
+                  className="img-fluid"
+                  style={{ maxWidth: "20%", height: "auto" }}
+                />
               </div>
 
-              <h3 className="text-25 lh-13 mt-5 text-center">
+              <h3 className="text-25 lh-13 mt-5 text-center ">
                 {`Set a new password for ${email}`}
               </h3>
-              <p className="mt-10 text-center">
-                Please set a new password for your account.
+              <p className="mt-10 text-center mb-30">
+                Your previous password has been reseted. Please set a new{" "}
+                <br></br>password for your account.
               </p>
 
               <form
@@ -143,8 +148,8 @@ export default function ResetPassword({
                 onSubmit={handleSubmit}
               >
                 <div className="col-lg-13">
-                  <label className="text-13 lh-1 fw-500 text-dark-1 mb-10">
-                    New Password *
+                  <label className="text-14 lh-1 fw-500 text-dark-1 mb-10">
+                    Create New Password *
                   </label>
                   <div className="position-relative">
                     <input
@@ -157,7 +162,7 @@ export default function ResetPassword({
                       autoComplete="new-password"
                       minLength="12"
                       maxLength="128"
-                      className="form-control pe-5"
+                      className="pe-5"
                       aria-describedby="password-error"
                     />
                     <i
@@ -182,7 +187,7 @@ export default function ResetPassword({
                   )}
                 </div>
                 <div className="col-lg-13">
-                  <label className="text-13 lh-1 fw-500 text-dark-1 mb-10">
+                  <label className="text-14 lh-1 fw-500 text-dark-1 mb-10">
                     Re-enter Password *
                   </label>
                   <div className="position-relative">
@@ -196,7 +201,7 @@ export default function ResetPassword({
                       autoComplete="new-password"
                       minLength="12"
                       maxLength="128"
-                      className="form-control pe-5"
+                      className="pe-5"
                       aria-describedby="confirm-password-error"
                     />
                     <i
@@ -243,7 +248,6 @@ export default function ResetPassword({
                 </div>
               </form>
             </div>
-          </div>
         </div>
       </div>
     </div>
