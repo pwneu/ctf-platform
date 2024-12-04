@@ -5,7 +5,6 @@ import Header from "@/layout/headers/Header";
 
 import {
   HomeHero,
-  Organization,
   LearningFeatures,
   FindLearningPath,
   CampusesTag,
@@ -31,7 +30,6 @@ export default function HomePage() {
 
       <div className="content-wrapper  js-content-wrapper overflow-hidden">
         <HomeHero />
-        <Organization />
         <LearningFeatures />
         <FindLearningPath />
         <CampusesTag />

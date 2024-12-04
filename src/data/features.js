@@ -1,20 +1,18 @@
 export const feature = [
   {
     id: 1,
-    title: "High-Quality Learning: Engage with thoughtfully designed courses.",
+    title: "Dive into expertly crafted courses that foster deep understanding.",
   },
   {
     id: 2,
-    title: "Student-Friendly: Enjoy a clear, easy-to-follow curriculum.",
+    title: "Experience a clear, easy-to-follow curriculum tailored to your academic journey.",
   },
   {
     id: 3,
-    title: "Free Access: Gain valuable knowledge at no cost.",
+    title: "Join a supportive community and start learning today.",
   },
-  {
-    id: 4,
-    title: "Open and Inclusive: Join the platform and start learning right away without any fees.",
-  },
+  
+  
 ];
 
 
