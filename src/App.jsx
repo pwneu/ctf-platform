@@ -52,7 +52,7 @@ import {
 } from "./pages/admin";
 import RequireDefinedAuth from "./components/RequireDefinedAuth";
 import BlacklistPage from "./pages/admin/BlacklistPage";
-
+import ChatBotPage from "./pages/chatbot/ChatBotPage";
 // import {
 //   AchievementDetailsPage,
 //   AchievementsListPage,
@@ -129,6 +129,7 @@ function App() {
             <Route path="play" element={<ChallengesPage />} />
             <Route path="/play/:id" element={<ChallengeDetailsPage />} />
             <Route path="/leaderboards" element={<LeaderboardsPage />} />
+            <Route path="/chat" element={<ChatBotPage />} />
           </Route>
 
           {/* Routes that require the user to be a member */}
