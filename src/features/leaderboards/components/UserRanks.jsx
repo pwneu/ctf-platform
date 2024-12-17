@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import "./leaderboards.css";
 
 export default function UserRanks({
   userRanks,
@@ -10,7 +11,7 @@ export default function UserRanks({
 
   const renderUserRankItem = (rank, isRequester) => {
     const userLink = `/admin/user/${rank.id}`;
-    const style = isRequester ? { backgroundColor: "yellow" } : {};
+    const className = isRequester ? "rank-item requester" : "rank-item";
 
     const handleRowClick = () => {
       if (isRequester) {
@@ -21,21 +22,21 @@ export default function UserRanks({
     };
 
     return (
-      <tr
-        key={rank.id}
-        style={{
-          ...style,
-          cursor: isRequester || isManager ? "pointer" : "default",
-        }}
-        onClick={handleRowClick}
-      >
-        <td style={{ textAlign: "center" }}>{rank.userName}</td>
-        <td style={{ textAlign: "center" }}>{rank.position}</td>
-        <td style={{ textAlign: "center" }}>{rank.points}</td>
-        <td style={{ textAlign: "center" }}>
-          {new Date(rank.latestSolve).toLocaleString()}
-        </td>
-      </tr>
+      <div
+      key={rank.id}
+      className={`${className} hoverable-row`}
+      onClick={handleRowClick}
+    >
+      <div className="rank-column center">{rank.position}</div>
+      <div className="rank-column center hoverable">
+        {rank.userName}
+        <div className="tooltip">
+          {`${rank.userName} solve time: ${new Date(rank.latestSolve).toLocaleString()}`}
+        </div>
+      </div>
+      <div className="rank-column center">{rank.points}</div>
+     
+    </div>
     );
   };
 
@@ -44,20 +45,22 @@ export default function UserRanks({
     requesterRank && userRanks.some((rank) => rank.id === requesterRank.id);
 
   return (
-    <div style={{ minHeight: "500px" }}>
-      <p
-        style={{ textAlign: "center" }}
-      >{`There are currently ${totalLeaderboardCount} participant(s).`}</p>
-      <table style={{ width: "100%", borderCollapse: "collapse" }}>
-        <thead>
-          <tr>
-            <th style={{ textAlign: "center" }}>Username</th>
-            <th style={{ textAlign: "center" }}>Rank</th>
-            <th style={{ textAlign: "center" }}>Points</th>
-            <th style={{ textAlign: "center" }}>Latest Solve Time</th>
-          </tr>
-        </thead>
-        <tbody>
+    <div
+      className="user-ranks-container"
+      data-aos="fade-up"
+      data-aos-offset="80"
+      data-aos-duration={900}
+    >
+      <p className="text-black rank-column center  text-sm">
+          {`There are currently (${totalLeaderboardCount}) participant(s).`}
+        </p>
+      <div className="leaderboard-wrapper text-black">
+        <div className="leaderboard-header text-white">
+          <div className="rank-column center">Rank</div>
+          <div className="rank-column center">Username</div>
+          <div className="rank-column center">Points</div>
+        </div>
+        <div>
           {userRanks.map((rank) =>
             renderUserRankItem(
               rank,
@@ -66,14 +69,12 @@ export default function UserRanks({
           )}
           {requesterRank && !isRequesterInUserRanks && (
             <>
-              <tr>
-                <td colSpan={4} style={{ height: "20px" }}></td>
-              </tr>
+              <div className="spacer"></div>
               {renderUserRankItem(requesterRank, true)}
             </>
           )}
-        </tbody>
-      </table>
+        </div>
+      </div>
     </div>
   );
 }
