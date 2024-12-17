@@ -79,6 +79,15 @@ export default function Menu({ allClasses, headerPosition }) {
                 Leaderboards
               </Link>
             </li>
+            <li className="menu-item-has-children -has-mega-menu">
+              <Link
+                data-barba
+                to="/chat"
+                className={menuItem === "Courses" ? "activeMenu" : ""}
+              >
+                Dash AI
+              </Link>
+            </li>
             <li className="menu-item-has-children">
               <Link
                 data-barba
