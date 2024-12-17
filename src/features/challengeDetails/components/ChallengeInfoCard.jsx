@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-export default function PinContent({ pageItem }) {
+export default function ChallengeInfoCard({ challengeDetails }) {
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
   // useEffect hook to update the screen width when the window is resized
   useEffect(() => {
@@ -32,7 +32,11 @@ export default function PinContent({ pageItem }) {
           className="bg-white  rounded-8 border-light py-10 px-10"
         >
           <div className="relative">
-            <img className="w-1/1" src={pageItem.imageSrc} alt="image" />
+            <img
+              className="w-1/1"
+              src="/assets/img/challengesCards/bgsample.png"
+              alt="image"
+            />
           </div>
 
           <div className="courses-single-t scroll-bar-1 pt-30 pb-20 px-20">
@@ -42,7 +46,7 @@ export default function PinContent({ pageItem }) {
                   <div className="fa fa-folder"></div>
                   <div className="ml-10">Category</div>
                 </div>
-                <div>Web Explotation</div>
+                <div>{challengeDetails.categoryName}</div>
               </div>
 
               <div className="d-flex justify-between py-8 border-top-light">
@@ -50,7 +54,7 @@ export default function PinContent({ pageItem }) {
                   <div className="fa fa-trophy"></div>
                   <div className="ml-10">Points</div>
                 </div>
-                <div>100</div>
+                <div>{challengeDetails.points}</div>
               </div>
 
               <div className="d-flex justify-between py-8 border-top-light">
@@ -58,7 +62,11 @@ export default function PinContent({ pageItem }) {
                   <div className="fa fa-users"></div>
                   <div className="ml-10">Solvers</div>
                 </div>
-                <div>20</div>
+                <div>
+                  {challengeDetails.solveCount === 0
+                    ? "None"
+                    : challengeDetails.solveCount}
+                </div>
               </div>
 
               <div className="d-flex justify-between py-8 border-top-light">
@@ -66,7 +74,11 @@ export default function PinContent({ pageItem }) {
                   <div className="fa fa-infinity"></div>
                   <div className="ml-10">Max Attempts</div>
                 </div>
-                <div>Unlimited</div>
+                <div>
+                  {challengeDetails.maxAttempts === 0
+                    ? "Unlimited"
+                    : challengeDetails.maxAttempts}
+                </div>
               </div>
 
               <div className="d-flex justify-between py-8 border-top-light">
@@ -74,15 +86,23 @@ export default function PinContent({ pageItem }) {
                   <div className="far fa-clock"></div>
                   <div className="ml-10">Deadline</div>
                 </div>
-                <div>Disabled</div>
+                <div>
+                  {challengeDetails.deadlineEnabled
+                    ? new Date(challengeDetails.deadline).toLocaleString()
+                    : "Disabled"}
+                </div>
               </div>
 
               <div className="d-flex justify-between py-8 border-top-light">
                 <div className="d-flex items-center text-dark-1">
                   <div className="fa fa-download"></div>
-                  <div className="ml-10">Files</div>
+                  <div className="ml-10">Artifacts</div>
                 </div>
-                <div>Download</div>
+                <div>
+                  {challengeDetails.artifacts.length > 0
+                    ? challengeDetails.artifacts.length
+                    : "None"}
+                </div>
               </div>
 
               <div className="d-flex justify-between py-8 border-top-light">
@@ -90,7 +110,12 @@ export default function PinContent({ pageItem }) {
                   <div className="fa fa-lightbulb-o"></div>
                   <div className="ml-10">Hints</div>
                 </div>
-                <div>No hints available</div>
+                <div>
+                  {" "}
+                  {challengeDetails.hints.length > 0
+                    ? challengeDetails.hints.length
+                    : "None"}
+                </div>
               </div>
             </div>
           </div>

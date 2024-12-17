@@ -1,25 +1,45 @@
+// import { coursesData } from "@/data/courses";
 import { useState, useEffect } from "react";
+import ChallengeInfoCard from "./ChallengeInfoCard";
+import RecentSolvers from "./RecentSolvers";
 import { api } from "@/api";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import useAuth from "@/hooks/useAuth";
+import ChallengeDetailsArtifacts from "./ChallengeDetailsArtifacts";
+import ChallengeDetailsHints from "./ChallengeDetailsHints";
+
+// TODO -- design challenge loading and challenge not found
+
+const menuItems = [
+  { id: 1, href: "#recent-solvers", text: "Recent Solvers", isActive: true },
+  { id: 2, href: "#artifacts", text: "Artifacts", isActive: false },
+  { id: 3, href: "#hints", text: "Hints", isActive: false },
+];
+
+const badgeClasses = [
+  "bg-green-1 text-dark-1",
+  "bg-orange-1 text-white",
+  "bg-purple-1 text-white",
+];
 
 export default function ChallengeDetails({ id }) {
+  // const [pageItem, setPageItem] = useState(coursesData[0]);
+  const [activeTab, setActiveTab] = useState(1);
+
+  // useEffect(() => {
+  //   setPageItem(coursesData.filter((elm) => elm.id == id)[0] || coursesData[0]);
+  // }, [id]);
+
   const [challengeDetails, setChallengeDetails] = useState();
   const [flag, setFlag] = useState("");
-  // const [message, setMessage] = useState("");
-  const [selectedHint, setSelectedHint] = useState(null);
-  const [showConfirmUseHintModal, setShowConfirmUseHintModal] = useState(false);
 
   const [alreadySolved, setAlreadySolved] = useState(false);
-  const [isDownloading, setIsDownloading] = useState(false);
-  const [isUsingHint, setIsUsingHint] = useState(false);
+
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmissionDisabled, setIsSubmissionDisabled] = useState(false);
 
   const [isSubmittingTooOften, setIsSubmittingTooOften] = useState(false);
-
-  const [recentSolvers, setRecentSolvers] = useState();
 
   const { auth } = useAuth();
   const isManager = auth?.roles?.includes("Manager");
@@ -90,110 +110,6 @@ export default function ChallengeDetails({ id }) {
     }
   };
 
-  const handleCheckHintStatus = async (hint) => {
-    if (alreadySolved) {
-      toast.info("Challenge already solved");
-      return;
-    }
-    try {
-      setSelectedHint(hint);
-      setIsUsingHint(true);
-      const response = await api.get(`/play/hints/${hint.id}/check`);
-      if (response.data === true) {
-        await handleUseHint(hint);
-      } else if (response.data === false) {
-        setShowConfirmUseHintModal(true);
-      }
-    } catch (error) {
-      const status = error?.response?.status;
-
-      if (status === 401) {
-        navigate("/login");
-      } else if (status === 400) {
-        if (
-          error?.response?.data?.code ===
-          "CheckIfHintUsed.ChallengeAlreadySolved"
-        ) {
-          setAlreadySolved(true);
-          toast.info(error.response?.data?.message);
-        } else if (error?.response?.data?.code === "CheckIfHintUsed.NotFound") {
-          toast.error(error.response?.data?.message);
-        } else {
-          toast.error(error.response?.data?.message);
-        }
-      } else if (status === 403) {
-        toast.info("Managers and admins are not allowed to use hints");
-      } else if (status === 429) {
-        toast.warn("Slow down on using hints!");
-      } else {
-        toast.error("Error checking hint status. Please try again later");
-      }
-    } finally {
-      setIsUsingHint(false);
-    }
-  };
-
-  const handleUseHint = async (hint) => {
-    try {
-      setIsUsingHint(true);
-      const response = await api.post(`/play/hints/${hint.id}`);
-      toast.info(`Hint: ${response.data}`);
-    } catch (error) {
-      const status = error?.response?.status;
-
-      if (status === 401) {
-        navigate("/login");
-      } else if (status === 400) {
-        if (error?.response?.data?.code === "UseHint.ChallengeAlreadySolved") {
-          setAlreadySolved(true);
-          toast.info(error.response?.data?.message);
-        } else if (error?.response?.data?.code === "UseHint.NotFound") {
-          toast.error(error.response?.data?.message);
-        } else {
-          toast.error(error.response?.data?.message);
-        }
-      } else if (status === 429) {
-        toast.warn("Slow down on using hints!");
-      } else if (status === 403) {
-        toast.info("Managers and admins are not allowed to use hints");
-      } else {
-        toast.error("Error using hint. Please try again later");
-      }
-    } finally {
-      setIsUsingHint(false);
-      setShowConfirmUseHintModal(false);
-    }
-  };
-
-  const handleDownloadArtifact = async (artifact) => {
-    try {
-      setIsDownloading(true);
-      const response = await api.get(`/play/artifacts/${artifact.id}`, {
-        responseType: "blob",
-      });
-
-      const url = window.URL.createObjectURL(new Blob([response.data]));
-      const link = document.createElement("a");
-      link.href = url;
-      link.setAttribute("download", artifact.fileName || "download");
-      document.body.appendChild(link);
-      link.click();
-      link.remove();
-    } catch (error) {
-      const status = error?.response?.status;
-
-      if (status === 401) {
-        navigate("/login");
-      } else if (status === 400) {
-        toast.error(error.response?.data?.message);
-      } else {
-        toast.error("Error downloading artifact. Please try again later");
-      }
-    } finally {
-      setIsDownloading(false);
-    }
-  };
-
   useEffect(() => {
     const fetchChallengeDetails = async () => {
       try {
@@ -217,7 +133,6 @@ export default function ChallengeDetails({ id }) {
     const checkChallengeStatus = async () => {
       try {
         const response = await api.get(`/play/challenges/${id}/check`);
-        console.log(response.data);
         if (response.data === "AlreadySolved") {
           setAlreadySolved(true);
         } else if (response.data === "Disabled") {
@@ -229,228 +144,215 @@ export default function ChallengeDetails({ id }) {
       }
     };
 
-    const fetchRecentSolvers = async () => {
-      try {
-        const response = await api.get(`/play/challenges/${id}/solves`, {
-          params: {
-            sortOrder: "desc",
-            pageSize: 20,
-            sortBy: "solvedat",
-          },
-        });
-        // console.log(response.data);
-        setRecentSolvers(response.data.items);
-      } catch (error) {
-        const status = error?.response?.status;
-
-        if (status === 429) {
-          toast.warn("Slow down on fetching recent solvers!");
-        }
-        // else {
-        //   toast.error(
-        //     "Something went wrong getting challenge solves. Please try again later"
-        //   );
-        // }
-
-        setRecentSolvers([]);
-      }
-    };
-
     fetchChallengeDetails();
     checkChallengeStatus();
-    fetchRecentSolvers();
   }, [id]);
 
   return (
-    <div id="js-pin-container" className="js-pin-container relative">
-      <section className="page-header -type-5 bg-light-6">
-        <div className="container d-flex justify-content-center align-items-center">
-          <div className="page-header__content pt-90 pb-90 text-center">
-            <div className="row y-gap-30">
-              {challengeDetails === undefined ? (
-                <div
-                  style={{
-                    minHeight: "80vh",
-                    // display: "flex",
-                    // justifyContent: "center",
-                    // alignItems: "center",
-                  }}
-                >
-                  Loading...
-                </div>
-              ) : challengeDetails === null ? (
-                <div
-                  style={{
-                    minHeight: "80vh",
-                  }}
-                >
-                  Challenge Not Found
-                </div>
-              ) : (
-                <div style={{ minHeight: "80vh" }}>
-                  {/* <div> */}
-                  <h1 className="text-40 lh-14 mt-20 ">
-                    {challengeDetails.name}
-                  </h1>
-                  <div className="badge px-15 py-8 text-14 bg-black text-white fw-400">
-                    Category: {challengeDetails.categoryName}
-                  </div>
-                  <div className="mt-20 d-flex justify-content-center x-gap-20 y-gap-2 pb-50">
-                    <div className="badge px-15 py-8 text-14 bg-orange-1 text-white fw-400">
-                      {challengeDetails.tags.join(", ")}
-                    </div>
-                    <div>
-                      <div className="badge px-15 py-8 text-14 bg-purple-1 text-white fw-400">
-                        Points: {challengeDetails.points}
-                      </div>
-                    </div>
-                    <div>
-                      <div className="mt-23 badge px-15 py-8 text-14 bg-green-1 text-dark-1 fw-400">
-                        Solvers: {challengeDetails.solveCount}
-                      </div>
-                    </div>
-                    <div>
-                      <div className="mt-23 badge px-15 py-8 text-14 bg-green-1 text-dark-1 fw-400">
-                        Max Attempts:{" "}
-                        {challengeDetails.maxAttempts === 0
-                          ? "Unlimited"
-                          : challengeDetails.maxAttempts}
-                      </div>
-                    </div>
-                    <div>
-                      <div className="mt-23 badge px-15 py-8 text-14 bg-green-1 text-dark-1 fw-400">
-                        Deadline:{" "}
-                        {challengeDetails.deadlineEnabled
-                          ? new Date(challengeDetails.deadline).toLocaleString()
-                          : "Disabled"}
-                      </div>
-                    </div>
-                  </div>
-                  <p style={{ whiteSpace: "pre-line" }}>
-                    {challengeDetails.description}
-                  </p>
-                  <form
-                    onSubmit={handleSubmit}
-                    className="d-flex justify-content-center mt-20"
-                  >
-                    <input
-                      type="text"
-                      value={flag}
-                      onChange={(e) => setFlag(e.target.value)}
-                      placeholder="PWNEU{FLAG}"
-                      className="mx-2"
-                      hidden={isManager}
-                      required
-                    />
-                    <button
-                      type="submit"
-                      className="submit-button"
-                      hidden={isManager}
-                      disabled={
-                        isManager ||
-                        isSubmitting ||
-                        isSubmissionDisabled ||
-                        alreadySolved ||
-                        !flag ||
-                        isSubmittingTooOften
-                      }
-                    >
-                      {isSubmittingTooOften
-                        ? "Wait..."
-                        : isSubmitting
-                        ? "Submitting..."
-                        : isSubmissionDisabled
-                        ? "Disabled!"
-                        : alreadySolved
-                        ? "Solved!"
-                        : "Submit"}
-                    </button>
-                  </form>
-                  {/* {message && <p className="mt-20">{message}</p>} */}
-                  <h4 className="mt-20">Artifacts</h4>
-                  {challengeDetails.artifacts.length > 0 ? (
-                    challengeDetails.artifacts.map((artifact, index) => (
-                      <div key={index} className="hint-container">
-                        <button
-                          onClick={() => handleDownloadArtifact(artifact)}
-                          className="hint-button"
-                          disabled={isDownloading}
-                        >
-                          {isDownloading ? "Downloading" : artifact.fileName}
-                        </button>
-                      </div>
-                    ))
-                  ) : (
-                    <div className="no-artifacts-message">
-                      No artifacts available.
-                    </div>
-                  )}
-                  <h4 className="mt-20">Hints</h4>
-                  {challengeDetails.hints.length > 0 ? (
-                    challengeDetails.hints.map((hint, index) => (
-                      <div key={index} className="hint-container">
-                        <button
-                          onClick={() => handleCheckHintStatus(hint)}
-                          className="hint-button"
-                          disabled={isUsingHint}
-                        >
-                          {isUsingHint
-                            ? "Loading..."
-                            : `Use hint (-${hint.deduction} Points)`}
-                        </button>
-                      </div>
-                    ))
-                  ) : (
-                    <div className="no-hints-message">No hints available.</div>
-                  )}
-                  <h4 className="mt-20">Recent Solvers</h4>
-                  {recentSolvers === undefined ? (
-                    <p>Loading...</p>
-                  ) : recentSolvers === null || recentSolvers.length === 0 ? (
-                    <p>No solvers found.</p>
-                  ) : (
-                    <ul>
-                      {recentSolvers.map((solver, index) => (
-                        <li key={index}>
-                          {solver.userName} -{" "}
-                          {new Date(solver.solvedAt).toLocaleString()}
-                        </li>
-                      ))}
-                    </ul>
-                  )}
-                  {/* Confirmation Modal */}
-                  {showConfirmUseHintModal && (
-                    <div className="modal-overlay">
-                      <div className="modal-content">
-                        <h3>Use Hint?</h3>
-                        <p>{`This will deduct ${selectedHint?.deduction} point${
-                          selectedHint?.deduction === 1 ? "" : "s"
-                        }. Do you want to proceed?`}</p>
-                        <div className="modal-buttons">
-                          <button
-                            onClick={() => handleUseHint(selectedHint)}
-                            className="confirm-button"
-                            disabled={isUsingHint}
-                          >
-                            {isUsingHint ? "Loading..." : "Confirm"}
-                          </button>
-                          <button
-                            onClick={() => setShowConfirmUseHintModal(false)}
-                            className="cancel-button"
-                            disabled={isUsingHint}
-                          >
-                            {isUsingHint ? "Loading..." : "Cancel"}
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  )}
-                </div>
-              )}
-            </div>
-          </div>
+    <>
+      {challengeDetails === undefined ? (
+        <div
+          style={{
+            minHeight: "80vh",
+            marginTop: "200px",
+            // display: "flex",
+            // justifyContent: "center",
+            // alignItems: "center",
+          }}
+        >
+          Loading...
         </div>
-      </section>
-    </div>
+      ) : challengeDetails === null ? (
+        <div
+          style={{
+            minHeight: "80vh",
+            marginTop: "200px",
+          }}
+        >
+          Challenge Not Found
+        </div>
+      ) : (
+        <div id="js-pin-container" className="js-pin-container relative">
+          <section className="page-header -type-5 bg-dark-1">
+            <div className="page-header__bg">
+              <div
+                className="bg-image js-lazy"
+                data-bg="img/event-single/bg.png"
+              ></div>
+            </div>
+
+            <div className="container">
+              <div className="page-header__content pt-90 pb-90">
+                <div className="row y-gap-30 relative">
+                  <div className="col-xl-7 col-lg-8">
+                    <div>
+                      <h1 className="text-30 lh-14 text-white pr-60 lg:pr-0">
+                        {challengeDetails?.name}
+                      </h1>
+                    </div>
+
+                    <p
+                      className="col-xl-9 mt-20 "
+                      style={{ whiteSpace: "pre-line" }}
+                    >
+                      {challengeDetails?.description}
+                    </p>
+
+                    {/* Changed to tags */}
+                    <div className="mt-30 d-flex x-gap-15 y-gap-10 pb-20">
+                      {challengeDetails?.tags.map((tag, index) => (
+                        <div key={index}>
+                          <div
+                            className={`badge px-15 py-8 text-11 fw-400 ${
+                              badgeClasses[index % badgeClasses.length]
+                            }`}
+                          >
+                            {tag}
+                          </div>
+                        </div>
+                      ))}
+
+                      {/* <div>
+                    <div className="badge px-15 py-8 text-11 bg-green-1 text-dark-1 fw-400">
+                      Web Exploitation
+                    </div>
+                  </div>
+                  <div>
+                    <div className="badge px-15 py-8 text-11 bg-orange-1 text-white fw-400">
+                      Solvers: 20
+                    </div>
+                  </div>
+                  <div>
+                    <div className="badge px-15 py-8 text-11 bg-purple-1 text-white fw-400">
+                      Points: 20
+                    </div>
+                  </div> */}
+                    </div>
+                    <form
+                      className="contact-form respondForm__form text-white row y-gap-20 pt-30"
+                      onSubmit={handleSubmit}
+                    >
+                      <div className="col-lg-9  text-white">
+                        <input
+                          required
+                          type="text"
+                          value={flag}
+                          onChange={(e) => setFlag(e.target.value)}
+                          name="PWNEU{FLAG}"
+                          placeholder="PWNEU{FLAG}"
+                          autoComplete="given-name"
+                          hidden={isManager}
+                          style={{ color: "white" }}
+                        />
+                      </div>
+                      <button
+                        type="submit"
+                        className="submit-button"
+                        hidden={isManager}
+                        disabled={
+                          isManager ||
+                          isSubmitting ||
+                          isSubmissionDisabled ||
+                          alreadySolved ||
+                          !flag ||
+                          isSubmittingTooOften
+                        }
+                      >
+                        {isSubmittingTooOften
+                          ? "Wait..."
+                          : isSubmitting
+                          ? "Submitting..."
+                          : isSubmissionDisabled
+                          ? "Disabled!"
+                          : alreadySolved
+                          ? "Solved!"
+                          : "Submit"}
+                      </button>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+          {challengeDetails && (
+            <ChallengeInfoCard challengeDetails={challengeDetails} />
+          )}
+
+          <section
+            className="pt-30 layout-pb-md"
+            style={{
+              minHeight: "80vh",
+            }}
+          >
+            <div className="container">
+              <div className="row">
+                <div className="col-lg-8">
+                  <div className="pt-25 pb-30 px-30 ">
+                    <div className="tabs -active-purple-2 js-tabs pt-0">
+                      <div className="tabs__controls d-flex js-tabs-controls">
+                        {menuItems.map((elm, i) => (
+                          <button
+                            key={i}
+                            onClick={() => setActiveTab(elm.id)}
+                            className={`tabs__button js-tabs-button js-update-pin-scene ${
+                              i != 0 ? "ml-30" : ""
+                            } ${activeTab == elm.id ? "is-active" : ""} `}
+                            type="button"
+                          >
+                            {elm.text}
+                          </button>
+                        ))}
+                      </div>
+
+                      <div className="tabs__content   js-tabs-content">
+                        <div
+                          className={`tabs__pane -tab-item-1 ${
+                            activeTab == 1 ? "is-active" : ""
+                          } `}
+                        >
+                          <RecentSolvers challengeId={challengeDetails.id} />
+                        </div>
+
+                        <div
+                          className={`tabs__pane -tab-item-2 ${
+                            activeTab == 2 ? "is-active" : ""
+                          } `}
+                        >
+                          <ChallengeDetailsArtifacts
+                            artifacts={challengeDetails.artifacts}
+                          />
+                        </div>
+
+                        <div
+                          className={`tabs__pane -tab-item-3 ${
+                            activeTab == 3 ? "is-active" : ""
+                          } `}
+                        >
+                          <ChallengeDetailsHints
+                            hints={challengeDetails.hints}
+                            alreadySolved={alreadySolved}
+                            setAlreadySolved={setAlreadySolved}
+                          />
+                        </div>
+
+                        {/* <div
+                        className={`tabs__pane -tab-item-2 ${
+                          activeTab == 2 ? "is-active" : ""
+                        } `}
+                      >
+                        <Leaderboard />
+                      </div>
+
+                      */}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+      )}
+    </>
   );
 }
