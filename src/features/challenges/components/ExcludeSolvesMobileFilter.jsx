@@ -13,7 +13,7 @@ export default function ExcludeSolvesMobileFilter({
   return (
     <>
       <div className="sidebar__item">
-        <h5 className="sidebar__title">Exclude Solves</h5>
+        <h5 className="sidebar__title ">Exclude Solves</h5>
         <div className="sidebar-checkbox">
           {excludeSolveOptions.map((excludeSolveOption, index) => (
             <div

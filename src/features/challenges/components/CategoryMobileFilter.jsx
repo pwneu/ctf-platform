@@ -12,7 +12,7 @@ export default function CategoryMobileFilter({
   return (
     <>
       <div className="sidebar__item">
-        <h5 className="sidebar__title">Category</h5>
+        <h5 className="sidebar__title ">Category</h5>
         <div className="sidebar-checkbox">
           <div
             className="sidebar-checkbox__item"
@@ -51,8 +51,10 @@ export default function CategoryMobileFilter({
 
               <div className="sidebar-checkbox__title">{category.name}</div>
             </div>
+           
           ))}
         </div>
+        <div className="mb-20"> </div>
       </div>
     </>
   );

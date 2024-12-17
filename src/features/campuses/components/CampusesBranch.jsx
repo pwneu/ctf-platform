@@ -37,8 +37,12 @@ export default function CampusPreview() {
 
           <div className="w-100"></div>
           <section className=" pt-27 layout-pb-lg">
-            <div className="container">
-              <div className="row y-gap-20 justify-center align-items-center pt-60 lg:pt-0 ">
+            <div className="container"
+             data-aos="fade-Up"
+             data-aos-offset="80"
+             data-aos-duration={900}>
+              <div className="row y-gap-20 justify-center align-items-center pt-60 lg:pt-0"
+              >
                 {campuses.map((elm, i) => (
                   <div key={i} className="col-lg-12 col-md-10">
                     <div className="coursesCard -type-2 text-center pt-50 pb-40 px-30 bg-white rounded-8">

@@ -15,7 +15,7 @@ export default function CategoryFilter({
 
   return (
     <>
-      <div className="sidebar__item">
+      <div className="sidebar__item ">
         <div className="accordion js-accordion">
           <div
             className={`accordion__item js-accordion-item-active ${
@@ -36,7 +36,7 @@ export default function CategoryFilter({
 
             <div
               className="accordion__content"
-              style={categoryOpen ? { maxHeight: "350px" } : {}}
+              style={categoryOpen ? { maxHeight: "450px" } : {}}
             >
               <div className="accordion__content__inner">
                 <div className="sidebar-checkbox">
@@ -50,18 +50,18 @@ export default function CategoryFilter({
                         readOnly
                         checked={selectedCategory === null}
                       />
-                      <div className="form-checkbox__mark">
+                      <div className="form-checkbox__mark mt-30">
                         <div className="form-checkbox__icon icon-check"></div>
                       </div>
                     </div>
 
-                    <div className="sidebar-checkbox__title">All</div>
+                    <div className="sidebar-checkbox__title mt-30">All</div>
                   </div>
                   {categories.map((category, i) => (
                     <div
                       key={i}
                       onClick={() => handleSelectedCategoryChange(category)}
-                      className="sidebar-checkbox__item cursor"
+                      className="sidebar-checkbox__item cursor mt-30"
                     >
                       <div className="form-checkbox">
                         <input
@@ -80,6 +80,7 @@ export default function CategoryFilter({
                     </div>
                   ))}
                 </div>
+                
               </div>
             </div>
           </div>
