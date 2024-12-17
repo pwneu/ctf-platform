@@ -15,8 +15,8 @@ export default function ExcludeSolvesFilter({
 
   return (
     <>
-      <div className="sidebar__item">
-        <div className="accordion js-accordion">
+      <div className="sidebar__item ">
+        <div className="accordion js-accordion  mt-30">
           <div
             className={`accordion__item js-accordion-item-active ${
               excludeSolvesOpen ? "is-active" : ""
