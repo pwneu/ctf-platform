@@ -1,3 +1,4 @@
+
 import { Line } from "react-chartjs-2";
 import {
   Chart as ChartJS,
@@ -9,6 +10,7 @@ import {
   Legend,
 } from "chart.js";
 import "chart.js/auto";
+import "./leaderboards.css";
 
 ChartJS.register(
   LineElement,
@@ -30,7 +32,7 @@ export default function LeaderboardGraph({ topUsersGraph }) {
       label: userGraph[0].userName,
       data: userGraph.map((entry) => entry.score),
       fill: false,
-      borderColor: `hsl(${(index * 60) % 360}, 100%, 50%)`,
+      borderColor: `hsl(${(index * 50) % 360}, 100%, 50%)`,
       tension: 0.1,
     })),
   };
@@ -44,12 +46,8 @@ export default function LeaderboardGraph({ topUsersGraph }) {
       },
       tooltip: {
         callbacks: {
-          title: (tooltipItems) => {
-            return tooltipItems[0].label;
-          },
-          label: (tooltipItem) => {
-            return `${tooltipItem.dataset.label}: ${tooltipItem.raw}`;
-          },
+          title: (tooltipItems) => tooltipItems[0].label,
+          label: (tooltipItem) => `${tooltipItem.dataset.label}: ${tooltipItem.raw}`,
         },
       },
     },
@@ -75,7 +73,10 @@ export default function LeaderboardGraph({ topUsersGraph }) {
   };
 
   return (
-    <div style={{ width: "100%", height: "400px" }}>
+    <div className="leaderboard-graph-container"
+    data-aos="fadeInRight"
+    data-aos-offset="80"
+    data-aos-duration={900}>
       <Line data={data} options={options} />
     </div>
   );

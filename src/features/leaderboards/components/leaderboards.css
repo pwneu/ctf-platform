@@ -1,0 +1,223 @@
+.leaderboard-section {
+    padding: 50px 20px; /* Section padding for spacing */
+  }
+  
+  .container {
+    max-width: 1200px;
+    margin: 0 auto; /* Center the content */
+    padding: 0 20px; /* Add horizontal padding */
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* Spacing between rows */
+  }
+  
+  .leaderbordrow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap; /* Allows wrapping for smaller screens */
+    gap: 20px; /* Space between columns */
+  }
+  
+
+  .content-section {
+    flex: 2; /* Takes more space for text */
+  }
+  
+  .title {
+    font-size: clamp(1.8rem, 2.5vw, 2.5rem); /* Responsive font size */
+    line-height: 1.5;
+    color: #333; /* Dark text for contrast */
+  }
+  
+  .description,
+  .additional-info {
+    margin-top: 20px;
+    font-size: clamp(0.1rem, 1.2vw, 1.1rem); /* Responsive text size */
+    line-height: 1.3;
+    color: #555; /* Subtle color for readability */
+  }
+  
+  .image-section-leaderboard {
+    flex: 1; /* Smaller column for the image */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .leaderboardlogo {
+    max-width: 60%;
+    height: auto; /* Ensures responsive scaling */
+  }
+  
+  /* Responsive Adjustments */
+  @media (max-width: 768px) {
+    .leaderbordrow {
+      text-align: center; /* Centers content for small screens */
+    }
+    .content-section {
+      order: 2; /* Moves text below the image */
+    }
+  
+    .image-section-leaderboard {
+      order: 2; /* Moves image above text */
+    }
+  
+    .title {
+      font-size: 1.5rem; /* Smaller title font size */
+    }
+  
+    .description,
+    .additional-info {
+      font-size: 0.9rem; /* Compact text size */
+    }
+  }
+  
+  /* Leaderboard Graph Container */
+  .leaderboard-graph-container {
+    display: flex;
+    justify-content: center; /* Centers graph horizontally */
+    align-items: center; /* Centers graph vertically */
+    width: clamp(60%, 70%, 90%); /* Responsive width (min, preferred, max) */
+    max-width: 3500px; /* Limits the maximum width */
+    height: 500px; /* Fixed height */
+    margin: 0 auto; /* Horizontally centered */
+    box-sizing: border-box; /* Includes padding and border in width/height */
+    padding: 20px; /* Adds spacing inside */
+    border-radius: 10px; /* Optional: Rounded corners for aesthetics */
+    overflow: hidden; /* Hides overflow content */
+  }
+  
+  .hoverable {
+    position: relative;
+    cursor: pointer;
+  }
+  
+  .tooltip {
+    visibility: hidden;
+    background-color: rgba(0, 0, 0, 0.651);
+    color: #fff;
+    text-align: center;
+    border-radius: 4px;
+    padding: 6px 10px;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%; /* Position above the element */
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+    white-space: nowrap;
+  }
+  
+  .hoverable:hover .tooltip {
+    visibility: visible;
+    opacity: 1;
+  }
+  
+  /* Container for the whole leaderboard */
+  .user-ranks-container {
+    min-height: 500px;
+    padding: clamp(50px, 10%, 100px); /* Responsive padding */
+    background-color: #ffffff; /* Keeps it clean and light */
+  
+  }
+  
+  /* Styling for the total participant count */
+  .total-count {
+    text-align: center;
+    font-size: clamp(1rem, 2vw, 1.5rem); /* Responsive font size */
+    color: #333; /* Contrasting color for readability */
+    margin-bottom: 20px; /* Space below */
+  }
+  
+  /* Wrapper for the leaderboard */
+  .leaderboard-wrapper {
+    overflow-x: auto; /* Horizontal scrolling for small screens */
+    margin-bottom: 50px; /* Space below */
+    padding: 10px; /* Adds inner padding */
+    background-color: #fafafa; /* Subtle background */
+    border-radius: 6px; /* Rounded edges */
+  }
+  
+  /* Header styling for leaderboard */
+  .leaderboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center; /* Aligns items vertically */
+    padding: 5px;
+    border-bottom: 6px solid #cff721; /* Emphasized border */
+    background-color: #000000de; /* High contrast background */
+    color: #fff; /* White text for contrast */
+    font-size: clamp(0.9rem, 1.5vw, 1.2rem); /* Responsive font size */
+  }
+  
+  /* Styling for the columns in both header and rows */
+  .rank-column {
+    flex: 1;
+    text-align: center;
+    padding: 2px;
+  }
+  
+  .rank-column.left {
+    text-align: left;
+  }
+  
+  .rank-column.right {
+      text-align: right;
+     
+    }
+    
+  
+  .rank-column.center {
+    text-align: center;
+  }
+  
+  /* Row item styling */
+  .rank-item {
+    display: flex;
+    flex-wrap: wrap; /* Adapts to smaller screens */
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: left;
+    padding: 2px 12px; /* Adds consistent spacing */
+    border-bottom: 1px solid #30000017; /* Dividing line between items */
+    cursor: default;
+    transition: background-color 0.2s ease-in-out; /* Smooth hover effect */
+  }
+  
+  .rank-item:hover {
+    background-color: #f0f0f0; /* Subtle hover effect */
+  }
+  
+  .rank-item.requester {
+    background-color: rgba(255, 230, 0, 0.63); /* Highlighted for requesters */
+    cursor: pointer;
+  }
+  
+  /* Spacer between items */
+  .spacer {
+    height: 20px;
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .leaderboard-graph-container {
+      height: 1000px; /* Reduced height for smaller screens */
+      
+    }
+  
+    .user-ranks-container {
+      padding: 4px; /* Adjusted padding for compact devices */
+    }
+  
+    .rank-item {
+      padding: 1px 1px; /* Reduced padding for compact layout */
+      font-size: 0.7rem; /* Adjust font size */
+    }
+  
+    .leaderboard-header {
+      font-size: 0.7rem; /* Adjust font size */
+    }
+  }
+  

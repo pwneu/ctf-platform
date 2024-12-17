@@ -6,6 +6,7 @@ import { useState, useEffect } from "react";
 import useAuth from "@/hooks/useAuth";
 import { toast } from "react-toastify";
 import { LeaderboardGraph, UserRanks } from "@/features/leaderboards";
+import  LeaderboardOverview from "@/features/leaderboards/layout/LeaderboardOverview";
 import { api } from "@/api";
 
 const metadata = {
@@ -38,10 +39,12 @@ export default function LeaderboardsPage() {
       <MetaComponent meta={metadata} />
       <Preloader />
       <Header />
+      <LeaderboardOverview/>
       <div className="content-wrapper js-content-wrapper">
+      
         {leaderboards ? (
           leaderboards.userRanks && leaderboards.userRanks.length > 0 ? (
-            <>
+            <> 
               <LeaderboardGraph topUsersGraph={leaderboards.topUsersGraph} />
               <UserRanks
                 requesterRank={leaderboards.requesterRank}

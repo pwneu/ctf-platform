@@ -3842,6 +3842,15 @@ h1, h2, h3, h4, h5, h6 {
 
 .coursesCard.-type-4 {
   transition: all 0.3s cubic-bezier(0.215, 0.61, 0.355, 1);
+  border-radius: 8px; 
+  box-shadow: 0 4px 20px rgba(0, 4, 238, 0.418); 
+  transition: transform 0.3s, box-shadow 0.3s; 
+ 
+}
+
+.coursesCard:hover {
+  transform: translateY(-5px); 
+  box-shadow: 0 4px 20px rgba(55, 189, 2, 0.979); 
 }
 
 .coursesCard.-type-4 .coursesCard__image {
