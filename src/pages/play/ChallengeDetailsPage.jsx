@@ -3,8 +3,8 @@ import Preloader from "@/components/Preloader";
 import MetaComponent from "@/components/MetaComponent";
 import Header from "@/layout/headers/Header";
 import Footer from "@/layout/footers/Footer";
-// import { ChallengeDetails } from "@/features/challengeDetails";
-import { Details } from "@/features/challengeDetails"
+// import { ChallengeDetailsOld } from "@/features/challengeDetails";
+import { ChallengeDetails } from "@/features/challengeDetails"
 
 const metadata = {
   title:
@@ -22,8 +22,8 @@ export default function ChallengeDetailsPage() {
       <Preloader />;
       <Header />
       <div className="content-wrapper  js-content-wrapper ">
-        {/* <ChallengeDetails id={params.id} /> */}
-        <Details id={params.id} />
+        {/* <ChallengeDetailsOld id={params.id} /> */}
+        <ChallengeDetails id={params.id} />
         <Footer />
       </div>
     </div>
