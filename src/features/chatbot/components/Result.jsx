@@ -1,13 +1,19 @@
-
-const Result = ({ result }) => {
+export default function Result({ result }) {
   return (
     <div className="message-list">
       <div className="message bot">
-        <p>{result ? result : 'What can I help with?'}</p>
+        {result === "" || result == null ? (
+          <p>What can I help with?</p>
+        ) : (
+          <p
+            dangerouslySetInnerHTML={{
+              __html: result
+                .replace(/\n\n/g, "</p><p>")
+                .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>"),
+            }}
+          />
+        )}
       </div>
     </div>
   );
-};
-
-export default Result;
-
+}
