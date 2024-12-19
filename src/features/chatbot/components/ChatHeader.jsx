@@ -3,9 +3,6 @@ const ChatHeader = () => (
     <div className="container">
       <div
         className="row y-gap-30 justify-between items-center"
-        data-aos="fade-right"
-        data-aos-offset="80"
-        data-aos-duration={900}
       >
         <div className="col-xl-7 col-lg-4">
           <div className="sectionTitle -light"
@@ -22,7 +19,7 @@ const ChatHeader = () => (
         <div className="col-lg-4 lg:order-4">
           <img
             className="w-1/1"
-            src="assets/img/community/dashai3.svg"
+            src="assets/img/chatbot/dashai-icons.png"
             alt="image"
           />
         </div>
