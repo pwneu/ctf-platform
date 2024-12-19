@@ -1,17 +1,17 @@
 export default function TermsAndConditionTabs() {
   return (
     <>
-      <section className="page-header -type-1">
+      <section className="layout-pt-lg layout-pb-lg bg-dark-1">
         <div className="container">
           <div className="page-header__content">
             <div className="row justify-center text-center">
-              <div className="col-auto">
+              <div className="col-auto mt-90">
                 <div>
-                  <h1 className="page-header__title">Terms & Conditions</h1>
+                  <h1 className="page-header__title mt-90 text-white 1h-1">Terms & Conditions</h1>
                 </div>
 
                 <div>
-                  <p className="page-header__text">
+                  <p className="page-header__text text-white mt-15">
                     Welcome to PWNEU CyberEducation. As your dedicated platform
                     for advanced cybersecurity training, we are committed to
                     providing you with a valuable and secure learning
