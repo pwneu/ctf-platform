@@ -13,15 +13,15 @@ const MessageInput = ({ message, onInputChange, onGenerateResult }) => {
         placeholder="Message Dash AI"
       />
       <img
-        src="/assets/img/chatbot/Send-Icon.gif"
+        src="/assets/img/chatbot/Send-Icon.png"
         alt="Generate Answer"
         onClick={onGenerateResult}
         style={{
           cursor: "pointer",
           marginLeft: "10px",
-          marginTop: "10px",
-          width: "40px",
-          height: "40px",
+          marginTop: "9px",
+          width: "50px",
+          height: "50px",
         }}
       />
     </div>
