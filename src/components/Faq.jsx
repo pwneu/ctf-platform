@@ -6,16 +6,16 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 export default function Faq() {
   const [activeFaq, setActiveFaq] = useState(0);
   return (
-    <section className="layout-pt-lg layout-pb-lg bg-light-4">
+    <section className="layout-pt-lg layout-pb-lg bg-light-6">
       <div className="container">
         <div className="row justify-center text-center">
           <div className="col-xl-12 col-lg-9 col-md-11">
             <div className="sectionTitle ">
-              <h2 className="sectionTitle__title ">
+              <h2 className="page-header__title mt-90 ">
                 Frequently Asked Questions.
               </h2>
 
-              <p className="sectionTitle__text ">
+              <p className="page-header__text">
               Got questions? We’ve got answers! Check out our FAQs below for the most common queries.
               </p>
             </div>
@@ -75,6 +75,13 @@ export default function Faq() {
           </div>
         </div>
       </div>
+      <div
+          className="flex justify-center items-center mt-30 mx-auto"
+          style={{
+            minHeight: "50vh",
+            marginTop: "200px",
+          }}
+        ></div>
     </section>
   );
 }
