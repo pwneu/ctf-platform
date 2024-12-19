@@ -54,10 +54,10 @@ export default function LeaderboardsPage() {
               />
             </>
           ) : (
-            <p style={{ minHeight: "1000px" }}>No leaderboards available.</p>
+            <p style={{ minHeight: "1000px", alignItems: "center" }}>No leaderboards available.</p>
           )
         ) : (
-          <p style={{ minHeight: "1000px" }}>Loading leaderboards...</p>
+          <p style={{ minHeight: "1000px", alignItems: "center" }}>Loading leaderboards...</p>
         )}
         <Footer />
       </div>
