@@ -23,20 +23,21 @@ export default function UserRanks({
 
     return (
       <div
-      key={rank.id}
-      className={`${className} hoverable-row`}
-      onClick={handleRowClick}
-    >
-      <div className="rank-column center">{rank.position}</div>
-      <div className="rank-column center hoverable">
-        {rank.userName}
-        <div className="tooltip">
-          {`${rank.userName} solve time: ${new Date(rank.latestSolve).toLocaleString()}`}
+        key={rank.id}
+        className={`${className} hoverable-row`}
+        onClick={handleRowClick}
+      >
+        <div className="rank-column center">{rank.position}</div>
+        <div className="rank-column center hoverable">
+          {rank.userName}
+          <div className="tooltip">
+            {`${rank.userName} solve time: ${new Date(
+              rank.latestSolve
+            ).toLocaleString()}`}
+          </div>
         </div>
+        <div className="rank-column center">{rank.points}</div>
       </div>
-      <div className="rank-column center">{rank.points}</div>
-     
-    </div>
     );
   };
 
@@ -52,8 +53,8 @@ export default function UserRanks({
       data-aos-duration={900}
     >
       <p className="text-black rank-column center  text-sm">
-          {`There are currently (${totalLeaderboardCount}) participant(s).`}
-        </p>
+        {`There are currently (${totalLeaderboardCount}) participant(s).`}
+      </p>
       <div className="leaderboard-wrapper text-black">
         <div className="leaderboard-header text-white">
           <div className="rank-column center">Rank</div>
@@ -74,6 +75,10 @@ export default function UserRanks({
             </>
           )}
         </div>
+        <div className="mt-90"></div>
+        <div className="mt-90"></div>
+        <div className="mt-90"></div>
+        <div className="mt-90"></div>
       </div>
     </div>
   );

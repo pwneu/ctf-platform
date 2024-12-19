@@ -1,4 +1,3 @@
-
 import { Line } from "react-chartjs-2";
 import {
   Chart as ChartJS,
@@ -47,7 +46,8 @@ export default function LeaderboardGraph({ topUsersGraph }) {
       tooltip: {
         callbacks: {
           title: (tooltipItems) => tooltipItems[0].label,
-          label: (tooltipItem) => `${tooltipItem.dataset.label}: ${tooltipItem.raw}`,
+          label: (tooltipItem) =>
+            `${tooltipItem.dataset.label}: ${tooltipItem.raw}`,
         },
       },
     },
@@ -73,10 +73,12 @@ export default function LeaderboardGraph({ topUsersGraph }) {
   };
 
   return (
-    <div className="leaderboard-graph-container"
-    data-aos="fadeInRight"
-    data-aos-offset="80"
-    data-aos-duration={900}>
+    <div
+      className="leaderboard-graph-container"
+      data-aos="fade-up"
+      data-aos-offset="80"
+      data-aos-duration={900}
+    >
       <Line data={data} options={options} />
     </div>
   );
