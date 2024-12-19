@@ -16,6 +16,9 @@ export default function DiscussionForum() {
         <div className="container mx-auto flex flex-col justify-center items-center h-full ">
           <div className="text-center">
             <img
+             data-aos="fade-down"
+             data-aos-offset="80"
+             data-aos-duration={900}
               src="assets/img/community/DiscordCommunity.png"
               alt="Community Icon"
               style={{
@@ -26,7 +29,11 @@ export default function DiscussionForum() {
             />
           </div>
 
-          <div className="text-white mt-6 px-4 text-center max-w-2xl">
+          <div className="text-white mt-6 px-4 text-center max-w-2xl"
+           data-aos="fade-up"
+           data-aos-offset="80"
+           data-aos-duration={900}
+          >
             <h4 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold text-white leading-tight">
               Connect with Our Cybersecurity Community
             </h4>
@@ -47,7 +54,10 @@ export default function DiscussionForum() {
           >
             <Link
               to="/signup"
-              className="button -sm -white text-dark-1 font-semibold rounded-lg shadow hover:bg-gray-200 "
+              className="button -sm -white text-dark-1 font-semibold rounded-lg shadow hover:bg-gray-200"
+              data-aos="fade-up"
+              data-aos-offset="80"
+              data-aos-duration={900}
             >
               Join Now
             </Link>
