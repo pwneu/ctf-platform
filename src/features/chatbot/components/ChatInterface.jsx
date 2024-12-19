@@ -58,6 +58,9 @@ const ChatInterface = () => {
   return (
     <div
       className="chatbot bg-dark-3 "
+      data-aos="fade-up"
+      data-aos-offset="80"
+      data-aos-duration={900}
     >
       <div className="chat-container">
         <MessageInput
