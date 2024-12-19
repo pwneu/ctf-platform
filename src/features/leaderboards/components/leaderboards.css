@@ -118,7 +118,7 @@
   /* Container for the whole leaderboard */
   .user-ranks-container {
     min-height: 500px;
-    padding: clamp(50px, 10%, 100px); /* Responsive padding */
+    padding: clamp(50px,  100px); /* Responsive padding */
     background-color: #ffffff; /* Keeps it clean and light */
   
   }
@@ -136,7 +136,7 @@
     overflow-x: auto; /* Horizontal scrolling for small screens */
     margin-bottom: 50px; /* Space below */
     padding: 10px; /* Adds inner padding */
-    background-color: #fafafa; /* Subtle background */
+
     border-radius: 6px; /* Rounded edges */
   }
   
@@ -165,10 +165,8 @@
   
   .rank-column.right {
       text-align: right;
-     
-    }
+  }
     
-  
   .rank-column.center {
     text-align: center;
   }
@@ -204,7 +202,6 @@
   @media (max-width: 768px) {
     .leaderboard-graph-container {
       height: 1000px; /* Reduced height for smaller screens */
-      
     }
   
     .user-ranks-container {

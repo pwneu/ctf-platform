@@ -58,15 +58,15 @@ export default function ChallengesList({ challenges, isBusy }) {
                         </div>
                       </div>
 
-                      <div className=" items-center">
-                        <div className="mt-20 text-14 lh-1 text-light-1">
-                          <div className="fa fa-trophy"></div> Points:{" "}
+                      <div className=" items-center ">
+                        <div className="mt-20 text-14 lh-1 text-light-1 ">
+                          <div className="fa fa-trophy"></div>    Points:{" "}
                           {challenge.points}
                         </div>
                       </div>
 
                       <div className=" text-14 lh-2 text-light-1">
-                        <div className="fa fa-users"> </div> Solve Count:{" "}
+                        <div className="fa fa-users mt-20"> </div> Solve Count:{" "}
                         {challenge.solveCount}
                       </div>
                     </div>
