@@ -11,7 +11,22 @@ export const contactData = [
   },
   {
     id: 3,
-    icon: "/assets/img/contact/3.svg",
+    icon: "/assets/img/contact/neu-contact.png",
     email: "http://www.neu.edu.ph/",
+  },
+  {
+    id: 4,
+    icon: "/assets/img/contact/neu-acss.png",
+    orgACSS: "Association of Computer Student (ACSS)",
+  },
+  {
+    id: 5,
+    icon: "/assets/img/contact/neu-pwneucybereduct.png",
+    orgACSS: "PWNEU CyberEducation ",
+  },
+  {
+    id: 5,
+    icon: "/assets/img/contact/neu-unitgg.png",
+    orgACSS: "UnitGG CTF Players",
   },
 ];
