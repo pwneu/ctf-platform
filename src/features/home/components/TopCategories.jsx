@@ -5,7 +5,10 @@ export default function TopCategories() {
   return (
     <section className="layout-pt-lg layout-pb-lg">
       <div className="container">
-        <div className="row justify-center text-center">
+        <div className="row justify-center text-center"
+        data-aos="fade-down"
+        data-aos-offset="100"
+        data-aos-duration={900}>
           <div className="col-auto">
             <div className="sectionTitle ">
               <h2 className="sectionTitle__title ">Top Categories</h2>
@@ -17,7 +20,12 @@ export default function TopCategories() {
           </div>
         </div>
 
-        <div className="row y-gap-30 pt-50">
+
+        <div className="row y-gap-30 pt-50"
+         data-aos="fade-up"
+         data-aos-offset="100"
+         data-aos-duration={900}
+         >
           <div className="col-lg-6">
             <div className="row y-gap-30">
               {topCatagoriesThree.slice(0, 4).map((elm, i) => (

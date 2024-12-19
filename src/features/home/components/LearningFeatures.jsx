@@ -17,16 +17,65 @@ export default function LearningFeatures() {
       </div>
 
       <div className="container">
-        <div className="row y-gap-30 lg:pt-50">
+        <div className="row y-gap-40">
           {learningPath.map((elm, i) => (
-            <div key={i} className="col-xl-3 col-lg-4 col-md-6 ">
-              <div className="categoryCard -type-4">
+            <div key={i} className="col-xl-3 col-lg-4 col-md-6 col-sm-12">
+              <div
+                className="categoryCard -type-4"
+                data-aos="fade-up"
+                data-aos-offset="100"
+                data-aos-duration={900}
+                data-aos-delay={i * 100} // Add delay to stagger animations
+              >
                 <div className="categoryCard__content">
-                  <h4 className="categoryCard__title text-17 fw-600 pt-90 ">
-                    {elm.title}
-                  </h4>
-                  <div className="categoryCard__text text-13 lh-1 mt-5  ">
-                    {elm.description}
+                  {/* Icon Image Here */}
+                  <div
+                    className="categoryCard__icon"
+                    data-aos="fade-up"
+                    data-aos-offset="90"
+                    data-aos-duration={900}
+                  >
+                    <img
+                      src={elm.icon}
+                      alt={`${elm.title} icon`}
+                      className="icon-img"
+                      style={{
+                        width: "55px",
+                        height: "55px",
+                        objectFit: "contain",
+                      }}
+                    />
+                  </div>
+                  <div
+                    className="categoryCard__content"
+                    style={{
+                      display: "flex",
+                      flexDirection: "column",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      textAlign: "center",
+                    }}
+                  >
+                    <h4
+                      className="categoryCard__title"
+                      style={{
+                        fontSize: "17px",
+                        fontWeight: "600",
+                        marginBottom: "1px",
+                      }}
+                    >
+                      {elm.title}
+                    </h4>
+                    <div
+                      className="categoryCard__text mt-30"
+                      style={{
+                        fontSize: "15px",
+                        lineHeight: "1.25",
+                        marginTop: "9px",
+                      }}
+                    >
+                      {elm.description}
+                    </div>
                   </div>
                 </div>
               </div>
