@@ -1,15 +1,13 @@
-// import { coursesData } from "@/data/courses";
+
 import { useState, useEffect } from "react";
 import ChallengeInfoCard from "./ChallengeInfoCard";
 import RecentSolvers from "./RecentSolvers";
 import { api } from "@/api";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
-import useAuth from "@/hooks/useAuth";
+// import useAuth from "@/hooks/useAuth";
 import ChallengeDetailsArtifacts from "./ChallengeDetailsArtifacts";
 import ChallengeDetailsHints from "./ChallengeDetailsHints";
-
-// TODO -- design challenge loading and challenge not found
 
 const menuItems = [
   { id: 1, href: "#recent-solvers", text: "Recent Solvers", isActive: true },
@@ -19,8 +17,13 @@ const menuItems = [
 
 const badgeClasses = [
   "bg-green-1 text-dark-1",
-  "bg-orange-1 text-white",
+  "bg-dark-4 text-white",
+  "bg-dark-5 text-white",
   "bg-purple-1 text-white",
+  "bg-orange-1 text-white",
+  "bg-light-9 text-dark-1",
+  "bg-yellow-3 text-black",
+  "bg-purple-4 text-black",
 ];
 
 export default function ChallengeDetails({ id }) {
@@ -41,8 +44,8 @@ export default function ChallengeDetails({ id }) {
 
   const [isSubmittingTooOften, setIsSubmittingTooOften] = useState(false);
 
-  const { auth } = useAuth();
-  const isManager = auth?.roles?.includes("Manager");
+  // const { auth } = useAuth();
+  // const isManager = auth?.roles?.includes("Manager");
 
   const navigate = useNavigate();
 
@@ -155,9 +158,6 @@ export default function ChallengeDetails({ id }) {
           style={{
             minHeight: "80vh",
             marginTop: "200px",
-            // display: "flex",
-            // justifyContent: "center",
-            // alignItems: "center",
           }}
         >
           Loading...
@@ -198,65 +198,164 @@ export default function ChallengeDetails({ id }) {
                       {challengeDetails?.description}
                     </p>
 
-                    {/* Changed to tags */}
-                    <div className="mt-30 d-flex x-gap-15 y-gap-10 pb-20">
+                    <div
+                      className="tag-container"
+                      style={{
+                        display: "flex",
+                        flexWrap: "wrap",
+                        gap: "8px", // Slightly larger gap for better spacing
+                        marginTop: "30px",
+                        justifyContent: "flex-start", // Left-aligned by default
+                        width: "100%",
+                        padding: "0",
+                        boxSizing: "border-box",
+                      }}
+                    >
                       {challengeDetails?.tags.map((tag, index) => (
-                        <div key={index}>
+                        <div
+                          key={index}
+                          className="tag-wrapper"
+                          style={{
+                            flex: "1 1 calc(25% - 16px)", // Adjust for responsive layout
+                            maxWidth: "120px", // Ensure the maximum width for larger screens
+                            minWidth: "70px", // Maintain readability for smaller tags
+                            height: "auto",
+                            margin: "4px", // Consistent spacing
+                            boxSizing: "border-box",
+                          }}
+                        >
                           <div
-                            className={`badge px-15 py-8 text-11 fw-400 ${
+                            className={`badge text-11 fw-100 ${
                               badgeClasses[index % badgeClasses.length]
                             }`}
+                            style={{
+                              display: "flex", // Full flexibility for content alignment
+                              justifyContent: "center",
+                              alignItems: "center",
+                              width: "100%", // Utilize the full width of the parent
+                              height: "30px", // Slightly taller for better readability
+                              padding: "0 12px", // Add horizontal padding for longer text
+                              borderRadius: "20px",
+                              textAlign: "center",
+                              boxSizing: "border-box",
+                              overflow: "hidden", // Prevent text overflow
+                              whiteSpace: "nowrap", // Prevent wrapping
+                              textOverflow: "ellipsis", // Add ellipsis for overflowing text
+                            }}
                           >
                             {tag}
                           </div>
                         </div>
                       ))}
+                      <style>{`
+                        @media screen and (max-width: 1024px) {
+                          .tag-wrapper {
+                            flex: 1 1 calc(33% - 16px); /* Adjust for medium screens */
+                            maxWidth: 120px; /* Reduce max width for smaller screens */
+                          }
 
-                      {/* <div>
-                    <div className="badge px-15 py-8 text-11 bg-green-1 text-dark-1 fw-400">
-                      Web Exploitation
+                          .badge {
+                            font-size: 0.875rem; /* Slightly smaller font */
+                          }
+                        }
+
+                        @media screen and (max-width: 768px) {
+                          .tag-wrapper {
+                            flex: 1 1 calc(50% - 16px); /* Adjust for smaller screens */
+                            maxWidth: 100px;
+                          }
+
+                          .badge {
+                            font-size: 0.75rem; /* Smaller font for narrow screens */
+                          }
+                        }
+
+                        @media screen and (max-width: 480px) {
+                          .tag-wrapper {
+                            flex: 1 1 calc(100% - 16px); /* Full width for very small screens */
+                            maxWidth: 100%; /* Remove fixed width constraints */
+                          }
+
+                          .badge {
+                            font-size: 0.75rem; /* Keep text readable on small devices */
+                            height: 28px; /* Reduce badge height */
+                          }
+                        }
+                      `}</style>
                     </div>
-                  </div>
-                  <div>
-                    <div className="badge px-15 py-8 text-11 bg-orange-1 text-white fw-400">
-                      Solvers: 20
-                    </div>
-                  </div>
-                  <div>
-                    <div className="badge px-15 py-8 text-11 bg-purple-1 text-white fw-400">
-                      Points: 20
-                    </div>
-                  </div> */}
-                    </div>
+
                     <form
-                      className="contact-form respondForm__form text-white row y-gap-20 pt-30"
+                      className="ctf-flag-form mt-50"
                       onSubmit={handleSubmit}
+                      style={{
+                        display: "flex",
+                        alignItems: "flex-start",
+                        justifyContent: "space-between",
+                        gap: "12px",
+                        color: "white",
+                        flexWrap: "wrap", // Make sure it wraps if needed
+                      }}
                     >
-                      <div className="col-lg-9  text-white">
+                      <div
+                        style={{
+                          display: "flex",
+                          flexDirection: "column",
+                          gap: "5px",
+                          flex: "1",
+                          minWidth: "200px", // Ensure it stays responsive
+                        }}
+                      >
                         <input
                           required
                           type="text"
                           value={flag}
                           onChange={(e) => setFlag(e.target.value)}
-                          name="PWNEU{FLAG}"
-                          placeholder="PWNEU{FLAG}"
-                          autoComplete="given-name"
-                          hidden={isManager}
-                          style={{ color: "white" }}
+                          name="PWNEY{FLAG}"
+                          placeholder="PWNEY{FLAG}"
+                          autoComplete="off"
+                          style={{
+                            color: "white",
+                            backgroundColor: "transparent",
+                            border: "1px solid white",
+                            padding: "7px",
+                            borderRadius: "5px",
+                            fontSize: "14px",
+                            width: "100%", // Ensure input takes up full width
+                          }}
                         />
                       </div>
                       <button
                         type="submit"
-                        className="submit-button"
-                        hidden={isManager}
                         disabled={
-                          isManager ||
+                          isSubmittingTooOften ||
                           isSubmitting ||
                           isSubmissionDisabled ||
                           alreadySolved ||
-                          !flag ||
-                          isSubmittingTooOften
+                          !flag
                         }
+                        style={{
+                          backgroundColor:
+                            isSubmittingTooOften ||
+                            isSubmitting ||
+                            isSubmissionDisabled ||
+                            alreadySolved ||
+                            !flag
+                              ? "#EBEAFE"
+                              : "#cff721",
+                          color: "black",
+                          border: "none",
+                          padding: "8px 19px",
+                          borderRadius: "2px",
+                          cursor:
+                            isSubmittingTooOften ||
+                            isSubmitting ||
+                            isSubmissionDisabled ||
+                            alreadySolved ||
+                            !flag
+                              ? "not-allowed"
+                              : "pointer",
+                          fontSize: "14px",
+                        }}
                       >
                         {isSubmittingTooOften
                           ? "Wait..."
@@ -277,7 +376,6 @@ export default function ChallengeDetails({ id }) {
           {challengeDetails && (
             <ChallengeInfoCard challengeDetails={challengeDetails} />
           )}
-
           <section
             className="pt-30 layout-pb-md"
             style={{
@@ -334,16 +432,6 @@ export default function ChallengeDetails({ id }) {
                             setAlreadySolved={setAlreadySolved}
                           />
                         </div>
-
-                        {/* <div
-                        className={`tabs__pane -tab-item-2 ${
-                          activeTab == 2 ? "is-active" : ""
-                        } `}
-                      >
-                        <Leaderboard />
-                      </div>
-
-                      */}
                       </div>
                     </div>
                   </div>

@@ -15923,32 +15923,38 @@ table.table td {
   background-color: darkblue;   /* Darker background on hover */
 }
 
-/* Hints Button */
 .hint-button {
-  background-color: #000000; 
-  color: white;
-  padding: 5px 80px;
-  border: none;
-  border-radius: 5px;
-  font-size: 15px;
+  display: flex;
+  align-items: center;
   cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s ease;
-  margin-top: 30px;
+  border: none;
+  background: transparent;
 }
 
-.hint-button:hover {
-  background-color: #0056b3; /* Darker shade on hover */
-  transform: translateY(-12px); /* Slight lift effect */
+.hint-text {
+  color: black;
+  transition: color 0.3s;
 }
 
-.hint-button:active {
-  background-color: #004494; /* Even darker shade when active */
-  transform: translateY(0); /* Reset lift effect */
+.hint-text.used {
+  color: red; /* Red if used */
 }
 
-.hint-button:focus {
-  outline: none; /* Remove default focus outline */
-  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.5); /* Add custom focus effect */
+.hint-button i {
+  margin-right: 8px;
+  transition: color 0.3s;
+}
+
+.hint-button i.used {
+  color: #e67e22; /* Orange if used */
+}
+
+.hint-button i:hover:not(.used) {
+  color: #e67e22; /* Highlight on hover if not used */
+}
+
+.hint-text:hover:not(.used) {
+  color: #e67e22; /* Highlight text on hover if not used */
 }
 
 
@@ -15993,7 +15999,7 @@ table.table td {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.747); /* Semi-transparent background */
+  background-color: rgba(0, 0, 0, 0.856); /* Semi-transparent background */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -16001,10 +16007,10 @@ table.table td {
 }
 
 .modal-content {
-  background-color: #ffffff;
+  background-color: #ffffffee;
   padding: 20px;
-  border-radius: 8px;
-  width: 80%;
+  border-radius: 50px;
+  width: 60%;
   max-width: 900px;
   max-height: 80%;
   overflow-y: auto; /* Allows scrolling if content is too long */
@@ -16021,3 +16027,4 @@ table.table td {
   font-size: 50px;
   cursor: pointer;
 }
+
