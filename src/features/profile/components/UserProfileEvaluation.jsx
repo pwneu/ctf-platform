@@ -1,4 +1,4 @@
-import { Row, Col, Card } from "react-bootstrap"; // TODO -- Bootstrap destroying mobile ui
+import { Row, Col, Card } from "react-bootstrap"; 
 import { Pie, Bar } from "react-chartjs-2";
 import "chart.js/auto"; // Required for automatic Chart.js version management
 import { api } from "@/api";

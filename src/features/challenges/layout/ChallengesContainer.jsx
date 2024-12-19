@@ -16,7 +16,6 @@ import ExcludeSolvesFilter from "../components/ExcludeSolvesFilter";
 import CategoryMobileFilter from "../components/CategoryMobileFilter";
 import ExcludeSolvesMobileFilter from "../components/ExcludeSolvesMobileFilter";
 
-// TODO -- Mobile
 
 export default function ChallengesContainer() {
   const [categories, setCategories] = useState([]);
