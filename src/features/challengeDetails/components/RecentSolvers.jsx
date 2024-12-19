@@ -37,57 +37,60 @@ export default function RecentSolvers({ challengeId }) {
       {recentSolvers === undefined ? (
         <p>Loading...</p>
       ) : recentSolvers === null || recentSolvers.length === 0 ? (
-        <p>No solvers found.</p>
+        <div
+          className="no-hints-message text-dark-1"
+          style={{
+            marginTop: "20px",
+            display: "inline-flex",
+            gap: "8px",
+            alignItems: "center",
+            textAlign: "left",
+          }}
+        >
+          <i className="fa fa-users"></i> No solvers found.
+        </div>
       ) : (
-        <ul>
+        <div style={{ width: "100%" }}>
+          {/* Data Rows */}
           {recentSolvers.map((solver, index) => (
-            <li key={index}>
-              {solver.userName} - {new Date(solver.solvedAt).toLocaleString()}
-            </li>
+            <div
+              key={index}
+              style={{
+                display: "flex",
+                flexDirection: "column", // Stack elements vertically for mobile
+                padding: "10px 0",
+                borderBottom: "1px solid #ddd",
+              }}
+            >
+              <div
+                className="text-dark-1"
+                style={{
+                  textAlign: "left",
+                  fontWeight: "bold",
+                  fontSize: "0.875rem",
+                }}
+              >
+                {solver.userName}
+              </div>
+              <div
+                style={{
+                  textAlign: "left",
+                  color: "#555",
+                  fontSize: "0.875rem",
+                }}
+              >
+                {new Date(solver.solvedAt).toLocaleString()}
+              </div>
+            </div>
           ))}
-        </ul>
+        </div>
       )}
+      <div
+        style={{
+          minHeight: "50vh",
+          marginTop: "200px",
+        }}
+      ></div>
     </>
   );
-  // const [showMore, setShowMore] = useState(false);
-
-  // return (
-  //   <div id="overview" className="pt-60 lg:pt-40 to-over">
-  //     <h4 className="text-18 fw-500">Recent Solvers</h4>
-
-  //     <div
-  //       className={`show-more  mt-30 js-show-more ${
-  //         showMore ? "is-active" : ""
-  //       } `}
-  //     >
-  //       <div
-  //         className="show-more__content "
-  //         style={showMore ? { maxHeight: "370px" } : {}}
-  //       >
-  //         <p className="">
-  //           This CTF challenge is designed to test your skills in cybersecurity
-  //           and problem-solving. Starting with initial reconnaissance,
-  //           participants must uncover hidden clues and unravel layers of
-  //           cryptographic puzzles. The challenge progresses step by step,
-  //           leading to more complex tasks involving binary exploitation, web
-  //           application vulnerabilities, and reverse engineering.
-  //           <br />
-  //           <br />
-  //           First, identify the differences between red herrings and actionable
-  //           leads. Analyze the given scenario and use your expertise to craft
-  //           low-level exploits or decipher intricate ciphers. Success will
-  //           demand creativity, precision, and a deep understanding of security
-  //           concepts.
-  //         </p>
-  //       </div>
-
-  //       <button
-  //         onClick={() => setShowMore((pre) => !pre)}
-  //         className="show-more__button text-purple-1 fw-500 underline mt-30"
-  //       >
-  //         Show more
-  //       </button>
-  //     </div>
-  //   </div>
-  // );
 }

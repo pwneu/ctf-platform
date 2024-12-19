@@ -1,7 +1,7 @@
-import { api } from "@/api";
+import { useState } from "react";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { api } from "@/api";
 
 export default function ChallengeDetailsHints({
   hints,
@@ -11,7 +11,6 @@ export default function ChallengeDetailsHints({
   const [selectedHint, setSelectedHint] = useState(null);
   const [showConfirmUseHintModal, setShowConfirmUseHintModal] = useState(false);
   const [isUsingHint, setIsUsingHint] = useState(false);
-
   const navigate = useNavigate();
 
   const handleCheckHintStatus = async (hint) => {
@@ -30,7 +29,6 @@ export default function ChallengeDetailsHints({
       }
     } catch (error) {
       const status = error?.response?.status;
-
       if (status === 401) {
         navigate("/login");
       } else if (status === 400) {
@@ -64,7 +62,6 @@ export default function ChallengeDetailsHints({
       toast.info(`Hint: ${response.data}`);
     } catch (error) {
       const status = error?.response?.status;
-
       if (status === 401) {
         navigate("/login");
       } else if (status === 400) {
@@ -91,43 +88,114 @@ export default function ChallengeDetailsHints({
 
   return (
     <>
-      {hints.length > 0 ? (
-        hints.map((hint, index) => (
-          <div key={index} className="hint-container">
-            <button
-              onClick={() => handleCheckHintStatus(hint)}
-              className="hint-button"
-              disabled={isUsingHint}
+      <>
+        {hints.length > 0 ? (
+          hints.map((hint, index) => (
+            <div
+              key={index}
+              className="hint-container"
+              style={{
+                marginTop: "10px",
+                display: "flex",
+                flexDirection: "column",
+              }}
             >
-              {isUsingHint
-                ? "Loading..."
-                : `Use hint (-${hint.deduction} Points)`}
-            </button>
+              <button
+                onClick={() => handleCheckHintStatus(hint)}
+                className="hint-button"
+                disabled={isUsingHint}
+                style={{
+                  display: "flex",
+                  gap: "8px",
+                  alignItems: "center",
+                  textAlign: "left", // Left-aligned text
+                  fontSize: "0.875rem", // Adjust font size for readability
+                  padding: "8px 12px", // Add padding for better clickability
+                  border: "1px solid #ddd", // Optional: Add border for better visibility
+                  borderRadius: "4px", // Add slight rounding for a modern look
+                  backgroundColor: isUsingHint ? "#f0f0f0" : "#fff", // Change background based on state
+                  cursor: isUsingHint ? "not-allowed" : "pointer",
+                }}
+              >
+                {isUsingHint ? (
+                  "Loading..."
+                ) : (
+                  <>
+                    <i className="fa fa-lightbulb-o"></i>
+                    {` Use hint (-${hint.deduction} Points)`}
+                  </>
+                )}
+              </button>
+            </div>
+          ))
+        ) : (
+          <div
+            className="no-hints-message text-dark-1"
+            style={{
+              marginTop: "20px",
+              display: "flex",
+              gap: "8px",
+              alignItems: "center",
+              textAlign: "left", // Ensure left alignment
+             
+            }}
+          >
+            <i className="fa fa-lightbulb-o"></i> No hints available.
           </div>
-        ))
-      ) : (
-        <div className="no-hints-message">No hints available.</div>
-      )}
+        )}
+
+        <style>
+          {`
+            @media screen and (max-width: 768px) {
+              .hint-container {
+                width: 100%; /* Ensure container takes full width */
+              }
+
+              .hint-button {
+                font-size: 0.875rem; /* Adjust font size for smaller screens */
+                padding: 8px 10px; /* Reduce padding for smaller devices */
+              }
+
+              .no-hints-message {
+                font-size: 0.875rem;
+              }
+            }
+
+            @media screen and (max-width: 480px) {
+              .hint-button {
+                font-size: 0.75rem; /* Smaller font for very small screens */
+                padding: 6px 8px; /* Further reduce padding */
+              }
+
+              .no-hints-message {
+                font-size: 0.75rem;
+              }
+            }
+          `}
+        </style>
+      </>
 
       {/* Confirmation Modal */}
       {showConfirmUseHintModal && (
         <div className="modal-overlay">
           <div className="modal-content">
             <h3>Use Hint?</h3>
-            <p>{`This will deduct ${selectedHint?.deduction} point${
+            <p className="mt-20">{`This will deduct ${
+              selectedHint?.deduction
+            } point${
               selectedHint?.deduction === 1 ? "" : "s"
             }. Do you want to proceed?`}</p>
             <div className="modal-buttons">
               <button
                 onClick={() => handleUseHint(selectedHint)}
-                className="confirm-button"
+                className="confirm-button mt-20"
                 disabled={isUsingHint}
               >
                 {isUsingHint ? "Loading..." : "Confirm"}
               </button>
               <button
                 onClick={() => setShowConfirmUseHintModal(false)}
-                className="cancel-button"
+                className="cancel-button mt-20"
                 disabled={isUsingHint}
               >
                 {isUsingHint ? "Loading..." : "Cancel"}
@@ -136,6 +204,15 @@ export default function ChallengeDetailsHints({
           </div>
         </div>
       )}
+      <div
+        style={{
+          minHeight: "50vh",
+          marginTop: "200px",
+          // display: "flex",
+          // justifyContent: "center",
+          // alignItems: "center",
+        }}
+      ></div>
     </>
   );
 }

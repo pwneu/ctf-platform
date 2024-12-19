@@ -29,20 +29,20 @@ export default function ChallengeInfoCard({ challengeDetails }) {
       >
         <div
           style={{ position: "sticky", top: "100px" }}
-          className="bg-white  rounded-8 border-light py-10 px-10"
+          className="bg-black py-10 px-10"
         >
           <div className="relative">
             <img
               className="w-1/1"
-              src="/assets/img/challengesCards/bgsample.png"
+              src="/assets/img/challengesCards/cards2.png"
               alt="image"
             />
           </div>
 
-          <div className="courses-single-t scroll-bar-1 pt-30 pb-20 px-20">
+          <div className="text-white courses-single-t scroll-bar-1 pt-30 pb-20 px-20">
             <div className="mt-25">
               <div className="d-flex justify-between py-8 ">
-                <div className="d-flex items-center text-dark-1">
+                <div className="d-flex items-center">
                   <div className="fa fa-folder"></div>
                   <div className="ml-10">Category</div>
                 </div>
@@ -50,7 +50,7 @@ export default function ChallengeInfoCard({ challengeDetails }) {
               </div>
 
               <div className="d-flex justify-between py-8 border-top-light">
-                <div className="d-flex items-center text-dark-1">
+                <div className="d-flex items-center">
                   <div className="fa fa-trophy"></div>
                   <div className="ml-10">Points</div>
                 </div>
@@ -58,7 +58,7 @@ export default function ChallengeInfoCard({ challengeDetails }) {
               </div>
 
               <div className="d-flex justify-between py-8 border-top-light">
-                <div className="d-flex items-center text-dark-1">
+                <div className="d-flex items-center ">
                   <div className="fa fa-users"></div>
                   <div className="ml-10">Solvers</div>
                 </div>
@@ -70,7 +70,7 @@ export default function ChallengeInfoCard({ challengeDetails }) {
               </div>
 
               <div className="d-flex justify-between py-8 border-top-light">
-                <div className="d-flex items-center text-dark-1">
+                <div className="d-flex items-center">
                   <div className="fa fa-infinity"></div>
                   <div className="ml-10">Max Attempts</div>
                 </div>
@@ -82,7 +82,7 @@ export default function ChallengeInfoCard({ challengeDetails }) {
               </div>
 
               <div className="d-flex justify-between py-8 border-top-light">
-                <div className="d-flex items-center text-dark-1">
+                <div className="d-flex items-center ">
                   <div className="far fa-clock"></div>
                   <div className="ml-10">Deadline</div>
                 </div>
@@ -94,7 +94,7 @@ export default function ChallengeInfoCard({ challengeDetails }) {
               </div>
 
               <div className="d-flex justify-between py-8 border-top-light">
-                <div className="d-flex items-center text-dark-1">
+                <div className="d-flex items-center ">
                   <div className="fa fa-download"></div>
                   <div className="ml-10">Artifacts</div>
                 </div>
@@ -106,7 +106,7 @@ export default function ChallengeInfoCard({ challengeDetails }) {
               </div>
 
               <div className="d-flex justify-between py-8 border-top-light">
-                <div className="d-flex items-center text-dark-1">
+                <div className="d-flex items-center ">
                   <div className="fa fa-lightbulb-o"></div>
                   <div className="ml-10">Hints</div>
                 </div>
