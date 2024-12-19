@@ -3,7 +3,6 @@ import Features from "./components/Features";
 import LearningFeatures from "./components/LearningFeatures";
 import FindLearningPath from "./components/FindLearningPath";
 import HomeHero from "./components/HomeHero";
-import Testimonials from "./components/Testimonials";
 import TopCategories from "./components/TopCategories";
 import WhyPWNEU from "./components/WhyPWNEU";
 import Achievements from "./components/Achievements";
@@ -14,7 +13,6 @@ export {
   LearningFeatures,
   FindLearningPath,
   HomeHero,
-  Testimonials,
   TopCategories,
   WhyPWNEU,
   Achievements
