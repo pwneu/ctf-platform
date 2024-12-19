@@ -8,53 +8,82 @@ export default function Contact() {
 
   return (
     <>
-      <section className="">
+      <section
+        data-aos="fade-down"
+        data-aos-offset="80"
+        data-aos-duration={900}
+      >
         <MapComponent />
       </section>
-      <section className="layout-pt-md layout-pb-lg">
-        <div className="container">
+      <section className="layout-pt-md layout-pb-lg mt-90">
+        <div
+          className="container"
+          data-aos="fade-up"
+          data-aos-offset="80"
+          data-aos-duration={900}
+        >
           <div className="row y-gap-20 justify-between">
-            <div className="col-lg-3">
-              <h4 className="text-24 fw-600">
+            <div className="col-lg-4">
+              <h4 className="text-24 fw-600 text-dark-1">
                 Stay Connected with PWNEU CyberEduc{" "}
               </h4>
-              <p className="mt-25 fw-400">
+              <p className="mt-25 fw-400 text-dark-1">
                 We’d love to hear from you! Feel free to get in touch with us
                 for any inquiries.
               </p>
 
-              <div className="y-gap-40 pt-90 lg:pt-80">
-                {contactData.map((elm, i) => (
-                  <div key={i} className="d-flex items-center">
-                    <div className="d-flex justify-center items-center size-1 rounded-full bg-light-0">
+              <div className="y-gap-30 pt-90 lg:pt-80">
+                {contactData.map((elm) => (
+                  <div
+                    key={elm.id}
+                    className="d-flex items-center"
+                    style={{
+                      alignItems: "center", // Ensures vertical alignment of all items
+                    }}
+                  >
+                    <div
+                      className="d-flex justify-center items-center size-1 rounded-full bg-light-0 text-dark-1"
+                      style={{
+                        width: "40px",
+                        height: "40px",
+                        display: "flex",
+                        alignItems: "center", // Centers the icon vertically
+                        justifyContent: "center", // Centers the icon horizontally
+                      }}
+                    >
                       <img
                         src={elm.icon}
-                        alt="icon"
-                        style={{ width: "40px", height: "40px" }}
+                        alt={`icon-${elm.id}`}
+                        style={{
+                          width: "40px",
+                          height: "40px",
+                          objectFit: "contain",
+                        }}
                       />
                     </div>
-                    <div className="ml-20">
-                      {elm.address
-                        ? `${elm.address
-                            .split(" ")
-                            .slice(0, 5)
-                            .join(" ")} \n ${elm.address
-                            .split(" ")
-                            .slice(4, -1)
-                            .join(" ")}`
-                        : elm.email || elm.phoneNumber}
+                    <div
+                      className="ml-20 text-dark-1"
+                      style={{
+                        marginLeft: "20px", // Adds spacing between the icon and text
+                        display: "flex", // Flex layout for proper alignment
+                        alignItems: "center", // Aligns text vertically
+                      }}
+                    >
+                      {elm.address ||
+                        elm.email ||
+                        elm.orgACSS ||
+                        elm.phoneNumber}
                     </div>
                   </div>
                 ))}
               </div>
             </div>
 
-            <div className="col-lg-8">
-              <h3 className="text-24 fw-600">Send a Message.</h3>
-              <p className="mt-25 fw-400">
+            <div className="col-lg-6 mt-20">
+              <h3 className="text-24 fw-600 ">Send a Message.</h3>
+              <p className="mt-25 fw-400 text-dark-1">
                 Have a question or just want to get in touch? Fill out the form
-                below, and
-                <br /> we’ll be sure to get back to you soon!
+                below, and we’ll be sure to get back to you soon!
               </p>
 
               <form
@@ -108,6 +137,12 @@ export default function Contact() {
             </div>
           </div>
         </div>
+        <div
+          style={{
+            minHeight: "42vh",
+            marginTop: "200px",
+          }}
+        ></div>
       </section>
     </>
   );
