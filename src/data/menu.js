@@ -41,37 +41,11 @@ export const menuList = [
   },
 ];
 export const menumobileList = [
-  {
-    title: "Overview",
-    path: "/our-story",
-    icon: "fa-eye",
-  },
-  {
-    title: "Who We Are",
-    path: "/who-we-are",
-    icon: "fa-users",
-  },
-  {
-    title: "Mission and Vision",
-    path: "/mission-vision",
-    icon: "fa-bullseye",
-  },
-  {
-    title: "Privacy Policy",
-    path: "/privacy-policy",
-    icon: "fa-shield-alt",
-  },
-  {
-    title: "Terms and Conditions",
-    path: "/terms-and-conditions",
-    icon: "fa-file-alt",
-  },
-  {
-    title: "Learn",
-    path: "https://pwneu.github.io/learn/docs/introduction",
-    icon: "fa-book",
-  },
-
+  // {
+  //   title: "Learn",
+  //   path: "https://pwneu.github.io/learn/docs/introduction",
+  //   icon: "fa-book",
+  // },
   {
     title: "Play",
     path: "/play",
@@ -88,9 +62,34 @@ export const menumobileList = [
     icon: "fa-robot",
   },
   {
+    title: "Overview",
+    path: "/our-story",
+    icon: "fa-eye",
+  },
+  {
+    title: "Who We Are",
+    path: "/who-we-are",
+    icon: "fa-users",
+  },
+  {
+    title: "Mission and Vision",
+    path: "/mission-vision",
+    icon: "fa-bullseye",
+  },
+  {
     title: "University",
     path: "/campuses",
     icon: "fa-university",
+  },
+  {
+    title: "Privacy Policy",
+    path: "/privacy-policy",
+    icon: "fa-shield-alt",
+  },
+  {
+    title: "Terms and Conditions",
+    path: "/terms-and-conditions",
+    icon: "fa-file-alt",
   },
   {
     title: "Community",
