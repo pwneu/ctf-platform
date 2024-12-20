@@ -4408,6 +4408,7 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 
+
 @media (max-width: 1199px) {
   .header .header-menu {
     position: fixed !important;
@@ -4427,7 +4428,7 @@ h1, h2, h3, h4, h5, h6 {
     flex-direction: column;
     height: 100%;
     transition: all 0.3s cubic-bezier(0.215, 0.61, 0.355, 1);
-    transform: translateX(-20%);
+    transform: translateX(-2%);
   }
   .header .header-menu ul {
     overflow-y: hidden;
@@ -4587,7 +4588,7 @@ h1, h2, h3, h4, h5, h6 {
     transition: all 0.2s cubic-bezier(0.215, 0.61, 0.355, 1);
   }
   .header .header-menu .mobile-footer .mobile-socials a:hover {
-    background-color: var(--color-light-4);
+    background-color: var(--color-light-12);
     color: var(--color-purple-1) !important;
   }
 }
