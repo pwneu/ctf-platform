@@ -4,13 +4,12 @@ import MetaComponent from "@/components/MetaComponent";
 import Header from "@/layout/headers/Header";
 import Footer from "@/layout/footers/Footer";
 // import { ChallengeDetailsOld } from "@/features/challengeDetails";
-import { ChallengeDetails } from "@/features/challengeDetails"
+import { ChallengeDetails } from "@/features/challengeDetails";
 
 const metadata = {
-  title:
-    "Challenge Details || PWNEU - Professional LMS Online Education Course ReactJS Template",
+  title: "Challenge Details || PWNEU",
   description:
-    "Elevate your e-learning content with PWNEU, the most impressive LMS template for online courses, education and LMS platforms.",
+    "This challenge is part of the PWNEU competition, focusing on advanced problem-solving and technical expertise in cybersecurity and related domains.",
 };
 
 export default function ChallengeDetailsPage() {

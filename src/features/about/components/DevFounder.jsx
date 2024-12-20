@@ -3,21 +3,25 @@ import { developers } from "@/data/teams";
 export default function DevFounder() {
   return (
     <section
-      className="py-16 bg-center bg-no-repeat"
+      className="py-16 bg-center bg-no-repeat "
       style={{
         backgroundImage: "url('/assets/img/learningPaths/pathways/bg1.gif')",
         backgroundSize: "cover",
         backgroundPosition: "center",
-        height: "120vh",
+        height: "136vh",
+        minHeight: "180vh",
       }}
     >
-      <div className="container mx-auto flex flex-col justify-center items-center h-full ">
-        <div className="text-center">
+      <div className="container mx-auto  flex flex-col justify-center items-center h-full ">
+        <div className="text-center ">
           <img
+            data-aos="fade-down"
+            data-aos-offset="80"
+            data-aos-duration={900}
             src="assets/img/about/whoweare/pwneu.svg"
             alt="Community Icon"
             style={{
-              marginTop: "190px",
+              marginTop: "200px",
               width: "90%",
               maxWidth: "100px",
             }}
@@ -29,11 +33,21 @@ export default function DevFounder() {
         <div className="row justify-center text-center">
           <div className="col-auto">
             <div className="sectionTitle ">
-              <h1 className="sectionTitle__title text-10 text-white">
+              <h1
+                className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold text-white leading-tight"
+                data-aos="fade-down"
+                data-aos-offset="80"
+                data-aos-duration={900}
+              >
                 Meet the Executive Team
               </h1>
 
-              <p className="sectionTitle__text  text-white">
+              <p
+                className="text-white mt-4 leading-relaxed content-wrapper js-content-wrapper overflow-hidden"
+                data-aos="fade-down"
+                data-aos-offset="80"
+                data-aos-duration={900}
+              >
                 We are pleased to introduce our Executive Team, each bringing
                 exceptional skills and expertise to our organization:
               </p>
@@ -47,7 +61,12 @@ export default function DevFounder() {
               key={i}
               className="col-xl-3 col-lg-2 col-md-6 linkCustomTwo justify-content-center "
             >
-              <div className="categoryCard -type-3">
+              <div
+                className="categoryCard -type-3"
+                data-aos="fade-down"
+                data-aos-offset="80"
+                data-aos-duration={900}
+              >
                 <div className="categoryCard__content">
                   <h4 className="categoryCard__title text-11 fw-700 text-white ">
                     {elm.title}
@@ -61,7 +80,12 @@ export default function DevFounder() {
           ))}
         </div>
         <div className="row y-gap-30 pt-20 lg:pt-50 justify-content-center text-white mt-8 px-4 text-center max-w-2xl">
-          <p className="mt-4  leading-relaxed content-wrapper js-content-wrapper overflow-hidden">
+          <p
+            className="mt-4 leading-relaxed content-wrapper js-content-wrapper overflow-hidden"
+            data-aos="fade-up"
+            data-aos-offset="80"
+            data-aos-duration={900}
+          >
             We are developers and UnitGG CTF (Capture The Flag) players,
             dedicated to providing a dynamic and engaging learning platform for
             students pursuing cybersecurity at New Era University. Our mission
