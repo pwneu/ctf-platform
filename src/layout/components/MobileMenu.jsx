@@ -1,156 +1,145 @@
 import MobileFooter from "./MobileFooter"; 
-import { menuList } from "@/data/menu"; 
-import { Link } from "react-router-dom"; 
-import { useEffect, useState } from "react"; 
-import { useLocation } from "react-router-dom"; 
-import PropTypes from 'prop-types'; 
+import { menumobileList } from "@/data/menu";
+import { Link, useLocation } from "react-router-dom";
+import { useState, useEffect } from "react";
+import PropTypes from "prop-types";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faInfoCircle,
+  faEye,
+  faUsers,
+  faBullseye,
+  faShieldAlt,
+  faFileAlt,
+  faBook,
+  faGamepad,
+  faTrophy,
+  faRobot,
+  faUniversity,
+  faQuestionCircle,
+  faLifeRing,
+  faSignInAlt,
+  faUserPlus, // Import the Login (faSignInAlt) and Sign Up (faUserPlus) icons
+} from "@fortawesome/free-solid-svg-icons";
 
-export default function MobileMenu({ setActiveMobileMenu, activeMobileMenu }) {
-  const { pathname } = useLocation(); // Move this to the top for clarity
+const iconMap = {
+  "fa-info-circle": faInfoCircle,
+  "fa-eye": faEye,
+  "fa-users": faUsers,
+  "fa-bullseye": faBullseye,
+  "fa-shield-alt": faShieldAlt,
+  "fa-book": faBook,
+  "fa-file-alt": faFileAlt,
+  "fa-gamepad": faGamepad,
+  "fa-trophy": faTrophy,
+  "fa-robot": faRobot,
+  "fa-university": faUniversity,
+  "fa-question-circle": faQuestionCircle,
+  "fa-life-ring": faLifeRing,
+  "fa-sign-in-alt": faSignInAlt, // Map the Login icon
+  "fa-user-plus": faUserPlus, // Map the SignUp icon
+};
+
+const MobileMenu = ({ setActiveMobileMenu, activeMobileMenu }) => {
+  const { pathname } = useLocation();
   const [showMenu, setShowMenu] = useState(false);
-  const [menuNesting, setMenuNesting] = useState([]);
-  const [menuItem, setMenuItem] = useState("");
-  const [submenu, setSubmenu] = useState("");
-  
+  const [activeMenuItem, setActiveMenuItem] = useState("");
+
   useEffect(() => {
-    menuList.forEach((elm) => {
-      elm?.links?.forEach((elm2) => {
-        if (elm2.href?.split("/")[1] === pathname.split("/")[1]) {
-          setMenuItem(elm.title);
-        } else {
-          elm2?.links?.map((elm3) => {
-            if (elm3.href?.split("/")[1] === pathname.split("/")[1]) {
-              setMenuItem(elm.title);
-              setSubmenu(elm2.title);
-            }
-          });
-        }
-      });
-    });
-  }, [pathname]); // Add pathname to dependencies
+    const activeItem = menumobileList
+      .flatMap((menu) => [menu, ...(menu.subMenu || [])])
+      .find((item) => item.path.split("/")[1] === pathname.split("/")[1]);
+
+    if (activeItem) {
+      setActiveMenuItem(activeItem.title);
+    }
+  }, [pathname]);
 
   useEffect(() => {
     setShowMenu(true);
   }, []);
-  
+
+  const renderIcon = (iconName) => <FontAwesomeIcon icon={iconMap[iconName]} />;
+
   return (
     <div
-      className={`header-menu js-mobile-menu-toggle ${activeMobileMenu ? "-is-el-visible" : ""}`}
+      className={`header-menu js-mobile-menu-toggle ${
+        activeMobileMenu ? "-is-el-visible" : ""
+      }`}
     >
       <div className="header-menu__content">
         <div className="mobile-bg js-mobile-bg"></div>
 
-        <div className="d-none xl:d-flex items-center px-20 py-20 border-bottom-light">
-          <Link
-            to="/login"
-            className={`text-dark-1 ${pathname === "/login" ? "activeMenu" : "inActiveMenu"}`}
-          >
-            Log in
-          </Link>
-          <Link
-            to="/signup"
-            className={`text-dark-1 ml-30 ${pathname === "/signup" ? "activeMenu" : "inActiveMenu"}`}
-          >
-            Sign Up
-          </Link>
+        <div className="d-none xl:d-flex items-center px-10 py-20 border-bottom-light justify-content-between w-full">
+          <div className="logo">
+            <img
+              src="/assets/img/general/PWNEU-DarkGreenLogo-mobileheader.svg"
+              alt="Logo"
+              style={{ height: "40px" }}
+            />
+          </div>
+
+          <div className="d-flex items-center">
+            <Link
+              to="/login"
+              className={`text-dark-1 ${
+                pathname === "/login" ? "activeMenu" : "inActiveMenu"
+              }`}
+              style={{ fontSize: "14px" }}
+            >
+              <span style={{ marginRight: "10px" }}>
+                {renderIcon("fa-sign-in-alt")}
+              </span>{" "}
+              Log in
+            </Link>
+            <Link
+              to="/signup"
+              className={`text-dark-1 ml-30 ${
+                pathname === "/signup" ? "activeMenu" : "inActiveMenu"
+              }`}
+              style={{ fontSize: "14px" }}
+            >
+              <span style={{ marginRight: "10px" }}>
+                {renderIcon("fa-user-plus")}
+              </span>{" "}
+              Sign Up
+            </Link>
+          </div>
         </div>
 
         {showMenu && activeMobileMenu && (
-          <div className="mobileMenu text-dark-1">
-            {menuList.map((elm, i) => {
-              if (elm.title) {
-                return (
-                  <div key={i} className="submenuOne">
-                    <div
-                      className="title"
-                      onClick={() =>
-                        setMenuNesting((prev) =>
-                          prev[0] === elm.title ? [] : [elm.title],
-                        )
+          <div className="mobileMenu text-dark-1" style={{ textAlign: "left" }}>
+            {menumobileList.map((elm, i) => (
+              <div key={i} className="menuItem">
+                <div className="menu-item-container">
+                  {!elm.subMenu && (
+                    <Link
+                      className={
+                        activeMenuItem === elm.title
+                          ? "activeMenu link"
+                          : "link inActiveMenu"
                       }
+                      to={elm.path}
+                      style={{
+                        display: "block",
+                        fontSize: "18px",
+                        marginRight: "10px",
+                        marginLeft: "10px",
+                      }}
                     >
-                      <span className={elm.title === menuItem ? "activeMenu" : "inActiveMenu"}>
-                        {elm.title}
+                      <span style={{ marginRight: "20px" }}>
+                        {renderIcon(elm.icon)}
                       </span>
-                      <i
-                        className={
-                          menuNesting[0] === elm.title
-                            ? "icon-chevron-right text-13 ml-10 active"
-                            : "icon-chevron-right text-13 ml-10"
-                        }
-                      ></i>
-                    </div>
-
-                    {elm.links &&
-                      elm.links.map((itm, index) => (
-                        <div
-                          key={index}
-                          className={menuNesting[0] === elm.title ? "toggle active" : "toggle"}
-                        >
-                          {itm.href && (
-                            <Link
-                              className={pathname.split("/")[1] === itm.href.split("/")[1]
-                                ? "activeMenu link"
-                                : "link inActiveMenu"
-                              }
-                              to={itm.href}
-                            >
-                              {itm.label}
-                            </Link>
-                          )}
-
-                          {itm.links && (
-                            <div className="submenuTwo">
-                              <div
-                                className="title"
-                                onClick={() =>
-                                  setMenuNesting((prev) =>
-                                    prev[1] === itm.title ? [prev[0]] : [prev[0], itm.title],
-                                  )
-                                }
-                              >
-                                <span
-                                  className={itm.title === submenu ? "activeMenu" : "inActiveMenu"}
-                                >
-                                  {itm.title}
-                                </span>
-                                <i
-                                  className={
-                                    menuNesting[1] === itm.title
-                                      ? "icon-chevron-right text-13 ml-10 active"
-                                      : "icon-chevron-right text-13 ml-10"
-                                  }
-                                ></i>
-                              </div>
-                              <div className={menuNesting[1] === itm.title ? "toggle active" : "toggle"}>
-                                {itm.links &&
-                                  itm.links.map((itm2, index3) => (
-                                    <Link
-                                      key={index3}
-                                      className={pathname.split("/")[1] === itm2.href.split("/")[1]
-                                        ? "activeMenu link"
-                                        : "link inActiveMenu"
-                                      }
-                                      to={itm2.href}
-                                    >
-                                      {itm2.label}
-                                    </Link>
-                                  ))}
-                              </div>
-                            </div>
-                          )}
-                        </div>
-                      ))}
-                  </div>
-                );
-              }
-              return null; // Return null for non-title elements
-            })}
+                      {elm.title}
+                    </Link>
+                  )}
+                </div>
+              </div>
+            ))}
           </div>
         )}
-
-        {/* mobile footer start */}
-        <MobileFooter />
+         {/* mobile footer start */}
+         <MobileFooter />
         {/* mobile footer end */}
       </div>
 
@@ -161,7 +150,7 @@ export default function MobileMenu({ setActiveMobileMenu, activeMobileMenu }) {
         }}
         data-el-toggle=".js-mobile-menu-toggle"
       >
-        <div className="size-40 d-flex items-center justify-center rounded-full bg-white">
+        <div className="size-30 d-flex items-center justify-center rounded-full bg-white">
           <div className="icon-close text-dark-1 text-16"></div>
         </div>
       </div>
@@ -169,10 +158,11 @@ export default function MobileMenu({ setActiveMobileMenu, activeMobileMenu }) {
       <div className="header-menu-bg" onClick={() => setActiveMobileMenu(false)}></div>
     </div>
   );
-}
-
-// Define prop types for the MobileMenu component
-MobileMenu.propTypes = {
-  setActiveMobileMenu: PropTypes.func.isRequired,  // Function to set active mobile menu
-  activeMobileMenu: PropTypes.bool.isRequired,      // Boolean indicating if the mobile menu is active
 };
+
+MobileMenu.propTypes = {
+  setActiveMobileMenu: PropTypes.func.isRequired,
+  activeMobileMenu: PropTypes.bool.isRequired,
+};
+
+export default MobileMenu;
