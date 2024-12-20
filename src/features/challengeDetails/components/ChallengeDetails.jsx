@@ -310,8 +310,8 @@ export default function ChallengeDetails({ id }) {
                           type="text"
                           value={flag}
                           onChange={(e) => setFlag(e.target.value)}
-                          name="PWNEY{FLAG}"
-                          placeholder="PWNEY{FLAG}"
+                          name="PWNEU{FLAG}"
+                          placeholder="PWNEU{FLAG}"
                           autoComplete="off"
                           style={{
                             color: "white",
