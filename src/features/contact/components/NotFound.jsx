@@ -6,7 +6,7 @@ export default function NotFound() {
           <div className="row y-gap-50 justify-center items-center">
             <div className="col-lg-6 text-center">
               <div className="no-page__img">
-                <img src="/assets/img/404/searching.gif" alt="image" />
+                <img src="/assets/img/about/contact/searching.gif" alt="image" />
               </div>
             </div>
 
