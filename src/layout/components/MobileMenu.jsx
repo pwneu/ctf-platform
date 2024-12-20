@@ -167,6 +167,29 @@ const MobileMenu = ({ setActiveMobileMenu, activeMobileMenu }) => {
 
         {showMenu && activeMobileMenu && (
           <div className="mobileMenu text-dark-1" style={{ textAlign: "left" }}>
+            <div className="menuItem">
+              <div className="menu-item-container">
+                <Link
+                  className="link"
+                  to="https://pwneu.github.io/learn/docs/introduction"
+                  style={{
+                    display: "block",
+                    fontSize: "18px",
+                    marginRight: "10px",
+                    marginLeft: "10px",
+                  }}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    window.open(e.currentTarget.href, '_blank', 'noopener noreferrer');
+                  }}
+                >
+                  <span style={{ marginRight: "20px" }}>
+                    {renderIcon("fa-book")}
+                  </span>
+                  {"Learn"}
+                </Link>
+              </div>
+            </div>
             {menumobileList.map((elm, i) => (
               <div key={i} className="menuItem">
                 <div className="menu-item-container">
