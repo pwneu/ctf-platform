@@ -6,6 +6,7 @@ import HomeHero from "./components/HomeHero";
 import TopCategories from "./components/TopCategories";
 import WhyPWNEU from "./components/WhyPWNEU";
 import Achievements from "./components/Achievements";
+import Testimonials from "./components/Testimonials";
 
 export {
   CampusesTag,
@@ -13,6 +14,7 @@ export {
   LearningFeatures,
   FindLearningPath,
   HomeHero,
+  Testimonials,
   TopCategories,
   WhyPWNEU,
   Achievements
