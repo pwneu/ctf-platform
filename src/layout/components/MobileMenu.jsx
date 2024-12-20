@@ -1,4 +1,4 @@
-import MobileFooter from "./MobileFooter"; 
+import MobileFooter from "./MobileFooter";
 import { menumobileList } from "@/data/menu";
 import { Link, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
@@ -21,6 +21,12 @@ import {
   faSignInAlt,
   faUserPlus, // Import the Login (faSignInAlt) and Sign Up (faUserPlus) icons
 } from "@fortawesome/free-solid-svg-icons";
+import useAuth from "@/hooks/useAuth";
+import { api } from "@/api";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
+
+const LOGOUT_API = "/identity/logout";
 
 const iconMap = {
   "fa-info-circle": faInfoCircle,
@@ -44,6 +50,24 @@ const MobileMenu = ({ setActiveMobileMenu, activeMobileMenu }) => {
   const { pathname } = useLocation();
   const [showMenu, setShowMenu] = useState(false);
   const [activeMenuItem, setActiveMenuItem] = useState("");
+  const { auth, setAuth } = useAuth();
+  const navigate = useNavigate();
+  const [isLoggingOut, setIsLoggingOut] = useState(false);
+
+  const isManager = auth?.roles?.includes("Manager");
+
+  const handleLogout = async () => {
+    setIsLoggingOut(true);
+    try {
+      await api.post(LOGOUT_API);
+      setAuth(null);
+      navigate("/login");
+    } catch (error) {
+      toast.error("Unable to log out");
+    } finally {
+      setIsLoggingOut(false);
+    }
+  };
 
   useEffect(() => {
     const activeItem = menumobileList
@@ -71,39 +95,73 @@ const MobileMenu = ({ setActiveMobileMenu, activeMobileMenu }) => {
         <div className="mobile-bg js-mobile-bg"></div>
 
         <div className="d-none xl:d-flex items-center px-10 py-20 border-bottom-light justify-content-between w-full">
-          <div className="logo">
-            <img
-              src="/assets/img/general/PWNEU-DarkGreenLogo-mobileheader.svg"
-              alt="Logo"
-              style={{ height: "40px" }}
-            />
-          </div>
+          <Link to="/">
+            <div className="logo">
+              <img
+                src="/assets/img/general/PWNEU-DarkGreenLogo-mobileheader.svg"
+                alt="Logo"
+                style={{ height: "40px" }}
+              />
+            </div>
+          </Link>
 
           <div className="d-flex items-center">
-            <Link
-              to="/login"
-              className={`text-dark-1 ${
-                pathname === "/login" ? "activeMenu" : "inActiveMenu"
-              }`}
-              style={{ fontSize: "14px" }}
-            >
-              <span style={{ marginRight: "10px" }}>
-                {renderIcon("fa-sign-in-alt")}
-              </span>{" "}
-              Log in
-            </Link>
-            <Link
-              to="/signup"
-              className={`text-dark-1 ml-30 ${
-                pathname === "/signup" ? "activeMenu" : "inActiveMenu"
-              }`}
-              style={{ fontSize: "14px" }}
-            >
-              <span style={{ marginRight: "10px" }}>
-                {renderIcon("fa-user-plus")}
-              </span>{" "}
-              Sign Up
-            </Link>
+            {auth?.userName ? (
+              <>
+                <Link
+                  to={isManager ? "/admin" : "/profile"}
+                  className={`text-dark-1 ${
+                    pathname === "/login" ? "activeMenu" : "inActiveMenu"
+                  }`}
+                  style={{
+                    fontSize: "14px",
+                    whiteSpace: "nowrap",
+                    overflow: "hidden",
+                    textOverflow: "ellipsis",
+                    maxWidth: "80px",
+                    display: "inline-block",
+                    verticalAlign: "middle",
+                  }}
+                >
+                  {auth.userName}
+                </Link>
+                <button
+                  onClick={handleLogout}
+                  className={`text-dark-1 ml-30`}
+                  style={{ fontSize: "14px" }}
+                  disabled={isLoggingOut}
+                >
+                  {isLoggingOut ? "Logging out..." : "Log out"}{" "}
+                </button>
+              </>
+            ) : (
+              <>
+                <Link
+                  to="/login"
+                  className={`text-dark-1 ${
+                    pathname === "/login" ? "activeMenu" : "inActiveMenu"
+                  }`}
+                  style={{ fontSize: "14px" }}
+                >
+                  <span style={{ marginRight: "10px" }}>
+                    {renderIcon("fa-sign-in-alt")}
+                  </span>{" "}
+                  Log in
+                </Link>
+                <Link
+                  to="/signup"
+                  className={`text-dark-1 ml-30 ${
+                    pathname === "/signup" ? "activeMenu" : "inActiveMenu"
+                  }`}
+                  style={{ fontSize: "14px" }}
+                >
+                  <span style={{ marginRight: "10px" }}>
+                    {renderIcon("fa-user-plus")}
+                  </span>{" "}
+                  Sign Up
+                </Link>
+              </>
+            )}
           </div>
         </div>
 
@@ -138,8 +196,8 @@ const MobileMenu = ({ setActiveMobileMenu, activeMobileMenu }) => {
             ))}
           </div>
         )}
-         {/* mobile footer start */}
-         <MobileFooter />
+        {/* mobile footer start */}
+        <MobileFooter />
         {/* mobile footer end */}
       </div>
 
@@ -155,7 +213,10 @@ const MobileMenu = ({ setActiveMobileMenu, activeMobileMenu }) => {
         </div>
       </div>
 
-      <div className="header-menu-bg" onClick={() => setActiveMobileMenu(false)}></div>
+      <div
+        className="header-menu-bg"
+        onClick={() => setActiveMobileMenu(false)}
+      ></div>
     </div>
   );
 };
