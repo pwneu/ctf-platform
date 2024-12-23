@@ -217,7 +217,7 @@ export default function ChallengeDetailsOld({ id }) {
     const checkChallengeStatus = async () => {
       try {
         const response = await api.get(`/play/challenges/${id}/check`);
-        console.log(response.data);
+        // console.log(response.data);
         if (response.data === "AlreadySolved") {
           setAlreadySolved(true);
         } else if (response.data === "Disabled") {

@@ -36,9 +36,9 @@ export default function ChallengeDetailsArtifacts({ artifacts }) {
     }
   };
 
-  useEffect(() => {
-    console.log(artifacts);
-  }, [artifacts]);
+  // useEffect(() => {
+  //   console.log(artifacts);
+  // }, [artifacts]);
 
   return (
     <>

@@ -44,7 +44,7 @@ export default function VerifyCode() {
     }
 
     if (!hasErrors) {
-      console.log("Verification Code Submitted: ", formData.code);
+      // console.log("Verification Code Submitted: ", formData.code);
       navigate("/set-new-password");
     }
   };
