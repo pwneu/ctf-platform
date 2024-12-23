@@ -20,6 +20,15 @@ import {
 } from "./pages/authentication";
 import { CertifyPage, UserProfilePage } from "./pages/profile";
 import {
+  UserDashboardPage,
+  UserSummaryPage,
+  UserSolveOverviewPage,
+  UserHintUsagePage,
+  UserCertifyPage,
+  UserSettingsPage,
+} from "./pages/user-profile";
+
+import {
   CampusesPage,
   // DiscussionForumsPage,
   HomePage,
@@ -134,7 +143,13 @@ function App() {
 
           {/* Routes that require the user to be a member */}
           <Route element={<RequireAuth allowedRoles={["Member"]} />}>
-            <Route path="/profile" element={<UserProfilePage />} />
+            <Route path="/profile" element={<UserProfilePage />} /> 
+            <Route path="/dashboard" element={<UserDashboardPage />} />
+            <Route path="/user-summary" element={<UserSummaryPage />} />
+            <Route path="/solve-overview" element={<UserSolveOverviewPage />} />
+            <Route path="/hint-usage" element={<UserHintUsagePage />} />
+            <Route path="/certify" element={<UserCertifyPage />} />
+            <Route path="/settings" element={<UserSettingsPage />} />
             <Route path="/certify" element={<CertifyPage />} />
           </Route>
 
