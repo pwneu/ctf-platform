@@ -1188,6 +1188,9 @@ html.-dark-mode .sidebar.-base-sidebar .sidebar__item.-is-active {
   color: var(--color-purple-1) !important;
 }
 
+html.-dark-mode .sidebar.-base-sidebar .sidebar__itemUser.-is-active {
+  color: var(--color-purple-3) !important;
+}
 html.-dark-mode .-dark-button-dark-1 {
   border-color: #000000 !important;
   background-color: #ff0404 !important;
@@ -1853,13 +1856,14 @@ button:focus {
 }
 
 .button.-purple-4 {
-  background-color: var(--color-purple-4);
-  border: 2px solid var(--color-purple-4);
+  background-color: var(--color-black);
+  border: 2px solid var(--color-green-1);
 }
 
 .button.-purple-4:hover {
-  background-color: transparent !important;
-  color: var(--color-purple-4) !important;
+ 
+  color: var(--color-green-1) !important;
+  border: 2px solid var(--color-green-1);
 }
 
 .button.-outline-purple-4 {
@@ -4346,7 +4350,7 @@ h1, h2, h3, h4, h5, h6 {
     content: '';
     position: absolute;
     top: 6px;
-    left: 20px;
+    left: 30px;
     width: 10px;
     height: 10px;
     background-color: rgb(255, 255, 255);
@@ -4962,6 +4966,14 @@ h1, h2, h3, h4, h5, h6 {
   padding: 0 20px;
   height: 55px;
 }
+.sidebar.-base-sidebar .sidebar__itemUser {
+  display: flex;
+  align-items: center;
+  border-radius: 16px;
+  padding: 0 20px;
+  height: 55px;
+}
+
 
 @media (max-width: 575px) {
   .sidebar.-base-sidebar .sidebar__item {
@@ -4969,8 +4981,18 @@ h1, h2, h3, h4, h5, h6 {
     height: 45px;
   }
 }
+@media (max-width: 575px) {
+  .sidebar.-base-sidebar .sidebar__itemUser {
+    border-radius: 0;
+    height: 45px;
+  }
+}
 
 .sidebar.-base-sidebar .sidebar__item.-is-active {
+  background-color: var(--color-green-1);
+  color: var(--color-purple-1) !important;
+}
+.sidebar.-base-sidebar .sidebar__itemUser.-is-active {
   background-color: var(--color-green-1);
   color: var(--color-purple-1) !important;
 }
@@ -8587,9 +8609,21 @@ h1, h2, h3, h4, h5, h6 {
   padding: 0 20px;
   height: 55px;
 }
+.sidebar.-dashboard .sidebar__itemUser {
+  display: flex;
+  align-items: center;
+  border-radius: 16px;
+  padding: 0 20px;
+  height: 55px;
+}
+
 
 @media (max-width: 575px) {
   .sidebar.-dashboard .sidebar__item {
+    border-radius: 0;
+    height: 45px;
+  }
+  .sidebar.-dashboard .sidebar__itemUser {
     border-radius: 0;
     height: 45px;
   }
@@ -8599,6 +8633,11 @@ h1, h2, h3, h4, h5, h6 {
   background-color: var(--color-green-1);
   color: white !important;
 }
+.sidebar.-dashboard .sidebar__itemUser.-is-active {
+  background-color: var(--color-dark-1);
+  color: white !important;
+}
+
 
 .sidebar.-courses > * + * {
   border-top: 1px solid #DDDDDD;

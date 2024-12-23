@@ -23,7 +23,7 @@ export const RankPoints = [
     value: 22,
     iconClass: "icon-search",
   },
-  
+
   
 ];
 
