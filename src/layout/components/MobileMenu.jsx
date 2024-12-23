@@ -109,7 +109,7 @@ const MobileMenu = ({ setActiveMobileMenu, activeMobileMenu }) => {
             {auth?.userName ? (
               <>
                 <Link
-                  to={isManager ? "/admin" : "/profile"}
+                  to={isManager ? "/admin" : "/dashboard"}
                   className={`text-dark-1 ${
                     pathname === "/login" ? "activeMenu" : "inActiveMenu"
                   }`}

@@ -70,20 +70,24 @@ export default function Header() {
                   </div>
                 </div>
 
-                <div className="header-right__buttons d-flex items-center ml-30 md:d-none" >
+                <div className="header-right__buttons d-flex items-center ml-30 md:d-none">
                   {auth?.userName ? (
                     <>
                       <Link
                         className="text-white"
-                        style={{ cursor: "pointer", textDecoration: "none", marginRight: "10px"  }}
-                        to={isManager ? "/admin" : "/profile"}
+                        style={{
+                          cursor: "pointer",
+                          textDecoration: "none",
+                          marginRight: "10px",
+                        }}
+                        to={isManager ? "/admin" : "/dashboard"}
                       >
                         {auth.userName}
                       </Link>
 
                       <button
                         onClick={handleLogout}
-                        className="button -sm -rounded -green-1 text-dark-1" 
+                        className="button -sm -rounded -green-1 text-dark-1"
                         disabled={isLoggingOut}
                       >
                         {isLoggingOut ? "Logging out..." : "Log out"}{" "}
@@ -91,14 +95,16 @@ export default function Header() {
                     </>
                   ) : (
                     <>
-                      <Link to="/login" className="--sm -white text-white" style={{ marginRight: "20px" }}>
-                        Log in 
+                      <Link
+                        to="/login"
+                        className="--sm -white text-white"
+                        style={{ marginRight: "20px" }}
+                      >
+                        Log in
                       </Link>
                       <Link
                         to="/signup"
                         className="button -sm -rounded -green-1 text-dark-1"
-
-
                       >
                         Sign up
                       </Link>
