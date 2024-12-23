@@ -42,7 +42,7 @@ export default function HeroStory() {
               disableOnInteraction: false,
             }}
             loop={true}
-            onSlideChange={() => console.log("Slide changed!")}
+            // onSlideChange={() => console.log("Slide changed!")}
           >
             {slidesData.map((item, i) => (
               <SwiperSlide key={i}>

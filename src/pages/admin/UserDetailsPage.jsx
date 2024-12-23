@@ -32,7 +32,7 @@ export default function UserDetailsPage() {
   const getUserDetails = async (id) => {
     try {
       const response = await api.get(`/identity/users/${id}/details`);
-      console.log(response.data);
+      // console.log(response.data);
       setUserDetails(response.data);
     } catch (error) {
       const status = error?.response?.status;

@@ -21,10 +21,12 @@ export default function UserProfileHintUsages({
   const fetchUserHintUsages = useCallback(
     async (pageNumber) => {
       setIsBusy(true);
+
+      // TODO -- remove sorting dropdowns, always sort by use time descending
       const params = {
-        ...(sortByInput && { sortBy: sortByInput }),
-        sortOrder: sortOrderInput,
-        page: pageNumber,
+        ...(sortByInput && { sortBy: sortByInput }), // "desc"
+        sortOrder: sortOrderInput, // "usedat"
+        page: pageNumber, 
         pageSize,
       };
 
@@ -92,7 +94,7 @@ export default function UserProfileHintUsages({
                 onChange={(e) => setSortByInput(e.target.value)}
               >
                 <option value="">Select...</option>
-                <option value="username">Username</option>
+                <option value="challengename">Challenge Name</option>
                 <option value="deduction">Deduction</option>
                 <option value="usedat">Used At</option>
               </Form.Select>

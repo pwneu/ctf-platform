@@ -21,9 +21,11 @@ export default function UserProfileSolves({
   const fetchUserSolves = useCallback(
     async (pageNumber) => {
       setIsBusy(true);
+
+      // TODO -- remove sorting dropdowns, always sort by use time descending
       const params = {
-        sortBy: sortByInput,
-        sortOrder: sortOrderInput,
+        sortBy: sortByInput, // "solvedat"
+        sortOrder: sortOrderInput, // "desc"
         page: pageNumber,
         pageSize,
       };
