@@ -24,6 +24,7 @@ export default function UserRanks({
     return (
       <div
         key={rank.id}
+        // TODO -- make leaderboards.css class inline (kahit yung .container class lang baka kasi nagcaclash sa styling)
         className={`${className} hoverable-row`}
         onClick={handleRowClick}
       >
@@ -31,7 +32,7 @@ export default function UserRanks({
         <div className="rank-column center hoverable">
           {rank.userName}
           <div className="tooltip">
-            {`${rank.userName} solve time: ${new Date(
+            {`${rank.userName} latest solve time: ${new Date(
               rank.latestSolve
             ).toLocaleString()}`}
           </div>
