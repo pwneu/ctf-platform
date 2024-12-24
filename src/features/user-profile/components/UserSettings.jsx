@@ -1,12 +1,12 @@
 import { useState } from "react";
 import EditProfile from "./EditProfile";
-import Password from "./Password";
+import UserChangePassword from "./UserChangePassword";
 
 import FooterProfile from "@/layout/footers/FooterProfile";
 
 const buttons = ["Profile", "Change Password"];
 
-export default function Settings() {
+export default function UserSettings() {
   const [activeTab, setActiveTab] = useState(1);
 
   return (
@@ -42,7 +42,7 @@ export default function Settings() {
 
                 <div className="tabs__content py-30 px-30 js-tabs-content">
                   <EditProfile activeTab={activeTab} />
-                  <Password activeTab={activeTab} />
+                  <UserChangePassword activeTab={activeTab} />
                 </div>
               </div>
             </div>

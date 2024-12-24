@@ -1,7 +1,7 @@
 import MetaComponent from "@/components/MetaComponent";
 import HeaderProfile from "@/layout/headers/HeaderProfile";
-import Sidebar from "@/features/user-profile/components/Sidebar";
-import Dashboard from "@/features/user-profile/components/Dashboard";
+import UserProfileSidebar from "@/features/user-profile/layout/UserProfileSidebar";
+import UserDashboard from "@/features/user-profile/components/UserDashboard";
 
 const metadata = {
   title: "Profile || PWNEU",
@@ -21,9 +21,9 @@ export default function UserDashboardPage() {
             className="dashboard -home-9 js-dashboard-home-9"
           >
             <div className="dashboard__sidebar scroll-bar-1">
-              <Sidebar />
+              <UserProfileSidebar />
             </div>
-            <Dashboard />
+            <UserDashboard />
           </div>
         </div>
       </main>

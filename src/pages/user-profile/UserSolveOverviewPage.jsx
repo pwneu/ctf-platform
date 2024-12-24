@@ -1,7 +1,7 @@
 import MetaComponent from "@/components/MetaComponent";
 import HeaderProfile from "@/layout/headers/HeaderProfile";
-import Sidebar from "@/features/user-profile/components/Sidebar";
-import SolveOverview from "@/features/user-profile/components/SolveOverview";
+import UserProfileSidebar from "@/features/user-profile/layout/UserProfileSidebar";
+import UserSolves from "@/features/user-profile/components/UserSolves";
 
 const metadata = {
   title: "Solve Overview || PWNEU",
@@ -20,9 +20,9 @@ export default function UserSolveOverviewPage() {
             className="dashboard -home-9 js-dashboard-home-9"
           >
             <div className="dashboard__sidebar scroll-bar-1">
-              <Sidebar />
+              <UserProfileSidebar />
             </div>
-            <SolveOverview />
+            <UserSolves />
           </div>
         </div>
       </main>

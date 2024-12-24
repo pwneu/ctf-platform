@@ -1,4 +1,4 @@
-export default function Password({ activeTab }) {
+export default function UserChangePassword({ activeTab }) {
   const handleSubmit = (e) => {
     e.preventDefault();
   };
