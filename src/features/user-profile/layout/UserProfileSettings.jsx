@@ -1,5 +1,5 @@
 import { useState } from "react";
-import EditProfile from "../components/EditProfile";
+import UserProfileDetails from "../components/UserProfileDetails";
 import UserChangePassword from "../components/UserChangePassword";
 
 import FooterProfile from "@/layout/footers/FooterProfile";
@@ -41,7 +41,7 @@ export default function UserProfileSettings() {
                 </div>
 
                 <div className="tabs__content py-30 px-30 js-tabs-content">
-                  <EditProfile activeTab={activeTab} />
+                  <UserProfileDetails activeTab={activeTab} />
                   <UserChangePassword activeTab={activeTab} />
                 </div>
               </div>

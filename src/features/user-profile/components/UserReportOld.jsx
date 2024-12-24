@@ -1,5 +1,7 @@
 import FooterProfile from "@/layout/footers/FooterProfile";
 
+// Unused
+
 export default function UserReportOld() {
   return (
     <div className="dashboard__main ">

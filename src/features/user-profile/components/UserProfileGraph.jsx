@@ -50,12 +50,12 @@ export default function UserProfileGraph() {
     ],
   };
 
-  // Chart options
+  // Chart options with X-axis labels hidden
   const options = {
     responsive: true,
     plugins: {
       legend: {
-        display: true, // Show legend if you want
+        display: false, // Show legend if you want
       },
       title: {
         display: false, // Hide the title
@@ -65,38 +65,29 @@ export default function UserProfileGraph() {
         intersect: false,
       },
     },
+    scales: {
+      x: {
+        display: false, // Hide the X-axis labels
+      },
+    },
   };
 
   return (
-    // <div className="max-w-sm mx-auto p-2 bg-white shadow-md rounded-lg">
-    //   <h2 className="text-xl font-semibold text-center mb-2">Graph Activity</h2>
-    //   <div className="h-12 md:h-24 lg:h-36 mb-2">
-    //     {" "}
-    //     {/* Adjusted height values */}
-    //     <Line data={data} options={options} aria-label="User Activity Graph" />
-    //   </div>
-    // </div>
     <>
-      <div className="col-xl-12 col-md-6">
-        <div className="rounded-16 mt-30 bg-white -dark-bg-dark-1  h-100">
-          <div className="d-flex justify-between items-center py-20 px-30 ">
-            <h2 className="text-17 lh-1 fw-500">Graph Activity</h2>
-            <div className="">
-              <div
-                id="ddtwobutton"
-                onClick={() => {
-                  document
-                    .getElementById("ddtwobutton")
-                    .classList.toggle("-is-dd-active");
-                  document
-                    .getElementById("ddtwocontent")
-                    .classList.toggle("-is-el-visible");
-                }}
-                className="dropdown js-dropdown js-category-active"
-              ></div>
-            </div>
-          </div>
-          <div className="py-40 px-30">
+      <div
+        // className="dashboard__content"
+        style={{
+          margin: "0 auto",
+          alignItems: "center",
+          maxWidth: "1000px",
+        }}
+      >
+        <div className="max-w-sm mx-auto p-2 bg-white shadow-md rounded-lg">
+          <h2 className="text-xl font-semibold text-center mb-2">
+            Points Graph
+          </h2>
+          <div className="h-12 md:h-24 lg:h-36 mb-2">
+            {/* Adjusted height values */}
             <Line
               data={data}
               options={options}

@@ -1,20 +1,30 @@
 // import { cardboards } from "../data/cardboards";
-import Charts from "../components/Charts";
-import PieChartComponent from "../components/PieCharts";
+// import Charts from "../components/Charts";
+// import PieChartComponent from "../components/PieCharts";
 import FooterProfile from "@/layout/footers/FooterProfile";
 
 import UserProfileOverview from "../components/UserProfileOverview";
 import UserProfileStatsReport from "../components/UserProfileStatsReport";
-// import UserProfileGraph from "../components/UserProfileGraph";
+import UserProfileGraph from "../components/UserProfileGraph";
+import UserProfileEvaluation from "../components/UserProfileEvaluation";
+import UserProfileCertify from "../components/UserProfileCertify";
 
 export default function UserProfileDashboard() {
   return (
     <div className="dashboard__main ">
       <UserProfileOverview />
       <UserProfileStatsReport />
+      <UserProfileGraph />
+      <UserProfileEvaluation />
+      <UserProfileCertify />
+      <FooterProfile />
+    </div>
+  );
+}
 
-      {/* <UserProfileGraph /> */}
-      <div className="col-xl-12 col-md-6">
+{
+  /* 
+  <div className="col-xl-12 col-md-6">
         <div className="rounded-16 mt-30 bg-white -dark-bg-dark-1  h-100">
           <div className="d-flex justify-between items-center py-20 px-30 ">
             <h2 className="text-17 lh-1 fw-500">Graph Activity</h2>
@@ -39,7 +49,7 @@ export default function UserProfileDashboard() {
         </div>
       </div>
 
-      <div className="col-xl-4 col-md-6 mt-30">
+  <div className="col-xl-4 col-md-6 mt-30">
         <div className="rounded-16 bg-white -dark-bg-dark-1 shadow-4 h-100">
           <div className="d-flex justify-between items-center py-20 px-30 border-bottom-light">
             <div className="">
@@ -101,9 +111,6 @@ export default function UserProfileDashboard() {
             <PieChartComponent />
           </div>
         </div>
-      </div>
-      <div className="mt-90"></div>
-      <FooterProfile />
-    </div>
-  );
+      </div> 
+      */
 }

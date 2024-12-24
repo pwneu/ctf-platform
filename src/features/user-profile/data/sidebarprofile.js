@@ -29,16 +29,16 @@ export const sidebarprofile = [
     text: "Hint Usage",
     iconClass: "fa fa-lightbulb",
   },
+  // {
+  //   id: 5,
+  //   href: "/certify",
+  //   text: "Certification",
+  //   iconClass: "fa fa-certificate",
+  // },
   {
     id: 5,
-    href: "/certify",
-    text: "Certification",
-    iconClass: "fa fa-certificate",
-  },
-  {
-    id: 6,
     href: "/settings",
-    iconClass: "icon-tools",
+    iconClass: "fa fa-gear",
     text: "Settings",
   },
   // {

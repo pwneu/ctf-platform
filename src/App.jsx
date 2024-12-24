@@ -24,7 +24,7 @@ import {
   // UserSummaryPage,
   UserSolveOverviewPage,
   UserHintUsagePage,
-  UserCertifyPage,
+  // UserCertifyPage,
   UserSettingsPage,
 } from "./pages/user-profile";
 
@@ -148,7 +148,7 @@ function App() {
             {/* <Route path="/user-summary" element={<UserSummaryPage />} /> */}
             <Route path="/solve-overview" element={<UserSolveOverviewPage />} />
             <Route path="/hint-usage" element={<UserHintUsagePage />} />
-            <Route path="/certify" element={<UserCertifyPage />} />
+            {/* <Route path="/certify" element={<UserCertifyPage />} /> */}
             <Route path="/settings" element={<UserSettingsPage />} />
             <Route path="/certify" element={<CertifyPage />} />
           </Route>
