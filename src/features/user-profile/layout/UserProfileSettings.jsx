@@ -1,12 +1,12 @@
 import { useState } from "react";
-import EditProfile from "./EditProfile";
-import UserChangePassword from "./UserChangePassword";
+import EditProfile from "../components/EditProfile";
+import UserChangePassword from "../components/UserChangePassword";
 
 import FooterProfile from "@/layout/footers/FooterProfile";
 
 const buttons = ["Profile", "Change Password"];
 
-export default function UserSettings() {
+export default function UserProfileSettings() {
   const [activeTab, setActiveTab] = useState(1);
 
   return (

@@ -2,7 +2,7 @@ import MetaComponent from "@/components/MetaComponent";
 import HeaderProfile from "@/layout/headers/HeaderProfile";
 import UserProfileSidebar from "@/features/user-profile/layout/UserProfileSidebar";
 
-import UserSettings from "@/features/user-profile/components/UserSettings";
+import UserProfileSettings from "@/features/user-profile/layout/UserProfileSettings";
 
 const metadata = {
   title: "Settings || PWNEU",
@@ -23,7 +23,7 @@ export default function UserSettingsPage() {
             <div className="dashboard__sidebar scroll-bar-1">
               <UserProfileSidebar />
             </div>
-            <UserSettings />
+            <UserProfileSettings />
           </div>
         </div>
       </main>

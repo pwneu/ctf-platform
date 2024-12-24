@@ -2,7 +2,7 @@ import MetaComponent from "@/components/MetaComponent";
 import HeaderProfile from "@/layout/headers/HeaderProfile";
 import UserProfileSidebar from "@/features/user-profile/layout/UserProfileSidebar";
 
-import UserCertificate from "@/features/user-profile/components/UserCertificate";
+import UserProfileCertificate from "@/features/user-profile/layout/UserProfileCertificate";
 
 const metadata = {
   title: "User Certificate || PWNEU",
@@ -24,7 +24,7 @@ export default function UserCertifyPage() {
             <div className="dashboard__sidebar scroll-bar-1">
               <UserProfileSidebar />
             </div>
-            <UserCertificate />
+            <UserProfileCertificate />
           </div>
         </div>
       </main>

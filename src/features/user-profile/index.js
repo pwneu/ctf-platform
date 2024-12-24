@@ -1,30 +1,37 @@
-import UserProfileSidebar from "./layout/UserProfileSidebar";
-import UserDashboard from "./components/UserDashboard";
 import Charts from "./components/Charts";
 import PieCharts from "./components/PieCharts";
-
-import UserReport from "./components/UserReport";
-import UserSolves from "./components/UserSolves";
-import UserHintUsages from "./components/UserHintUsages";
-import UserCertificate from "./components/UserCertificate";
-
-import UserSettings from "./components/UserSettings";
+import UserReportOld from "./components/UserReportOld";
 import UserChangePassword from "./components/UserChangePassword";
 import EditProfile from "./components/EditProfile";
+import UserProfileStatsReport from "./components/UserProfileStatsReport";
+import UserProfileGraph from "./components/UserProfileGraph";
+import UserProfileOverview from "./components/UserProfileOverview";
 
-import FooterProfile from "@/layout/footers/FooterProfile";
+import UserProfileSidebar from "./layout/UserProfileSidebar";
+import UserProfileDashboard from "./layout/UserProfileDashboard";
+import UserProfileSettings from "./layout/UserProfileSettings";
+import UserProfileSolves from "./layout/UserProfileSolves";
+import UserProfileHintUsages from "./layout/UserProfileHintUsages";
+import UserProfileCertificate from "./layout/UserProfileCertificate";
+
+// import HeaderProfile from "../../layout/headers/HeaderProfile";
+// import FooterProfile from "../../layout/footers/FooterProfile";
 
 export {
+  UserProfileOverview,
+  UserProfileGraph,
+  UserProfileStatsReport,
   UserProfileSidebar,
-  UserDashboard,
+  UserProfileDashboard,
   Charts,
   PieCharts,
-  UserReport,
-  UserSolves,
-  UserHintUsages,
-  UserCertificate,
-  UserSettings,
+  UserReportOld,
+  UserProfileSolves,
+  UserProfileHintUsages,
+  UserProfileCertificate,
+  UserProfileSettings,
   UserChangePassword,
   EditProfile,
-  FooterProfile
+  // HeaderProfile,
+  // FooterProfile
 };

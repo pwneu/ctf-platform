@@ -1,7 +1,10 @@
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
+import useAuth from "@/hooks/useAuth";
 
 export default function HeaderProfile() {
+  const { auth } = useAuth();
+
   useEffect(() => {
     if (window.innerWidth < 990) {
       document
@@ -60,9 +63,21 @@ export default function HeaderProfile() {
             <div className="col-auto">
               <div className="d-flex items-center">
                 <div className="relative d-flex items-center ml-10">
-                  <a href="#" data-el-toggle=".js-profile-toggle text-dark-1">
-                    Username here
-                  </a>
+                  <div
+                    // to="/dashboard"
+                    data-el-toggle=".js-profile-toggle text-dark-1"
+                    style={{
+                      fontSize: "14px",
+                      whiteSpace: "nowrap",
+                      overflow: "hidden",
+                      textOverflow: "ellipsis",
+                      maxWidth: "80px",
+                      display: "inline-block",
+                      verticalAlign: "middle",
+                    }}
+                  >
+                    {auth?.userName}
+                  </div>
                 </div>
               </div>
             </div>
