@@ -3,22 +3,11 @@ import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
 export default function UserProfileOverview() {
-  const [userEmail, setUserEmail] = useState("");
   const [userDetails, setUserDetails] = useState();
   const [userRank, setUserRank] = useState();
   const [userPlayData, setUserPlayData] = useState();
 
   useEffect(() => {
-    const getMyEmail = async () => {
-      try {
-        const response = await api.get(`/identity/me/email`);
-        setUserEmail(response.data);
-        // eslint-disable-next-line no-unused-vars
-      } catch (error) {
-        setUserEmail("No Email");
-      }
-    };
-
     const getMyRank = async () => {
       try {
         const response = await api.get(`/play/me/rank`);
@@ -66,7 +55,6 @@ export default function UserProfileOverview() {
     };
 
     getMyDetails();
-    getMyEmail();
     getMyRank();
     getMyPlayData();
   }, []);
@@ -85,7 +73,6 @@ export default function UserProfileOverview() {
                   {userDetails.fullName}
                 </h1>
                 <div className="mt-10 text-white">{`@${userDetails.userName}`}</div>
-                <div className="mt-10 text-white">{`${userEmail}`}</div>
               </>
             )}
           </div>

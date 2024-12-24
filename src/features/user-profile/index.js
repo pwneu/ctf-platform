@@ -2,7 +2,7 @@ import Charts from "./components/Charts";
 import PieCharts from "./components/PieCharts";
 import UserReportOld from "./components/UserReportOld";
 import UserChangePassword from "./components/UserChangePassword";
-import EditProfile from "./components/EditProfile";
+import UserProfileDetails from "./components/UserProfileDetails";
 import UserProfileStatsReport from "./components/UserProfileStatsReport";
 import UserProfileGraph from "./components/UserProfileGraph";
 import UserProfileOverview from "./components/UserProfileOverview";
@@ -31,7 +31,7 @@ export {
   UserProfileCertificate,
   UserProfileSettings,
   UserChangePassword,
-  EditProfile,
+  UserProfileDetails,
   // HeaderProfile,
   // FooterProfile
 };
