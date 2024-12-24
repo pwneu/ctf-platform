@@ -1,5 +1,5 @@
 import { platformoverview } from "../data/platformoverview";
-export default function UserOverview() {
+export default function UserOverviewOld() {
   return (
     <section className="section-bg pt-90 pb-90 lg:pt-50 lg:pb-50">
       <div className="section-bg__item -full">
