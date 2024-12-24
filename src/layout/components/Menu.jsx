@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { menuList } from "@/data/menu";
 import { useLocation } from "react-router-dom";
 import MobileFooter from "./MobileFooter";
-import PropTypes from 'prop-types'; // Import PropTypes
+import PropTypes from "prop-types"; // Import PropTypes
 
 export default function Menu({ allClasses, headerPosition }) {
   const [menuItem, setMenuItem] = useState("");
@@ -30,7 +30,9 @@ export default function Menu({ allClasses, headerPosition }) {
 
   return (
     <div
-      className={`header-menu js-mobile-menu-toggle ${headerPosition ? headerPosition : ""}`}
+      className={`header-menu js-mobile-menu-toggle ${
+        headerPosition ? headerPosition : ""
+      }`}
     >
       <div className="header-menu__content">
         <div className="mobile-bg js-mobile-bg"></div>
@@ -47,7 +49,7 @@ export default function Menu({ allClasses, headerPosition }) {
         {/* Optional: Display the submenu title */}
         {submenu && <div className="submenu-title">{submenu}</div>}
 
-        <div className="menu js-navList">
+        <div className="menu js-navList" style={{ marginLeft: "120px" }}>
           <ul className={`${allClasses ? allClasses : ""}`}>
             <li className="menu-item-has-children">
               <Link
@@ -55,7 +57,11 @@ export default function Menu({ allClasses, headerPosition }) {
                 className={menuItem === "Learn" ? "activeMenu" : ""}
                 onClick={(e) => {
                   e.preventDefault();
-                  window.open(e.currentTarget.href, '_blank', 'noopener noreferrer');
+                  window.open(
+                    e.currentTarget.href,
+                    "_blank",
+                    "noopener noreferrer"
+                  );
                 }}
               >
                 Learn
@@ -148,6 +154,6 @@ export default function Menu({ allClasses, headerPosition }) {
 
 // Define prop types
 Menu.propTypes = {
-  allClasses: PropTypes.string,  // Define allClasses as optional string
-  headerPosition: PropTypes.string // Define headerPosition as optional string
+  allClasses: PropTypes.string, // Define allClasses as optional string
+  headerPosition: PropTypes.string, // Define headerPosition as optional string
 };
