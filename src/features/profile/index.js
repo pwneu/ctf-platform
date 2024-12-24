@@ -1,15 +1,15 @@
-import UserProfile from "./components/UserProfile";
-import UserOverview from "./components/UserOverview";
-import UserProfileEvaluation from "./components/UserProfileEvaluation";
-import UserProfileGraph from "./components/UserProfileGraph";
-import UserProfileSolves from "./components/UserProfileSolves";
-import UserProfileHintUsages from "./components/UserProfileHintUsages";
+import UserProfileOld from "./components/UserProfileOld";
+import UserOverviewOld from "./components/UserOverviewOld";
+import UserProfileEvaluationOld from "./components/UserProfileEvaluationOld";
+import UserProfileGraphOld from "./components/UserProfileGraphOld";
+import UserProfileSolvesOld from "./components/UserProfileSolvesOld";
+import UserProfileHintUsagesOld from "./components/UserProfileHintUsagesOld";
 
 export {
-  UserProfile,
-  UserOverview,
-  UserProfileEvaluation,
-  UserProfileGraph,
-  UserProfileHintUsages,
-  UserProfileSolves,
+  UserProfileOld,
+  UserOverviewOld,
+  UserProfileEvaluationOld,
+  UserProfileGraphOld,
+  UserProfileHintUsagesOld,
+  UserProfileSolvesOld,
 };

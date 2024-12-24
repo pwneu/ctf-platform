@@ -3,7 +3,7 @@ import "chart.js/auto"; // Required for automatic Chart.js version management
 import { api } from "@/api";
 import { useState, useEffect } from "react";
 
-export default function UserProfileGraph() {
+export default function UserProfileGraphOld() {
   const [userGraph, setUserGraph] = useState();
 
   const getMyGraph = async () => {
