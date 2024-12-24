@@ -1,6 +1,6 @@
 import FooterProfile from "@/layout/footers/FooterProfile";
 
-export default function UserCertificate() {
+export default function UserProfileCertificate() {
   const handleSubmit = (e) => {
     e.preventDefault();
   };

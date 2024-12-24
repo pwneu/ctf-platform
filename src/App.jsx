@@ -18,10 +18,10 @@ import {
   VerifyEmailPage,
   SignupPage,
 } from "./pages/authentication";
-import { CertifyPage, UserProfilePage } from "./pages/profile";
+import { CertifyPage /*UserProfilePage*/ } from "./pages/profile";
 import {
   UserDashboardPage,
-  UserSummaryPage,
+  // UserSummaryPage,
   UserSolveOverviewPage,
   UserHintUsagePage,
   UserCertifyPage,
@@ -143,9 +143,9 @@ function App() {
 
           {/* Routes that require the user to be a member */}
           <Route element={<RequireAuth allowedRoles={["Member"]} />}>
-            <Route path="/profile" element={<UserProfilePage />} /> 
+            {/* <Route path="/profile" element={<UserProfilePage />} />  */}
             <Route path="/dashboard" element={<UserDashboardPage />} />
-            <Route path="/user-summary" element={<UserSummaryPage />} />
+            {/* <Route path="/user-summary" element={<UserSummaryPage />} /> */}
             <Route path="/solve-overview" element={<UserSolveOverviewPage />} />
             <Route path="/hint-usage" element={<UserHintUsagePage />} />
             <Route path="/certify" element={<UserCertifyPage />} />
@@ -184,7 +184,12 @@ function App() {
         </Route>
       </Routes>
 
-      <ToastContainer position="top-right" autoClose={2000} hideProgressBar style={{ width: "500px" }} />
+      <ToastContainer
+        position="top-right"
+        autoClose={2000}
+        hideProgressBar
+        style={{ width: "500px" }}
+      />
     </>
   );
 }

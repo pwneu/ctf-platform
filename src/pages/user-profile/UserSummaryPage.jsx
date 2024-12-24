@@ -1,7 +1,7 @@
 import MetaComponent from "@/components/MetaComponent";
 import HeaderProfile from "@/layout/headers/HeaderProfile";
 import UserProfileSidebar from "@/features/user-profile/layout/UserProfileSidebar";
-import UserReport from "@/features/user-profile/components/UserReport";
+import UserReportOld from "@/features/user-profile/components/UserReportOld";
 
 const metadata = {
   title:
@@ -25,7 +25,7 @@ export default function UserSummaryPage() {
             <div className="dashboard__sidebar scroll-bar-1">
               <UserProfileSidebar />
             </div>
-            <UserReport />
+            <UserReportOld />
           </div>
         </div>
       </main>
