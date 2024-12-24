@@ -1,4 +1,4 @@
-// import { hintusage } from "../data/hintusage";
+// import { solveoverview } from "../data/solveoverview";
 import FooterProfile from "@/layout/footers/FooterProfile";
 import { api } from "@/api";
 import { useCallback, useEffect, useState } from "react";
@@ -7,44 +7,41 @@ import { toast } from "react-toastify";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
-export default function HintUsage() {
+export default function UserSolves() {
   const navigate = useNavigate();
-  const [userHintUsages, setUserHintUsages] = useState([]);
+  const [userSolves, setUserSolves] = useState([]);
   const [isBusy, setIsBusy] = useState(false);
   const [page, setPage] = useState(0); // Initial of 0 so useEffect will work
   const [requestedPage, setRequestedPage] = useState(1); // Track requested page
   const [pageSize] = useState(20);
-  const [totalHintUsagesCount, setTotalHintUsagesCount] = useState(0);
+  const [totalSolveCount, setTotalSolveCount] = useState(0);
 
-  const fetchUserHintUsages = useCallback(
+  const fetchUserSolves = useCallback(
     async (pageNumber) => {
       setIsBusy(true);
 
       const params = {
-        sortBy: "usedat",
+        sortBy: "solvedat",
         sortOrder: "desc",
         page: pageNumber,
         pageSize,
       };
 
       try {
-        const response = await api.get(`/play/me/hintUsages`, { params });
-        setUserHintUsages(response.data.items);
-        setTotalHintUsagesCount(response.data.totalCount);
-        setPage(pageNumber); // Only update page after a successful fetch
+        const response = await api.get("/play/me/solves", { params });
+        setUserSolves(response.data.items);
+        setTotalSolveCount(response.data.totalCount);
+        setPage(pageNumber); // Only update page after successful fetch
       } catch (error) {
         const status = error?.response?.status;
-
         if (status === 401) {
           navigate("/login");
         } else if (status === 429) {
           toast.warn("Slow down!");
         } else {
-          toast.error(
-            "Something went wrong getting user hint usages. Please try again later."
-          );
+          toast.error("Error fetching user solves. Please try again later");
         }
-        // Revert requestedPage back to the last successful page if there's an error
+        // Revert requestedPage back to page if there was an error
         setRequestedPage(page);
       } finally {
         setIsBusy(false);
@@ -55,9 +52,9 @@ export default function HintUsage() {
 
   useEffect(() => {
     if (requestedPage !== page) {
-      fetchUserHintUsages(requestedPage);
+      fetchUserSolves(requestedPage);
     }
-  }, [requestedPage, fetchUserHintUsages, page]);
+  }, [requestedPage, fetchUserSolves, page]);
 
   const handlePagination = (direction) => {
     if (isBusy) return;
@@ -75,26 +72,26 @@ export default function HintUsage() {
               <div className="py-30 px-30">
                 <div>
                   <div className="d-flex items-center py-10 px-0 border-bottom-light">
-                    <h2 className="text-17  text-dark-1 lh-1 fw-500">
-                      Hint Usage Overview
+                    <h2 className="text-17 lh-1 fw-500">
+                      Challenge Performance Overview
                     </h2>
                   </div>
-                  <div className="col-xl-12">
+                  <div className="col-xl-12 ">
                     <p className="mt-15">
-                      This section provides detailed information about the hints
-                      used during the CTF competition. It includes the hint ID,
-                      associated challenge ID and name, the timestamp when the
-                      hint was used, and the points deducted for utilizing each
-                      hint.
+                      This section details the challenges you participated in
+                      during the CTF competition. It provides the challenge ID,
+                      name, the points earned for solving each challenge, the
+                      timestamp of when the solution was submitted, and the
+                      corresponding category for each challenge.
                     </p>
                   </div>
                 </div>
               </div>
 
               <div className="text-center mt-3">
-                <p>Total Hint Usages: {totalHintUsagesCount}</p>
+                <p>Total Solves: {totalSolveCount}</p>
                 <p>
-                  Page: {page} of {Math.ceil(totalHintUsagesCount / pageSize)}
+                  Page: {page} of {Math.ceil(totalSolveCount / pageSize)}
                 </p>
                 <div className="d-flex justify-content-center">
                   <button
@@ -109,12 +106,10 @@ export default function HintUsage() {
                   <button
                     onClick={() => handlePagination("next")}
                     disabled={
-                      isBusy ||
-                      page >= Math.ceil(totalHintUsagesCount / pageSize)
+                      isBusy || page >= Math.ceil(totalSolveCount / pageSize)
                     }
                     className={`custom-button ms-1 ${
-                      isBusy ||
-                      page >= Math.ceil(totalHintUsagesCount / pageSize)
+                      isBusy || page >= Math.ceil(totalSolveCount / pageSize)
                         ? "disabled"
                         : ""
                     }`}
@@ -124,13 +119,10 @@ export default function HintUsage() {
                 </div>
               </div>
 
-              <div className="py-30 px-30 ">
+              <div className="py-30 px-30">
                 <div className="mt-20">
                   <div className="px-30 py-20 bg-dark-6 -dark-bg-dark-2 rounded-8">
                     <div className="row x-gap-10">
-                      {/* <div className="col-lg-5">
-                        <div className="text-white">Hint Id</div>
-                      </div> */}
                       <div className="col-lg-5">
                         <div className="text-white">Challenge Id</div>
                       </div>
@@ -138,45 +130,39 @@ export default function HintUsage() {
                         <div className="text-white">Challenge Name</div>
                       </div>
                       <div className="col-lg-2">
-                        <div className="text-white">Point Deduction</div>
+                        <div className="text-white">Challenge Points</div>
                       </div>
                       <div className="col-lg-3">
-                        <div className="text-white">Used At</div>
+                        <div className="text-white">Solve At</div>
                       </div>
                     </div>
                   </div>
 
-                  {userHintUsages.length > 0 ? (
-                    userHintUsages.map((userHintUsage) => (
+                  {userSolves.length > 0 ? (
+                    userSolves.map((userSolve) => (
                       <Link
-                        key={userHintUsage.challengeId}
-                        to={`/play/${userHintUsage.challengeId}`}
+                        key={userSolve.challengeId}
+                        to={`/play/${userSolve.challengeId}`}
                         // className="px-30 border-bottom-light"
                         className="px-30"
                       >
-                        <div className="row x-gap-0 items-center py-15">
+                        <div className="row x-gap-10 items-center py-15">
                           <div className="col-lg-5">
                             <div className="d-flex items-center">
                               <div className="ml-0">
-                                <div className="lh-12">
-                                  {userHintUsage.challengeId}
+                                <div className="fw-20">
+                                  {userSolve.challengeId}
                                 </div>
-                                {/* <div className="text-14 lh-12 mt-5">
-                                  Deduction Points:{" "}
-                                  {userHintUsage.deduction}
-                                </div> */}
                               </div>
                             </div>
                           </div>
 
                           <div className="col-lg-2">
-                            {userHintUsage.challengeName}
+                            {userSolve.challengeName}
                           </div>
-                          <div className="col-lg-2">
-                            {userHintUsage.deduction}
-                          </div>
+                          <div className="col-lg-2">{userSolve.points}</div>
                           <div className="col-lg-3">
-                            {new Date(userHintUsage.usedAt).toLocaleString()}
+                            {new Date(userSolve.solvedAt).toLocaleString()}
                           </div>
                         </div>
                       </Link>
@@ -184,29 +170,29 @@ export default function HintUsage() {
                   ) : (
                     <tr>
                       <td colSpan={5} className="text-center">
-                        No hint usages found.
+                        {/* TODO -- Design or remove */}
+                        No user solves found.
                       </td>
                     </tr>
                   )}
 
-                  {/* {hintusage.map((elm, i) => (
+                  {/* {solveoverview.map((elm, i) => (
                     <div key={i} className="px-30 border-bottom-light">
-                      <div className="row x-gap-0 items-center py-15">
-                        <div className="col-lg-5">
-                          <div className="d-flex items-center">
+                      <div className="row x-gap-10 items-center py-15">
+                        <div className="col-lg-5 ">
+                          <div className="d-flex items-center  ">
                             <div className="ml-0">
-                              <div className="lh-12">Hint: {elm.hintId}</div>
-                              <div className="text-14 lh-12 mt-5">
-                                {elm.hintCategory} Deduction Points:{" "}
-                                {elm.deductionPoints}
+                              <div className=" lh-12 ">
+                                Category: {elm.challengeCategory}
                               </div>
+                              <div className="fw-20">{elm.challengeId}</div>
                             </div>
                           </div>
                         </div>
 
-                        <div className="col-lg-2">{elm.challengeId}</div>
                         <div className="col-lg-2">{elm.challengeName}</div>
-                        <div className="col-lg-3">{elm.UsedAt}</div>
+                        <div className="col-lg-2">{elm.challengePoints}</div>
+                        <div className="col-lg-3">{elm.SolveAt}</div>
                       </div>
                     </div>
                   ))} */}

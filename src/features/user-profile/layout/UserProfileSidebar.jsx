@@ -2,7 +2,7 @@ import { sidebarprofile } from "../data/sidebarprofile";
 import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 
-export default function Sidebar() {
+export default function UserProfileSidebar() {
   const { pathname } = useLocation();
   return (
     <div className="sidebar -dashboard text-dark-1">

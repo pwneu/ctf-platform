@@ -6,7 +6,7 @@ import { api } from "@/api";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
-export default function Dashboard() {
+export default function UserDashboard() {
   const [userEmail, setUserEmail] = useState("");
   const [userDetails, setUserDetails] = useState();
   const [userRank, setUserRank] = useState();
