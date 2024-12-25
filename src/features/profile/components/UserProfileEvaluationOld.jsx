@@ -4,7 +4,7 @@ import "chart.js/auto"; // Required for automatic Chart.js version management
 import { api } from "@/api";
 import { useEffect, useState } from "react";
 
-export default function UserProfileEvaluation() {
+export default function UserProfileEvaluationOld() {
   const [userEvaluations, setUserEvaluations] = useState();
 
   const getMyEvaluations = async () => {

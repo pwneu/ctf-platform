@@ -1,7 +1,7 @@
 import MetaComponent from "@/components/MetaComponent";
 import HeaderProfile from "@/layout/headers/HeaderProfile";
-import Sidebar from "@/features/user-profile/components/Sidebar";
-import HintUsage from "@/features/user-profile/components/HintUsage";
+import UserProfileSidebar from "@/features/user-profile/layout/UserProfileSidebar";
+import UserProfileHintUsages from "@/features/user-profile/layout/UserProfileHintUsages";
 
 const metadata = {
   title: "Hints activity || PWNEU",
@@ -20,9 +20,9 @@ export default function UserHintUsagePage() {
             className="dashboard -home-9 js-dashboard-home-9"
           >
             <div className="dashboard__sidebar scroll-bar-1">
-              <Sidebar />
+              <UserProfileSidebar />
             </div>
-            <HintUsage />
+            <UserProfileHintUsages />
           </div>
         </div>
       </main>

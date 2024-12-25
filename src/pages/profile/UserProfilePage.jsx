@@ -3,12 +3,12 @@ import MetaComponent from "@/components/MetaComponent";
 import Header from "@/layout/headers/Header";
 import Footer from "@/layout/footers/Footer";
 import {
-  UserProfile,
+  UserProfileOld,
   // UserOverview,
-  UserProfileEvaluation,
-  UserProfileGraph,
-  UserProfileSolves,
-  UserProfileHintUsages,
+  UserProfileEvaluationOld,
+  UserProfileGraphOld,
+  UserProfileSolvesOld,
+  UserProfileHintUsagesOld,
 } from "@/features/profile";
 import { useState } from "react";
 
@@ -30,19 +30,19 @@ export default function UserProfilePage() {
 
       <div className="content-wrapper  js-content-wrapper ">
         {/* <UserOverview /> */}
-        <UserProfile
+        <UserProfileOld
           totalSolveCount={totalSolveCount}
           totalHintUsagesCount={totalHintUsagesCount}
           userDetails={userDetails}
           setUserDetails={setUserDetails}
         />
-        <UserProfileEvaluation />
-        <UserProfileGraph />
-        <UserProfileSolves
+        <UserProfileEvaluationOld />
+        <UserProfileGraphOld />
+        <UserProfileSolvesOld
           totalSolveCount={totalSolveCount}
           setTotalSolveCount={setTotalSolveCount}
         />
-        <UserProfileHintUsages
+        <UserProfileHintUsagesOld
           totalHintUsagesCount={totalHintUsagesCount}
           setTotalHintUsagesCount={setTotalHintUsagesCount}
         />

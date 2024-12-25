@@ -1,30 +1,37 @@
-import Sidebar from "./components/Sidebar";
-import Dashboard from "./components/Dashboard";
 import Charts from "./components/Charts";
 import PieCharts from "./components/PieCharts";
+import UserReportOld from "./components/UserReportOld";
+import UserChangePassword from "./components/UserChangePassword";
+import UserProfileDetails from "./components/UserProfileDetails";
+import UserProfileStatsReport from "./components/UserProfileStatsReport";
+import UserProfileGraph from "./components/UserProfileGraph";
+import UserProfileOverview from "./components/UserProfileOverview";
 
-import UserReport from "./components/UserReport";
-import SolveOverview from "./components/SolveOverview";
-import HintUsage from "./components/HintUsage";
-import Certificate from "./components/Certificate";
+import UserProfileSidebar from "./layout/UserProfileSidebar";
+import UserProfileDashboard from "./layout/UserProfileDashboard";
+import UserProfileSettings from "./layout/UserProfileSettings";
+import UserProfileSolves from "./layout/UserProfileSolves";
+import UserProfileHintUsages from "./layout/UserProfileHintUsages";
+import UserProfileCertificate from "./layout/UserProfileCertificate";
 
-import Settings from "./components/Settings";
-import Password from "./components/Password";
-import EditProfile from "./components/EditProfile";
-
-import FooterProfile from "@/layout/footers/FooterProfile";
+// import HeaderProfile from "../../layout/headers/HeaderProfile";
+// import FooterProfile from "../../layout/footers/FooterProfile";
 
 export {
-  Sidebar,
-  Dashboard,
+  UserProfileOverview,
+  UserProfileGraph,
+  UserProfileStatsReport,
+  UserProfileSidebar,
+  UserProfileDashboard,
   Charts,
   PieCharts,
-  UserReport,
-  SolveOverview,
-  HintUsage,
-  Certificate,
-  Settings,
-  Password,
-  EditProfile,
-  FooterProfile
+  UserReportOld,
+  UserProfileSolves,
+  UserProfileHintUsages,
+  UserProfileCertificate,
+  UserProfileSettings,
+  UserChangePassword,
+  UserProfileDetails,
+  // HeaderProfile,
+  // FooterProfile
 };
