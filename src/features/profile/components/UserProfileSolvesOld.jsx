@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { FaArrowLeft, FaArrowRight, FaSync } from "react-icons/fa";
 
-export default function UserProfileSolves({
+export default function UserProfileSolvesOld({
   totalSolveCount,
   setTotalSolveCount,
 }) {

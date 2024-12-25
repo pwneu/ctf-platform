@@ -15,7 +15,7 @@ export default function UserRanks({
 
     const handleRowClick = () => {
       if (isRequester) {
-        navigate("/profile");
+        navigate("/dashboard");
       } else if (isManager) {
         navigate(userLink);
       }

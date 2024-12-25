@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 import { api } from "@/api";
 import { useNavigate } from "react-router-dom";
 
-export default function UserProfile({
+export default function UserProfileOld({
   totalSolveCount,
   totalHintUsagesCount,
   userDetails,

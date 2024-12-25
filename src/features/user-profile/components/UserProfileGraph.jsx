@@ -50,12 +50,12 @@ export default function UserProfileGraph() {
     ],
   };
 
-  // Chart options
+  // Chart options with X-axis labels hidden
   const options = {
     responsive: true,
     plugins: {
       legend: {
-        display: true, // Show legend if you want
+        display: false, // Show legend if you want
       },
       title: {
         display: false, // Hide the title
@@ -65,16 +65,37 @@ export default function UserProfileGraph() {
         intersect: false,
       },
     },
+    scales: {
+      x: {
+        display: false, // Hide the X-axis labels
+      },
+    },
   };
 
   return (
-    <div className="max-w-sm mx-auto p-2 bg-white shadow-md rounded-lg">
-      <h2 className="text-xl font-semibold text-center mb-2">Graph Activity</h2>
-      <div className="h-12 md:h-24 lg:h-36 mb-2">
-        {" "}
-        {/* Adjusted height values */}
-        <Line data={data} options={options} aria-label="User Activity Graph" />
+    <>
+      <div
+        // className="dashboard__content"
+        style={{
+          margin: "0 auto",
+          alignItems: "center",
+          maxWidth: "1000px",
+        }}
+      >
+        <div className="max-w-sm mx-auto p-2 bg-white shadow-md rounded-lg">
+          <h2 className="text-xl font-semibold text-center mb-2">
+            Points Graph
+          </h2>
+          <div className="h-12 md:h-24 lg:h-36 mb-2">
+            {/* Adjusted height values */}
+            <Line
+              data={data}
+              options={options}
+              aria-label="User Activity Graph"
+            />
+          </div>
+        </div>
       </div>
-    </div>
+    </>
   );
 }
