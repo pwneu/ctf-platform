@@ -1,5 +1,4 @@
 import { useNavigate } from "react-router-dom";
-import "./leaderboards.css";
 
 export default function UserRanks({
   userRanks,
@@ -24,7 +23,6 @@ export default function UserRanks({
     return (
       <div
         key={rank.id}
-        // TODO -- make leaderboards.css class inline (kahit yung .container class lang baka kasi nagcaclash sa styling)
         className={`${className} hoverable-row`}
         onClick={handleRowClick}
       >

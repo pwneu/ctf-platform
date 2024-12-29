@@ -19,6 +19,8 @@ export default function HeaderAdmin() {
     }
   };
 
+  const isAdmin = auth?.roles?.includes("Admin");
+
   return (
     <Navbar bg="light" expand="lg">
       <Container>
@@ -28,11 +30,14 @@ export default function HeaderAdmin() {
           <Nav className="me-auto">
             <Nav.Link href="/admin/keys">Access Keys</Nav.Link>
             <Nav.Link href="/admin/categories">Categories</Nav.Link>
-            <Nav.Link href="/admin/challenges">Challenges</Nav.Link>{" "}
+            <Nav.Link href="/admin/challenges">Challenges</Nav.Link>
             <Nav.Link href="/admin/users">Users</Nav.Link>
-            <Nav.Link href="/admin/configurations">Configurations</Nav.Link>
             <Nav.Link href="/admin/leaderboards">Leaderboards</Nav.Link>
             <Nav.Link href="/admin/blacklist">Blacklist</Nav.Link>
+            <Nav.Link href="/admin/configurations">Configurations</Nav.Link>
+            {isAdmin && (
+              <Nav.Link href="/admin/audits">Audits</Nav.Link>
+            )}
           </Nav>
           <Nav className="ms-auto">
             {auth?.userName ? (

@@ -1,12 +1,22 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import MessageInput from "./MessageInput";
 import Result from "./Result";
-import "./chatui.css";
 import { api } from "@/api"; // Uncomment if testing chatbot
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
 const ChatInterface = () => {
+  useEffect(() => {
+    const link = document.createElement("link");
+    link.rel = "stylesheet";
+    link.href = "/assets/css/chatui.css";
+    document.head.appendChild(link);
+
+    return () => {
+      document.head.removeChild(link);
+    };
+  }, []);
+
   const [message, setMessage] = useState("");
   const [result, setResult] = useState("");
   const [isGenerating, setIsGenerating] = useState(false);

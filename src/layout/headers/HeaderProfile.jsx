@@ -30,7 +30,11 @@ export default function HeaderProfile() {
   return (
     <>
       <header className="header -dashboard -dark-bg-dark-1 js-header">
-        <div className="header__container py-20 px-30">
+        <div
+          className="header__container px-30"
+          // className="header__container py-20 px-30"
+          style={{ paddingBottom: "29px", paddingTop: "29px" }}
+        >
           <div className="row justify-between items-center">
             <div className="col-auto">
               <div className="d-flex items-center">

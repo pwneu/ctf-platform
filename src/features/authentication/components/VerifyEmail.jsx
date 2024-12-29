@@ -14,7 +14,7 @@ const metadata = {
   description: "Verify your email to join PWNEU",
 };
 
-export default function VerifyEmailPage() {
+export default function VerifyEmail() {
   const [verificationStatus, setVerificationStatus] = useState(null);
   const [email, setEmail] = useState(null);
 
@@ -51,7 +51,7 @@ export default function VerifyEmailPage() {
           ) : verificationStatus === "failed" ? (
             <AccountVerificationFailed />
           ) : (
-            <div>Loading...</div>
+            <></>
           )}
         </section>
       </div>

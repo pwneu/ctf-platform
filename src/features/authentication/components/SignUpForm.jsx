@@ -142,239 +142,253 @@ export default function SignUpForm({ setHasRegistered }) {
   };
 
   return (
-    <div className="form-page__content lg:py-40 mt-8">
-      <div className="container mt-10">
-        <div className="row justify-center items-center mt-8">
-          <div className="col-xl-10 col-lg-9 mt-8">
-            <div className="text-center mt-5 ">
-              <img
-                src="assets/img/login/JoinUs-Icon.gif"
-                alt="Image Description"
-                className="img-fluid"
-                style={{ maxWidth: "20%", height: "auto" }}
-              />
-            </div>
-            <div className="">
-              <h3 className="text-20 lh-2 text-center">Accept the Challenge</h3>
-              <p className="text-15  lh-2 text-center">
-                Sign up now using your university's institutional account and
-                unlock a world of exciting CTF challenges! Whether you're a
-                beginner or a seasoned hacker, there's something here for
-                everyone. Push your limits, climb the leaderboard, and represent
-                your university!
-              </p>
-              <form
-                className="contact-form respondForm__form row y-gap-20 pt-30"
-                onSubmit={handleSubmit}
-              >
-                <div className="col-lg-6">
-                  <label className="text-12 lh-1 fw-500 text-dark-1 mb-10">
-                    First Name *
-                  </label>
-                  <input
-                    required
-                    type="text"
-                    name="firstName"
-                    placeholder="First Name"
-                    value={formData.firstName}
-                    onChange={handleInputChange}
-                    autoComplete="given-name"
-                  />
-                </div>
-                <div className="col-lg-6">
-                  <label className="text-12 lh-1 fw-500 text-dark-1 mb-10">
-                    Last Name *
-                  </label>
-                  <input
-                    required
-                    type="text"
-                    name="lastName"
-                    placeholder="Last Name"
-                    value={formData.lastName}
-                    onChange={handleInputChange}
-                    autoComplete="family-name"
-                  />
-                </div>
-                <div className="col-lg-6">
-                  <label className="text-12 lh-1 fw-500 text-dark-1 mb-10">
-                    Email address *
-                  </label>
-                  <input
-                    required
-                    type="email"
-                    name="email"
-                    placeholder="Email Address"
-                    value={formData.email}
-                    onChange={handleInputChange}
-                    autoComplete="email"
-                  />
-                </div>
-                <div className="col-lg-6">
-                  <label className="text-12 lh-1 fw-500 text-dark-1 mb-10">
-                    Username *
-                  </label>
-                  <input
-                    required
-                    type="text"
-                    name="username"
-                    placeholder="Username"
-                    value={formData.username}
-                    onChange={handleInputChange}
-                    autoComplete="username"
-                  />
-                </div>
-
-                <div className="col-lg-6">
-                  <label className="text-12 lh-1 fw-500 text-dark-1 mb-10">
-                    Password *
-                  </label>
-                  <div className="position-relative ">
-                    <input
-                      required
-                      type={showPassword.password ? "text" : "password"}
-                      name="password"
-                      placeholder="Password"
-                      value={formData.password}
-                      onChange={handleInputChange}
-                      autoComplete="new-password"
-                      minLength="12"
-                      maxLength="128"
-                      className="pe-5"
-                    />
-                    <i
-                      className={`fas ${
-                        showPassword.password ? "fa-eye" : "fa-eye-slash"
-                      } position-absolute`}
-                      style={{
-                        cursor: "pointer",
-                        right: "10px",
-                        top: "50%",
-                        transform: "translateY(-50%)",
-                        zIndex: 1,
-                        color: "#000",
-                      }}
-                      onClick={() => togglePasswordVisibility("password")}
-                    ></i>
-                  </div>
-                  {errors.password && (
-                    <p className="error-text">{errors.password}</p>
-                  )}
-                </div>
-                <div className="col-lg-6">
-                  <label className="text-12 lh-1 fw-500 text-dark-1 mb-10">
-                    Confirm Password *
-                  </label>
-                  <div className="position-relative">
-                    <input
-                      required
-                      type={showPassword.confirmPassword ? "text" : "password"}
-                      name="confirmPassword"
-                      placeholder="Confirm Password"
-                      value={formData.confirmPassword}
-                      onChange={handleInputChange}
-                      autoComplete="confirm-password"
-                      minLength="12"
-                      maxLength="128"
-                      className="pe-5"
-                    />
-                    <i
-                      className={`fas ${
-                        showPassword.confirmPassword ? "fa-eye" : "fa-eye-slash"
-                      } position-absolute`}
-                      style={{
-                        cursor: "pointer",
-                        right: "10px",
-                        top: "50%",
-                        transform: "translateY(-50%)",
-                        zIndex: 1,
-                        color: "#000",
-                      }}
-                      onClick={() =>
-                        togglePasswordVisibility("confirmPassword")
-                      }
-                    ></i>
-                  </div>
-                  {errors.confirmPassword && (
-                    <p className="error-text">{errors.confirmPassword}</p>
-                  )}
-                </div>
-
-                <div className="col-lg-12">
-                  <label className="text-12 lh-1 fw-500 text-dark-1 mb-10">
-                    Access Key *
-                  </label>
-                  <input
-                    required
-                    type="text"
-                    name="accessKey"
-                    placeholder="Access Key"
-                    value={formData.accessKey}
-                    onChange={handleInputChange}
-                    autoComplete="accesskey"
-                  />
-                </div>
-
-                <Turnstile
-                  siteKey={import.meta.env.VITE_TURNSTILE_SITE_KEY}
-                  onSuccess={(token) => setTurnstileToken(token)}
-                  onError={() => setTurnstileToken("")}
-                  onExpire={() => setTurnstileToken("")}
+    <div
+      style={{
+        maxHeight: "100vh", // Adjust the height as needed
+        overflowY: "auto",
+        padding: "1rem",
+      }}
+    >
+      <div className="form-page__content lg:py-40 mt-8">
+        <div className="container mt-10">
+          <div className="row justify-center items-center mt-8">
+            <div className="col-xl-10 col-lg-9 mt-8">
+              <div className="text-center mt-5 ">
+                <img
+                  src="assets/img/login/JoinUs-Icon.gif"
+                  alt="Image Description"
+                  className="img-fluid"
+                  style={{ maxWidth: "20%", height: "auto" }}
                 />
-
-                <div className="col-lg-12">
-                  <label className="text-12 lh-1 fw-500 text-dark-1 mb-10">
+              </div>
+              <div className="">
+                <h3 className="text-20 lh-2 text-center">
+                  Accept the Challenge
+                </h3>
+                <p className="text-15  lh-2 text-center">
+                  Sign up now using your university's institutional account and
+                  unlock a world of exciting CTF challenges! Whether you're a
+                  beginner or a seasoned hacker, there's something here for
+                  everyone. Push your limits, climb the leaderboard, and
+                  represent your university!
+                </p>
+                <form
+                  className="contact-form respondForm__form row y-gap-20 pt-30"
+                  onSubmit={handleSubmit}
+                >
+                  <div className="col-lg-6">
+                    <label className="text-12 lh-1 fw-500 text-dark-1 mb-10">
+                      First Name *
+                    </label>
                     <input
-                      type="checkbox"
-                      name="termsAgreed"
-                      checked={formData.termsAgreed}
+                      required
+                      type="text"
+                      name="firstName"
+                      placeholder="First Name"
+                      value={formData.firstName}
                       onChange={handleInputChange}
-                    />{" "}
-                    I agree to all the{" "}
-                    <Link
-                      to="/terms-and-conditions"
-                      className="text-custom-color"
-                    >
-                      Terms
-                    </Link>{" "}
-                    and{" "}
-                    <Link to="/privacy-policy" className="text-custom-color">
-                      Privacy Policies
-                    </Link>
-                    .
-                  </label>
-                </div>
+                      autoComplete="given-name"
+                    />
+                  </div>
+                  <div className="col-lg-6">
+                    <label className="text-12 lh-1 fw-500 text-dark-1 mb-10">
+                      Last Name *
+                    </label>
+                    <input
+                      required
+                      type="text"
+                      name="lastName"
+                      placeholder="Last Name"
+                      value={formData.lastName}
+                      onChange={handleInputChange}
+                      autoComplete="family-name"
+                    />
+                  </div>
+                  <div className="col-lg-6">
+                    <label className="text-12 lh-1 fw-500 text-dark-1 mb-10">
+                      Email address *
+                    </label>
+                    <input
+                      required
+                      type="email"
+                      name="email"
+                      placeholder="Email Address"
+                      value={formData.email}
+                      onChange={handleInputChange}
+                      autoComplete="email"
+                    />
+                  </div>
+                  <div className="col-lg-6">
+                    <label className="text-12 lh-1 fw-500 text-dark-1 mb-10">
+                      Username *
+                    </label>
+                    <input
+                      required
+                      type="text"
+                      name="username"
+                      placeholder="Username"
+                      value={formData.username}
+                      onChange={handleInputChange}
+                      autoComplete="username"
+                    />
+                  </div>
 
-                <div className="col-12 mx-auto">
-                  <button
-                    type="submit"
-                    name="submit"
-                    id="submit"
-                    className="button -md fw-500 w-1/1"
-                    disabled={isButtonDisabled}
-                    style={{
-                      backgroundColor: "black",
-                      color: "white",
-                      border: "none",
-                    }}
-                    onMouseEnter={(e) => {
-                      e.target.style.backgroundColor = "#d0f721c7";
-                      e.target.style.color = "black";
-                    }}
-                    onMouseLeave={(e) => {
-                      e.target.style.backgroundColor = "black";
-                      e.target.style.color = "white";
-                    }}
-                  >
-                    {isButtonDisabled ? "Processing..." : "Create Account"}
-                  </button>
-                  <p className="mt-10 text-center">
-                    Already have an account?{" "}
-                    <Link to="/login" className="text-custom-color">
-                      Log in
-                    </Link>
-                  </p>
-                </div>
-              </form>
+                  <div className="col-lg-6">
+                    <label className="text-12 lh-1 fw-500 text-dark-1 mb-10">
+                      Password *
+                    </label>
+                    <div className="position-relative ">
+                      <input
+                        required
+                        type={showPassword.password ? "text" : "password"}
+                        name="password"
+                        placeholder="Password"
+                        value={formData.password}
+                        onChange={handleInputChange}
+                        autoComplete="new-password"
+                        minLength="12"
+                        maxLength="128"
+                        className="pe-5"
+                      />
+                      <i
+                        className={`fas ${
+                          showPassword.password ? "fa-eye" : "fa-eye-slash"
+                        } position-absolute`}
+                        style={{
+                          cursor: "pointer",
+                          right: "10px",
+                          top: "50%",
+                          transform: "translateY(-50%)",
+                          zIndex: 1,
+                          color: "#000",
+                        }}
+                        onClick={() => togglePasswordVisibility("password")}
+                      ></i>
+                    </div>
+                    {errors.password && (
+                      <p className="error-text">{errors.password}</p>
+                    )}
+                  </div>
+                  <div className="col-lg-6">
+                    <label className="text-12 lh-1 fw-500 text-dark-1 mb-10">
+                      Confirm Password *
+                    </label>
+                    <div className="position-relative">
+                      <input
+                        required
+                        type={
+                          showPassword.confirmPassword ? "text" : "password"
+                        }
+                        name="confirmPassword"
+                        placeholder="Confirm Password"
+                        value={formData.confirmPassword}
+                        onChange={handleInputChange}
+                        autoComplete="confirm-password"
+                        minLength="12"
+                        maxLength="128"
+                        className="pe-5"
+                      />
+                      <i
+                        className={`fas ${
+                          showPassword.confirmPassword
+                            ? "fa-eye"
+                            : "fa-eye-slash"
+                        } position-absolute`}
+                        style={{
+                          cursor: "pointer",
+                          right: "10px",
+                          top: "50%",
+                          transform: "translateY(-50%)",
+                          zIndex: 1,
+                          color: "#000",
+                        }}
+                        onClick={() =>
+                          togglePasswordVisibility("confirmPassword")
+                        }
+                      ></i>
+                    </div>
+                    {errors.confirmPassword && (
+                      <p className="error-text">{errors.confirmPassword}</p>
+                    )}
+                  </div>
+
+                  <div className="col-lg-12">
+                    <label className="text-12 lh-1 fw-500 text-dark-1 mb-10">
+                      Access Key *
+                    </label>
+                    <input
+                      required
+                      type="text"
+                      name="accessKey"
+                      placeholder="Access Key"
+                      value={formData.accessKey}
+                      onChange={handleInputChange}
+                      autoComplete="accesskey"
+                    />
+                  </div>
+
+                  <Turnstile
+                    siteKey={import.meta.env.VITE_TURNSTILE_SITE_KEY}
+                    onSuccess={(token) => setTurnstileToken(token)}
+                    onError={() => setTurnstileToken("")}
+                    onExpire={() => setTurnstileToken("")}
+                  />
+
+                  <div className="col-lg-12">
+                    <label className="text-12 lh-1 fw-500 text-dark-1 mb-10">
+                      <input
+                        type="checkbox"
+                        name="termsAgreed"
+                        checked={formData.termsAgreed}
+                        onChange={handleInputChange}
+                      />{" "}
+                      I agree to all the{" "}
+                      <Link
+                        to="/terms-and-conditions"
+                        className="text-custom-color"
+                      >
+                        Terms
+                      </Link>{" "}
+                      and{" "}
+                      <Link to="/privacy-policy" className="text-custom-color">
+                        Privacy Policies
+                      </Link>
+                      .
+                    </label>
+                  </div>
+
+                  <div className="col-12 mx-auto">
+                    <button
+                      type="submit"
+                      name="submit"
+                      id="submit"
+                      className="button -md fw-500 w-1/1"
+                      disabled={isButtonDisabled}
+                      style={{
+                        backgroundColor: "black",
+                        color: "white",
+                        border: "none",
+                      }}
+                      onMouseEnter={(e) => {
+                        e.target.style.backgroundColor = "#d0f721c7";
+                        e.target.style.color = "black";
+                      }}
+                      onMouseLeave={(e) => {
+                        e.target.style.backgroundColor = "black";
+                        e.target.style.color = "white";
+                      }}
+                    >
+                      {isButtonDisabled ? "Processing..." : "Create Account"}
+                    </button>
+                    <p className="mt-10 text-center">
+                      Already have an account?{" "}
+                      <Link to="/login" className="text-custom-color">
+                        Log in
+                      </Link>
+                    </p>
+                  </div>
+                </form>
+              </div>
             </div>
           </div>
         </div>
