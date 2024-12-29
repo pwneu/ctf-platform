@@ -1,12 +1,12 @@
 import AOS from "aos";
 import "aos/dist/aos.css";
-import "./styles/index.scss";
+// import "./styles/index.scss";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "react-toastify/dist/ReactToastify.css";
 import "react-calendar/dist/Calendar.css";
-import { Routes, Route, Navigate } from "react-router-dom";
-import { useEffect } from "react";
+import { Routes, Route, Navigate, useLocation } from "react-router-dom";
+import { useEffect, useState } from "react";
 import { ToastContainer } from "react-toastify";
 import RequireNoAuth from "./components/RequireNoAuth";
 import RequireAuth from "./components/RequireAuth";
@@ -68,6 +68,41 @@ import ChatBotPage from "./pages/chatbot/ChatBotPage";
 // } from "./pages/achievements";
 
 function App() {
+  const location = useLocation();
+  const [cssLoaded, setCssLoaded] = useState(false); // Initialize state to false
+
+  // Conditionally load SCSS or Bootstrap CSS based on route
+  useEffect(() => {
+    if (location.pathname.startsWith("/admin")) {
+      // import("bootstrap/dist/css/bootstrap.min.css").then(() => {
+      //   setCssLoaded(true); // Bootstrap is loaded
+      // });
+      const link = document.createElement("link");
+      link.rel = "stylesheet";
+      link.href =
+        "https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css";
+      document.head.appendChild(link);
+
+      // Set loading to false once the link is added
+      link.onload = () => setCssLoaded(true);
+    } else {
+      import("./styles/index.scss").then(() => {
+        setCssLoaded(true); // SCSS is loaded
+      });
+    }
+  }, [location.pathname]);
+
+  // Conditionally load SCSS based on route
+  // useEffect(() => {
+  //   if (!location.pathname.startsWith("/admin")) {
+  //     import("./styles/index.scss").then(() => {
+  //       setCssLoaded(true); // Set loading to false after SCSS is loaded
+  //     });
+  //   } else {
+  //     setCssLoaded(true); // Don't load SCSS for /admin pages
+  //   }
+  // }, [location.pathname]);
+
   useEffect(() => {
     AOS.init({
       duration: 700,
@@ -85,6 +120,11 @@ function App() {
       "font-size: 20px; font-weight: bold;"
     );
   }, []);
+
+  if (!cssLoaded) {
+    // return <div>Loading...</div>; // Show loading indicator while CSS is being loaded
+    return <div></div>; // Show loading indicator while CSS is being loaded
+  }
 
   return (
     <>
