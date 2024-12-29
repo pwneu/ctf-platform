@@ -11,6 +11,7 @@ export default function ChallengesPagination({
     if (isBusy) return;
     if (page > 1) {
       setPage((prev) => prev - 1);
+      window.scrollTo({ top: 0, behavior: "smooth" });
     }
   };
 
@@ -18,12 +19,14 @@ export default function ChallengesPagination({
     if (isBusy) return;
     if (page < totalPages) {
       setPage((prev) => prev + 1);
+      window.scrollTo({ top: 0, behavior: "smooth" });
     }
   };
 
   const handlePageClick = (pageNumber) => {
     if (isBusy) return;
     setPage(pageNumber);
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   const renderPageNumbers = () => {
@@ -43,7 +46,10 @@ export default function ChallengesPagination({
   };
 
   return (
-    <div className="row justify-center pt-90 lg:pt-50">
+    <div
+      // className="row justify-center pt-90 lg:pt-50"
+      className="row justify-center lg:pt-50"
+    >
       <div className="col-auto">
         <div className="pagination -buttons">
           <button

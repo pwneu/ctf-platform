@@ -37,7 +37,7 @@ export default function ChallengesContainer() {
 
   const [page, setPage] = useState(1);
   const pageRef = useRef(1);
-  const pageSize = 12;
+  const pageSize = 15;
   const [filterOpen, setFilterOpen] = useState(false);
 
   const isFirstRender = useRef(true);
