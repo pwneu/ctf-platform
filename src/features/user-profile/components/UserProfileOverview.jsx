@@ -61,7 +61,12 @@ export default function UserProfileOverview() {
 
   return (
     <>
-      <div className="dashboard__content bg-dark-account">
+      <div
+        className="dashboard__content bg-dark-account"
+        style={{
+          marginTop: window.innerWidth > 574 ? "20px" : "0",
+        }}
+      >
         <div className="row pb-50 mb-10">
           <div className="col-auto">
             {userDetails === undefined ? (
