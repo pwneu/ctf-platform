@@ -62,6 +62,7 @@ import {
 import RequireDefinedAuth from "./components/RequireDefinedAuth";
 import BlacklistPage from "./pages/admin/BlacklistPage";
 import ChatBotPage from "./pages/chatbot/ChatBotPage";
+import AuditsPage from "./pages/admin/AuditsPage";
 // import {
 //   AchievementDetailsPage,
 //   AchievementsListPage,
@@ -214,6 +215,11 @@ function App() {
               path="/admin/leaderboards"
               element={<LeaderboardsAdminPage />}
             />
+          </Route>
+
+          {/* Routes that only the admin is allowed to access*/}
+          <Route element={<RequireAuth allowedRoles={["Admin"]} />}>
+            <Route path="/admin/audits" element={<AuditsPage />} />
           </Route>
 
           <Route path="/not-found" element={<NotFoundPage />} />
