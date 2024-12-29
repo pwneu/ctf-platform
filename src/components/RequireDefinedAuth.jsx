@@ -1,12 +1,12 @@
 import { Outlet } from "react-router-dom";
 import useAuth from "@/hooks/useAuth";
+import LoadingIcon from "./LoadingIcon";
 
 const RequireDefinedAuth = () => {
   const { auth } = useAuth();
 
-  // TODO -- Design
   if (auth === undefined) {
-    return <div>Loading...</div>;
+    return <LoadingIcon />;
   }
 
   return <Outlet />;

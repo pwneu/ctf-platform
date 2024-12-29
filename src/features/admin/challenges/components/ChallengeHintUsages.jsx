@@ -97,7 +97,6 @@ export default function ChallengeHintUsages({ challengeId }) {
               >
                 <option value="">Select...</option>
                 <option value="username">Username</option>{" "}
-                {/* TODO -- Not working */}
                 <option value="deduction">Deduction</option>
                 <option value="usedat">Used At</option>
               </Form.Select>

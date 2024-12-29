@@ -231,7 +231,6 @@ export default function UserProfile({
             </div>*/}
           </div>
         </div>
-        {/* TODO -- Design */}
         <button onClick={generateStatsReport} disabled={isDownloading}>
             {isDownloading ? 'Downloading...' : 'Download Stats Report'}
         </button>
