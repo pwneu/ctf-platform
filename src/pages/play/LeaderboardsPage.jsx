@@ -2,11 +2,16 @@ import Preloader from "@/components/Preloader";
 import MetaComponent from "@/components/MetaComponent";
 import Header from "@/layout/headers/Header";
 import Footer from "@/layout/footers/Footer";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useLayoutEffect } from "react";
 import useAuth from "@/hooks/useAuth";
 import { toast } from "react-toastify";
-import { LeaderboardGraph, UserRanks } from "@/features/leaderboards";
-import  LeaderboardOverview from "@/features/leaderboards/layout/LeaderboardOverview";
+import {
+  LeaderboardGraph,
+  LeaderboardsLoading,
+  NoLeaderboards,
+  UserRanks,
+} from "@/features/leaderboards";
+import LeaderboardOverview from "@/features/leaderboards/layout/LeaderboardOverview";
 import { api } from "@/api";
 
 const metadata = {
@@ -15,6 +20,17 @@ const metadata = {
 };
 
 export default function LeaderboardsPage() {
+  useLayoutEffect(() => {
+    const link = document.createElement("link");
+    link.rel = "stylesheet";
+    link.href = "/assets/css/leaderboards.css";
+    document.head.appendChild(link);
+
+    return () => {
+      document.head.removeChild(link);
+    };
+  }, []);
+
   const [leaderboards, setLeaderboards] = useState();
 
   const { auth } = useAuth();
@@ -39,12 +55,11 @@ export default function LeaderboardsPage() {
       <MetaComponent meta={metadata} />
       <Preloader />
       <Header />
-      <LeaderboardOverview/>
+      <LeaderboardOverview />
       <div className="content-wrapper js-content-wrapper">
-      
         {leaderboards ? (
           leaderboards.userRanks && leaderboards.userRanks.length > 0 ? (
-            <> 
+            <>
               <LeaderboardGraph topUsersGraph={leaderboards.topUsersGraph} />
               <UserRanks
                 requesterRank={leaderboards.requesterRank}
@@ -54,10 +69,14 @@ export default function LeaderboardsPage() {
               />
             </>
           ) : (
-            <p style={{ minHeight: "1000px", alignItems: "center" }}>No leaderboards available.</p>
+            <div style={{ minHeight: "1000px", alignItems: "center" }}>
+              <NoLeaderboards />
+            </div>
           )
         ) : (
-          <p style={{ minHeight: "1000px", alignItems: "center" }}>Loading leaderboards...</p>
+          <div style={{ minHeight: "1000px", alignItems: "center" }}>
+            <LeaderboardsLoading />
+          </div>
         )}
         <Footer />
       </div>

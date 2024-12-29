@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
-import { Table, Form, Row, Col, Button } from "react-bootstrap"; // TODO -- Bootstrap destroying mobile ui
+import { Table, Form, Row, Col, Button } from "react-bootstrap";
 import { api } from "@/api";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
@@ -22,7 +22,6 @@ export default function UserProfileSolvesOld({
     async (pageNumber) => {
       setIsBusy(true);
 
-      // TODO -- remove sorting dropdowns, always sort by use time descending
       const params = {
         sortBy: sortByInput, // "solvedat"
         sortOrder: sortOrderInput, // "desc"

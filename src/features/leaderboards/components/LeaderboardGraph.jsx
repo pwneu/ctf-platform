@@ -9,7 +9,6 @@ import {
   Legend,
 } from "chart.js";
 import "chart.js/auto";
-import "./leaderboards.css";
 
 ChartJS.register(
   LineElement,

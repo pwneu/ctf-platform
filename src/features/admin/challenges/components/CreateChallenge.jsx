@@ -1,11 +1,21 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useLayoutEffect } from "react";
 import { Modal, Button, Form } from "react-bootstrap";
 import { toast } from "react-toastify";
-import "./CreateChallenge.css";
 import { api } from "@/api";
 import { useNavigate } from "react-router-dom";
 
 export default function CreateChallenge({ show, onHide, onSuccess }) {
+  useLayoutEffect(() => {
+    const link = document.createElement("link");
+    link.rel = "stylesheet";
+    link.href = "/assets/css/CreateChallenge.css";
+    document.head.appendChild(link);
+
+    return () => {
+      document.head.removeChild(link);
+    };
+  }, []);
+
   const navigate = useNavigate();
   const [categories, setCategories] = useState([]);
   const [formData, setFormData] = useState({

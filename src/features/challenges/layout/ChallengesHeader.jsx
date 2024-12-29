@@ -1,5 +1,17 @@
+import { useLayoutEffect } from "react";
 
 export default function ChallengesHeader() {
+  useLayoutEffect(() => {
+    const link = document.createElement("link");
+    link.rel = "stylesheet";
+    link.href = "/assets/css/leaderboards.css";
+    document.head.appendChild(link);
+
+    return () => {
+      document.head.removeChild(link);
+    };
+  }, []);
+
     return (
  <section className="leaderboard-section">
         <div className="container">

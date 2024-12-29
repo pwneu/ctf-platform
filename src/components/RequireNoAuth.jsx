@@ -1,20 +1,22 @@
 import { Navigate, Outlet, useLocation } from "react-router-dom";
 import useAuth from "@/hooks/useAuth";
+import LoadingIcon from "./LoadingIcon";
+import { toast } from "react-toastify";
 
 const RequireNoAuth = () => {
   const { auth } = useAuth();
   const location = useLocation();
 
-  // TODO -- Design
   if (auth === undefined) {
-    return <div>Loading...</div>;
+    return <LoadingIcon />;
   }
 
-  return !auth?.userName ? (
-    <Outlet />
-  ) : (
-    <Navigate to="/" state={{ from: location }} replace />
-  );
+  if (auth?.userName) {
+    toast.warn("You must be logged out before accessing this page.");
+    return <Navigate to="/" state={{ from: location }} replace />;
+  }
+
+  return <Outlet />;
 };
 
 export default RequireNoAuth;

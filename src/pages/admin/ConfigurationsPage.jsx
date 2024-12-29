@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import useAuth from "@/hooks/useAuth";
 import HeaderAdmin from "@/layout/headers/HeaderAdmin";
 import {
+  ChallengesLocked,
   IsCertificationEnabled,
   IsTurnstileEnabled,
   PublicLeaderboardCount,
@@ -85,19 +86,6 @@ export default function ConfigurationsPage() {
     }
   };
 
-  // Hack fix because of educrat overriding bootstrap classes :(
-  useEffect(() => {
-    const bootstrapLink = document.createElement("link");
-    bootstrapLink.rel = "stylesheet";
-    bootstrapLink.href =
-      "https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css";
-    document.head.appendChild(bootstrapLink);
-
-    return () => {
-      document.head.removeChild(bootstrapLink);
-    };
-  }, []);
-
   return (
     <>
       <HeaderAdmin />
@@ -106,6 +94,15 @@ export default function ConfigurationsPage() {
           <Card.Header as="h5">Play Configuration</Card.Header>
           <Card.Body>
             <SubmissionsAllowed
+              playConfigurations={playConfigurations}
+              setPlayConfigurations={setPlayConfigurations}
+              isAdmin={isAdmin}
+              isBusy={isBusy}
+              setIsBusy={setIsBusy}
+              handleApiError={handleApiError}
+            />
+
+            <ChallengesLocked
               playConfigurations={playConfigurations}
               setPlayConfigurations={setPlayConfigurations}
               isAdmin={isAdmin}
