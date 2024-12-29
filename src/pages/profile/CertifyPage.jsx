@@ -2,8 +2,6 @@ import { useEffect, useState } from "react";
 import { api } from "@/api";
 import { toast } from "react-toastify";
 
-// TODO -- Design
-
 export default function CertifyPage() {
   const [certificationStatus, setCertificationStatus] = useState(null);
 

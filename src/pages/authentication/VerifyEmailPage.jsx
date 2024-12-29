@@ -5,6 +5,7 @@ import MetaComponent from "@/components/MetaComponent";
 import {
   AccountHasVerified,
   AccountVerificationFailed,
+  AccountVerificationLoading,
   AuthImageMove,
   HeaderAuth,
 } from "@/features/authentication";
@@ -55,7 +56,7 @@ export default function VerifyEmailPage() {
           ) : verificationStatus === "failed" ? (
             <AccountVerificationFailed />
           ) : (
-            <div>Loading...</div> // TODO -- Design
+            <AccountVerificationLoading />
           )}
         </section>
       </div>

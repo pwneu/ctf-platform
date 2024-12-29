@@ -123,7 +123,6 @@ export default function UserProfileOld({
                     <div className="text-40 fw-500 text-dark-1 ">
                       {userDetails.fullName}
                     </div>
-                    {/* TODO -- Show/hide email (hide by default) */}
                     <div className="text-14 lh-1 mt-5">{userEmail}</div>
                   </>
                 )}
@@ -231,7 +230,6 @@ export default function UserProfileOld({
             </div>*/}
           </div>
         </div>
-        {/* TODO -- Design */}
         <button onClick={generateStatsReport} disabled={isDownloading}>
             {isDownloading ? 'Downloading...' : 'Download Stats Report'}
         </button>

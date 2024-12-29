@@ -123,7 +123,6 @@ function App() {
   }, []);
 
   if (!cssLoaded) {
-    // return <div>Loading...</div>; // Show loading indicator while CSS is being loaded
     return <div></div>; // Show loading indicator while CSS is being loaded
   }
 

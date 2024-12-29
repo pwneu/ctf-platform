@@ -1,13 +1,13 @@
 import { Navigate, Outlet, useLocation } from "react-router-dom";
 import useAuth from "@/hooks/useAuth";
+import LoadingIcon from "./LoadingIcon";
 
 const RequireNoAuth = () => {
   const { auth } = useAuth();
   const location = useLocation();
 
-  // TODO -- Design
   if (auth === undefined) {
-    return <div>Loading...</div>;
+    return <LoadingIcon />;
   }
 
   return !auth?.userName ? (
