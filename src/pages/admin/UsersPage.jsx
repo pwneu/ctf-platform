@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Container, Button, Spinner } from "react-bootstrap";
 import { api } from "@/api";
 import { toast } from "react-toastify";
@@ -114,23 +114,6 @@ export default function UsersPage() {
       setIsExportingMembers(false);
     }
   };
-
-  // useEffect(() => {
-  //   import("bootstrap/dist/css/bootstrap.min.css");
-  // }, []);
-
-  // Hack fix because of educrat overriding bootstrap classes :(
-  useEffect(() => {
-    const bootstrapLink = document.createElement("link");
-    bootstrapLink.rel = "stylesheet";
-    bootstrapLink.href =
-      "https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css";
-    document.head.appendChild(bootstrapLink);
-
-    return () => {
-      document.head.removeChild(bootstrapLink);
-    };
-  }, []);
 
   return (
     <>

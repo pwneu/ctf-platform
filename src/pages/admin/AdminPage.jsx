@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { api } from "@/api";
 import useAuth from "@/hooks/useAuth";
 import { toast } from "react-toastify";
-import { useEffect, useState } from "react";
+import { /*useEffect,*/ useState } from "react";
 import HeaderAdmin from "@/layout/headers/HeaderAdmin";
 import {
   Container,
@@ -89,17 +89,18 @@ export default function AdminPage() {
     }
   };
 
-  useEffect(() => {
-    const bootstrapLink = document.createElement("link");
-    bootstrapLink.rel = "stylesheet";
-    bootstrapLink.href =
-      "https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css";
-    document.head.appendChild(bootstrapLink);
+  // Hack fix because of educrat overriding bootstrap classes :(
+  // useEffect(() => {
+  //   const bootstrapLink = document.createElement("link");
+  //   bootstrapLink.rel = "stylesheet";
+  //   bootstrapLink.href =
+  //     "https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css";
+  //   document.head.appendChild(bootstrapLink);
 
-    return () => {
-      document.head.removeChild(bootstrapLink);
-    };
-  }, []);
+  //   return () => {
+  //     document.head.removeChild(bootstrapLink);
+  //   };
+  // }, []);
 
   return (
     <>
