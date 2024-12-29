@@ -5,7 +5,12 @@ import Footer from "@/layout/footers/Footer";
 import { useState, useEffect, useLayoutEffect } from "react";
 import useAuth from "@/hooks/useAuth";
 import { toast } from "react-toastify";
-import { LeaderboardGraph, UserRanks } from "@/features/leaderboards";
+import {
+  LeaderboardGraph,
+  LeaderboardsLoading,
+  NoLeaderboards,
+  UserRanks,
+} from "@/features/leaderboards";
 import LeaderboardOverview from "@/features/leaderboards/layout/LeaderboardOverview";
 import { api } from "@/api";
 
@@ -64,14 +69,14 @@ export default function LeaderboardsPage() {
               />
             </>
           ) : (
-            <p style={{ minHeight: "1000px", alignItems: "center" }}>
-              No leaderboards available.
-            </p>
+            <div style={{ minHeight: "1000px", alignItems: "center" }}>
+              <NoLeaderboards />
+            </div>
           )
         ) : (
-          <p style={{ minHeight: "1000px", alignItems: "center" }}>
-            Loading leaderboards...
-          </p>
+          <div style={{ minHeight: "1000px", alignItems: "center" }}>
+            <LeaderboardsLoading />
+          </div>
         )}
         <Footer />
       </div>
