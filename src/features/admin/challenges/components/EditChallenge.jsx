@@ -88,11 +88,7 @@ export default function EditChallenge({
         } else if (status === 429) {
           toast.warn("Slow down!");
         } else {
-          toast.error(
-            `Error deleting challenge: ${
-              error.response?.data?.message || error.message
-            }`
-          );
+          toast.error(`${error.response?.data?.message || error.message}`);
         }
       } else if (error.request) {
         toast.error("No response received.");
