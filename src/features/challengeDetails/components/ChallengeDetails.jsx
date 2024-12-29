@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import ChallengeInfoCard from "./ChallengeInfoCard";
 import RecentSolvers from "./RecentSolvers";
@@ -156,20 +155,45 @@ export default function ChallengeDetails({ id }) {
       {challengeDetails === undefined ? (
         <div
           style={{
-            minHeight: "80vh",
-            marginTop: "200px",
+            minHeight: "100vh",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
           }}
         >
-          Loading...
+          <h3 style={{ fontSize: "30px", textAlign: "center" }}>
+            Challenge Loading...
+          </h3>
+          <img src="/assets/img/general/loading.gif" alt="Loading..." />
         </div>
       ) : challengeDetails === null ? (
         <div
           style={{
-            minHeight: "80vh",
-            marginTop: "200px",
+            minHeight: "90vh",
+            marginTop: "100px",
           }}
         >
-          Challenge Not Found
+          <section
+            className="no-page layout-pt-lg layout-pb-lg "
+            style={{ marginTop: "0px", paddingTop: "0px" }}
+          >
+            <div className="container">
+              <div className="row y-gap-50 justify-center items-center">
+                <h3 className="text-30 lh-15" style={{ textAlign: "center" }}>
+                  Challenge Not Found...
+                </h3>
+                <div className="col-lg-6 text-center">
+                  <div className="no-page__img">
+                    <img
+                      src="/assets/img/about/contact/searching.gif"
+                      alt="image"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
         </div>
       ) : (
         <div id="js-pin-container" className="js-pin-container relative">
