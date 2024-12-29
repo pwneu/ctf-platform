@@ -11,7 +11,8 @@ export default function ChallengesList({ challenges, isBusy }) {
 
   return (
     <>
-      <section className="layout-pt layout-pb-lg">
+      <section className="layout-pt layout-pb-md">
+      {/* <section className="layout-pt layout-pb-lg"> */}
         <div className="container">
           <div className="row y-gap-20 justify-center">
             {isBusy || challenges === undefined ? (
@@ -60,7 +61,7 @@ export default function ChallengesList({ challenges, isBusy }) {
 
                       <div className=" items-center ">
                         <div className="mt-20 text-14 lh-1 text-light-1 ">
-                          <div className="fa fa-trophy"></div>    Points:{" "}
+                          <div className="fa fa-trophy"></div> Points:{" "}
                           {challenge.points}
                         </div>
                       </div>
