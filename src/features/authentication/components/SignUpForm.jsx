@@ -152,7 +152,7 @@ export default function SignUpForm({ setHasRegistered }) {
       <div className="form-page__content lg:py-40 mt-8">
         <div className="container mt-10">
           <div className="row justify-center items-center mt-8">
-            <div className="col-xl-10 col-lg-9 mt-8">
+            <div className="col-xl-0 col-lg-7 mt-40 ">
               <div className="text-center mt-5 ">
                 <img
                   src="assets/img/login/JoinUs-Icon.gif"
@@ -162,10 +162,10 @@ export default function SignUpForm({ setHasRegistered }) {
                 />
               </div>
               <div className="">
-                <h3 className="text-20 lh-2 text-center">
+                <h3 className="text-20 mt-15 text-center">
                   Accept the Challenge
                 </h3>
-                <p className="text-15  lh-2 text-center">
+                <p className="text-15   mt-15  lh-4 text-center text-dark-1">
                   Sign up now using your university's institutional account and
                   unlock a world of exciting CTF challenges! Whether you're a
                   beginner or a seasoned hacker, there's something here for
@@ -178,7 +178,7 @@ export default function SignUpForm({ setHasRegistered }) {
                 >
                   <div className="col-lg-6">
                     <label className="text-12 lh-1 fw-500 text-dark-1 mb-10">
-                      First Name *
+                      First Name  <span style={{ color: 'red' }}>*</span>
                     </label>
                     <input
                       required
@@ -192,7 +192,7 @@ export default function SignUpForm({ setHasRegistered }) {
                   </div>
                   <div className="col-lg-6">
                     <label className="text-12 lh-1 fw-500 text-dark-1 mb-10">
-                      Last Name *
+                      Last Name  <span style={{ color: 'red' }}>*</span>
                     </label>
                     <input
                       required
@@ -206,7 +206,7 @@ export default function SignUpForm({ setHasRegistered }) {
                   </div>
                   <div className="col-lg-6">
                     <label className="text-12 lh-1 fw-500 text-dark-1 mb-10">
-                      Email address *
+                      Email address  <span style={{ color: 'red' }}>*</span>
                     </label>
                     <input
                       required
@@ -220,7 +220,7 @@ export default function SignUpForm({ setHasRegistered }) {
                   </div>
                   <div className="col-lg-6">
                     <label className="text-12 lh-1 fw-500 text-dark-1 mb-10">
-                      Username *
+                      Username  <span style={{ color: 'red' }}>*</span>
                     </label>
                     <input
                       required
@@ -235,7 +235,7 @@ export default function SignUpForm({ setHasRegistered }) {
 
                   <div className="col-lg-6">
                     <label className="text-12 lh-1 fw-500 text-dark-1 mb-10">
-                      Password *
+                      Password  <span style={{ color: 'red' }}>*</span>
                     </label>
                     <div className="position-relative ">
                       <input
@@ -271,7 +271,7 @@ export default function SignUpForm({ setHasRegistered }) {
                   </div>
                   <div className="col-lg-6">
                     <label className="text-12 lh-1 fw-500 text-dark-1 mb-10">
-                      Confirm Password *
+                      Confirm Password  <span style={{ color: 'red' }}>*</span>
                     </label>
                     <div className="position-relative">
                       <input
@@ -314,7 +314,7 @@ export default function SignUpForm({ setHasRegistered }) {
 
                   <div className="col-lg-12">
                     <label className="text-12 lh-1 fw-500 text-dark-1 mb-10">
-                      Access Key *
+                      Access Key  <span style={{ color: 'red' }}>*</span>
                     </label>
                     <input
                       required
@@ -335,7 +335,7 @@ export default function SignUpForm({ setHasRegistered }) {
                   />
 
                   <div className="col-lg-12">
-                    <label className="text-12 lh-1 fw-500 text-dark-1 mb-10">
+                    <label className="text-12 lh-2 fw-500 text-dark-1 mb-10">
                       <input
                         type="checkbox"
                         name="termsAgreed"
@@ -386,6 +386,7 @@ export default function SignUpForm({ setHasRegistered }) {
                         Log in
                       </Link>
                     </p>
+                    <p className="mt-90 text-center"></p>
                   </div>
                 </form>
               </div>
