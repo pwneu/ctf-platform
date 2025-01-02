@@ -63,7 +63,7 @@ export default function UserProfileCertify() {
 
   return (
     <>
-      <div className="dashboard__content bg-black -dark-bg-dark-2 shadow-1">
+      <div className="dashboard__content bg-black">
         <div className="row pb-50 mb-10 mt-30 ">
           <div className="col-auto">
             <h1 className="text-30 text-white lh-12 fw-700 ">

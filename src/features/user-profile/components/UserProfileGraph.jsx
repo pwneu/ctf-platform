@@ -43,8 +43,8 @@ export default function UserProfileGraph() {
         label: "Activity Score",
         data: scores,
         fill: false,
-        backgroundColor: "rgba(75, 192, 192, 0.2)",
-        borderColor: "rgba(75, 192, 192, 1)",
+        backgroundColor: "rgba(8, 45, 255, 0.2)",
+        borderColor: "rgb(255, 217, 1)",
         tension: 0.1,
       },
     ],
@@ -86,7 +86,7 @@ export default function UserProfileGraph() {
           <h2 className="text-xl font-semibold text-center mb-2">
             Points Graph
           </h2>
-          <div className="h-12 md:h-24 lg:h-36 mb-2">
+          <div className="h-12 md:h-24 lg:h-36 mb-2 text-dark-1">
             {/* Adjusted height values */}
             <Line
               data={data}
