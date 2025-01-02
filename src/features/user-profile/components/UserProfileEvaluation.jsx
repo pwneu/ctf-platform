@@ -46,11 +46,13 @@ export default function UserProfileEvaluation() {
                 category.totalChallenges - category.totalSolves,
               ],
               backgroundColor: [
-                "rgba(75, 192, 192, 0.6)",
-                "rgba(255, 99, 132, 0.6)",
+               
+              "rgba(0, 15, 102, 0.87)",
+                "rgba(114, 3, 3, 0.84)",
+              
               ],
-              borderColor: ["rgba(75, 192, 192, 1)", "rgba(255, 99, 132, 1)"],
-              borderWidth: 1,
+              borderColor: ["rgb(253, 253, 253)", "rgb(255, 255, 255)"],
+              borderWidth: 10,
             },
           ],
         };
@@ -66,16 +68,17 @@ export default function UserProfileEvaluation() {
                 category.hintsUsed,
               ],
               backgroundColor: [
-                "rgba(54, 162, 235, 0.6)",
-                "rgba(255, 206, 86, 0.6)",
-                "rgba(153, 102, 255, 0.6)",
+               "rgba(243, 200, 10, 0.81)",
+                "rgba(4, 2, 114, 0.94)",
+                "rgba(78, 5, 92, 0.71)",
               ],
               borderColor: [
-                "rgba(54, 162, 235, 1)",
-                "rgba(255, 206, 86, 1)",
-                "rgba(153, 102, 255, 1)",
+                "rgb(0, 0, 0)",
+                "rgb(0, 0, 0)",
+                "rgb(0, 0, 0)",
               ],
               borderWidth: 1,
+              borderRadius: 30,
             },
           ],
         };
@@ -84,9 +87,9 @@ export default function UserProfileEvaluation() {
           <div
             key={category.categoryId}
             style={{
-              borderRadius: "16px",
+              borderRadius: "25px",
               backgroundColor: "white",
-              boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
+              boxShadow: "0px 2px 6px rgba(128, 46, 161, 0.09)",
               padding: "16px",
             }}
           >

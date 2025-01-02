@@ -48,18 +48,18 @@ export default function UserProfileStatsReport() {
   return (
     <>
       <div className="dashboard__content">
-        <div className="row y-gap-30 mt-30">
+        <div className="row y-gap-30 mt-0">
           <div className="col-xl-12">
-            <div className="rounded-16 bg-white -dark-bg-dark-2 shadow-1 h-100 ">
+            <div className="rounded-16 bg-white -dark-bg-dark-2  h-100 ">
               <div className="py-30 px-30">
                 <div>
                   <div className="d-flex items-center py-10 px-0 border-bottom-light">
-                    <h2 className="text-17 lh-1 fw-500">
+                    <h2 className="text-17 lh-2 fw-500">
                       Performance Insights and Key Takeaways
                     </h2>
                   </div>
-                  <div className="col-xl-10 ">
-                    <p className="mt-15">
+                  <div className="col-xl-10 text-dark-1">
+                    <p className="mt-15 ">
                       This section offers insights into your CTF journey,
                       highlighting areas of strength, such as specific
                       categories or types of challenges where you performed
@@ -68,17 +68,18 @@ export default function UserProfileStatsReport() {
                       suggestions on areas to improve for future competitions.
                     </p>
 
-                    <p className="mt-15">
+                    <p className="mt-2 ">
                       Download detailed performance statistics and challenges
                       breakdown to assess progress and strategy moving forward.
                     </p>
+                
                   </div>
                 </div>
 
-                <div className="mt-30">
-                  <div className="rounded-8 px-25 py-25 ">
+                <div className="mt-30 border-bottom-light">
+                  <div className="rounded-8 px-25 py-25  ">
                     <div className="row">
-                      <div className="col-10">
+                      <div className="col-10 ">
                         <div className="text-dark-1 ">
                           {" "}
                           <i

@@ -71,7 +71,7 @@ export default function UserProfileHintUsages() {
       <div className="dashboard__content">
         <div className="row y-gap-30">
           <div className="col-12">
-            <div className="rounded-16 bg-white -dark-bg-dark-1 shadow-1 h-100">
+            <div className="rounded-16 bg-white h-100">
               <div className="py-30 px-30">
                 <div>
                   <div className="d-flex items-center py-10 px-0 border-bottom-light">
