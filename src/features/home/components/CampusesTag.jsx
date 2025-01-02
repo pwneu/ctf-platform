@@ -83,7 +83,7 @@ export default function CampusesTag() {
                       data-aos-duration={(i + 1) * 500}
                     >
                       <div className="eventCard__img">
-                        <img src={elm.imgSrc} alt="image" />
+                        <img src={elm.imgSrc} />
                       </div>
 
                       <div className="eventCard__bg bg-white">

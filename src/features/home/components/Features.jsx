@@ -54,7 +54,6 @@ export default function Features() {
               <img
                 style={{ height: "100%", width: "100%" }}
                 src="/assets/img/features/pwneufeatures.gif"
-                alt="image"
               />
             </div>
           </div>

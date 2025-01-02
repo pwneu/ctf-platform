@@ -52,7 +52,6 @@ const HomeHero = () => {
         <div className="masthead__bg">
           <img
             src={"/assets/img/learningPaths/learning/herobg2.svg"}
-            alt="image"
           />
         </div>
 
