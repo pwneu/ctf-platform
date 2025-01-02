@@ -88,37 +88,6 @@ export default function UserProfileSolves() {
                 </div>
               </div>
 
-              <div className="text-center mt-3">
-                <p>Total Solves: {totalSolveCount}</p>
-                <p>
-                  Page: {page} of {Math.ceil(totalSolveCount / pageSize)}
-                </p>
-                <div className="d-flex justify-content-center">
-                  <button
-                    onClick={() => handlePagination("prev")}
-                    disabled={isBusy || page <= 1}
-                    className={`custom-button me-2 ${
-                      isBusy || page <= 1 ? "disabled" : ""
-                    }`}
-                  >
-                    <FaArrowLeft className="me-1" /> Previous
-                  </button>
-                  <button
-                    onClick={() => handlePagination("next")}
-                    disabled={
-                      isBusy || page >= Math.ceil(totalSolveCount / pageSize)
-                    }
-                    className={`custom-button ms-1 ${
-                      isBusy || page >= Math.ceil(totalSolveCount / pageSize)
-                        ? "disabled"
-                        : ""
-                    }`}
-                  >
-                    Next <FaArrowRight className="ms-1" />
-                  </button>
-                </div>
-              </div>
-
               <div className="py-30 px-30">
                 <div className="mt-20">
                   <div className="px-30 py-20 bg-dark-6 -dark-bg-dark-2 rounded-8">
@@ -175,6 +144,39 @@ export default function UserProfileSolves() {
                       </td>
                     </tr>
                   )}
+
+                  <div className="text-center mt-3">
+                    <p>Total Solves: {totalSolveCount}</p>
+                    <p>
+                      Page: {page} of {Math.ceil(totalSolveCount / pageSize)}
+                    </p>
+                    <div className="d-flex justify-content-center">
+                      <button
+                        onClick={() => handlePagination("prev")}
+                        disabled={isBusy || page <= 1}
+                        className={`custom-button me-2 ${
+                          isBusy || page <= 1 ? "disabled" : ""
+                        }`}
+                      >
+                        <FaArrowLeft className="me-1" /> Previous
+                      </button>
+                      <button
+                        onClick={() => handlePagination("next")}
+                        disabled={
+                          isBusy ||
+                          page >= Math.ceil(totalSolveCount / pageSize)
+                        }
+                        className={`custom-button ms-1 ${
+                          isBusy ||
+                          page >= Math.ceil(totalSolveCount / pageSize)
+                            ? "disabled"
+                            : ""
+                        }`}
+                      >
+                        Next <FaArrowRight className="ms-1" />
+                      </button>
+                    </div>
+                  </div>
 
                   {/* {solveoverview.map((elm, i) => (
                     <div key={i} className="px-30 border-bottom-light">
