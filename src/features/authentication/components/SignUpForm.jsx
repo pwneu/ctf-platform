@@ -153,22 +153,27 @@ export default function SignUpForm({ setHasRegistered }) {
         <div className="container mt-10">
           <div className="row justify-center items-center mt-8">
             <div className="col-xl-0 col-lg-7 mt-40 ">
+              
               <div className="text-center mt-5 ">
-                <img
-                  src="assets/img/login/JoinUs-Icon.gif"
-                  alt="Image Description"
-                  className="img-fluid"
-                  style={{ maxWidth: "20%", height: "auto" }}
-                />
-              </div>
-              <div className="">
-                <h3 className="text-20 mt-15 text-center">
-                  Accept the Challenge
+              <h3 className="text-20 mt-90 text-center">
+                  Accept the Challenge <span style={{ color: 'red' }}>!</span>
                 </h3>
                 <p className="text-15   mt-15  lh-4 text-center text-dark-1">
-                  Sign up now using your university's institutional account and
-                  unlock a world of exciting CTF challenges! Whether you're a
-                  beginner or a seasoned hacker, there's something here for
+                  Sign up now using your university's institutional account and  <br></br>
+                  unlock a world of exciting CTF challenges! 
+                </p>
+                <img
+                  src="assets/img/login/SignUpForm.png"
+                  alt="Image Description"
+                  className="img-fluid"
+                  style={{ maxWidth: "30%", height: "auto" }}
+                />
+                
+              </div>
+              <div className="">
+                
+                <p className="text-15   mt-15  lh-4 text-center text-dark-1">
+                   Whether you're a beginner or a seasoned hacker, there's something here for
                   everyone. Push your limits, climb the leaderboard, and
                   represent your university!
                 </p>
@@ -345,12 +350,12 @@ export default function SignUpForm({ setHasRegistered }) {
                       I agree to all the{" "}
                       <Link
                         to="/terms-and-conditions"
-                        className="text-custom-color"
+                        className="text-custom-color fw-500"
                       >
                         Terms
                       </Link>{" "}
                       and{" "}
-                      <Link to="/privacy-policy" className="text-custom-color">
+                      <Link to="/privacy-policy" className="text-custom-color fw-500">
                         Privacy Policies
                       </Link>
                       .
@@ -380,9 +385,9 @@ export default function SignUpForm({ setHasRegistered }) {
                     >
                       {isButtonDisabled ? "Processing..." : "Create Account"}
                     </button>
-                    <p className="mt-10 text-center">
+                    <p className="mt-10 text-center text-dark-1">
                       Already have an account?{" "}
-                      <Link to="/login" className="text-custom-color">
+                      <Link to="/login" className="text-custom-color fw-500">
                         Log in
                       </Link>
                     </p>

@@ -9477,7 +9477,11 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .text-custom-color {
-  color: #ff0d05 !important;
+  color:#4C19C5 !important;
+}
+
+.text-custom2-color {
+  color: #F6352E !important;
 }
 
 .text-custom-green {

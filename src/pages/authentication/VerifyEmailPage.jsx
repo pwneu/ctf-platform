@@ -18,9 +18,10 @@ const metadata = {
 };
 
 export default function VerifyEmailPage() {
-  const [verificationStatus, setVerificationStatus] = useState(null);
+  const [verificationStatus, setVerificationStatus] = useState("null"); // gawing "success" para mag appear yung AccountHasVerified, "failed" para mag appear yung AccountVerificationFailed. originally null
   const [email, setEmail] = useState(null);
 
+  // comment out useEffect
   useEffect(() => {
     const queryParams = new URLSearchParams(window.location.search);
     const emailParam = queryParams.get("email");
