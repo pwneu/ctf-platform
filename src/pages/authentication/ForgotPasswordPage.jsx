@@ -15,7 +15,7 @@ const metadata = {
 };
 
 export default function ForgotPasswordPage() {
-  const [passwordResetSent, setPasswordResetSent] = useState(false);
+  const [passwordResetSent, setPasswordResetSent] = useState(false); // gawing true para mag appear yung PasswordResetSent. originally false
 
   return (
     <div className="main-content  ">

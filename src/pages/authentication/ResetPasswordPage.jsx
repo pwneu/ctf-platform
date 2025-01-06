@@ -20,7 +20,7 @@ export default function ResetPasswordPage() {
   const [email, setEmail] = useState(undefined);
 
   const [passwordResetHasCompleted, setPasswordResetHasCompleted] =
-    useState(false);
+    useState(false); // gawing false para mag appear yung ResetPassword, true para mag appear yung PasswordResetCompleted. originally false
 
   const navigate = useNavigate();
 
@@ -29,7 +29,7 @@ export default function ResetPasswordPage() {
     return emailRegex.test(email);
   };
 
-  useEffect(() => {
+  useEffect(() => { 
     const queryParams = new URLSearchParams(window.location.search);
     const emailParam = queryParams.get("email");
     const resetToken = queryParams.get("resetToken");

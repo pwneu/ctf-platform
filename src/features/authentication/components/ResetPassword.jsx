@@ -118,26 +118,35 @@ export default function ResetPassword({
   };
 
   return (
-    <div className="form-page__content lg:py-90">
+    <div 
+    style={{
+      maxHeight: "100vh", // Adjust the height as needed
+      overflowY: "auto",
+      padding: "1rem",
+    }}
+    className="form-page__content lg:py-90">
       <div className="container">
-        <div className="row justify-center items-center">
-          <div className="col-xl-8 col-lg-9">
+        <div className="row justify-center items-center px-90 py-90 md:px-25 md:py-25 mt-90">
+          <div className="col-xl-8 col-lg-9 mt-6">
            
               
 
-              <div className="text-center">
+              <div className="text-center ">
                 <img
                   src="assets/img/login/ResetPassword-Icon.svg"
                   alt="Image Description"
-                  className="img-fluid"
-                  style={{ maxWidth: "20%", height: "auto" }}
+                  className="img-fluid "
+                  style={{ maxWidth: "12%", height: "auto" }}
                 />
               </div>
 
-              <h3 className="text-25 lh-13 mt-5 text-center ">
-                {`Set a new password for ${email}`}
+              <h3 className="text-25 lh-1 mt-5 text-center ">
+                {`Set a new password`}
               </h3>
-              <p className="mt-10 text-center mb-30">
+              <h3 className="text-1 lh-4 mt-56 text-center ">
+                {`for ${email}`}
+              </h3>
+              <p className="mt-40 text-center text-dark-1">
                 Your previous password has been reseted. Please set a new{" "}
                 <br></br>password for your account.
               </p>
@@ -149,7 +158,7 @@ export default function ResetPassword({
               >
                 <div className="col-lg-13">
                   <label className="text-14 lh-1 fw-500 text-dark-1 mb-10">
-                    Create New Password *
+                    Create New Password <span style={{ color: 'red' }}>*</span>
                   </label>
                   <div className="position-relative">
                     <input
@@ -188,7 +197,7 @@ export default function ResetPassword({
                 </div>
                 <div className="col-lg-13">
                   <label className="text-14 lh-1 fw-500 text-dark-1 mb-10">
-                    Re-enter Password *
+                    Re-enter Password <span style={{ color: 'red' }}>*</span>
                   </label>
                   <div className="position-relative">
                     <input
@@ -242,12 +251,17 @@ export default function ResetPassword({
                     id="submit"
                     className="button -md fw-500 w-1/1"
                     disabled={isBusy}
+                    style={{ display: 'block', marginLeft: 'auto', marginRight: 'auto' }}
                   >
                     {isBusy ? "Processing..." : "Set Password"}
                   </button>
+
+                  
                 </div>
               </form>
+              
             </div>
+            
         </div>
       </div>
     </div>
