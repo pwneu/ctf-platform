@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import { useState } from "react";
 import { Turnstile } from "@marsidev/react-turnstile";
 import { api } from "@/api";
@@ -81,13 +80,8 @@ export default function ForgotPassword({ setPasswordResetSent }) {
       <div className="container">
         <div className="row justify-center items-center">
           <div className="col-xl-8 col-lg-9 mt-6">
-            <div className="px-90 py-90 md:px-25 md:py-25 ">
-              <div className="mb-20 mb-60">
-                <Link to="/login" className="text-14">
-                  &lt; Back to Login
-                </Link>
-              </div>
-              <div className="text-center">
+            <div className="px-90 py-90 md:px-25 md:py-25 mt-90">
+              <div className="text-center ">
                 <img
                   src="assets/img/login/ForgotPassword-Icon.gif"
                   alt="Image Description"
@@ -98,7 +92,7 @@ export default function ForgotPassword({ setPasswordResetSent }) {
               <h3 className="text-25 lh-13 mt-5 text-center">
                 Forgot your password?
               </h3>
-              <p className="mt-10 text-center ">
+              <p className="mt-10 text-center text-dark-1 ">
                 No worries, it happens to the best of us. Just enter your{" "}
                 <br></br>email below to reset your password.
               </p>
@@ -129,18 +123,16 @@ export default function ForgotPassword({ setPasswordResetSent }) {
                   onError={() => setTurnstileToken("")}
                   onExpire={() => setTurnstileToken("")}
                 />
-
-                <div className="col-12 mt-20">
                   <button
                     type="submit"
                     name="submit"
                     id="submit"
-                    className="button -md fw-500 w-1/1"
+                    className="button -md fw-500 w-1"
                     disabled={isBusy}
+                    style={{ display: 'block', marginLeft: 'auto', marginRight: 'auto' }}
                   >
                     {isBusy ? "Processing..." : "Submit"}
                   </button>
-                </div>
               </form>
             </div>
           </div>
