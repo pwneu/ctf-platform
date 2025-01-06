@@ -98,17 +98,17 @@ export const menumobileList = [
   },
   {
     title: "Help Center",
-    path: "/help-center",
+    path: "https://www.neu.edu.ph/",
     icon: "fa-question-circle",
   },
   {
     title: "FAQs",
-    path: "/help-center/faqs",
+    path: "/help-center",
     icon: "fa-info-circle",
   },
   {
     title: "Support",
-    path: "/help-center",
+    path: "/contact",
     icon: "fa-life-ring",
   },
 ];
