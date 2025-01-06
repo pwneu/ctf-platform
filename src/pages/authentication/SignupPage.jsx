@@ -15,7 +15,7 @@ const metadata = {
 };
 
 export default function SignupPage() {
-  const [hasRegistered, setHasRegistered] = useState(false);
+  const [hasRegistered, setHasRegistered] = useState(false);// gawing true para mag appear yung AccountHasbeenCreated. Originally false
 
   return (
     <div className="main-content  ">
