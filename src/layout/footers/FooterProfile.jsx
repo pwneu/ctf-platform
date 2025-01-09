@@ -9,6 +9,9 @@ export default function FooterProfile() {
             <div className="col-auto">
               <div className="text-13 lh-1">
                 © {new Date().getFullYear()} PWNEU. All Right Reserved.
+                <br />
+                <br />
+                {"PWNEU{$treN9Th$_4Nd_wE@Kn3$$ES}"}
               </div>
             </div>
 

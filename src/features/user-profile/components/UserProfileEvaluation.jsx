@@ -19,11 +19,11 @@ export default function UserProfileEvaluation() {
   }, []);
 
   if (userEvaluations === undefined) {
-    return <p>Loading...</p>;
+    return <p></p>;
   }
 
   if (!userEvaluations || !userEvaluations.categoryEvaluations) {
-    return <p>No user evaluations available.</p>;
+    return <p></p>;
   }
 
   return (
