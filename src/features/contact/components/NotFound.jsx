@@ -6,7 +6,10 @@ export default function NotFound() {
           <div className="row y-gap-50 justify-center items-center">
             <div className="col-lg-6 text-center">
               <div className="no-page__img">
-                <img src="/assets/img/about/contact/searching.gif" alt="image" />
+                <img
+                  src="/assets/img/about/contact/searching.gif"
+                  alt="image"
+                />
               </div>
             </div>
 
@@ -21,6 +24,13 @@ export default function NotFound() {
                 <div className="mt-10">
                   The page you&apos;re looking for isn&apos;t available.
                 </div>
+                <br />
+                <h2
+                  className="text-3 lh-12 mt-5"
+                  style={{ fontFamily: "monospace" }}
+                >
+                  {"PWNEU{404_N0t_f0UNd}"}
+                </h2>
               </div>
             </div>
           </div>
