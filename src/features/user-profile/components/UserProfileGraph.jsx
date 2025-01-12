@@ -21,12 +21,12 @@ export default function UserProfileGraph() {
 
   // Display loading message if userGraph is undefined
   if (userGraph === undefined) {
-    return <p className="text-center text-gray-500">Loading...</p>;
+    return <p className="text-center text-gray-500"></p>;
   }
 
   // Check if userGraph is null, undefined, or empty
   if (!userGraph || userGraph.length === 0) {
-    return <p className="text-center text-gray-500">No data available.</p>;
+    return <p className="text-center text-gray-500"></p>;
   }
 
   // Prepare data for the chart
