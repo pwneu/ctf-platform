@@ -201,7 +201,7 @@
   /* Responsive adjustments */
   @media (max-width: 768px) {
     .leaderboard-graph-container {
-      height: 1000px; /* Reduced height for smaller screens */
+      height: 350px; /* Reduced height for smaller screens */
     }
   
     .user-ranks-container {
