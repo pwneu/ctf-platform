@@ -26,8 +26,10 @@ export default function ChallengeDetailsArtifacts({ artifacts }) {
 
       if (status === 401) {
         navigate("/login");
-      } else if (status === 400) {
+      } else if (status === 404) {
         toast.error(error.response?.data?.message);
+      } else if (status === 429) {
+        toast.error("Slow down on downloading artifacts!");
       } else {
         toast.error("Error downloading artifact. Please try again later");
       }
