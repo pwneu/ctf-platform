@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 // import useAuth from "@/hooks/useAuth";
 import ChallengeDetailsArtifacts from "./ChallengeDetailsArtifacts";
 import ChallengeDetailsHints from "./ChallengeDetailsHints";
+import useAuth from "@/hooks/useAuth";
 
 const menuItems = [
   { id: 1, href: "#recent-solvers", text: "Recent Solvers", isActive: true },
@@ -43,8 +44,8 @@ export default function ChallengeDetails({ id }) {
 
   const [isSubmittingTooOften, setIsSubmittingTooOften] = useState(false);
 
-  // const { auth } = useAuth();
-  // const isManager = auth?.roles?.includes("Manager");
+  const { auth } = useAuth();
+  const isManager = auth?.roles?.includes("Manager");
 
   const navigate = useNavigate();
 
@@ -122,7 +123,7 @@ export default function ChallengeDetails({ id }) {
         const status = error?.response?.status;
 
         if (status === 404) {
-          // toast.error(error.response.data.message || "Challenge not found");
+          navigate("not-found", { replace: true });
         } else {
           toast.error(
             "Something went wrong getting challenge details. Please try again later"
@@ -133,6 +134,11 @@ export default function ChallengeDetails({ id }) {
     };
 
     const checkChallengeStatus = async () => {
+      if (isManager) {
+        setIsSubmissionDisabled(true);
+        return;
+      }
+
       try {
         const response = await api.get(`/play/challenges/${id}/check`);
         if (response.data === "AlreadySolved") {
@@ -148,7 +154,7 @@ export default function ChallengeDetails({ id }) {
 
     fetchChallengeDetails();
     checkChallengeStatus();
-  }, [id]);
+  }, [id, isManager, navigate]);
 
   return (
     <>
@@ -217,7 +223,10 @@ export default function ChallengeDetails({ id }) {
 
                     <p
                       className="col-xl-9 mt-20 "
-                      style={{ whiteSpace: "pre-line" }}
+                      style={{
+                        whiteSpace: "pre-line",
+                        fontFamily: "monospace",
+                      }}
                     >
                       {challengeDetails?.description}
                     </p>
@@ -336,6 +345,7 @@ export default function ChallengeDetails({ id }) {
                           onChange={(e) => setFlag(e.target.value)}
                           name="PWNEU{FLAG}"
                           placeholder="PWNEU{FLAG}"
+                          maxLength="100"
                           autoComplete="off"
                           style={{
                             color: "white",
@@ -345,12 +355,14 @@ export default function ChallengeDetails({ id }) {
                             borderRadius: "5px",
                             fontSize: "14px",
                             width: "100%", // Ensure input takes up full width
+                            fontFamily: "monospace",
                           }}
                         />
                       </div>
                       <button
                         type="submit"
                         disabled={
+                          isManager ||
                           isSubmittingTooOften ||
                           isSubmitting ||
                           isSubmissionDisabled ||
@@ -381,7 +393,9 @@ export default function ChallengeDetails({ id }) {
                           fontSize: "14px",
                         }}
                       >
-                        {isSubmittingTooOften
+                        {isManager
+                          ? "Not A Player!"
+                          : isSubmittingTooOften
                           ? "Wait..."
                           : isSubmitting
                           ? "Submitting..."
