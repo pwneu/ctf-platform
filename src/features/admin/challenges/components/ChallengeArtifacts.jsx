@@ -65,7 +65,8 @@ export default function ChallengeArtifacts({
         navigate("/login");
       } else if (status === 400) {
         toast.error(error.response?.data?.message);
-      } else if (status === 413) { // Nginx file error
+      } else if (status === 413) {
+        // Nginx file error
         toast.error(
           "The file is too large. Please choose a file smaller than 30 MB."
         );
@@ -97,6 +98,8 @@ export default function ChallengeArtifacts({
         navigate("/login");
       } else if (status === 404) {
         toast.error(error.response?.data?.message);
+      } else if (status === 429) {
+        toast.error("Slow down on downloading artifacts!");
       } else {
         toast.error("Error downloading artifact. Please try again later");
       }
