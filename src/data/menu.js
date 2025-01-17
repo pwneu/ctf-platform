@@ -43,7 +43,7 @@ export const menuList = [
 export const menumobileList = [
   // {
   //   title: "Learn",
-  //   path: "https://pwneu.github.io/learn/docs/introduction",
+  //   path: "https://pwneu.github.io/learn/modules/introduction",
   //   icon: "fa-book",
   // },
   {
