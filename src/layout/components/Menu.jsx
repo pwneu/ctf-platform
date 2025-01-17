@@ -53,7 +53,7 @@ export default function Menu({ allClasses, headerPosition }) {
           <ul className={`${allClasses ? allClasses : ""}`}>
             <li className="menu-item-has-children">
               <Link
-                to="https://pwneu.github.io/learn/docs/introduction"
+                to="https://pwneu.github.io/learn/modules/introduction"
                 className={menuItem === "Learn" ? "activeMenu" : ""}
                 onClick={(e) => {
                   e.preventDefault();

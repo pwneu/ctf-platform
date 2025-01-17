@@ -171,7 +171,7 @@ const MobileMenu = ({ setActiveMobileMenu, activeMobileMenu }) => {
               <div className="menu-item-container">
                 <Link
                   className="link"
-                  to="https://pwneu.github.io/learn/docs/introduction"
+                  to="https://pwneu.github.io/learn/modules/introduction"
                   style={{
                     display: "block",
                     fontSize: "18px",
