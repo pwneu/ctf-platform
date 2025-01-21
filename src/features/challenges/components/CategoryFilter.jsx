@@ -36,7 +36,10 @@ export default function CategoryFilter({
 
             <div
               className="accordion__content"
-              style={categoryOpen ? { maxHeight: "450px" } : {}}
+              // style={categoryOpen ? { maxHeight: "1000px" } : {}}
+
+              // TODO -- Other categories not showing are fixed but animation doesnt work anymore
+              style={categoryOpen ? { maxHeight: "none" } : {}}
             >
               <div className="accordion__content__inner">
                 <div className="sidebar-checkbox">
@@ -62,6 +65,7 @@ export default function CategoryFilter({
                       key={i}
                       onClick={() => handleSelectedCategoryChange(category)}
                       className="sidebar-checkbox__item cursor mt-30"
+                      style={{ paddingBottom: "1px" }}
                     >
                       <div className="form-checkbox">
                         <input
@@ -80,7 +84,6 @@ export default function CategoryFilter({
                     </div>
                   ))}
                 </div>
-                
               </div>
             </div>
           </div>
