@@ -1,4 +1,4 @@
-export const sortByOptions = ["Points", "Solves", "Name"];
+export const sortByOptions = ["Default", "Points", "Solves", "Name"];
 export const sortOrderOptions = [
   { id: "asc", value: "Ascending" },
   { id: "desc", value: "Descending" },
