@@ -1,7 +1,7 @@
 /* eslint-disable react/no-unescaped-entities */
 /* eslint-disable no-useless-escape */
 import { Link } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { toast } from "react-toastify";
 import { api } from "@/api";
 import { Turnstile } from "@marsidev/react-turnstile";
@@ -32,7 +32,8 @@ export default function SignUpForm({ setHasRegistered, accessKey }) {
 
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
 
-  const [turnstileToken, setTurnstileToken] = useState("");
+  const [turnstileToken, setTurnstileToken] = useState(undefined);
+  const turnstileRef = useRef(null);
 
   const togglePasswordVisibility = (field) => {
     setShowPassword((prev) => ({
@@ -136,6 +137,9 @@ export default function SignUpForm({ setHasRegistered, accessKey }) {
       } else {
         toast.error("Something went wrong registering. Please try again later");
       }
+
+      turnstileRef.current?.reset();
+      setTurnstileToken(undefined);
     } finally {
       setIsButtonDisabled(false);
     }
@@ -337,6 +341,7 @@ export default function SignUpForm({ setHasRegistered, accessKey }) {
                   </div>
 
                   <Turnstile
+                    ref={turnstileRef}
                     siteKey={import.meta.env.VITE_TURNSTILE_SITE_KEY}
                     onSuccess={(token) => setTurnstileToken(token)}
                     onError={() => setTurnstileToken("")}
@@ -375,7 +380,9 @@ export default function SignUpForm({ setHasRegistered, accessKey }) {
                       name="submit"
                       id="submit"
                       className="button -md fw-500 w-1/1"
-                      disabled={isButtonDisabled}
+                      disabled={
+                        isButtonDisabled || turnstileToken === undefined
+                      }
                       style={{
                         backgroundColor: "black",
                         color: "white",
