@@ -1,5 +1,5 @@
 /* eslint-disable no-useless-escape */
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { toast } from "react-toastify";
 import { api } from "@/api";
 import { Turnstile } from "@marsidev/react-turnstile";
@@ -24,7 +24,8 @@ export default function ResetPassword({
     confirmPassword: false,
   });
 
-  const [turnstileToken, setTurnstileToken] = useState("");
+  const [turnstileToken, setTurnstileToken] = useState(undefined);
+  const turnstileRef = useRef(null);
 
   const [isBusy, setIsBusy] = useState(false);
 
@@ -111,6 +112,9 @@ export default function ResetPassword({
         } else {
           toast.error("Something went wrong. Please try again later");
         }
+
+        turnstileRef.current?.reset();
+        setTurnstileToken(undefined);
       } finally {
         setIsBusy(false);
       }
@@ -231,6 +235,7 @@ export default function ResetPassword({
               </div>
 
               <Turnstile
+                ref={turnstileRef}
                 siteKey={import.meta.env.VITE_TURNSTILE_SITE_KEY}
                 onSuccess={(token) => setTurnstileToken(token)}
                 onError={() => setTurnstileToken("")}
@@ -243,7 +248,7 @@ export default function ResetPassword({
                   name="submit"
                   id="submit"
                   className="button -md fw-500 w-1/1"
-                  disabled={isBusy}
+                  disabled={isBusy || turnstileToken === undefined}
                   style={{
                     display: "block",
                     marginLeft: "auto",

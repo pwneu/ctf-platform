@@ -1,7 +1,7 @@
 /* eslint-disable no-useless-escape */
 /* eslint-disable react/no-unescaped-entities */
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { api } from "@/api";
 import { toast } from "react-toastify";
 import useAuth from "@/hooks/useAuth";
@@ -26,7 +26,8 @@ export default function LoginForm() {
 
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
 
-  const [turnstileToken, setTurnstileToken] = useState("");
+  const [turnstileToken, setTurnstileToken] = useState(undefined);
+  const turnstileRef = useRef(null);
 
   const { setAuth } = useAuth();
 
@@ -126,6 +127,9 @@ export default function LoginForm() {
             "Something went wrong logging in. Please try again later"
           );
         }
+
+        turnstileRef.current?.reset();
+        setTurnstileToken(undefined);
       } finally {
         setIsButtonDisabled(false);
       }
@@ -133,18 +137,19 @@ export default function LoginForm() {
   };
 
   return (
-    <div 
-    style={{
-      maxHeight: "100vh", // Adjust the height as needed
-      overflowY: "auto",
-      padding: "1rem",
-    }}
-    className="form-page__content lg:py-90">
+    <div
+      style={{
+        maxHeight: "100vh", // Adjust the height as needed
+        overflowY: "auto",
+        padding: "1rem",
+      }}
+      className="form-page__content lg:py-90"
+    >
       <div className="container">
         <div className="row justify-center items-center">
           <div className="col-xl-8 col-lg-9 ">
             <div className="mt-90 px-90 py-90 md:px-25 md:py-25  rounded-16 ">
-            <div className="text-center ">
+              <div className="text-center ">
                 <img
                   src="assets/img/login/AccountHasbeenCreated.png"
                   alt="Image Description"
@@ -152,9 +157,7 @@ export default function LoginForm() {
                   style={{ maxWidth: "30%", height: "auto" }}
                 />
               </div>
-              <h3 className="text-12 text-center">
-                Welcome, Challenger!
-              </h3>
+              <h3 className="text-12 text-center">Welcome, Challenger!</h3>
               <p className="mt-10 text-center text-dark-1">
                 Log in with your university's institutional account. Don’t have
                 an account yet? Register now and join the action!
@@ -166,7 +169,7 @@ export default function LoginForm() {
               >
                 <div className="col-12">
                   <label className="text-13 lh-1 fw-500 text-dark-1 mb-10">
-                    Username <span style={{ color: 'red' }}>*</span>
+                    Username <span style={{ color: "red" }}>*</span>
                   </label>
                   <input
                     required
@@ -183,7 +186,7 @@ export default function LoginForm() {
                 </div>
                 <div className="col-12">
                   <label className="text-13 lh-1 fw-500 text-dark-1 mb-10">
-                    Password <span style={{ color: 'red' }}>*</span>
+                    Password <span style={{ color: "red" }}>*</span>
                   </label>
                   <div className="position-relative">
                     <input
@@ -219,6 +222,7 @@ export default function LoginForm() {
                 </div>
 
                 <Turnstile
+                  ref={turnstileRef}
                   siteKey={import.meta.env.VITE_TURNSTILE_SITE_KEY}
                   onSuccess={(token) => setTurnstileToken(token)}
                   onError={() => setTurnstileToken("")}
@@ -229,39 +233,42 @@ export default function LoginForm() {
                 <div className="d-flex justify-content-between align-items-center">
                   <p className="mb-0 text-black">
                     Don’t have an account?{" "}
-                    <Link to="/signup" className="text-custom-color fw-500" >
+                    <Link to="/signup" className="text-custom-color fw-500">
                       Register
                     </Link>
                   </p>
-                  <Link to="/forgot-password" className="text-black text-14 fw-500">
+                  <Link
+                    to="/forgot-password"
+                    className="text-black text-14 fw-500"
+                  >
                     Forgot Password?
                   </Link>
                 </div>
 
                 {/* Submit Button */}
                 <div className="col-6 mx-auto mt-4">
-                <button
-                      type="submit"
-                      name="submit"
-                      id="submit"
-                      className="button -md fw-500 w-1/1"
-                      disabled={isButtonDisabled}
-                      style={{
-                        backgroundColor: "black",
-                        color: "white",
-                        border: "none",
-                      }}
-                      onMouseEnter={(e) => {
-                        e.target.style.backgroundColor = "#d0f721c7";
-                        e.target.style.color = "black";
-                      }}
-                      onMouseLeave={(e) => {
-                        e.target.style.backgroundColor = "black";
-                        e.target.style.color = "white";
-                      }}
-                    >
-                      {isButtonDisabled ? "Processing..." : "LOG IN"}
-                    </button>
+                  <button
+                    type="submit"
+                    name="submit"
+                    id="submit"
+                    className="button -md fw-500 w-1/1"
+                    disabled={isButtonDisabled || turnstileToken === undefined}
+                    style={{
+                      backgroundColor: "black",
+                      color: "white",
+                      border: "none",
+                    }}
+                    onMouseEnter={(e) => {
+                      e.target.style.backgroundColor = "#d0f721c7";
+                      e.target.style.color = "black";
+                    }}
+                    onMouseLeave={(e) => {
+                      e.target.style.backgroundColor = "black";
+                      e.target.style.color = "white";
+                    }}
+                  >
+                    {isButtonDisabled ? "Processing..." : "LOG IN"}
+                  </button>
                 </div>
               </form>
               <div className="mt-90"></div>

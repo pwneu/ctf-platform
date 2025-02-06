@@ -7,6 +7,8 @@ import MetaComponent from "@/components/MetaComponent";
 import AccountHasVerified from "./AccountHasVerified";
 import AccountVerificationFailed from "./AccountVerificationFailed";
 
+// Unused but keep it
+
 const VERIFY_EMAIL_API = "/identity/verify";
 
 const metadata = {
