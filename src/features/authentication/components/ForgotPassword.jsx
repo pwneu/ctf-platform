@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { Turnstile } from "@marsidev/react-turnstile";
 import { api } from "@/api";
 import { toast } from "react-toastify";
@@ -12,7 +12,8 @@ export default function ForgotPassword({ setPasswordResetSent }) {
     email: "",
   });
 
-  const [turnstileToken, setTurnstileToken] = useState("");
+  const [turnstileToken, setTurnstileToken] = useState(undefined);
+  const turnstileRef = useRef(null);
   const [isBusy, setIsBusy] = useState(false);
 
   const handleInputChange = (e) => {
@@ -69,6 +70,9 @@ export default function ForgotPassword({ setPasswordResetSent }) {
         } else {
           toast.error("Something went wrong. Please try again later");
         }
+
+        setTurnstileToken(undefined);
+        turnstileRef.current?.reset();
       } finally {
         setIsBusy(false);
       }
@@ -118,21 +122,26 @@ export default function ForgotPassword({ setPasswordResetSent }) {
                 </div>
 
                 <Turnstile
+                  ref={turnstileRef}
                   siteKey={import.meta.env.VITE_TURNSTILE_SITE_KEY}
                   onSuccess={(token) => setTurnstileToken(token)}
                   onError={() => setTurnstileToken("")}
                   onExpire={() => setTurnstileToken("")}
                 />
-                  <button
-                    type="submit"
-                    name="submit"
-                    id="submit"
-                    className="button -md fw-500 w-1"
-                    disabled={isBusy}
-                    style={{ display: 'block', marginLeft: 'auto', marginRight: 'auto' }}
-                  >
-                    {isBusy ? "Processing..." : "Submit"}
-                  </button>
+                <button
+                  type="submit"
+                  name="submit"
+                  id="submit"
+                  className="button -md fw-500 w-1"
+                  disabled={isBusy || turnstileToken === undefined}
+                  style={{
+                    display: "block",
+                    marginLeft: "auto",
+                    marginRight: "auto",
+                  }}
+                >
+                  {isBusy ? "Processing..." : "Submit"}
+                </button>
               </form>
             </div>
           </div>
