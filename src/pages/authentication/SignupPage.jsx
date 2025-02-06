@@ -6,7 +6,7 @@ import {
   HeaderAuth,
   AccountHasbeenCreated,
 } from "@/features/authentication";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const metadata = {
   title: "Sign Up || PWNEU",
@@ -15,7 +15,17 @@ const metadata = {
 };
 
 export default function SignupPage() {
-  const [hasRegistered, setHasRegistered] = useState(false);// gawing true para mag appear yung AccountHasbeenCreated. Originally false
+  const [hasRegistered, setHasRegistered] = useState(false); // gawing true para mag appear yung AccountHasbeenCreated. Originally false
+  const [accessKey, setAccessKey] = useState("");
+
+  useEffect(() => {
+    const queryParams = new URLSearchParams(window.location.search);
+    const accessKeyParams = queryParams.get("accessKey");
+
+    if (accessKeyParams !== null) {
+      setAccessKey(accessKeyParams);
+    }
+  }, []);
 
   return (
     <div className="main-content  ">
@@ -29,7 +39,10 @@ export default function SignupPage() {
           {hasRegistered ? (
             <AccountHasbeenCreated />
           ) : (
-            <SignUpForm setHasRegistered={setHasRegistered} />
+            <SignUpForm
+              setHasRegistered={setHasRegistered}
+              accessKey={accessKey}
+            />
           )}
         </section>
       </div>
