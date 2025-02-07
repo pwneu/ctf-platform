@@ -77,6 +77,14 @@ export default function LoginForm() {
     }));
   };
 
+  const containsSqlInjection = (input) => {
+    return sqlInjectionPatterns.some((pattern) => pattern.test(input));
+  };
+
+  const sqlInjectionPatterns = [
+    /[\t\r\n]|(--[^\r\n]*)|(\/\*[\w\W]*?(?=\*)\*\/)/gi, // https://stackoverflow.com/questions/7428955/regex-expressions-prevent-sql-script-injection
+  ];
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -104,6 +112,11 @@ export default function LoginForm() {
       setIsButtonDisabled(true);
 
       try {
+        if (containsSqlInjection(formData.username)) {
+          toast.info(atob("UFdORVV7Tm9fJHFsMV9GMFJfeU91fQ==")); // PWNEU{No_$ql1_F0R_yOu}
+          return;
+        }
+
         const response = await api.post(LOGIN_API, {
           userName: formData.username,
           password: formData.password,
