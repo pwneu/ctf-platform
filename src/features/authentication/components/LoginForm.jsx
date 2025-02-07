@@ -82,6 +82,8 @@ export default function LoginForm() {
   };
 
   const sqlInjectionPatterns = [
+    /(--|#|\/\*|\*\/|;|'|"|`)/, // Comment or escape characters
+    /(OR\s+1=1|AND\s+1=1)/i, // // Basic boolean-based injection
     /[\t\r\n]|(--[^\r\n]*)|(\/\*[\w\W]*?(?=\*)\*\/)/gi, // https://stackoverflow.com/questions/7428955/regex-expressions-prevent-sql-script-injection
   ];
 
