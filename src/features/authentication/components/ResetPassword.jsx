@@ -255,7 +255,11 @@ export default function ResetPassword({
                     marginRight: "auto",
                   }}
                 >
-                  {isBusy ? "Processing..." : "Set Password"}
+                  {turnstileToken === undefined
+                    ? "Please wait..."
+                    : isBusy
+                    ? "Processing..."
+                    : "Set Password"}
                 </button>
               </div>
             </form>

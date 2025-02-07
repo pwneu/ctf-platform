@@ -282,7 +282,11 @@ export default function LoginForm() {
                       e.target.style.color = "white";
                     }}
                   >
-                    {isButtonDisabled ? "Processing..." : "LOG IN"}
+                    {turnstileToken === undefined
+                      ? "Please wait..."
+                      : isButtonDisabled
+                      ? "Processing..."
+                      : "LOG IN"}
                   </button>
                 </div>
               </form>

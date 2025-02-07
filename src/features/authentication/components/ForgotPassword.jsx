@@ -140,7 +140,11 @@ export default function ForgotPassword({ setPasswordResetSent }) {
                     marginRight: "auto",
                   }}
                 >
-                  {isBusy ? "Processing..." : "Submit"}
+                  {turnstileToken === undefined
+                    ? "Please wait..."
+                    : isBusy
+                    ? "Processing..."
+                    : "Submit"}
                 </button>
               </form>
             </div>

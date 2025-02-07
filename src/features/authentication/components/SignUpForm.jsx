@@ -397,7 +397,11 @@ export default function SignUpForm({ setHasRegistered, accessKey }) {
                         e.target.style.color = "white";
                       }}
                     >
-                      {isButtonDisabled ? "Processing..." : "Create Account"}
+                      {turnstileToken === undefined
+                        ? "Please wait..."
+                        : isButtonDisabled
+                        ? "Processing..."
+                        : "Create Account"}
                     </button>
                     <p className="mt-10 text-center text-dark-1">
                       Already have an account?{" "}
