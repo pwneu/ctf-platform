@@ -1,0 +1,6 @@
+User-agent: *
+Disallow: /api/
+Disallow: /assets/
+Allow: /
+
+# PWNEU{w38_cR@w13rs}
