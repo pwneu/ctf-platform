@@ -1,7 +1,7 @@
 /* eslint-disable no-useless-escape */
 /* eslint-disable react/no-unescaped-entities */
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { api } from "@/api";
 import { toast } from "react-toastify";
 import useAuth from "@/hooks/useAuth";
@@ -151,10 +151,25 @@ export default function LoginForm() {
     }
   };
 
+
+    // Fix bug where there are 2 scrolling components on mobile, one on the whole page and one on this component
+    const [maxHeight, setMaxHeight] = useState(
+      window.innerWidth < 992 ? "unset" : "100vh"
+    );
+  
+    useEffect(() => {
+      const handleResize = () => {
+        setMaxHeight(window.innerWidth < 992 ? "unset" : "100vh");
+      };
+  
+      window.addEventListener("resize", handleResize);
+      return () => window.removeEventListener("resize", handleResize);
+    }, []);
+
   return (
     <div
       style={{
-        maxHeight: "100vh", // Adjust the height as needed
+        maxHeight: maxHeight, // Adjust the height as needed
         overflowY: "auto",
         padding: "1rem",
       }}
