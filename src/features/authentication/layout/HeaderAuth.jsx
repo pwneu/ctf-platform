@@ -1,14 +1,17 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import Menu from "../../../layout/components/Menu"; 
-import MobileMenu from "../../../layout/components/MobileMenu";  
+// import Menu from "../../../layout/components/Menu";
+import MobileMenu from "../../../layout/components/MobileMenu";
 
 export default function HeaderAuth() {
   const [activeMobileMenu, setActiveMobileMenu] = useState(false);
   return (
     <header className="header -base js-header">
       <div className="header__container py-10">
-        <div className="row justify-between items-center">
+        <div
+          className="row justify-between items-center"
+          style={{ marginTop: "10px" }}
+        >
           <div className="col-auto">
             <div className="header-left">
               <div className="header__logo ">
@@ -21,7 +24,7 @@ export default function HeaderAuth() {
 
           <div className="col-auto">
             <div className="header-right d-flex items-center">
-              <Menu allClasses={"menu__nav text-dark-1 -is-active"} />
+              {/* <Menu allClasses={"menu__nav text-dark-1 -is-active"} /> */}
               <MobileMenu
                 activeMobileMenu={activeMobileMenu}
                 setActiveMobileMenu={setActiveMobileMenu}
@@ -39,14 +42,14 @@ export default function HeaderAuth() {
                 </div>
               </div>
 
-              <div className="header-right__buttons md:d-none">
+              {/* <div className="header-right__buttons md:d-none">
                 <a
                   href="signup"
                   className="button -sm -rounded -dark-1 text-white"
                 >
                   Sign Up
                 </a>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>

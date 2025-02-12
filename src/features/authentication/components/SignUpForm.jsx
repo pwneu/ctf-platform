@@ -151,18 +151,36 @@ export default function SignUpForm({ setHasRegistered, accessKey }) {
     }
   }, [accessKey]);
 
+  // Fix bug where there are 2 scrolling components on mobile, one on the whole page and one on this component
+  const [maxHeight, setMaxHeight] = useState(
+    window.innerWidth < 992 ? "unset" : "100vh"
+  );
+
+  useEffect(() => {
+    const handleResize = () => {
+      setMaxHeight(window.innerWidth < 992 ? "unset" : "100vh");
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   return (
     <div
       style={{
-        maxHeight: "100vh", // Adjust the height as needed
+        maxHeight: maxHeight,
         overflowY: "auto",
         padding: "1rem",
       }}
     >
-      <div className="form-page__content lg:py-40 mt-8">
-        <div className="container mt-10">
-          <div className="row justify-center items-center mt-8">
-            <div className="col-xl-0 col-lg-7 mt-40 ">
+      {/* <div className="form-page__content lg:py-40 mt-8"> */}
+      <div className="form-page__content lg:py-40">
+        {/* <div className="container mt-10"> */}
+        <div className="container">
+          {/* <div className="row justify-center items-center mt-8"> */}
+          <div className="row justify-center items-center">
+            {/* <div className="col-xl-0 col-lg-7 mt-40 "> */}
+            <div className="col-xl-0 col-lg-7">
               <div className="text-center mt-5 ">
                 <h3 className="text-20 mt-90 text-center">
                   Accept the Challenge <span style={{ color: "red" }}>!</span>
