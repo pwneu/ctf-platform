@@ -51,7 +51,7 @@ const HomeHero = () => {
       <section className="masthead -type-1 js-mouse-move-container mt-50">
         <div className="masthead__bg">
           <img
-            src={"/assets/img/learningPaths/learning/herobg2.svg"}
+            src={"/assets/img/learningPaths/learning/herobg2-min.jpg"}
           />
         </div>
 
