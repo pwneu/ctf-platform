@@ -50,7 +50,6 @@ export default function DeleteUserButton({ userDetailsId, cannotBeDeleted }) {
 
   return (
     <>
-      {" "}
       <Button
         className="ml-3 mb-1"
         variant="danger"
@@ -61,7 +60,7 @@ export default function DeleteUserButton({ userDetailsId, cannotBeDeleted }) {
       </Button>
       <Modal
         show={showConfirmDeleteModal}
-        onHide={() => setShowConfirmDeleteModal(false)}
+        onHide={cancelDelete}
       >
         <Modal.Header closeButton>
           <Modal.Title>Confirm User Deletion</Modal.Title>

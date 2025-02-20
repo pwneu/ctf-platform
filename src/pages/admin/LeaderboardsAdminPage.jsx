@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { Button } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashAlt, faDownload } from "@fortawesome/free-solid-svg-icons";
+import RecalculateLeaderboardsButton from "@/features/admin/submissions/components/RecalculateLeaderboardsButton";
 
 export default function LeaderboardsAdminPage() {
   const navigate = useNavigate();
@@ -125,7 +126,7 @@ export default function LeaderboardsAdminPage() {
 
               <Button
                 onClick={downloadLeaderboards}
-                className="mb-3"
+                className="mb-3 me-2"
                 variant="success"
                 disabled={isDownloadingLeaderboards}
               >
@@ -134,6 +135,8 @@ export default function LeaderboardsAdminPage() {
                   ? "Downloading..."
                   : "Download Leaderboards"}
               </Button>
+
+              <RecalculateLeaderboardsButton isAdmin={isAdmin} />
 
               <UserRanksAdmin
                 requesterRank={leaderboards.requesterRank}

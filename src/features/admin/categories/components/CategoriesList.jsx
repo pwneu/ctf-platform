@@ -44,6 +44,7 @@ export default function CategoriesList({
         toast.info("Category ID copied to clipboard");
       },
       (err) => {
+        // eslint-disable-next-line no-console
         console.error("Could not copy text: ", err);
       }
     );
@@ -91,7 +92,7 @@ export default function CategoriesList({
 
       <Modal
         show={showConfirmDeleteModal}
-        onHide={() => setShowConfirmDeleteModal(false)}
+        onHide={cancelDelete}
         aria-labelledby="confirmModalLabel"
       >
         <Modal.Header closeButton>
