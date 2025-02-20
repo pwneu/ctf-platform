@@ -48,7 +48,7 @@ export default function AuditsPage() {
 
     try {
       const response = await api.get("/play/audits", { params });
-      console.log(response.data);
+      // console.log(response.data);
       setAudits(response.data.items);
       setTotalCount(response.data.totalCount);
       setPage(response.data.page);

@@ -112,10 +112,12 @@ function App() {
       once: true,
     });
 
+    // eslint-disable-next-line no-console
     console.log(
       "%cPWNEU{570P_R1GH7_TH3R3!}",
       "color: red; font-size: 30px; font-weight: bold;"
     );
+    // eslint-disable-next-line no-console
     console.log(
       "%cThis is a developer feature designed for use by developers. If anyone asks you to copy and paste something here to enable a feature or 'hack' into someone's account, it is a scam and could grant them access to your account.",
       "font-size: 20px; font-weight: bold;"
