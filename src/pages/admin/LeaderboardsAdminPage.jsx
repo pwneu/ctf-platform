@@ -23,8 +23,13 @@ export default function LeaderboardsAdminPage() {
     useState(false);
 
   const getLeaderboards = async () => {
+    const queryParams = new URLSearchParams(window.location.search);
+    const countParams = queryParams.get("count");
+
     try {
-      const response = await api.get("/play/leaderboards");
+      const response = await api.get("/play/leaderboards", {
+        params: countParams ? { count: countParams } : {},
+      });
       setLeaderboards(response.data);
     } catch {
       toast.error("Something went wrong getting leaderboards");
