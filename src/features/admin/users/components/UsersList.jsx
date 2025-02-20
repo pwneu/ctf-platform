@@ -10,13 +10,14 @@ export default function UsersList({ users, showEmail, onUserClick }) {
           <th>Full Name</th>
           <th>Email</th>
           <th>Email Confirmed</th>
+          <th>Visible on Leaderboards</th>
           <th>Created At</th>
         </tr>
       </thead>
       <tbody>
         {users === undefined ? (
           <tr>
-            <td colSpan={6} className="text-center">
+            <td colSpan={7} className="text-center">
               Click the search button to view users.
             </td>
           </tr>
@@ -32,6 +33,7 @@ export default function UsersList({ users, showEmail, onUserClick }) {
               <td>{user.fullName}</td>
               <td>{showEmail ? user.email : "••••••••••"}</td>
               <td>{user.emailConfirmed ? "Yes" : "No"}</td>
+              <td>{user.isVisibleOnLeaderboards ? "Yes" : "No"}</td>
               <td>{new Date(user.createdAt).toLocaleString()}</td>
             </tr>
           ))

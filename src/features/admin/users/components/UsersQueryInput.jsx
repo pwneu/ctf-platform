@@ -13,6 +13,8 @@ export default function UsersQueryInput({
   setSortOrderInput,
   excludeVerifiedInput,
   setExcludeVerifiedInput,
+  excludeVisibleOnLeaderboardsInput,
+  setExcludeVisibleOnLeaderboardsInput,
   handleSearch,
   isBusy,
 }) {
@@ -23,7 +25,7 @@ export default function UsersQueryInput({
   return (
     <Form>
       <Row>
-        <Col md={6}>
+        <Col md={3}>
           <Form.Group controlId="formSearchTerm">
             <Form.Label>Search</Form.Label>
             <Form.Control
@@ -32,6 +34,18 @@ export default function UsersQueryInput({
               value={searchTermInput}
               onChange={(e) => setSearchTermInput(e.target.value)}
               onFocus={selectAll}
+            />
+          </Form.Group>
+        </Col>
+        <Col md={3}>
+          <Form.Group controlId="formExcludeVerified">
+            <Form.Check
+              type="checkbox"
+              label="Exclude Visible on Leaderboards"
+              checked={excludeVisibleOnLeaderboardsInput}
+              onChange={(e) =>
+                setExcludeVisibleOnLeaderboardsInput(e.target.checked)
+              }
             />
           </Form.Group>
         </Col>

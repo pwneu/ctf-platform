@@ -18,6 +18,10 @@ export default function UsersPage() {
   const [sortByInput, setSortByInput] = useState("");
   const [sortOrderInput, setSortOrderInput] = useState("");
   const [excludeVerifiedInput, setExcludeVerifiedInput] = useState(false);
+  const [
+    excludeVisibleOnLeaderboardsInput,
+    setExcludeVisibleOnLeaderboardsInput,
+  ] = useState(false);
   const [page, setPage] = useState(0);
   const [pageSize, setPageSize] = useState(0);
   const [hasNextPage, setHasNextPage] = useState(false);
@@ -41,6 +45,9 @@ export default function UsersPage() {
       ...(sortByInput && { sortColumn: sortByInput }),
       ...(sortOrderInput && { sortOrder: sortOrderInput }),
       ...(excludeVerifiedInput && { excludeVerified: excludeVerifiedInput }),
+      ...(excludeVisibleOnLeaderboardsInput && {
+        excludeVisibleOnLeaderboards: excludeVisibleOnLeaderboardsInput,
+      }),
     };
 
     try {
@@ -133,6 +140,8 @@ export default function UsersPage() {
           setSortOrderInput={setSortOrderInput}
           excludeVerifiedInput={excludeVerifiedInput}
           setExcludeVerifiedInput={setExcludeVerifiedInput}
+          excludeVisibleOnLeaderboardsInput={excludeVisibleOnLeaderboardsInput}
+          setExcludeVisibleOnLeaderboardsInput={setExcludeVisibleOnLeaderboardsInput}
           handleSearch={handleSearch}
           isBusy={isBusy}
         />
