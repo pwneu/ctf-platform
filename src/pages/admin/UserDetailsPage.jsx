@@ -124,6 +124,7 @@ export default function UserDetailsPage() {
               cannotBeDeleted={userDetails.userName === auth?.userName}
               navigate={navigate}
               getUserDetails={getUserDetails}
+              getUserRank={getUserRank}
             />
 
             {shouldShowPlayData && (

@@ -9,6 +9,8 @@ import ResetCertificateButton from "./ResetCertificateButton";
 import GeneratePasswordResetLinkButton from "./GeneratePasswordResetLinkButton";
 import DeleteUserButton from "./DeleteUserButton";
 import DownloadCertificateButton from "./DownloadCertificateButton";
+import HideUserOnLeaderboardsButton from "./HideUserOnLeaderboardsButton";
+import ShowUserOnLeaderboardsButton from "./ShowUserOnLeaderboardsButton";
 
 export default function UserDetails({
   userDetails,
@@ -17,6 +19,7 @@ export default function UserDetails({
   isAdmin,
   cannotBeDeleted,
   getUserDetails,
+  getUserRank,
 }) {
   const [showEmail, setShowEmail] = useState(false);
   const userIsMember = userDetails?.roles?.includes("Member");
@@ -70,6 +73,16 @@ export default function UserDetails({
         )}
         <Row>
           <Col md={6} className="mb-3">
+            <h5>Verification Status</h5>
+            <p>{userDetails.emailConfirmed ? "Verified" : "Not Verified"}</p>
+          </Col>
+          <Col md={6} className="mb-3">
+            <h5>Visible On Leaderboards</h5>
+            <p>{userDetails.isVisibleOnLeaderboards ? "Yes" : "No"}</p>
+          </Col>
+        </Row>
+        <Row>
+          <Col md={6} className="mb-3">
             <h5>Email</h5>
             <p>{showEmail ? userEmail : "••••••••••"}</p>
             <Button
@@ -89,12 +102,6 @@ export default function UserDetails({
             </p>
           </Col>
         </Row>
-        <Row>
-          <Col md={6} className="mb-3">
-            <h5>Verification Status</h5>
-            <p>{userDetails.emailConfirmed ? "Verified" : "Not Verified"}</p>
-          </Col>
-        </Row>
         {!userIsAdmin && (
           <>
             <VerifyUserButton
@@ -112,6 +119,16 @@ export default function UserDetails({
             )}
             {isAdmin && (
               <>
+                <HideUserOnLeaderboardsButton
+                  userDetailsId={userDetails.id}
+                  getUserDetails={getUserDetails}
+                  getUserRank={getUserRank}
+                />
+                <ShowUserOnLeaderboardsButton
+                  userDetailsId={userDetails.id}
+                  getUserDetails={getUserDetails}
+                  getUserRank={getUserRank}
+                />
                 <GeneratePasswordResetLinkButton
                   userDetailsId={userDetails.id}
                 />
