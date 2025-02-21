@@ -38,7 +38,7 @@ export default function UsersQueryInput({
           </Form.Group>
         </Col>
         <Col md={3}>
-          <Form.Group controlId="formExcludeVerified">
+          <Form.Group controlId="formVisibleOnLeaderboardsInput">
             <Form.Check
               type="checkbox"
               label="Exclude Visible on Leaderboards"
