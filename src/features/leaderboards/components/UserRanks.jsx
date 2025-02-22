@@ -27,7 +27,10 @@ export default function UserRanks({
         onClick={handleRowClick}
       >
         <div className="rank-column center">{rank.position}</div>
-        <div className="rank-column center hoverable">
+        <div
+          className="rank-column center hoverable"
+          style={{ cursor: isRequester || isManager ? "pointer" : "default" }}
+        >
           {rank.userName}
           <div className="tooltip">
             {`${rank.userName} latest solve time: ${new Date(

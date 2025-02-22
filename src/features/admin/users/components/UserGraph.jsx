@@ -13,10 +13,10 @@ export default function UserGraph({ userGraph }) {
   }
 
   // Prepare data for the chart
-  const labels = userGraph.map((entry) =>
-    new Date(entry.activityDate).toLocaleString()
+  const labels = userGraph.activities.map((entry) =>
+    new Date(entry.occurredAt).toLocaleString()
   );
-  const scores = userGraph.map((entry) => entry.score);
+  const scores = userGraph.activities.map((entry) => entry.score);
 
   // Chart data
   const data = {
