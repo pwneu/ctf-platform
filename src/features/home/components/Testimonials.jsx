@@ -2,12 +2,12 @@ import "swiper/css";
 import "swiper/css/pagination";
 import { Navigation, Pagination, Autoplay } from "swiper"; // Include Autoplay module
 import { Swiper, SwiperSlide } from "swiper/react";
-import ModalVideo from "@/components/ModalVideo";
+// import ModalVideo from "@/components/ModalVideo";
 import { useEffect, useState } from "react";
 import { testimonials } from "@/data/testimonials";
 
 export default function Testimonials() {
-  const [isOpen, setIsOpen] = useState(false);
+  // const [isOpen, setIsOpen] = useState(false);
   const [showSlider, setShowSlider] = useState(false);
 
   useEffect(() => {
@@ -116,7 +116,7 @@ export default function Testimonials() {
                   />
                 </div>
 
-                <div className="-el-2" onClick={() => setIsOpen(true)}>
+                {/* <div className="-el-2" onClick={() => setIsOpen(true)}>
                   <div
                     style={{ cursor: "pointer" }}
                     className="d-flex items-center justify-center bg-white size-90 rounded-full js-gallery"
@@ -124,17 +124,17 @@ export default function Testimonials() {
                   >
                     <div className="icon-play text-30"></div>
                   </div>
-                </div>
+                </div> */}
               </div>
             </div>
           </div>
         </div>
       </section>
-      <ModalVideo
+      {/* <ModalVideo
         videoId={"XQtilPmhgUs"}
         isOpen={isOpen}
         setIsOpen={setIsOpen}
-      />
+      /> */}
     </>
   );
 }
