@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useLayoutEffect } from "react";
 import MessageInput from "./MessageInput";
 import Result from "./Result";
 import { api } from "@/api"; // Uncomment if testing chatbot
@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
 const ChatInterface = () => {
-  useEffect(() => {
+  useLayoutEffect(() => {
     const link = document.createElement("link");
     link.rel = "stylesheet";
     link.href = "/assets/css/chatui.css";
