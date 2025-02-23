@@ -12,7 +12,7 @@ export default function RecentSolvers({ challengeId }) {
   const [isBusy, setIsBusy] = useState(false);
   const [page, setPage] = useState(0); // Initial of 0 so useEffect will work
   const [requestedPage, setRequestedPage] = useState(1); // Track requested page
-  const [pageSize] = useState(30); // Can be up to 30
+  const [pageSize] = useState(15); // Can be up to 30
   // const [pageSize] = useState(30);
   const [totalSolveCount, setTotalSolveCount] = useState(0);
 
@@ -146,12 +146,12 @@ export default function RecentSolvers({ challengeId }) {
           ))}
         </div>
       )}
-      <div
+      {/* <div
         style={{
           minHeight: "50vh",
           marginTop: "200px",
         }}
-      ></div>
+      ></div> */}
     </>
   );
 }
