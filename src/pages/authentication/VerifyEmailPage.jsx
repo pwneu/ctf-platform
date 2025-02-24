@@ -9,6 +9,7 @@ import {
   AuthImageMove,
   HeaderAuth,
 } from "@/features/authentication";
+import { toast } from "react-toastify";
 
 const VERIFY_EMAIL_API = "/identity/verify";
 
@@ -40,6 +41,20 @@ export default function VerifyEmailPage() {
       await api.post(VERIFY_EMAIL_API, { email, confirmationToken: token });
       setVerificationStatus("success");
     } catch (error) {
+      const status = error?.response?.status;
+
+      if (status === 400) {
+        toast.error(error.response.data.message || "Error verifying user");
+      } else if (status === 429) {
+        toast.error(
+          "Too many request in your IP address. Please try again later"
+        );
+      } else {
+        toast.error(
+          "Something went wrong verifying user. Please try again later"
+        );
+      }
+
       setVerificationStatus("failed");
     }
   };
