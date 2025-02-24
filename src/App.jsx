@@ -18,7 +18,7 @@ import {
   VerifyEmailPage,
   SignupPage,
 } from "./pages/authentication";
-import { CertifyPage /*UserProfilePage*/ } from "./pages/profile";
+// import { CertifyPage /*UserProfilePage*/ } from "./pages/profile";
 import {
   UserDashboardPage,
   // UserSummaryPage,
@@ -192,7 +192,7 @@ function App() {
             <Route path="/hint-usage" element={<UserHintUsagePage />} />
             {/* <Route path="/certify" element={<UserCertifyPage />} /> */}
             <Route path="/settings" element={<UserSettingsPage />} />
-            <Route path="/certify" element={<CertifyPage />} />
+            {/* <Route path="/certify" element={<CertifyPage />} /> */}
           </Route>
 
           {/* Routes that require the user to have a manager role in order to give access */}
