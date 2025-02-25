@@ -79,7 +79,7 @@ export default function CategoryFilter({
                       </div>
 
                       <div className="sidebar-checkbox__title">
-                        {category.name}
+                        {`${category.name} (${category.challengesCount})`}
                       </div>
                     </div>
                   ))}

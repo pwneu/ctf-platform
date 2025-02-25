@@ -49,9 +49,11 @@ export default function CategoryMobileFilter({
                 </div>
               </div>
 
-              <div className="sidebar-checkbox__title">{category.name}</div>
+              <div className="sidebar-checkbox__title">
+                {" "}
+                {`${category.name} (${category.challengesCount})`}
+              </div>
             </div>
-           
           ))}
         </div>
         <div className="mb-20"> </div>
