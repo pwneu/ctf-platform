@@ -22,6 +22,8 @@ export default function UsersPage() {
     excludeVisibleOnLeaderboardsInput,
     setExcludeVisibleOnLeaderboardsInput,
   ] = useState(false);
+  const [excludeWithCertificateInput, setExcludeWithCertificateInput] =
+    useState(false);
   const [page, setPage] = useState(0);
   const [pageSize, setPageSize] = useState(0);
   const [hasNextPage, setHasNextPage] = useState(false);
@@ -47,6 +49,9 @@ export default function UsersPage() {
       ...(excludeVerifiedInput && { excludeVerified: excludeVerifiedInput }),
       ...(excludeVisibleOnLeaderboardsInput && {
         excludeVisibleOnLeaderboards: excludeVisibleOnLeaderboardsInput,
+      }),
+      ...(excludeWithCertificateInput && {
+        excludeWithCertificate: excludeWithCertificateInput,
       }),
     };
 
@@ -141,7 +146,11 @@ export default function UsersPage() {
           excludeVerifiedInput={excludeVerifiedInput}
           setExcludeVerifiedInput={setExcludeVerifiedInput}
           excludeVisibleOnLeaderboardsInput={excludeVisibleOnLeaderboardsInput}
-          setExcludeVisibleOnLeaderboardsInput={setExcludeVisibleOnLeaderboardsInput}
+          setExcludeVisibleOnLeaderboardsInput={
+            setExcludeVisibleOnLeaderboardsInput
+          }
+          excludeWithCertificateInput={excludeWithCertificateInput}
+          setExcludeWithCertificateInput={setExcludeWithCertificateInput}
           handleSearch={handleSearch}
           isBusy={isBusy}
         />

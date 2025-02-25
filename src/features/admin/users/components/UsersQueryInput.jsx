@@ -15,6 +15,8 @@ export default function UsersQueryInput({
   setExcludeVerifiedInput,
   excludeVisibleOnLeaderboardsInput,
   setExcludeVisibleOnLeaderboardsInput,
+  excludeWithCertificateInput,
+  setExcludeWithCertificateInput,
   handleSearch,
   isBusy,
 }) {
@@ -60,6 +62,18 @@ export default function UsersQueryInput({
           </Form.Group>
         </Col>
         <Col md={3}>
+          <Form.Group controlId="formExcludeWithCertificate">
+            <Form.Check
+              type="checkbox"
+              label="Exclude With Certificate"
+              checked={excludeWithCertificateInput}
+              onChange={(e) => setExcludeWithCertificateInput(e.target.checked)}
+            />
+          </Form.Group>
+        </Col>
+      </Row>
+      <Row className="mt-4">
+        <Col md={3}>
           <Form.Group controlId="formSortColumn">
             <Form.Label>Sort By</Form.Label>
             <Form.Select
@@ -73,8 +87,6 @@ export default function UsersQueryInput({
             </Form.Select>
           </Form.Group>
         </Col>
-      </Row>
-      <Row className="mt-4">
         <Col md={3}>
           <Form.Group controlId="formSortOrder">
             <Form.Label>Sort Order</Form.Label>
@@ -122,6 +134,11 @@ export default function UsersQueryInput({
             />
           </Form.Group>
         </Col>
+      </Row>
+      <Row className="mt-4">
+        <Col md={3}></Col>
+        <Col md={3}></Col>
+        <Col md={3}></Col>
         <Col md={3}>
           <Button
             variant="primary"
