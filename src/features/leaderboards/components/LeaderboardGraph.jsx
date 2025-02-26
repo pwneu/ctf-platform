@@ -38,7 +38,7 @@ export default function LeaderboardGraph({ topUsersGraph }) {
       const activity = user.activities.find((a) => a.occurredAt === timestamp);
       return {
         occurredAt: timestamp,
-        score: activity ? activity.score : null,
+        score: activity ? (activity.score < 0 ? 0 : activity.score) : null,
       };
     });
 
