@@ -12,9 +12,9 @@ export const footerLinks = [
     title: "Resources",
     links: [
       // { href: "/achievements-list", label: "Articles" },
-      { href: "", label: "Road Map" },
-      { href: "", label: "Recommended Tools" },
-      { href: "", label: "Resource Libraries" },
+      { href: "https://pauljerimy.com/security-certification-roadmap/", label: "Road Map" },
+      { href: "https://github.com/pwneu/CTF-Recommended-Tools.git", label: "Recommended Tools" },
+      { href: "https://ctftime.org/writeups", label: "Resource Libraries" },
     ],
   },
   {
