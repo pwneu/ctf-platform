@@ -92,7 +92,7 @@ export default function ChallengesLocked({
             onClick={handleConfirmSubmissionsChange}
             disabled={isBusy}
           >
-            {isBusy ? "Loading..." : "Lock"}
+            {isBusy ? "Loading..." : "Confirm"}
           </Button>
         </Modal.Footer>
       </Modal>
