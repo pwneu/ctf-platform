@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 import ChallengeDetailsArtifacts from "./ChallengeDetailsArtifacts";
 import ChallengeDetailsHints from "./ChallengeDetailsHints";
 import useAuth from "@/hooks/useAuth";
+import LinkifyText from "@/components/LinkifyText";
 
 const menuItems = [
   { id: 1, href: "#recent-solvers", text: "Recent Solvers", isActive: true },
@@ -228,7 +229,7 @@ export default function ChallengeDetails({ id }) {
                         fontFamily: "monospace",
                       }}
                     >
-                      {challengeDetails?.description}
+                      <LinkifyText text={challengeDetails?.description} />
                     </p>
 
                     <div
