@@ -14,21 +14,29 @@ export default function GenerateUserStatsButton({ userDetailsId }) {
     if (isGeneratingStatsReport) return;
     try {
       setIsGeneratingStatsReport(true);
+
+      try {
+        await api.get(`/identity/users/${userDetailsId}/details`);
+      } catch (error) {
+        if (error?.response?.status === 404) {
+          toast.error(error.response.data.message);
+          return;
+        }
+        throw error;
+      }
+
       const response = await api.get(`/play/users/${userDetailsId}/stats`, {
         responseType: "blob",
       });
 
-      const blob = new Blob([response.data], { type: "text/html" });
-      const url = URL.createObjectURL(blob);
-
-      const a = document.createElement("a");
-      a.href = url;
-      a.download = `${userDetailsId}_stats-report.html`;
-      document.body.appendChild(a);
-      a.click();
-
-      document.body.removeChild(a);
-      URL.revokeObjectURL(url);
+      const url = window.URL.createObjectURL(new Blob([response.data]));
+      const link = document.createElement("a");
+      link.href = url;
+      link.setAttribute("download", `user-stats-report-${userDetailsId}.pdf`);
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      window.URL.revokeObjectURL(url);
     } catch (error) {
       const status = error?.response?.status;
 
