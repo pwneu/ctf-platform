@@ -63,11 +63,37 @@ export default function LeaderboardGraph({ topUsersGraph }) {
         entry.occurredAt === minEntry.occurredAt
     );
 
+    // const colors = [
+    //   "#FFD700", // Gold (1st)
+    //   "#C0C0C0", // Silver (2nd)
+    //   "#8C7853", // Bronze (3rd)
+    //   "#FF5733", // Red (4th)
+    //   "#3357FF", // Blue (5th)
+    //   "#33FF57", // Green (6th)
+    //   "#A833FF", // Purple (7th)
+    //   "#00CED1", // Cyan (8th)
+    //   "#FF8C00", // Orange (9th)
+    //   "#4682B4", // Dark Blue (10th)
+    // ];
+
+    const colors = [
+      "#FF6B6B", // Soft Red  
+      "#FFA94D", // Warm Orange  
+      "#FFD43B", // Mellow Yellow  
+      "#A2D729", // Fresh Lime  
+      "#4CAF50", // Balanced Green  
+      "#29B6F6", // Bright Cyan  
+      "#5C6BC0", // Soft Blue  
+      "#AB47BC", // Muted Purple  
+      "#F06292", // Gentle Magenta  
+      "#8D6E63"  // Warm Brown  
+    ];
+
     return {
       label: user.userName,
       data: filteredActivities.map((activity) => activity.score),
       fill: false,
-      borderColor: `hsl(${(index * 60) % 360}, 100%, 50%)`,
+      borderColor: colors[index % colors.length],
       tension: 0.1,
       cubicInterpolationMode: "monotone",
       spanGaps: true,
