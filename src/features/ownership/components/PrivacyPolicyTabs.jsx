@@ -110,7 +110,7 @@ export default function PrivacyPolicyTabs() {
             <br />
             - Student ID
             <br />
-            - Username and password
+            - Username
             <br />
             - Participation data (e.g., scores, challenges attempted)
             <br />
