@@ -79,9 +79,9 @@ export default function ChallengeDetails({ id }) {
         );
         setIsSubmissionDisabled(true);
       } else if (response.data === "SubmittingTooOften") {
-        toast.warn("Submitting too often. Please wait for 30 seconds!");
+        toast.warn("Submitting too often. Please wait for 5 seconds!");
         setIsSubmittingTooOften(true); // Disable button
-        setTimeout(() => setIsSubmittingTooOften(false), 30_000);
+        setTimeout(() => setIsSubmittingTooOften(false), 5_000);
       } else {
         toast.info(response.data);
       }
