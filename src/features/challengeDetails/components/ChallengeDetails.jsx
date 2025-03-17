@@ -346,7 +346,7 @@ export default function ChallengeDetails({ id }) {
                           onChange={(e) => setFlag(e.target.value)}
                           name="PWNEU{FLAG}"
                           placeholder="PWNEU{FLAG}"
-                          maxLength="100"
+                          maxLength="500"
                           autoComplete="off"
                           style={{
                             color: "white",
