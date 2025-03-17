@@ -36,7 +36,7 @@ export default function ChallengeInfoCard({ challengeDetails }) {
               className="w-full"
               src={
                 challengeDetails.categoryName === "IAS 2"
-                  ? "/assets/img/Coffeehax.png"
+                  ? "/assets/img/challengesCards/Coffeehax.png"
                   : "/assets/img/challengesCards/cards2.png"
               }
               alt="image"
