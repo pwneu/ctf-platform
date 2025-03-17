@@ -234,7 +234,7 @@ function App() {
       <ToastContainer
         position="top-right"
         autoClose={2000}
-        hideProgressBar
+        // hideProgressBar
         style={{ width: "500px" }}
       />
     </>
