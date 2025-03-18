@@ -59,7 +59,7 @@ export default function ChallengeDetailsHints({
     try {
       setIsUsingHint(true);
       const response = await api.post(`/play/hints/${hint.id}`);
-      toast.info(`Hint: ${response.data}`);
+      toast.info(`Hint: ${response.data}`, { autoClose: 10_000 });
     } catch (error) {
       const status = error?.response?.status;
       if (status === 401) {
@@ -137,7 +137,6 @@ export default function ChallengeDetailsHints({
               gap: "8px",
               alignItems: "center",
               textAlign: "left", // Ensure left alignment
-             
             }}
           >
             <i className="fa fa-lightbulb-o"></i> No hints available.

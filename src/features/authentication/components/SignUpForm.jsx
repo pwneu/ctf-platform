@@ -121,7 +121,8 @@ export default function SignUpForm({ setHasRegistered, accessKey }) {
       });
 
       toast.success(
-        `The verification link has been sent to ${formData.email}. Please check to activate your account.`
+        `The verification link has been sent to ${formData.email}. Please check to activate your account.`,
+        { autoClose: 10_000 }
       );
 
       setHasRegistered(true);
