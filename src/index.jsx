@@ -4,14 +4,17 @@ import App from "./App.jsx";
 import { BrowserRouter } from "react-router-dom";
 import { AuthProvider } from "./context/AuthProvider.jsx";
 import ScrollToTop from "./components/ScrollToTop.jsx";
+import { SignalRProvider } from "./context/SignalRProvider.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   // <React.StrictMode>
-    <BrowserRouter>
-      <AuthProvider>
+  <BrowserRouter>
+    <AuthProvider>
+      <SignalRProvider>
         <ScrollToTop />
         <App />
-      </AuthProvider>
-    </BrowserRouter>
+      </SignalRProvider>
+    </AuthProvider>
+  </BrowserRouter>
   // </React.StrictMode>
 );

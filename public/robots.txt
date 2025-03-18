@@ -1,5 +1,6 @@
 User-agent: *
 Disallow: /api/
+Disallow: /hubs/
 Disallow: /assets/
 Allow: /
 

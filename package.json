@@ -21,6 +21,7 @@
     "@fullcalendar/daygrid": "^6.1.9",
     "@fullcalendar/react": "^6.1.9",
     "@marsidev/react-turnstile": "^1.0.2",
+    "@microsoft/signalr": "^8.0.7",
     "@mui/material": "^5.14.15",
     "@popperjs/core": "2.11.8",
     "@vitejs/plugin-react": "^4.3.1",
