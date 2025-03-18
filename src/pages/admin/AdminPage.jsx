@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { api } from "@/api";
 import useAuth from "@/hooks/useAuth";
 import { toast } from "react-toastify";
-import { /*useEffect,*/ useState } from "react";
+import { /*useEffect,*/ useEffect, useState } from "react";
 import HeaderAdmin from "@/layout/headers/HeaderAdmin";
 import {
   Container,
@@ -16,7 +16,7 @@ import {
   InputGroup,
 } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+import { faEye, faEyeSlash, faSync } from "@fortawesome/free-solid-svg-icons";
 
 export default function AdminPage() {
   const [currentPassword, setCurrentPassword] = useState("");
@@ -27,6 +27,7 @@ export default function AdminPage() {
   const [showCurrentPassword, setShowCurrentPassword] = useState(false);
   const [showNewPassword, setShowNewPassword] = useState(false);
   const [showRepeatPassword, setShowRepeatPassword] = useState(false);
+  const [onlineUsersCount, setOnlineUsersCount] = useState(0);
 
   const { auth } = useAuth();
   const navigate = useNavigate();
@@ -89,18 +90,20 @@ export default function AdminPage() {
     }
   };
 
-  // Hack fix because of educrat overriding bootstrap classes :(
-  // useEffect(() => {
-  //   const bootstrapLink = document.createElement("link");
-  //   bootstrapLink.rel = "stylesheet";
-  //   bootstrapLink.href =
-  //     "https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css";
-  //   document.head.appendChild(bootstrapLink);
+  const refreshOnlineUsers = async () => {
+    try {
+      const response = await api.get("/announcements/count");
+      setOnlineUsersCount(response.data.connectedUsers);
+    } catch (error) {
+      toast.error(
+        "Something went wrong getting the count of online users. Please try again later"
+      );
+    }
+  };
 
-  //   return () => {
-  //     document.head.removeChild(bootstrapLink);
-  //   };
-  // }, []);
+  useEffect(() => {
+    refreshOnlineUsers();
+  }, []);
 
   return (
     <>
@@ -110,6 +113,17 @@ export default function AdminPage() {
           <Card.Body>
             <Card.Title>
               <h3>{`Welcome, ${auth.userName}`}</h3>
+              <h4>
+                {`Online users count: ${onlineUsersCount}`}
+                <Button
+                  variant="outline-secondary"
+                  size="sm"
+                  onClick={refreshOnlineUsers}
+                  className="ms-2"
+                >
+                  <FontAwesomeIcon icon={faSync} />
+                </Button>
+              </h4>
             </Card.Title>
             <Form className="mt-4">
               <Row className="justify-content-center">
