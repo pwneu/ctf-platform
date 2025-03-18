@@ -31,6 +31,7 @@ export default function AdminPage() {
   const [message, setMessage] = useState("");
 
   const { auth } = useAuth();
+  const isAdmin = auth?.roles?.includes("Admin");
   const navigate = useNavigate();
 
   const isValidPassword = (password) => {
@@ -243,33 +244,35 @@ export default function AdminPage() {
         </Card>
 
         {/* Announcement Card */}
-        <Row className="justify-content-center">
-          <Col md={6}>
-            <Card className="mt-4">
-              <Card.Body>
-                <Card.Title>Send Announcement</Card.Title>
-                <Form.Group controlId="announcementMessage" className="mb-3">
-                  <Form.Label>Message</Form.Label>
-                  <Form.Control
-                    as="textarea"
-                    rows={3}
-                    placeholder="Enter your announcement message"
-                    value={message}
-                    onChange={(e) => setMessage(e.target.value)}
-                  />
-                </Form.Group>
-                <Button
-                  variant="primary"
-                  onClick={announce}
-                  disabled={!message || isBusy}
-                  className="w-100"
-                >
-                  {isBusy ? "Processing..." : "Send Announcement"}
-                </Button>
-              </Card.Body>
-            </Card>
-          </Col>
-        </Row>
+        {isAdmin && (
+          <Row className="justify-content-center">
+            <Col md={6}>
+              <Card className="mt-4">
+                <Card.Body>
+                  <Card.Title>Send Announcement</Card.Title>
+                  <Form.Group controlId="announcementMessage" className="mb-3">
+                    <Form.Label>Message</Form.Label>
+                    <Form.Control
+                      as="textarea"
+                      rows={3}
+                      placeholder="Enter your announcement message"
+                      value={message}
+                      onChange={(e) => setMessage(e.target.value)}
+                    />
+                  </Form.Group>
+                  <Button
+                    variant="primary"
+                    onClick={announce}
+                    disabled={!message || isBusy}
+                    className="w-100"
+                  >
+                    {isBusy ? "Processing..." : "Send Announcement"}
+                  </Button>
+                </Card.Body>
+              </Card>
+            </Col>
+          </Row>
+        )}
       </Container>
 
       <Modal show={showModal} onHide={() => setShowModal(false)} centered>
