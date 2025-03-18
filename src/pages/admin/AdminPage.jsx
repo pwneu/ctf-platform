@@ -28,6 +28,7 @@ export default function AdminPage() {
   const [showNewPassword, setShowNewPassword] = useState(false);
   const [showRepeatPassword, setShowRepeatPassword] = useState(false);
   const [onlineUsersCount, setOnlineUsersCount] = useState(0);
+  const [message, setMessage] = useState("");
 
   const { auth } = useAuth();
   const navigate = useNavigate();
@@ -86,6 +87,29 @@ export default function AdminPage() {
       }
     } finally {
       setShowModal(false);
+      setIsBusy(false);
+    }
+  };
+
+  const announce = async () => {
+    try {
+      if (isBusy) return;
+      setIsBusy(true);
+
+      await api.post("announcements", { message: message });
+      setMessage("");
+    } catch (error) {
+      const status = error?.response?.status;
+
+      if (status === 401) {
+        navigate("/login");
+      } else {
+        toast.error(
+          error.response?.data?.message ||
+            "Something went wrong. Please try again later"
+        );
+      }
+    } finally {
       setIsBusy(false);
     }
   };
@@ -217,6 +241,35 @@ export default function AdminPage() {
             </Form>
           </Card.Body>
         </Card>
+
+        {/* Announcement Card */}
+        <Row className="justify-content-center">
+          <Col md={6}>
+            <Card className="mt-4">
+              <Card.Body>
+                <Card.Title>Send Announcement</Card.Title>
+                <Form.Group controlId="announcementMessage" className="mb-3">
+                  <Form.Label>Message</Form.Label>
+                  <Form.Control
+                    as="textarea"
+                    rows={3}
+                    placeholder="Enter your announcement message"
+                    value={message}
+                    onChange={(e) => setMessage(e.target.value)}
+                  />
+                </Form.Group>
+                <Button
+                  variant="primary"
+                  onClick={announce}
+                  disabled={!message || isBusy}
+                  className="w-100"
+                >
+                  {isBusy ? "Processing..." : "Send Announcement"}
+                </Button>
+              </Card.Body>
+            </Card>
+          </Col>
+        </Row>
       </Container>
 
       <Modal show={showModal} onHide={() => setShowModal(false)} centered>
