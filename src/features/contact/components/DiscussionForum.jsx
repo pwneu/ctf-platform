@@ -53,7 +53,7 @@ export default function DiscussionForum() {
             }}
           >
             <Link
-              to="/signup"
+              to="https://discord.gg/rHheAu5Njr"
               className="button -sm -white text-dark-1 font-semibold rounded-lg shadow hover:bg-gray-200"
               data-aos="fade-up"
               data-aos-offset="80"
