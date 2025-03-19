@@ -1,9 +1,9 @@
-export const faq = [ 
+export const faq = [
   {
     id: 1,
     question: "What is a Capture The Flag (CTF) competition?",
     answer:
-      "A CTF competition involves solving security-related challenges to capture \"flags\" and earn points. These flags are hidden in various digital environments or embedded in files. The goal is to solve these challenges to progress and score high.",
+      'A CTF competition involves solving security-related challenges to capture "flags" and earn points. These flags are hidden in various digital environments or embedded in files. The goal is to solve these challenges to progress and score high.',
   },
   {
     id: 2,
@@ -27,7 +27,7 @@ export const faq = [
     id: 5,
     question: "What should I do if I get stuck on a challenge?",
     answer:
-      "If you're stuck, try revisiting the challenge details and explore online resources or forums. Additionally, our platform may provide hints or solutions for some challenges to help guide you.",
+      "If you're stuck on a challenge, try revisiting the challenge details carefully and explore online resources or forums for insights. Sometimes, breaking down the problem into smaller parts can help. Additionally, Dash AI Chatbot is here to assist you! It provides real-time hints, interactive guidance, and problem-solving support to help you tackle CTF challenges with confidence. Give it a try and enhance your cybersecurity skills!",
   },
   {
     id: 6,
@@ -43,7 +43,8 @@ export const faq = [
   },
   {
     id: 8,
-    question: "What should I do if I encounter technical issues or bugs on the platform?",
+    question:
+      "What should I do if I encounter technical issues or bugs on the platform?",
     answer:
       "If you experience technical issues, please contact our support team via the support page or email us at support@pwneuplatform.com. Provide details about the issue, including any error messages, and we’ll work to resolve it as quickly as possible.",
   },
@@ -51,12 +52,13 @@ export const faq = [
     id: 9,
     question: "How do I reset my password if I forget it?",
     answer:
-      "You can reset your password by clicking on the \"Forgot Password\" link on the login page. Follow the instructions provided to receive a password reset link via email.",
+      'You can reset your password by clicking on the "Forgot Password" link on the login page. Follow the instructions provided to receive a password reset link via email.',
   },
   {
     id: 10,
-    question: "Where can I find more resources or learning materials to improve my skills?",
+    question:
+      "Where can I find more resources or learning materials to improve my skills?",
     answer:
-      "We offer a variety of resources, including tutorials, guides, and recommended reading materials. Check out our Resources section or visit our blog for tips and educational content related to cybersecurity and CTF challenges.",
+      "We offer a variety of resources, including tutorials, guides, and recommended reading materials. Check out our Resources section for tips and educational content related to cybersecurity and CTF challenges.",
   },
 ];

@@ -15,7 +15,7 @@ export default function Faq() {
                 Frequently Asked Questions.
               </h2>
 
-              <p className="page-header__text">
+              <p className="page-header__text mt-20">
               Got questions? We’ve got answers! Check out our FAQs below for the most common queries.
               </p>
             </div>
@@ -62,11 +62,13 @@ export default function Faq() {
                   </div>
 
                   <div
-                    style={activeFaq == elm.id ? { maxHeight: "100px" } : {}}
+                    style={activeFaq == elm.id ? { maxHeight: "500px" } : {}}
                     className="accordion__content"
                   >
                     <div className="accordion__content__inner">
                       <p>{elm.answer}</p>
+                      <div className="mt-30"></div>
+                      <div></div>
                     </div>
                   </div>
                 </div>
