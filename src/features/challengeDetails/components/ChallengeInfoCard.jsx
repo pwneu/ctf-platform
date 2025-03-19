@@ -33,7 +33,7 @@ export default function ChallengeInfoCard({ challengeDetails }) {
         >
           <div className="relative">
             <img
-              className="w-full"
+              className="w-1/1"
               src={
                 challengeDetails.categoryName === "IAS 2"
                   ? "/assets/img/challengesCards/Coffeehax.png"
