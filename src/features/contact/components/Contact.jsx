@@ -79,11 +79,15 @@ export default function Contact() {
               </div>
             </div>
 
-            <div className="col-lg-6 mt-20">
+            <div className="col-lg-6">
               <h3 className="text-24 fw-600 ">Send a Message.</h3>
               <p className="mt-25 fw-400 text-dark-1">
                 Have a question or just want to get in touch? Fill out the form
                 below, and we’ll be sure to get back to you soon!
+              </p>
+
+              <p className="mt-25 fw-400 text-dark-1">
+                For technical assistance, contact the production team: david.roderos@neu.edu.ph / sharongrace.hangaan@neu.edu.ph
               </p>
 
               <form

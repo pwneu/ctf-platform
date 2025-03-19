@@ -24,9 +24,4 @@ export const contactData = [
     icon: "/assets/img/contact/neu-pwneucybereduct.png",
     orgACSS: "PWNEU CyberEducation ",
   },
-  {
-    id: 5,
-    icon: "/assets/img/contact/neu-unitgg.png",
-    orgACSS: "UnitGG CTF Players",
-  },
 ];

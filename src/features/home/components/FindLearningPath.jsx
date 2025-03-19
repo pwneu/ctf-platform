@@ -47,7 +47,7 @@ export default function FindLearningPath() {
 
           <div className="col-auto">
             <Link
-              to="/login"
+              to="/play"
               className="button -md -white text-black  mt-45 md:mt-0"
               data-aos="fade-up"
               data-aos-offset="100"
