@@ -9,7 +9,7 @@ export default function OurApproach() {
             <div className="sectionTitle ">
               <h2 className="sectionTitle__title text-24 ">Our Approach</h2>
             </div>
-            <p className="sectionTitle__text text-center ">
+            <p className="sectionTitle__text text-center text-dark-1">
               At PWNEU, we focus on hands-on, learner-centric cybersecurity
               education. Our platform combines open-source learning materials,
               collaborative events, competitions, and webinars to provide
@@ -20,9 +20,9 @@ export default function OurApproach() {
           </div>
         </div>
 
-        <div className="row y-gap-30 justify-between pt-60 lg:pt-50">
+        <div className="row y-gap-30 justify-between pt-60 lg:pt-50 text-dark-1">
           {ourapproach.map((elm, i) => (
-            <div key={i} className="col-lg-3 col-md-6">
+            <div key={i} className="col-lg-5 col-md-6">
               <div className="coursesCard -type-2 text-center pt-50 pb-40 px-30 bg-white rounded-8">
                 <div className="coursesCard__image">
                   <img src={elm.image} alt="image" />
@@ -51,7 +51,7 @@ export default function OurApproach() {
                 alt="image"
               />
             </div>
-            <div className="col-xl- col-lg-6 col-md-9 lg:order-2">
+            <div className="col-xl- col-lg-6 col-md-9 lg:order-2 text-dark-1">
               <p className="mt-45 text-center">
                 &ldquo;We&rsquo;re excited to connect with students, educators,
                 and cybersecurity enthusiasts who share our passion for learning

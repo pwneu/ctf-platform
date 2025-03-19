@@ -1,4 +1,3 @@
-
 export default function OurStory() {
   return (
     <>
@@ -33,38 +32,27 @@ export default function OurStory() {
           </div>
         </div>
       </section>
-      <section className="layout-pt-md layout-pb-lg">
-        <div className="container">
-          <div className="row y-gap-50 justify-between items-center">
-            <div className="col-lg-6 pr-50 sm:pr-15">
-              <div className="composition -type-8">
-                <div className="-el-1">
-                  <img src="/assets/img/about/ourstory/UnitggChampion3.svg" alt="image" className="img-fluid" style={{ maxWidth: "104%", height: "auto" }}/>
-                </div>
-                <div className="-el-2">
-                  <img src="/assets/img/about/ourstory/UnitggChampion2.svg" alt="image" className="img-fluid" style={{ maxWidth: "100%", height: "auto" }} />
-                </div>
-                <div className="-el-3">
-                  <img src="/assets/img/about/ourstory/UnitggChampion1.svg" alt="image" className="img-fluid" style={{ maxWidth: "100%", height: "auto" }} />
-                </div>
-              </div>
-            </div>
 
-            <div className="col-lg-5">
-              <h2 className="text-25 lh-16 text-center">Our Expertise</h2>
-              <p className="text-dark-1 mt-20 text-center">
-                Our team consists of seasoned cybersecurity professionals,
-                educators, and enthusiasts who bring a wealth of knowledge and
-                experience to the table. We specialize in creating challenging
-                and relevant CTF scenarios that simulate real-world security
-                threats. Our expertise extends beyond just technical skills; we
-                focus on fostering critical thinking, problem-solving, and
-                teamwork, which are essential attributes for any cybersecurity
-                professional. With our guidance, students can expect to gain a
-                deep understanding of cybersecurity principles and practices,
-                preparing them for successful careers in this ever-evolving
-                field.
-              </p>
+      <section className="mt-30">
+        <div className="container">
+          <div className="row justify-center text-center">
+            <div className="col-auto">
+              <div className="sectionTitle">
+                <h2 className="sectionTitle__title">Our Expertise</h2>
+                <p className="sectionTitle__text text-dark-1 mt-20">
+                  Our team consists of seasoned cybersecurity professionals,
+                  educators, and enthusiasts who bring a wealth of knowledge and
+                  experience to the table. We specialize in creating challenging
+                  and relevant CTF scenarios that simulate real-world security
+                  threats. Our expertise extends beyond just technical skills;
+                  we focus on fostering critical thinking, problem-solving, and
+                  teamwork, which are essential attributes for any cybersecurity
+                  professional. With our guidance, students can expect to gain a
+                  deep understanding of cybersecurity principles and practices,
+                  preparing them for successful careers in this ever-evolving
+                  field.
+                </p>
+              </div>
             </div>
           </div>
         </div>

@@ -62,7 +62,7 @@ export default function HeroStory() {
 
       <div className="container">
         <div className="row justify-center text-center">
-          <div className="col-xl-9 col-lg-8">
+          <div className="col-xl-9 col-lg-5">
             <div
               className="mainSlider__content"
               data-aos="fade-up"
@@ -87,10 +87,10 @@ export default function HeroStory() {
 
         <div className="row y-gap-20 justify-center mainSlider__items">
           {feature.map((elm, i) => (
-            <div key={i} className="col-xl-3 col-md-4 col-sm-6">
+            <div key={i} className="col-xl-4 col-md-6 col-sm-6">
               <div className="mainSlider-item text-center">
                 <img src={elm.imgSrc} alt="icon" />
-                <h4 className="text-20 fw-500 lh-18 text-white mt-8">
+                <h4 className="text-20 fw-500 lh-18 text-white mt-0">
                   {elm.title}
                 </h4>
                 <p className="text-15 text-white">{elm.description}</p>
@@ -100,13 +100,13 @@ export default function HeroStory() {
         </div>
       </div>
 
-      <button className="swiper-prev hero-slider-prev button -white-20 text-white size-60 rounded-full d-flex justify-center items-center js-prev">
+      {/* <button className="swiper-prev hero-slider-prev button -white-20 text-white size-60 rounded-full d-flex justify-center items-center js-prev">
         <i className="icon icon-arrow-left text-24"></i>
       </button>
 
       <button className="swiper-next hero-slider-next button -white-20 text-white size-60 rounded-full d-flex justify-center items-center js-next">
         <i className="icon icon-arrow-right text-24"></i>
-      </button>
+      </button> */}
     </section>
   );
 }
