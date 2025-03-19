@@ -89,7 +89,7 @@ export default function Testimonials() {
                 )}
 
 
-                {/* Pagination for Testimonials
+
                 <div className="d-flex x-gap-15 items-center pt-30">
                   <div className="col-auto">
                     <button className="d-flex items-center text-24 arrow-left-hover js-prev left-testimonials-eight">
@@ -104,7 +104,7 @@ export default function Testimonials() {
                       <i className="icon icon-arrow-right"></i>
                     </button>
                   </div>
-                </div> */}
+                </div>
               </div>
             </div>
 
