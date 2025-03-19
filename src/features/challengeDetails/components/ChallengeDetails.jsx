@@ -223,7 +223,7 @@ export default function ChallengeDetails({ id }) {
                     </div>
 
                     <p
-                      className="col-xl-9 mt-20 "
+                      className="col-xl-11 mt-20 text-white-2 "
                       style={{
                         whiteSpace: "pre-line",
                         fontFamily: "monospace",
