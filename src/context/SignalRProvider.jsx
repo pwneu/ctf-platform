@@ -18,6 +18,7 @@ export const SignalRProvider = ({ children }) => {
         accessTokenFactory: () => auth.accessToken,
         withCredentials: true,
       })
+      .configureLogging(signalR.LogLevel.None)
       .withAutomaticReconnect()
       .build();
 
