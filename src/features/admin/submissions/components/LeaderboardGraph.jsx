@@ -22,65 +22,73 @@ ChartJS.register(
 );
 
 export default function LeaderboardGraph({ topUsersGraph }) {
+  // Extract and sort all activity timestamps
   const allActivities = topUsersGraph
-    .flatMap((user) => user.activities) // Flatten all user activities
-    .map((activity) => activity.occurredAt) // Extract timestamps
-    .sort((a, b) => new Date(a) - new Date(b)); // Ensure chronological order
+    .flatMap((user) => user.activities)
+    .map((activity) => activity.occurredAt)
+    .sort((a, b) => new Date(a) - new Date(b));
 
-  // Downsample labels for performance
+  // Downsample for performance
   const maxLabels = 250;
   const step = Math.ceil(allActivities.length / maxLabels);
+  // Start with the downsampled timestamps
+  let unifiedTimestamps = allActivities.filter(
+    (_, index) => index % step === 0
+  );
 
-  const labels = allActivities
-    .filter((_, index) => index % step === 0)
-    .map((entry) => new Date(entry).toLocaleString());
+  // For each user, ensure their highest and lowest activity timestamps are included
+  topUsersGraph.forEach((user) => {
+    if (user.activities.length) {
+      const maxActivity = user.activities.reduce((prev, curr) =>
+        curr.score > prev.score ? curr : prev
+      );
+      const minActivity = user.activities.reduce((prev, curr) =>
+        curr.score < prev.score ? curr : prev
+      );
 
+      if (!unifiedTimestamps.includes(maxActivity.occurredAt)) {
+        unifiedTimestamps.push(maxActivity.occurredAt);
+      }
+      if (!unifiedTimestamps.includes(minActivity.occurredAt)) {
+        unifiedTimestamps.push(minActivity.occurredAt);
+      }
+    }
+  });
+
+  // Sort the unified timestamps chronologically
+  unifiedTimestamps.sort((a, b) => new Date(a) - new Date(b));
+
+  // Build the x-axis labels from unified timestamps
+  const labels = unifiedTimestamps.map((timestamp) =>
+    new Date(timestamp).toLocaleString()
+  );
+
+  // Define the color palette
+  const colors = [
+    "#FF6B6B", // Soft Red
+    "#FFA94D", // Warm Orange
+    "#FFD43B", // Mellow Yellow
+    "#A2D729", // Fresh Lime
+    "#4CAF50", // Balanced Green
+    "#29B6F6", // Bright Cyan
+    "#5C6BC0", // Soft Blue
+    "#AB47BC", // Muted Purple
+    "#F06292", // Gentle Magenta
+    "#8D6E63", // Warm Brown
+  ];
+
+  // Build datasets with data aligned to the unified timestamps
   const datasets = topUsersGraph.map((user, index) => {
-    const activities = allActivities.map((timestamp) => {
+    const data = unifiedTimestamps.map((timestamp) => {
+      // Find an activity that matches the timestamp
       const activity = user.activities.find((a) => a.occurredAt === timestamp);
-      return {
-        occurredAt: timestamp,
-        score: activity ? (activity.score < 0 ? 0 : activity.score) : null,
-      };
+      // If found, ensure negative scores become 0; if not, mark as null (gap)
+      return activity ? (activity.score < 0 ? 0 : activity.score) : null;
     });
-
-    // Find the highest and lowest scoring entries
-    const maxEntry = activities.reduce(
-      (max, entry) =>
-        entry.score !== null && entry.score > max.score ? entry : max,
-      { score: -Infinity, occurredAt: null }
-    );
-
-    const minEntry = activities.reduce(
-      (min, entry) =>
-        entry.score !== null && entry.score < min.score ? entry : min,
-      { score: Infinity, occurredAt: null }
-    );
-
-    // Downsample data while keeping both max and min entries
-    const filteredActivities = activities.filter(
-      (entry, i) =>
-        i % step === 0 ||
-        entry.occurredAt === maxEntry.occurredAt ||
-        entry.occurredAt === minEntry.occurredAt
-    );
-
-    const colors = [
-      "#FF6B6B", // Soft Red  
-      "#FFA94D", // Warm Orange  
-      "#FFD43B", // Mellow Yellow  
-      "#A2D729", // Fresh Lime  
-      "#4CAF50", // Balanced Green  
-      "#29B6F6", // Bright Cyan  
-      "#5C6BC0", // Soft Blue  
-      "#AB47BC", // Muted Purple  
-      "#F06292", // Gentle Magenta  
-      "#8D6E63"  // Warm Brown  
-    ];
 
     return {
       label: user.userName,
-      data: filteredActivities.map((activity) => activity.score),
+      data,
       fill: false,
       borderColor: colors[index % colors.length],
       tension: 0.1,
