@@ -8,13 +8,14 @@ export default function AccountHasbeenCreated() {
   };
 
   return (
-    <div 
-    style={{
-      maxHeight: "100vh", // Adjust the height as needed
-      overflowY: "auto",
-      padding: "1rem",
-    }}
-    className="form-page__content lg:py-50">
+    <div
+      style={{
+        maxHeight: "100vh", // Adjust the height as needed
+        overflowY: "auto",
+        padding: "1rem",
+      }}
+      className="form-page__content lg:py-50"
+    >
       <div className="container">
         <div className="row justify-center items-center">
           <div className="col-xl-8 col-lg-9">
@@ -44,6 +45,13 @@ export default function AccountHasbeenCreated() {
               </p>
               <p className="mt-30 text-34 text-center text-dark-1">
                 {`If you haven't received it after some time, feel free to reach out to an administrator for assistance.`}
+              </p>
+
+              {/* TODO -- remove when migrated to another cloud provider */}
+              <p className="mt-30 text-34 text-center text-red-500 fw-bold">
+                NOTE: Due to technical issues with our cloud provider, our email
+                verification service is currently disabled. Please contact an
+                administrator to verify your account manually.
               </p>
             </div>
             <div className="col-12">

@@ -101,6 +101,13 @@ export default function ForgotPassword({ setPasswordResetSent }) {
                 <br></br>email below to reset your password.
               </p>
 
+              {/* TODO -- remove when migrated to another cloud provider */}
+              <p className="mt-10 text-center text-red-500 fw-bold">
+                NOTE: Due to technical issues with our cloud provider, our emailing service is
+                currently disabled. Please contact an administrator to receive a
+                reset password link for your account.
+              </p>
+
               <form
                 className="contact-form respondForm__form row y-gap-20 pt-30"
                 onSubmit={handleSubmit}
