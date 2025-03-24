@@ -38,7 +38,7 @@ export default function ChallengeInfoCard({ challengeDetails }) {
                 challengeDetails.categoryName === "IAS 2"
                   ? "/assets/img/challengesCards/Coffeehax.png"
                   : challengeDetails.categoryName === "Network Forensics"
-                  ? "/assets/img/challengesCards/charan.jpg"
+                  ? "/assets/img/challengesCards/networkforen.jpg"
                   : "/assets/img/challengesCards/cards2.png"
               }
               alt="image"
