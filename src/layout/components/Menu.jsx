@@ -85,13 +85,22 @@ export default function Menu({ allClasses, headerPosition }) {
                 Leaderboards
               </Link>
             </li>
-            <li className="menu-item-has-children -has-mega-menu">
+            {/* <li className="menu-item-has-children -has-mega-menu">
               <Link
                 data-barba
                 to="/chat"
                 className={menuItem === "Courses" ? "activeMenu" : ""}
               >
                 Dash AI
+              </Link>
+            </li> */}
+            <li className="menu-item-has-children">
+              <Link
+                data-barba
+                to="/who-we-are"
+                className={menuItem === "WhoWeAre" ? "activeMenu" : ""}
+              >
+                Who We Are
               </Link>
             </li>
             <li className="menu-item-has-children">
@@ -121,7 +130,7 @@ export default function Menu({ allClasses, headerPosition }) {
                 About Us
               </Link>
             </li>
-            <li>
+            {/* <li>
               <Link
                 data-barba
                 to="/contact"
@@ -129,7 +138,7 @@ export default function Menu({ allClasses, headerPosition }) {
               >
                 Contact
               </Link>
-            </li>
+            </li> */}
           </ul>
         </div>
 

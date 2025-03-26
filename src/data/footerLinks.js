@@ -3,7 +3,7 @@ export const footerLinks = [
     title: "ABOUT US",
     links: [
       { href: "/our-story", label: "About Us" },
-      { href: "/who-we-are", label: "Who We are" },
+      { href: "/chat", label: "Dash AI" },
       { href: "/mission-vision", label: "Mission and Vision" },
       { href: "/contact", label: "Contact Us" },
     ],

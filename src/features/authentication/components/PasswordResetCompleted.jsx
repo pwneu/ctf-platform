@@ -25,7 +25,7 @@ export default function PasswordResetCompeleted() {
               </div>
 
               <h3 className="text-30  text-center">
-              Password Changes Successfully!
+              Password Changed Successfully!
               </h3>
               <p className="mt-30 text-34 text-center text-dark-1">
               {
