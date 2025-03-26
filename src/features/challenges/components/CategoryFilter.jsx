@@ -10,6 +10,7 @@ export default function CategoryFilter({
 
   const handleSelectedCategoryChange = (category) => {
     if (isBusy) return;
+    sessionStorage.setItem("selectedCategoryId", category?.id || "");
     setSelectedCategory(category);
   };
 

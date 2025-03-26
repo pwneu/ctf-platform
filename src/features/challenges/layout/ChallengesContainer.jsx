@@ -16,6 +16,7 @@ import ExcludeSolvesFilter from "../components/ExcludeSolvesFilter";
 import CategoryMobileFilter from "../components/CategoryMobileFilter";
 import ExcludeSolvesMobileFilter from "../components/ExcludeSolvesMobileFilter";
 
+// Di kona alam ano nangyayari dito wag niyo nalang galawin gumagana naman :/ - david
 
 export default function ChallengesContainer() {
   const [categories, setCategories] = useState([]);
@@ -38,7 +39,7 @@ export default function ChallengesContainer() {
   const [page, setPage] = useState(1);
   const pageRef = useRef(1);
   const pageSize = 10;
-  const [filterOpen, setFilterOpen] = useState(false);
+  const [filterOpen, setFilterOpen] = useState(true);
 
   const isFirstRender = useRef(true);
   const pageChanged = useRef(false);
@@ -47,7 +48,20 @@ export default function ChallengesContainer() {
     const fetchCategories = async () => {
       try {
         const response = await api.get("/play/categories/all");
-        setCategories(response.data);
+        const categoriesData = response.data;
+        setCategories(categoriesData);
+
+        // Retrieve stored selectedCategoryId
+        const storedCategoryId = sessionStorage.getItem("selectedCategoryId");
+
+        // Check if it's valid
+        const validCategory = categoriesData.find(
+          (cat) => cat.id === storedCategoryId
+        );
+
+        // Set the selected category (either valid category or null)
+        // TODO -- fix double api call when validCategory is not null
+        setSelectedCategory(validCategory || null);
       } catch {
         toast.error(
           "Something went wrong getting categories. Please try again later"
@@ -56,7 +70,6 @@ export default function ChallengesContainer() {
     };
 
     fetchCategories();
-    setSelectedCategory(null);
   }, []);
 
   // Reset page when selectedCategory or selectedExcludeSolves changes
