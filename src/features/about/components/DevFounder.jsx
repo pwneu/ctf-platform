@@ -86,7 +86,7 @@ export default function DevFounder() {
             data-aos-offset="80"
             data-aos-duration={900}
           >
-            We are developers and UnitGG CTF (Capture The Flag) players,
+            We are developers and CTF (Capture The Flag) players,
             dedicated to providing a dynamic and engaging learning platform for
             students pursuing cybersecurity at New Era University. Our mission
             is to encourage and empower students by offering them the tools,
