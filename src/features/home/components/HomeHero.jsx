@@ -84,7 +84,7 @@ const HomeHero = () => {
                   <div className="col-12 col-sm-auto">
                     <Link
                       data-barba
-                      to="/signup"
+                      to="/play"
                       className="buttonhero  -md  text-white mt-1"
                     >
                       <span style={{ color: "#cff721", fontSize: "16px" }}>
