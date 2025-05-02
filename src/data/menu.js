@@ -47,6 +47,11 @@ export const menumobileList = [
   //   icon: "fa-book",
   // },
   {
+    title: "Archives",
+    path: "/archives",
+    icon: "fa-box-archive",
+  },
+  {
     title: "Play",
     path: "/play",
     icon: "fa-gamepad",

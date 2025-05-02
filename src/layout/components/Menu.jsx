@@ -70,6 +70,15 @@ export default function Menu({ allClasses, headerPosition }) {
             <li className="menu-item-has-children -has-mega-menu">
               <Link
                 data-barba
+                to="/archives"
+                className={menuItem === "Courses" ? "activeMenu" : ""}
+              >
+                Archives
+              </Link>
+            </li>
+            <li className="menu-item-has-children -has-mega-menu">
+              <Link
+                data-barba
                 to="/play"
                 className={menuItem === "Courses" ? "activeMenu" : ""}
               >

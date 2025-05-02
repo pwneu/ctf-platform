@@ -19,7 +19,8 @@ import {
   faQuestionCircle,
   faLifeRing,
   faSignInAlt,
-  faUserPlus, // Import the Login (faSignInAlt) and Sign Up (faUserPlus) icons
+  faUserPlus,
+  faBoxArchive, // Import the Login (faSignInAlt) and Sign Up (faUserPlus) icons
 } from "@fortawesome/free-solid-svg-icons";
 import useAuth from "@/hooks/useAuth";
 import { api } from "@/api";
@@ -29,6 +30,7 @@ import { useNavigate } from "react-router-dom";
 const LOGOUT_API = "/identity/logout";
 
 const iconMap = {
+  "fa-box-archive": faBoxArchive,
   "fa-info-circle": faInfoCircle,
   "fa-eye": faEye,
   "fa-users": faUsers,

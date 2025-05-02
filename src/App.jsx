@@ -63,6 +63,7 @@ import RequireDefinedAuth from "./components/RequireDefinedAuth";
 import BlacklistPage from "./pages/admin/BlacklistPage";
 import ChatBotPage from "./pages/chatbot/ChatBotPage";
 import AuditsPage from "./pages/admin/AuditsPage";
+import ArchivesPage from "./pages/play/ArchivesPage";
 // import {
 //   AchievementDetailsPage,
 //   AchievementsListPage,
@@ -155,6 +156,7 @@ function App() {
 
             {/* Community */}
             <Route path="discussion-forum" element={<DiscussionForumsPage />} />
+            <Route path="archives" element={<ArchivesPage />} />
           </Route>
 
           {/* Routes that requires the user to be logged out */}
